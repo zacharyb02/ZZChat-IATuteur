@@ -1,0 +1,257 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/credit-card-fraud-detection-classification-problem?utm_source=DSPage&utm_medium=ProLink&utm_campaign=PythonProPage
+SUJET: CNN_DEEP_LEARNING
+
+# Credit Card Fraud Detection as a Classification Problem
+In this data science project, we will predict the credit card fraud in the transactional dataset using some of the predictive models.
+## Project Outcomes
+- Understanding the problem
+- Importing required libraries and understanding their use
+- Importing data and learning its structure
+- Performing basic EDA
+- Scaling different variables
+- Outlier treatment
+- Building basic Classification model with Random Forest
+- Nearmiss technique for undersampling data
+- SMOTE for oversampling data
+- cross validation in the context of undersampling and oversampling
+- Pipelining with sklearn/imblearn
+- Applying Linear model: Logistic Regression
+- Applying Ensemble technique: Random Forest
+- Applying  Non Linear Algorithms: Support Vector Machine, Decision Tree and k-Nearest Neighbour
+- Making predictions on test set and computing validation metrics
+- ROC curve and Learning curve
+- Comparison of results and Model Selection
+- Visualization with seaborn and matplotlib
+Get started today
+Request for free demo with us.
+## Architecture Diagrams
+## Topics
+- Business Problem 04m
+- Data Science Problem 10m
+- Solution Workflow 10m
+- Project Update 12m
+- Show me the Data 08m
+- Exploratory Data Analysis - Part 1 07m
+- Exploratory Data Analysis - Part 2 09m
+- Data Preparation - Part 1 06m
+- Data preparation 2 07m
+- Validation Metrics 10m
+- Base Model 08m
+- Undersampling Models - Part 1 12m
+- Undersampling Models - Part 2 07m
+- Oversampling Models 05m
+- Best Model 14m
+## Source code + Project materials
+## Project Description
+## Introduction to Credit Card Fraud Detection Project
+Like any other technology that has been introduced in the world, the internet also comes with pros and cons. All of us enjoy the pros as the internet has changed our lifestyle by enhancing our communication. But, at the same time, we are witnessing digital frauds, which include fraudulent transactions through stolen credit cards. Credit card companies must identify fraudulent credit card transactions so that customers are not charged for items that they did not purchase. And this project is all about detecting such fraudulent transactions with the help of customers' attributes and transactions information.
+## Credit Card Fraud Detection Dataset
+The dataset used contains transactions made by credit cards in September 2013 by European cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The dataset is highly unbalanced; the positive class (frauds) account for 0.172% of all transactions. The dataset has been collected and analyzed during a research collaboration of Worldline and the Machine Learning Group (http://mlg.ulb.ac.be) of ULB (Universite Libre de Bruxelles) on big data mining and fraud detection. More details on current and past projects on related topics are available on http://mlg.ulb.ac.be/BuFence and http://mlg.ulb.ac.be/ARTML.
+As the dataset was created using the PCA method, preprocessing of data has little scope. The imbalance between classes is compensated using oversampling and undersampling. The logistic regression, random forest, support vector machine, k-means are used within a cross-validation framework. Lastly, Recall and Accuracy are chosen as metrics while deducing the best classifier. A buffer section on outlier detection is added at the end.
+Project Update Notification: 13-11-2023
+The codebase has now been updated to ensure compatibility with Python 3.10.4. In this update, the pandas method append has been replaced by concat to ensure compatibility with the latest pandas version. The video Project Update covers the updates involved and entire execution of the updated codebase.
+## Learning Outcomes from the Fraud Detection Data Science Project
+Here is a fun project to work on as it will help you realize the inclination of companies toward using machine learning algorithms for detecting credit card frauds. Let us explore the learning takeaways from this project in detail.
+### Exploratory Data Analysis
+The dataset in this project does not have much information about what physical quantity each variable represents in this dataset except the two, amount, and time. Thus, analyzing the dataset using statistical tools is critical for such a dataset. You will learn how to draw statistical conclusions for all the variables. Additionally, the project solution will teach you how to create plots for visualizing the distribution of variables and deduce which variables play an essential role in segregating fraudulent and non-fraudulent transactions. The analysis will also assist you in concluding that the data is imbalanced and by what amount. Furthermore, you will learn plotting boxplots for visualizing outliers and evaluating the interquartile range of different features.
+### Data Preparation
+As the dataset is highly skewed towards non-fraudulent transactions, using classification algorithms in this project will reveal that one needs to use either undersampling or oversampling methods. This project will discuss both the ways in detail and assist you in understanding which technique will suit a particular problem. You will also learn how to prepare the data to implement algorithms of the scikit-learn library in Python. Additionally, you will learn about different methods for scaling the variables and outliers detection.
+### Machine Learning Algorithms
+This project is a beginner-friendly project on machine learning as it will teach you all the basics of this exciting domain. You will learn about the four types of machine learning problems: unsupervised learning, supervised learning, semi-supervised learning, and reinforcement learning. The project defines all these problems in detail with examples and various use cases. The goal is to detect which transactions are fraudulent or not, and this problem is an instance of a binary classification problem in supervised learning. To solve this problem, you will use algorithms like Random Forests, K-Nearest Neighbour, and Logistic Regression and deduce which is the best among them with the help of different statistical parameters like Precision, Recall, Accuracy, etc. Also, you will learn about preparing a credit card fraud detection project report with the help of classification metrics like the ROC curve, confusion matrix. The project will also assist you in understanding why accuracy is not an important metric for an imbalanced dataset. Furthermore, you will learn about using hyperparameter tuning techniques: GridSearchCV for undersampled data and RandomSearchCV for oversampled data.
+### FAQs on the Credit Card Fraud Detection Data Science Project
+The problem of credit card fraud detection is an example of a binary classification problem that can be solved using classification algorithms like Random Forests, Logistic Regression, Support Vector Machines, K-Nearest Neighbour, etc. You can analyze the performance of these algorithms using metrics like Recall, Precision, Accuracy, Confusion Matrix, ROC Curve, etc., and deduce which works best for your dataset.
+Another way of solving this problem is to treat this as an anomaly detection problem wherein the frauds are treated as anomalies. Then algorithms like Autoencoders, Isolation forest can be used to find out these anomalies.
+Machine learning algorithms do not assume the logic that differentiates fraudulent transactions from non-fraudulent ones. Rather, they leverage the transactions details and customers’ information to deduce the characteristics of fraudulent transactions. These algorithms are best suited to reveal the hidden patterns in the dataset and are therefore becoming a popular choice for solving problems like detecting credit card frauds.
+## Unlimited 1:1 Live Interactive Sessions
+- 30-minute live session Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+- No extra charges Unlimited number of sessions with no extra charges. Yes, unlimited!
+Unlimited number of sessions with no extra charges. Yes, unlimited!
+- We match you to the right expert Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+- Schedule recurring sessions Schedule recurring sessions, once a week or bi-weekly, or monthly.
+Schedule recurring sessions, once a week or bi-weekly, or monthly.
+- Pick your favorite expert If you find a favorite expert, schedule all future sessions with them.
+If you find a favorite expert, schedule all future sessions with them.
+- Use the 1-to-1 sessions to Troubleshoot your projects Customize our templates to your use-case Build a project portfolio Brainstorm architecture design Bring any project, even from outside ProjectPro Mock interview practice Career guidance Resume review
+- Troubleshoot your projects
+- Customize our templates to your use-case
+- Build a project portfolio
+- Brainstorm architecture design
+- Bring any project, even from outside ProjectPro
+- Mock interview practice
+- Career guidance
+- Resume review
+### Land Your Dream Job Faster
+AI-powered interview prep with recruiter connections
+### Upload Resume & Job Role
+Submit your resume and target job description
+### Tailored Mock Interview
+AI conducts interview based on your resume
+### Actionable Feedback
+Detailed report with strengths and improvements
+### Unlimited Practice
+Record multiple attempts, all saved
+### Select Best Performance
+Choose your strongest interview
+### Connect with Recruiters
+Shared with 121+ top tech recruiters conditions apply*
+## Benefits
+250+ end-to-end project solutions
+Each project solves a real business problem from start to finish. These projects cover the domains of Data Science, Machine Learning, Data Engineering, Big Data and Cloud.
+15 new projects added every month
+New projects every month to help you stay updated in the latest tools and tactics.
+500,000 lines of code
+Each project comes with verified and tested solutions including code, queries, configuration files, and scripts. Download and reuse them.
+Cloud Lab Workspace
+Unlimited 1:1 sessions
+Technical Support
+Chat with our technical experts to solve any issues you face while building your projects.
+7 Days risk-free trial
+We offer an unconditional 7-day money-back guarantee. Use the product for 7 days and if you don't like it we will make a 100% full refund. No terms or conditions.
+Payment Options
+0% interest monthly payment schemes available for all countries.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Comparison with other platforms
+### We provide ready-made project templates that solve real business problems, end-to-end and comes with solution code,explanation videos, cloud lab environment and tech support.
+## Our expert panel
+### Amedeo Biolatti
+Data Scientist, SwissRe
+### Diego Argueta
+Senior Data Platform Engineer, GoodRx
+### Manoj Kumar
+Data Scientist, Boeing
+### Benjamin Larson
+Principal Data Scientist - Cyber Security Risk Management, Verizon
+### Kedar Kanhere
+Data Scientist, Credit Suisse
+### Camille Girabawe
+Machine Learning Manager, Adobe
+### Nihit Saxena
+CEO at Datastunt?Labs
+### Pawan Kumar Yerravelly
+Data Engineer - Capacity Supply Chain and Provisioning, Microsoft India CoE
+### Stefan Jenkins
+Data Engineer, Microsoft
+### Bertil Hatt
+Head of Data science, OutFund
+### Hariharan Sampathkumar
+Senior Machine Learning Engineer | Data Scientist
+### Shraddha Surana
+Global Data Community Lead | Lead Data Scientist, Thoughtworks
+### Tory Borsboom-Hanson
+Data Science Consultant, Fractal Analytics
+### Shaurya Uppal
+Data Scientist, Inmobi
+### Gareth Morinan
+Chief Scientific Officer, Machine Medicine Technologies
+### Ana Garcia
+Director of Data Science & AnalyticsDirector, ZipRecruiter
+### Dina Jankovic
+Data Science, Yelp
+### Sara Beck
+Head of Data Science, Slated
+### Deepak Sahu
+Senior Data Engineer, Slintel-6sense company
+### Guang Yang
+Senior Applied Scientist, Amazon
+### Mehmet Akgun
+University of Economics and Technology, Instructor
+### Victoria Williams
+Senior Data Engineer, Hogan Assessment Systems
+### Balram Singh
+Data Engineering Manager, Microsoft Corporation
+### Divya Sistla
+Data Engineering Lead - Uber
+### Kirk Borne
+Chief Science Officer at DataPrime, Inc.
+### Muhy Eddin Zater
+Senior Data Scientist, Mawdoo3 Ltd
+### Mir Muntasar Ali Agha
+Senior Data Engineer, National Bank of Belgium
+### Anh Le
+Data and Blockchain Professional
+### Carlos Contreras
+Big Data & Analytics architect, Amazon
+### Ted Anderson
+Director of Business Intelligence , CouponFollow
+### Varun Jain
+Senior Data Engineer, Publicis Sapient
+### James Briggs
+Dev Advocate, Pinecone and Freelance ML
+### Brian Zhu
+Big Data Engineer, Beyond Limits
+### Kai Tarafdar
+NLP Engineer, Speechkit
+### Saniya Zahid
+Principal Software Engineer, Afiniti
+## RecommendedProjects
+Recommended Projects
+Data Science
+Machine Learning Projects in Python
+Data Science Projects in R
+Data Science Projects in Python
+## Latest Blogs
+LLM Compression Techniques to Build Faster and Cheaper LLMs
+Learn why every AI engineer must master LLM compression to keep LLMs efficient and affordable.| ProjectPro.
+How Does Multi-Head Attention Improve Transformer Models?
+Learn how Multi-Head Attention drives Transformer models and allows LLMs to understand complex patterns and achieve superior AI performance with ProjectPro.
+A Complete Guide to Data Science Models: Types, Applications, and Deployment
+Master types, applications, and deployment of impactful data science models with ProjectPro.
+View all blogs
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+Please Enter Your Email to Get Started
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

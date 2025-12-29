@@ -1,0 +1,157 @@
+SOURCE_URL: https://www.geeksforgeeks.org/computer-vision/lenet-5-architecture/
+SUJET: CNN_DEEP_LEARNING
+
+# LeNet-5 Architecture
+In the late 1990s, Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner created a convolutional neural network (CNN) based architecture called LeNet. The LeNet-5 architecture was developed to recognize handwritten and machine-printed characters, a function that showcased the potential of deep learning in practical applications. This article provides an in-depth exploration of the LeNet-5 architecture, examining each component and its contribution in deep learning.
+## Introduction to LeNet-5
+LeNet-5 is a convolutional neural network (CNN) architecture that introduced several key features and innovations that have become standard in modern deep learning. It demonstrated the effectiveness of CNNs for image recognition tasks and introduced key concepts such as convolution, pooling, and hierarchical feature extraction that underpin modern deep learning models.
+Originally designed for handwritten digit recognition , the principles behind LeNet-5 have been extended to various applications, including:
+- Handwriting recognition in postal services and banking.
+- Object and face recognition in images and videos.
+- Autonomous driving systems for recognizing and interpreting road signs.
+## Architecture of LeNet-5
+The architecture of LeNet 5 contains 7 layers excluding the input layer. Here is a detailed breakdown of the LeNet-5 architecture:
+### 1. Input Layer
+- Input Size : 32x32 pixels.
+- The input is larger than the largest character in the database, which is at most 20x20 pixels, centered in a 28x28 field. The larger input size ensures that distinctive features such as stroke endpoints or corners can appear in the center of the receptive field of the highest-level feature detectors.
+- Normalization : Input pixel values are normalized such that the background (white) corresponds to a value of 0, and the foreground (black) corresponds to a value of 1. This normalization makes the mean input roughly 0 and the variance roughly 1, which accelerates the learning process.
+### 2.Layer C1 (Convolutional Layer)
+- Feature Maps : 6 feature maps.
+- Connections : Each unit is connected to a 5x5 neighborhood in the input, producing 28x28 feature maps to prevent boundary effects.
+- Parameters : 156 trainable parameters and 117,600 connections.
+### 3. Layer S2 (Subsampling Layer)
+- Size : 14x14 (each unit connected to a 2x2 neighborhood in C1).
+- Operation : Each unit adds four inputs, multiplies by a trainable coefficient, adds a bias, and applies a sigmoid function.
+- Parameters : 12 trainable parameters and 5,880 connections.
+Partial Connectivity : C3 is not fully connected to S2, which limits the number of connections and breaks symmetry, forcing feature maps to learn different, complementary features.
+### 4.Layer C3 (Convolutional Layer)
+- Feature Maps: 16
+- Connections: Partially connected to S2: 6 maps -> 3 S2 maps, 9 maps -> 4 S2 maps, 1 map -> all 6 S2 maps.
+- Kernel Size: 5 x 5
+- Parameters: 1,516 trainable parameters
+- Connections: 151,600
+- Partial Connectivity: Reduces parameters and encourages each map to learn complementary features.
+### 5.Layer S4 (Subsampling Layer)
+- Feature Maps : 16 feature maps.
+- Size : 7x7 (each unit connected to a 2x2 neighborhood in C3).
+- Parameters : 32 trainable parameters and 2,744 connections.
+### 6.Layer C5 (Convolutional Layer)
+- Feature Maps : 120 feature maps.
+- Size : 1x1 (each unit connected to a 5x5 neighborhood on all 16 of S4’s feature maps, effectively fully connected due to input size).
+- Parameters : 48,000 trainable parameters and 48,000 connections.
+### 7.Layer F6 (Fully Connected Layer)
+- Units : 84 units.
+- Connections : Each unit is fully connected to C5, resulting in 10,164 trainable parameters.
+- Activation : Uses a scaled hyperbolic tangent function f(a) = A\tan (Sa) , where A = 1.7159 and S = 2/3
+### 8.Output Layer
+In the output layer of LeNet, each class is represented by an Euclidean Radial Basis Function (RBF) unit. Here's how the output of each RBF unit y_i is computed:
+y_i = \sum_{j} x_j . w_{ij} ​
+In this equation:
+- x_j represents the inputs to the RBF unit.
+- w_{ij} represents the weights associated with each input.
+- The summation is over all inputs to the RBF unit.
+In essence, the output of each RBF unit is determined by the Euclidean distance between its input vector and its parameter vector. The larger the distance between the input pattern and the parameter vector, the larger the RBF output. This output can be interpreted as a penalty term measuring the fit between the input pattern and the model of the class associated with the RBF unit.
+## Detailed Explanation of the Layers
+- Convolutional Layers (Cx) : These layers apply convolution operations to the input, using multiple filters to extract different features. The filters slide over the input image, computing the dot product between the filter weights and the input pixels. This process captures spatial hierarchies of features, such as edges and textures.
+- Subsampling Layers (Sx) : These layers perform pooling operations (average pooling in the case of LeNet-5) to reduce the spatial dimensions of the feature maps. This helps to control overfitting, reduce the computational load, and make the representation more compact.
+- Fully Connected Layers (Fx) : These layers are densely connected, meaning each neuron in these layers is connected to every neuron in the previous layer. This allows the network to combine features learned in previous layers to make final predictions.
+## Implementation
+### 1. Load the Dataset
+```python
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import numpy as np
+mnist = tf.keras.datasets.mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+```
+### 2. Pre-processing and Normalizing the Data
+```python
+rows, cols = 28, 28
+# Reshape the data into a 4D Array
+x_train = x_train.reshape(x_train.shape[0], rows, cols, 1)
+x_test = x_test.reshape(x_test.shape[0], rows, cols, 1)
+input_shape = (rows,cols,1)
+# Set type as float32 and normalize the values to [0,1]
+x_train = x_train.astype('float32')
+x_test = x_test.astype('float32')
+x_train = x_train / 255.0
+x_test = x_test / 255.0
+# Transform labels to one hot encoding
+y_train = tf.keras.utils.to_categorical(y_train, 10)
+```
+### 3. Define LeNet-5 Model
+Create a new instance of a model object using sequential model API. Then add layers to the neural network as per the LeNet-5 architecture discussed earlier. Finally, compile the model with the ‘categorical_crossentropy’ loss function and ‘SGD’ cost optimization algorithm. When compiling the model, add metrics=[‘accuracy’] as one of the parameters to calculate the accuracy of the model.
+It is important to highlight that each image in the MNIST data set has a size of 28 X 28 pixels so we will use the same dimensions for LeNet-5 input instead of 32 X 32 pixels.
+```python
+def build_lenet(input_shape):
+# Define Sequential Model
+model = tf.keras.Sequential()
+# C1 Convolution Layer
+model.add(tf.keras.layers.Conv2D(filters=6, strides=(1,1), kernel_size=(5,5), activation='tanh', input_shape=input_shape))
+# S2 SubSampling Layer
+model.add(tf.keras.layers.AveragePooling2D(pool_size=(2,2), strides=(2,2)))
+# C3 Convolution Layer
+model.add(tf.keras.layers.Conv2D(filters=6, strides=(1,1), kernel_size=(5,5), activation='tanh'))
+# S4 SubSampling Layer
+model.add(tf.keras.layers.AveragePooling2D(pool_size=(2,2), strides=(2,2)))
+# C5 Fully Connected Layer
+model.add(tf.keras.layers.Dense(units=120, activation='tanh'))
+# Flatten the output so that we can connect it with the fully connected layers by converting it into a 1D Array
+model.add(tf.keras.layers.Flatten())
+# FC6 Fully Connected Layers
+model.add(tf.keras.layers.Dense(units=84, activation='tanh'))
+# Output Layer
+model.add(tf.keras.layers.Dense(units=10, activation='softmax'))
+return model
+```
+### 4. Evaluate the Model and Visualize the process
+We can train the model by calling the model.fit function and pass in the training data, the expected output, the number of epochs, and batch size. Additionally, Keras provides a facility to evaluate the loss and accuracy at the end of each epoch. For this purpose, we can split the training data using the ‘validation_split’ argument or use another dataset using the ‘validation_data’ argument. We will use our training dataset to evaluate the loss and accuracy after every epoch.
+We can test the model by calling model.evaluate and passing in the testing data set and the expected output. We will visualize the training process by plotting the training accuracy and loss after each epoch.
+```python
+lenet = build_lenet(input_shape)
+# Compile the model
+lenet.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# We will be allowing 10 itterations to happen
+epochs = 10
+history = lenet.fit(x_train, y_train, epochs=epochs,batch_size=128, verbose=1)
+# Check Accuracy of the Model
+# Transform labels to one hot encoding
+if len(y_test.shape) != 2 or y_test.shape[1] != 10:
+y_test = tf.keras.utils.to_categorical(y_test, 10)
+loss ,acc= lenet.evaluate(x_test, y_test)
+print('Accuracy : ', acc)
+x_train = x_train.reshape(x_train.shape[0], 28,28)
+print('Training Data', x_train.shape, y_train.shape)
+x_test = x_test.reshape(x_test.shape[0], 28,28)
+print('Test Data', x_test.shape, y_test.shape)
+# Plot the Image
+image_index = 8888
+plt.imshow(x_test[image_index].reshape(28,28), cmap='Greys')
+# Make Prediction
+pred = lenet.predict(x_test[image_index].reshape(1, rows, cols, 1 ))
+print(pred.argmax())
+```
+Output:
+Epoch 1/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 29s 55ms/step - accuracy: 0.8350 - loss: 0.5978
+Epoch 2/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 21s 44ms/step - accuracy: 0.9511 - loss: 0.1647
+Epoch 3/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 42s 46ms/step - accuracy: 0.9668 - loss: 0.1143
+Epoch 4/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 25s 54ms/step - accuracy: 0.9750 - loss: 0.0853
+Epoch 5/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 39s 50ms/step - accuracy: 0.9794 - loss: 0.0702
+Epoch 6/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 40s 48ms/step - accuracy: 0.9840 - loss: 0.0567
+Epoch 7/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 21s 46ms/step - accuracy: 0.9844 - loss: 0.0514
+Epoch 8/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 41s 46ms/step - accuracy: 0.9871 - loss: 0.0429
+Epoch 9/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 40s 43ms/step - accuracy: 0.9886 - loss: 0.0388
+Epoch 10/10 469/469 ━━━━━━━━━━━━━━━━━━━━ 22s 46ms/step - accuracy: 0.9901 - loss: 0.0335
+313/313 ━━━━━━━━━━━━━━━━━━━━ 2s 6ms/step - accuracy: 0.9796 - loss: 0.0544
+Accuracy :  0.9832000136375427
+Training Data (60000, 28, 28) (60000, 10)
+Test Data (10000, 28, 28) (10000, 10)
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 108ms/step
+## Summary of LeNet-5 Architecture
+The overall architecture of LeNet-5, with its combination of convolutional, subsampling, and fully connected layers, was designed to be both computationally efficient and effective at capturing the hierarchical structure of handwritten digit images. The careful normalization of input values and the structured layout of receptive fields contribute to the network's ability to learn and generalize from the training data effectively.
+A
+- Blogathon
+- Computer Vision
+- AI-ML-DS
+- AI-ML-DS With Python
+- Data Science Blogathon 2024

@@ -1,0 +1,126 @@
+SOURCE_URL: https://www.geeksforgeeks.org/python/feature-detection-and-matching-with-opencv-python/
+SUJET: CNN_DEEP_LEARNING
+
+# Feature detection and matching with OpenCV-Python
+In this article, we are going to see about feature detection in computer vision with OpenCV in Python. Feature detection is the process of checking the important features of the image in this case features of the image can be edges, corners, ridges, and blobs in the images.
+In OpenCV, there are a number of methods to detect the features of the image and each technique has its own perks and flaws.
+Note: The images we give into these algorithms should be in black and white. This helps the algorithms to focus on the features more.
+Image in use:
+## Method 1: Haris corner detection
+Haris corner detection is a method in which we can detect the corners of the image by sliding a slider box all over the image by finding the corners and it will apply a threshold and the corners will be marked in the image. This algorithm is mainly used to detect the corners of the image.
+Syntax:
+cv2.cornerHarris(image, dest, blockSize, kSize, freeParameter, borderType)
+Parameters:
+- Image - The source image to detect the features
+- Dest - Variable to store the output image
+- Block size – Neighborhood size
+- Ksize – Aperture parameter
+- Border type: The pixel revealing type.
+Example: Feature detection and matching using OpenCV
+```python
+# Importing the libraries
+import cv2
+import numpy as np
+# Reading the image and converting the image to B/W
+image = cv2.imread('book.png')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray_image = np.float32(gray_image)
+# Applying the function
+dst = cv2.cornerHarris(gray_image, blockSize=2, ksize=3, k=0.04)
+# dilate to mark the corners
+dst = cv2.dilate(dst, None)
+image[dst > 0.01 * dst.max()] = [0, 255, 0]
+cv2.imshow('haris_corner', image)
+cv2.waitKey()
+```
+Output:
+## Method 2: Shi-Tomasi corner detection
+Shi and Tomasi came up with a different corner detection algorithm which is mostly similar to the Haris corner detection algorithm in which the only difference will be the kernel value in which we can find only the n strongest corners of the image. This can greatly help while we need only the limited and very important features of the image.
+cv2.goodFeaturesToTrack(image, maxc, Quality, maxD)
+- image – The source image we need to extract the features.
+- maxc – Maximum number of corners we want [Negative values gives all the corners]
+- Quality – Quality level parameter (preferred value=0.01)
+- maxD – Maximum distance (preferred value=10)
+```python
+# Importing the libraries
+import cv2
+import numpy as np
+# Reading the image and converting into B?W
+image = cv2.imread("book.png")
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Applying the function
+corners = cv2.goodFeaturesToTrack(
+gray_image, maxCorners=50, qualityLevel=0.02, minDistance=20)
+corners = np.float32(corners)
+for item in corners:
+x, y = item[0]
+x = int(x)
+y = int(y)
+cv2.circle(image, (x, y), 6, (0, 255, 0), -1)
+# Showing the image
+cv2.imshow('good_features', image)
+cv2.waitKey()
+```
+## Method 3: SIFT (Scale-Invariant Feature Transform)
+While Haris and shi-Tomasi are the algorithms to detect the corners of the image. SIFT is one of the important algorithms that detect objects irrelevant to the scale and rotation of the image and the reference. This helps a lot while we are comparing the real-world objects to an image though it is independent of the angle and scale of the image. This method will return the key points of the images which we need to mark in the image.
+sift = cv2.xfeatures2d.SIFT_create()
+kp, des = sift.detectAndCompute(gray_img, None)
+This function returns key points which we later use with drawkeypoints() method to draw the keypoints.
+Note: The circles in the image represent the keypoints, where the size of the circle directly represents the strength of the key points.
+```python
+# Importing the libraries
+import cv2
+# Reading the image and converting into B/W
+image = cv2.imread('book.jpg')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Applying the function
+sift = cv2.xfeatures2d.SIFT_create()
+kp, des = sift.detectAndCompute(gray_image, None)
+# Applying the function
+kp_image = cv2.drawKeypoints(image, kp, None, color=(
+0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+cv2.imshow('SIFT', kp_image)
+cv2.waitKey()
+```
+## Method 4: FAST algorithm for corner detection
+SURF is fast when compared to SIFT but not as fast to use with real-time devices like mobile phones and surveillance cameras. So FAST algorithm was introduced with a very fast computing time. However FAST gives us only the key points and we may need to compute descriptors with other algorithms like SIFT and SURF. With a Fast algorithm, we can detect corners and also blobs.
+fast = cv2.FastFeatureDetector_create()
+fast.setNonmaxSuppression(False)
+kp = fast.detect(gray_img, None)
+```python
+# Importing the libraries
+import cv2
+# Reading the image and converting into B/W
+image = cv2.imread('book.png')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Applying the function
+fast = cv2.FastFeatureDetector_create()
+fast.setNonmaxSuppression(False)
+# Drawing the keypoints
+kp = fast.detect(gray_image, None)
+kp_image = cv2.drawKeypoints(image, kp, None, color=(0, 255, 0))
+cv2.imshow('FAST', kp_image)
+cv2.waitKey()
+```
+## Method 5: ORB (Oriented FAST and Rotated Brief)
+ORB is a very effective way of detecting the features of the image when compared to SIFT and SURF. ORB is programmed to find fewer features in the image when compared to the SIFT and SURF algorithm because it detects the very important features in less time than them yet this algorithm is considered as a very effective algorithm when compared to other detecting algorithms.
+orb = cv2.ORB_create(nfeatures=2000)
+kp, des = orb.detectAndCompute(gray_img, None)
+```python
+# Importing the libraries
+import cv2
+# Reading the image and converting into B/W
+image = cv2.imread('book.png')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# Applying the function
+orb = cv2.ORB_create(nfeatures=2000)
+kp, des = orb.detectAndCompute(gray_image, None)
+# Drawing the keypoints
+kp_image = cv2.drawKeypoints(image, kp, None, color=(0, 255, 0), flags=0)
+cv2.imshow('ORB', kp_image)
+cv2.waitKey()
+```
+S
+- Python
+- OpenCV
+- Python-OpenCV

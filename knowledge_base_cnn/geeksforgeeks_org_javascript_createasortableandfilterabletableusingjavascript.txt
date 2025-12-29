@@ -1,0 +1,429 @@
+SOURCE_URL: https://www.geeksforgeeks.org/javascript/create-a-sortable-and-filterable-table-using-javascript/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- JS Tutorial
+- Web Tutorial
+- A to Z Guide
+- Projects
+- OOP
+- DOM
+- Set
+- Map
+- Math
+- Number
+- Boolean
+- Exercise
+# Create a Sortable and Filterable Table using JavaScript
+In this article, we will demonstrate how to create a sortable and filtrable table using JavaScript. This custom table will have the functionality of editing or removing individual items along with sorting and filtering items according to different fields. Also, a form is attached so that the user can easily edit as well as add more items to the table using that input form. It will consist of 3 namely the Name of the item, the category of the item and the year it was released.
+On completion, this custom table will look like this:
+## Prerequisites:
+- HTML
+- CSS
+- JavaScript
+- HTML DOM
+## Project Structure:
+The structure of the project representing containing files is:
+## Approach:
+- First create a table structure using HTML tags table, tr, th, tr, with class names, id, and event listeners. Also, add an input form using input components, buttons, etc.
+- Add style to the web pages using class names and ids to give background color, margin, padding, box-shadow, display to hide and show buttons, hover and transition to show zoom effect, and other properties.
+- In JavaScript create an array of objects to store info and properties of the dataset. and create a function addItem() to insert data into the table.
+- Use event listeners to sort the data array when clicking on the respective title in ascending or descending order.
+- Access the form items using HTML DOM methods to get the inputs and push items in the data array.
+- Link event listener to manage i.e. delete or edit the data from the respective icons and update button to apply the changes to the respective data item.
+Example: In this example, we will create a sample HTML table with the above-mentioned approach.
+```python
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1" />
+<link href="style.css"
+rel="stylesheet" />
+</head>
+<body>
+<div class="root">
+<h1>Custom Table</h1>
+<div class="form">
+<div>
+<h2 id="formTitle">Add item</h2>
+</div>
+<input type="text"
+id="nameInput"
+placeholder="Enter Name"
+title="Type in a name"
+value="" />
+<input type="text"
+id="catInput"
+value=""
+placeholder="Enter Category"
+title="Type in a name" />
+<input type="Number"
+id="yearInput"
+value=""
+placeholder="Enter year"
+title="Type in a name" />
+<button id="submitItem"
+type="button"
+onclick="submitItem()">
+Add Item
+</button>
+<button id="editItem"
+style="display: none"
+onclick="editItem()">
+Update
+</button>
+</div>
+<h2>Search for Item...</h2>
+<input type="text"
+id="searchInput"
+onkeyup="searchItems()"
+placeholder="Search for names.."
+title="Type in a name" />
+<table id="table">
+<tr class="titles">
+<th style="width: 5%">S.no</th>
+<th style="width: 30%"
+id="name"
+onclick="sortItems('name')">
+Name
+</th>
+<th style="width: 30%"
+onclick="sortItems('category')">
+Category
+</th>
+<th style="width: 10%"
+onclick="sortItems('year')">
+Year
+</th>
+<th style="width: 2%">Edit Entry</th>
+<th style="width: 2%">Delete Entry</th>
+</tr>
+</table>
+<script src="script.js"></script>
+</div>
+</body>
+</html>
+```
+```python
+/* style.css */
+* {
+box-sizing: border-box;
+}
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.root {
+display: "block";
+width: 50rem;
+}
+#searchInput {
+background-repeat: no-repeat;
+width: 100%;
+font-size: 16px;
+padding: 12px 20px 12px 40px;
+border: 1px solid #ddd;
+margin-bottom: 12px;
+}
+.form {
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+display: flexbox;
+margin: 0 1rem;
+padding: 1rem;
+width: 98%;
+font-size: 16px;
+background-color: rgb(247, 246, 246);
+}
+.form>div {
+width: 100%;
+}
+.form>button {
+background-color: rgb(46, 171, 46);
+padding: 1%;
+border-radius: 5px;
+width: 10%;
+color: black;
+border: 1px solid #ddd;
+}
+.form>input {
+width: 25%;
+margin: 2%;
+font-size: 16px;
+padding: 1%;
+border: 1px solid #ddd;
+}
+#table {
+border-collapse: collapse;
+width: 100%;
+border: 1px solid #ddd;
+font-size: 18px;
+}
+#table th,
+#table td {
+text-align: left;
+padding: 12px;
+}
+#table tr {
+border-bottom: 1px solid #ddd;
+}
+#table tr.titles {
+background-color: lightgreen;
+}
+.zoom {
+text-align: center;
+}
+.zoom:hover {
+transform: scale(1.5);
+color: rgb(255, 0, 0);
+}
+```
+```python
+// script.js
+// For edit item
+let index = -1;
+const table = document.getElementById("table");
+// For sorting ascending or descending
+const flag = { Name: false, Cat: false, Year: false };
+let data = [
+{ Name: "HTML", Cat: "Web", Year: "1993" },
+{
+Name: "Java",
+Cat: "Programming",
+Year: "1995",
+},
+{ Name: "JavaScript", Cat: "Web", Year: "1995" },
+{ Name: "MongoDB", Cat: "Database", Year: "2007" },
+{ Name: "Python", Cat: "Programming", Year: "1991" },
+];
+// To switch update or add form
+const switchEdit = () => {
+document.getElementById("submitItem").style.display =
+"none";
+document.getElementById("editItem").style.display = "";
+};
+const switchAdd = () => {
+document.getElementById("submitItem").style.display =
+"";
+document.getElementById("editItem").style.display =
+"none";
+};
+// To create table
+function addItem(e, i) {
+row = table.insertRow(i + 1);
+let c0 = row.insertCell(0);
+let c1 = row.insertCell(1);
+let c2 = row.insertCell(2);
+let c3 = row.insertCell(3);
+c4 = row.insertCell(4);
+let c5 = row.insertCell(5);
+c0.innerText = i + 1;
+c1.innerText = e.Name;
+c2.innerText = e.Cat;
+c3.innerText = e.Year;
+c4.innerHTML = "&#9997;";
+c5.innerHTML = "&#9746;";
+c4.classList.add("zoom");
+c5.classList.add("zoom");
+c4.addEventListener("click", () => edit(c4, i));
+c5.addEventListener("click", () => del(e));
+}
+// Traverse and insert items to table
+data.map((e, i) => addItem(e, i));
+// For sorting in different cases
+function sortItems(title) {
+remove();
+switch (title) {
+case "name":
+sortName();
+break;
+case "category":
+sortCat();
+break;
+case "year":
+sortYear();
+break;
+default:
+console.log("Default");
+}
+data.map((e, i) => addItem(e, i));
+}
+// Clear the table before updation
+function remove() {
+console.log("removed");
+while (table.rows.length > 1) table.deleteRow(-1);
+}
+// Sort with names
+function sortName() {
+data.sort((a, b) => {
+let fa = a.Name.toLowerCase(),
+fb = b.Name.toLowerCase();
+console.log(fa, fb);
+if (fa < fb) {
+return -1;
+}
+if (fa > fb) {
+return 1;
+}
+return 0;
+});
+if (flag.Name) data.reverse();
+flag.Name = !flag.Name;
+}
+// Sort with categories
+function sortCat() {
+data.sort((a, b) => {
+let fa = a.Cat.toLowerCase(),
+fb = b.Cat.toLowerCase();
+console.log(fa, fb);
+if (fa < fb) {
+return -1;
+}
+if (fa > fb) {
+return 1;
+}
+return 0;
+});
+if (flag.Cat) data.reverse();
+flag.Cat = !flag.Cat;
+}
+// Sort with year
+function sortYear() {
+data.sort((a, b) => a.Year - b.Year);
+if (flag.Year) data.reverse();
+flag.Year = !flag.Year;
+}
+// To search and filter items
+function searchItems() {
+let input = document
+.getElementById("searchInput")
+.value.toLowerCase();
+let filterItems = data.filter((e) => {
+return (
+e.Name.toLowerCase().includes(input) ||
+e.Cat.toLowerCase().includes(input) ||
+e.Year.includes(input)
+);
+});
+remove();
+filterItems.map((e, i) => addItem(e, i));
+}
+// Initiate edit form
+function edit(c, i) {
+console.log(c.classList.value);
+if (c.classList.value === "zoom") {
+c.classList.add("open");
+el = data[i];
+switchEdit();
+let nameInput =
+document.getElementById("nameInput");
+let catInput = document.getElementById("catInput");
+let yearInput =
+document.getElementById("yearInput");
+nameInput.value = el.Name;
+catInput.value = el.Cat;
+yearInput.value = el.Year;
+index = i;
+} else {
+c.classList.value = "zoom";
+switchAdd();
+document.getElementById("nameInput").value = "";
+document.getElementById("catInput").value = "";
+document.getElementById("yearInput").value = "";
+index = -1;
+}
+}
+// Submit edit data
+function editItem() {
+console.log("edit");
+nameInput = document.getElementById("nameInput");
+catInput = document.getElementById("catInput");
+yearInput = document.getElementById("yearInput");
+data[index] = {
+Name: nameInput.value,
+Cat: catInput.value,
+Year: yearInput.value,
+};
+remove();
+data.map((e, i) => addItem(e, i));
+nameInput.value = "";
+catInput.value = "";
+yearInput.value = "";
+switchAdd();
+}
+// Add new data
+function submitItem() {
+console.log("submit clicked");
+nameInput = document.getElementById("nameInput").value;
+catInput = document.getElementById("catInput").value;
+yearInput = document.getElementById("yearInput").value;
+if (
+nameInput === "" ||
+catInput === "" ||
+yearInput === ""
+) {
+window.alert("incomplete input data");
+return;
+}
+data.push({
+Name: nameInput,
+Cat: catInput,
+Year: yearInput,
+});
+document.getElementById("nameInput").value = "";
+document.getElementById("catInput").value = "";
+document.getElementById("yearInput").value = "";
+remove();
+data.map((e, i) => addItem(e, i));
+console.log(data);
+}
+// Delete specific field
+function del(el) {
+console.log("del clicked", el);
+remove();
+data = data.filter((e) => e.Name !== el.Name);
+data.map((e, i) => addItem(e, i));
+}
+```
+Output:
+### Explore
+- Introduction to JavaScript 4 min read
+- Variables and Datatypes in JavaScript 6 min read
+- JavaScript Operators 5 min read
+- Control Statements in JavaScript 4 min read
+- JavaScript Arrays 7 min read
+- JavaScript Array Methods 7 min read
+- JavaScript Strings 5 min read
+- JavaScript String Methods 9 min read
+- Functions in JavaScript 5 min read
+- JavaScript Function Expression 3 min read
+- Function Overloading in JavaScript 4 min read
+- Objects in JavaScript 4 min read
+- JavaScript Object Constructors 4 min read
+- Object Oriented Programming in JavaScript 3 min read
+- Classes and Objects in JavaScript 4 min read
+- What Are Access Modifiers In JavaScript ? 5 min read
+- JavaScript Constructor Method 7 min read
+- Asynchronous JavaScript 2 min read
+- JavaScript Callbacks 4 min read
+- JavaScript Promise 4 min read
+- Event Loop in JavaScript 4 min read
+- Async and Await in JavaScript 2 min read
+- Javascript Error and Exceptional Handling 6 min read
+- JavaScript Errors Throw and Try to Catch 2 min read
+- How to create custom errors in JavaScript ? 2 min read
+- JavaScript TypeError - Invalid Array.prototype.sort argument 1 min read
+- HTML DOM (Document Object Model) 8 min read
+- How to select DOM Elements in JavaScript ? 3 min read
+- JavaScript Custom Events 4 min read
+- JavaScript addEventListener() with Examples 9 min read
+- Closure in JavaScript 4 min read
+- JavaScript Hoisting 6 min read
+- Scope of Variables in JavaScript 3 min read
+- JavaScript Higher Order Functions 7 min read
+- Debugging in JavaScript 4 min read

@@ -1,0 +1,78 @@
+SOURCE_URL: https://www.coursera.org/projects/googlecloud-classify-images-with-tensorflow-convolutional-neural-networks-t7kqf
+SUJET: CNN_DEEP_LEARNING
+
+Enjoy unlimited growth with a year of Coursera Plus for €171 (regularly €342). Save now .
+# Classify Images with TensorFlow Convolutional Neural Networks
+Instructor: Google Cloud Training
+Included with
+Learn more
+## What you'll learn
+- Review the the starting model
+- Add convolutions, gather the data, and define the model
+- Compile and train the model
+- Visualize the convolutions and pooling
+## Skills you'll practice
+- Deep Learning
+- Data Collection
+- Google Cloud Platform
+- Tensorflow
+- Cloud Computing
+- Scientific Visualization
+- Artificial Neural Networks
+- Computer Vision
+- Convolutional Neural Networks
+- Image Analysis
+- Model Evaluation
+## Details to know
+Add to your LinkedIn profile
+Only available on desktop
+# See how employees at top companies are mastering in-demand skills
+## Learn, practice, and apply job-ready skills in less than 2 hours
+- Receive training from industry experts
+- Gain hands-on experience solving real-world job tasks
+## About this project
+This is a self-paced lab that takes place in the Google Cloud console. In this lab, you'll learn about how to use convolutional neural networks to improve your image classification models.
+### Instructor
+### Offered by
+We help millions of organizations empower their employees, serve their customers, and build what’s next for their businesses with innovative technology created in—and for—the cloud. Our products are engineered for security, reliability, and scalability, running the full stack from infrastructure to applications to devices and hardware. Our teams are dedicated to helping customers apply our technologies to create success.
+## How you'll learn
+- Hands-on, project-based learning Practice new skills by completing job-related tasks with step-by-step instructions.
+Hands-on, project-based learning
+Practice new skills by completing job-related tasks with step-by-step instructions.
+- No downloads or installation required Access the tools and resources you need in a cloud environment.
+No downloads or installation required
+Access the tools and resources you need in a cloud environment.
+- Available only on desktop This project is designed for laptops or desktop computers with a reliable Internet connection, not mobile devices.
+Available only on desktop
+This project is designed for laptops or desktop computers with a reliable Internet connection, not mobile devices.
+## Why people choose Coursera for their career
+### You might also like
+- G Google Cloud Introduction to Computer Vision with TensorFlow Project
+Google Cloud
+### Introduction to Computer Vision with TensorFlow
+Project
+- C Coursera Basic Image Classification with TensorFlow Guided Project
+Coursera
+### Basic Image Classification with TensorFlow
+Guided Project
+- G Google Cloud Introduction to Convolutions with TensorFlow Project
+### Introduction to Convolutions with TensorFlow
+- G Google Cloud Identify Horses or Humans with TensorFlow and Vertex AI Project
+### Identify Horses or Humans with TensorFlow and Vertex AI
+## Open new doors with Coursera Plus
+Unlimited access to 10,000+ world-class courses, hands-on projects, and job-ready certificate programs - all included in your subscription
+## Advance your career with an online degree
+Earn a degree from world-class universities - 100% online
+## Join over 3,400 global companies that choose Coursera for Business
+Upskill your employees to excel in the digital economy
+## Frequently asked questions
+In Projects, you'll complete an activity or scenario by following a set of instructions in an interactive hands-on environment. Projects are completed in a real cloud environment and within real instances of various products as opposed to a simulation or demo environment.
+By purchasing a Project, you'll get everything you need to complete the Project including temporary access to any product required to complete the Project.
+Even though Projects are technically available on mobile devices, we highly recommend that you complete Projects on a laptop or desktop only.
+Yes, you can download and keep any of your created files from the Project. To do so, please make sure you save any files and work to your device before exiting the product environment.
+Financial aid is not available for Projects.
+In rare instances, Projects may be taken down for maintenance or other reasons. If you are experiencing any issues, please contact us .
+Auditing is not available for Projects.
+At the top of the page, you can view the experience level recommended for this Project.
+Yes, everything you need to complete your Project will be available in your browser.
+### More questions

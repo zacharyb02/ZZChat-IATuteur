@@ -1,0 +1,147 @@
+SOURCE_URL: https://www.geeksforgeeks.org/javascript/javascript-type-conversion/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- JS Tutorial
+- Web Tutorial
+- A to Z Guide
+- Projects
+- OOP
+- DOM
+- Set
+- Map
+- Math
+- Number
+- Boolean
+- Exercise
+# JavaScript Type Conversion
+In JavaScript Type Conversion can be defined as converting the data type of the variables from one type to the other manually by the programmer(explicitly) or automatically by the JavaScript(implicitly).
+- Implicit Type Conversion (Coercion): Implicit Type Conversion occurs automatically by the JavaScript.
+- Explicit Type Conversion: Explicit Type Conversion occurs when the programmer manually changes the type of the variables using the function Number(), String(), and Boolean().
+## Implicit Type Conversion (Coercion)
+In JavaScript, the implicit type conversion or coercion conversion can be defined as the automatic conversion of the data type of the variables from one type to another type. Implicit type conversion mostly occurs when we are performing the arithmetic or the logical operations.
+### String + Number (Concatenation)
+When we add a string with the number, the JavaScript automatically converts the number into a string and performs string concatenation.
+```python
+let res = 5 + "5";
+console.log(res);
+```
+```python
+55
+```
+### Boolean to Number
+When we perform the mathematical operations, then JavaScript automatically converts true to 1 and false to 0.
+```python
+let res = true + 1;
+console.log(res);
+```
+```python
+2
+```
+### Equality Comparison (==)
+When we use the equality operator in the JavaScript, it compares them after converting the value into the same data type.
+```python
+let res = (5 == "5");
+console.log(res);
+```
+```python
+true
+```
+### Automatic Conversion in Logical Operations
+In JavaScript, these values are automatically converts undefined, null, "" (empty string), false, NaN, and 0 to false, and all other values to true.
+```python
+let res = Boolean("");
+let res2 = Boolean("Hello");
+console.log(res)
+console.log(res2)
+```
+```python
+false
+true
+```
+## Explicit Type Conversion
+In JavaScript, explicit type conversion can be defined as when we manually change the data type of the variable from one to other using some built-in JavaScript functions. JavaScript provides us the built-in functions for performing the explicit conversion.
+### Converting to String
+In JavaScript, we can convert the value into a string using the String() function, toString(), and by concatenating the empty string.
+```python
+let n = 123;
+let s1 = String(n);
+let s2 = n.toString();
+console.log(s1)
+console.log(s2)
+```
+```python
+123
+123
+```
+### Converting to Number
+In JavaScript, we can convert the value into a number using the Number() function, parseInt(), and parseFloat().
+```python
+let s = "123";
+let n = Number(s);
+let s1 = "12.34";
+let n1 = parseFloat(s1);
+console.log(n)
+console.log(n1)
+```
+```python
+123
+12.34
+```
+### Converting to Boolean
+In JavaScript, we can convert the value into a boolean we can use the Boolean() function.
+```python
+let str = "Hello";
+let b1 = Boolean(str);
+let emptyStr = "";
+let b2 = Boolean(emptyStr);
+console.log(b1)
+console.log(b2)
+```
+```python
+true
+false
+```
+## Why Learn JavaScript Type Conversion?
+- Data Handling : In JavaScript when we are working with API responses, user inputs and calculations, these type of the operation require type conversion.
+- Prevent Bugs : It is important to understand the type conversion which can help in preventing bugs which occurs when JavaScript implicitly converts value.
+- Code Clarity : By performing the explicit conversion makes our code bug free and more clear.
+## JavaScript Type Conversion Comparison
+### Explore
+- Introduction to JavaScript 4 min read
+- Variables and Datatypes in JavaScript 6 min read
+- JavaScript Operators 5 min read
+- Control Statements in JavaScript 4 min read
+- JavaScript Arrays 7 min read
+- JavaScript Array Methods 7 min read
+- JavaScript Strings 5 min read
+- JavaScript String Methods 9 min read
+- Functions in JavaScript 5 min read
+- JavaScript Function Expression 3 min read
+- Function Overloading in JavaScript 4 min read
+- Objects in JavaScript 4 min read
+- JavaScript Object Constructors 4 min read
+- Object Oriented Programming in JavaScript 3 min read
+- Classes and Objects in JavaScript 4 min read
+- What Are Access Modifiers In JavaScript ? 5 min read
+- JavaScript Constructor Method 7 min read
+- Asynchronous JavaScript 2 min read
+- JavaScript Callbacks 4 min read
+- JavaScript Promise 4 min read
+- Event Loop in JavaScript 4 min read
+- Async and Await in JavaScript 2 min read
+- Javascript Error and Exceptional Handling 6 min read
+- JavaScript Errors Throw and Try to Catch 2 min read
+- How to create custom errors in JavaScript ? 2 min read
+- JavaScript TypeError - Invalid Array.prototype.sort argument 1 min read
+- HTML DOM (Document Object Model) 8 min read
+- How to select DOM Elements in JavaScript ? 3 min read
+- JavaScript Custom Events 4 min read
+- JavaScript addEventListener() with Examples 9 min read
+- Closure in JavaScript 4 min read
+- JavaScript Hoisting 6 min read
+- Scope of Variables in JavaScript 3 min read
+- JavaScript Higher Order Functions 7 min read
+- Debugging in JavaScript 4 min read

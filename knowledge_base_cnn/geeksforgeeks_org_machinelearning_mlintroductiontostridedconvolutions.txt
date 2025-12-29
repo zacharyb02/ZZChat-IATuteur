@@ -1,0 +1,75 @@
+SOURCE_URL: https://www.geeksforgeeks.org/machine-learning/ml-introduction-to-strided-convolutions/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- Python for Machine Learning
+- Machine Learning with R
+- Machine Learning Algorithms
+- EDA
+- Math for Machine Learning
+- Machine Learning Interview Questions
+- ML Projects
+- Deep Learning
+- NLP
+- Computer vision
+- Data Science
+- Artificial Intelligence
+# ML | Introduction to Strided Convolutions
+Let us begin this article with a basic question - "Why padding and strided convolutions are required?"  Assume we have an image with dimensions of n x n . If it is convoluted with an f x f filter, then the dimensions of the image obtained are (n-f+1) x (n-f+1) .
+Example:
+Consider a 6 x 6 image as shown in figure below. It is to be convoluted with a 3 x 3 filter. The convolution is done using element wise multiplication.
+Figure 1: Image obtained after convolution of 6x6 image with a 3x3 filter and s=0
+Figure 2: 6 x 6 filter
+Figure 3: 3 x 3 filter
+Figure 4: Element wise multiplication
+But there are two downsides of this convolution:
+- By applying the convolutional filter every time, the original image sinks. i.e. the output image has smaller dimensions than the original input image which may lead to information loss.
+- Pixels at the corner of the image used in only one of the outputs than pixels in the middle which lead to huge information loss.
+In order to avoid it, padding is required. Also, sometimes it happens that we have a very large input image is to be convoluted with an f x f filter which may be computationally very expensive. In this situation, strides are used . That is why padding and strides are one of the most basic building blocks of Convolutional Neural Networks
+Dimensions of output image:
+Lets have an n x n image to be convoluted with an f x f filter. Assume a padding border of p pixels and a stride s , then the dimensions of the output image obtained are:
+The stride amount should be selected such that comparatively lesser computations are required and the information loss should be minimum.
+Figure 5: Image obtained after convolution of 7x7 image with a 3x3 filter and a stride of 2
+### Explore
+- Introduction to Machine Learning 8 min read
+- Types of Machine Learning 7 min read
+- What is Machine Learning Pipeline? 6 min read
+- Applications of Machine Learning 3 min read
+- Machine Learning with Python Tutorial 5 min read
+- NumPy Tutorial - Python Library 3 min read
+- Pandas Tutorial 4 min read
+- Data Preprocessing in Python 4 min read
+- EDA - Exploratory Data Analysis in Python 6 min read
+- What is Feature Engineering? 5 min read
+- Introduction to Dimensionality Reduction 4 min read
+- Feature Selection Techniques in Machine Learning 4 min read
+- Supervised Machine Learning 7 min read
+- Linear Regression in Machine learning 14 min read
+- Logistic Regression in Machine Learning 10 min read
+- Decision Tree in Machine Learning 8 min read
+- Random Forest Algorithm in Machine Learning 5 min read
+- K-Nearest Neighbor(KNN) Algorithm 8 min read
+- Support Vector Machine (SVM) Algorithm 9 min read
+- Naive Bayes Classifiers 6 min read
+- What is Unsupervised Learning 5 min read
+- K means Clustering – Introduction 6 min read
+- Hierarchical Clustering in Machine Learning 6 min read
+- DBSCAN Clustering in ML - Density based clustering 6 min read
+- Apriori Algorithm 6 min read
+- Frequent Pattern Growth Algorithm 5 min read
+- ECLAT Algorithm - ML 5 min read
+- Principal Component Analysis (PCA) 7 min read
+- Evaluation Metrics in Machine Learning 9 min read
+- Regularization in Machine Learning 5 min read
+- Cross Validation in Machine Learning 5 min read
+- Hyperparameter Tuning 5 min read
+- Underfitting and Overfitting in ML 3 min read
+- Bias and Variance in Machine Learning 6 min read
+- Reinforcement Learning 9 min read
+- Semi-Supervised Learning in ML 5 min read
+- Self-Supervised Learning (SSL) 6 min read
+- Ensemble Learning 7 min read
+- Machine Learning Interview Questions and Answers 15+ min read
+- 100+ Machine Learning Projects with Source Code 5 min read

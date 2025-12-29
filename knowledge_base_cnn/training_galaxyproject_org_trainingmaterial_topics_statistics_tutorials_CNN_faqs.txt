@@ -1,0 +1,46 @@
+SOURCE_URL: https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/faqs/
+SUJET: CNN_DEEP_LEARNING
+
+# Frequently Asked Questions
+### General Questions
+To use the tools installed and available on the Galaxy server:
+- At the top of the left tool panel, type in a tool name or datatype into the tool search box.
+- Shorter keywords find more choices.
+- Tools can also be directly browsed by category in the tool panel.
+If you can’t find a tool you need for a tutorial on Galaxy, please:
+- Check that you are using a compatible Galaxy server Navigate to the overview box at the top of the tutorial Find the “Supporting Materials” section Check “Available on these Galaxies” If your server is not listed here, the tutorial is not supported on your Galaxy server You can create an account on one of the supporting Galaxies
+- Navigate to the overview box at the top of the tutorial
+- Find the “Supporting Materials” section
+- Check “Available on these Galaxies”
+- If your server is not listed here, the tutorial is not supported on your Galaxy server
+- You can create an account on one of the supporting Galaxies
+- Use the Tutorial mode feature Open your Galaxy server Click on the curriculum icon on the top menu, this will open the GTN inside Galaxy. Navigate to your tutorial Tool names in tutorials will be blue buttons that open the correct tool for you Note: this does not work for all tutorials (yet)
+- Open your Galaxy server
+- Click on the curriculum icon on the top menu, this will open the GTN inside Galaxy.
+- Navigate to your tutorial
+- Tool names in tutorials will be blue buttons that open the correct tool for you
+- Note: this does not work for all tutorials (yet)
+- Still not finding the tool? Ask help in Gitter .
+- Ask help in Gitter .
+When something goes wrong in Galaxy, there are a number of things you can do to find out what it was. Error messages can help you figure out whether it was a problem with one of the settings of the tool, or with the input data, or maybe there is a bug in the tool itself and the problem should be reported. Below are the steps you can follow to troubleshoot your Galaxy errors.
+- Expand the red history dataset by clicking on it. Sometimes you can already see an error message here
+- Sometimes you can already see an error message here
+- View the error message by clicking on the bug icon galaxy-bug
+- Check the logs. Output (stdout) and error logs (stderr) of the tool are available: Expand the history item Click on the details icon Scroll down to the Job Information section to view the 2 logs: Tool Standard Output Tool Standard Error For more information about specific tool errors, please see the Troubleshooting section
+- Expand the history item
+- Click on the details icon
+- Scroll down to the Job Information section to view the 2 logs: Tool Standard Output Tool Standard Error
+- Tool Standard Output
+- Tool Standard Error
+- For more information about specific tool errors, please see the Troubleshooting section
+- Submit a bug report! If you are still unsure what the problem is. Click on the bug icon galaxy-bug Write down any information you think might help solve the problem See this FAQ on how to write good bug reports Click galaxy-bug Report button
+- Click on the bug icon galaxy-bug
+- Write down any information you think might help solve the problem See this FAQ on how to write good bug reports
+- See this FAQ on how to write good bug reports
+- Click galaxy-bug Report button
+- Ask for help! Where? In the GTN Matrix Channel In the Galaxy Matrix Channel Browse the Galaxy Help Forum to see if others have encountered the same problem before (or post your question). When asking for help, it is useful to share a link to your history
+- Where? In the GTN Matrix Channel In the Galaxy Matrix Channel Browse the Galaxy Help Forum to see if others have encountered the same problem before (or post your question).
+- In the GTN Matrix Channel
+- In the Galaxy Matrix Channel
+- Browse the Galaxy Help Forum to see if others have encountered the same problem before (or post your question).
+- When asking for help, it is useful to share a link to your history

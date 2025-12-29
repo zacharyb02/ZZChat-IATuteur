@@ -1,0 +1,171 @@
+SOURCE_URL: https://www.geeksforgeeks.org/linux-unix/linux-kernel-module-programming-hello-world-program/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- Linux-Unix
+- Interview Questions
+- Shell Scripting
+- Kali
+- Ubuntu
+- Red Hat
+- CentOS
+- Docker
+- Kubernetes
+- Python
+- R
+- Java
+# Linux Kernel Module Programming: Hello World Program
+- The basic way is to add the code to the kernel source tree and recompile the kernel.
+- A more efficient way is to do this is by adding code to the kernel while it is running. This process is called loading the module, where module refers to the code that we want to add to the kernel.
+- filesystem driver and
+- System calls.
+```python
+/**
+* @file    hello.c
+* @author  Akshat Sinha
+* @date    10 Sept 2016
+* @version 0.1
+* @brief  An introductory "Hello World!" loadable kernel
+*  module (LKM) that can display a message in the /var/log/kern.log
+*  file when the module is loaded and removed. The module can accept
+*  an argument when it is loaded -- the name, which appears in the
+*  kernel log files.
+*/
+#include <linux/module.h>     /* Needed by all modules */
+#include <linux/kernel.h>     /* Needed for KERN_INFO */
+#include <linux/init.h>       /* Needed for the macros */
+///< The license type -- this affects runtime behavior
+MODULE_LICENSE("GPL");
+///< The author -- visible when you use modinfo
+MODULE_AUTHOR("Akshat Sinha");
+///< The description -- see modinfo
+MODULE_DESCRIPTION("A simple Hello world LKM!");
+///< The version of the module
+MODULE_VERSION("0.1");
+static int __init hello_start(void)
+{
+printk(KERN_INFO "Loading hello module...\n");
+printk(KERN_INFO "Hello world\n");
+return 0;
+}
+static void __exit hello_end(void)
+{
+printk(KERN_INFO "Goodbye Mr.\n");
+}
+module_init(hello_start);
+module_exit(hello_end);
+```
+- KERN_EMERG: Used for emergency messages, usually those that precede a crash.
+- KERN_ALERT: A situation requiring immediate action.
+- KERN_CRIT: Critical conditions, often related to serious hardware or software failures.
+- KERN_ERR: Used to report error conditions; device drivers often use KERN_ERR to report hardware difficulties.
+- KERN_WARNING: Warnings about problematic situations that do not, in themselves, create serious problems with the system.
+- KERN_NOTICE: Situations that are normal, but still worthy of note. A number of security-related conditions are reported at this level.
+- KERN_INFO: Informational messages. Many drivers print information about the hardware they find at startup time at this level.
+- KERN_DEBUG: Used for debugging messages.
+```python
+akshat@gfg:~$ sudo apt-get install build-essential linux-headers-$(uname -r)
+```
+```python
+obj-m = hello.o
+all:
+make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
+clean:
+make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+```
+```python
+akshat@gfg:~$ make
+make -C /lib/modules/4.2.0-42-generic/build/ M=/home/akshat/Documents/hello-module modules
+make[1]: Entering directory `/usr/src/linux-headers-4.2.0-42-generic'
+CC [M]  /home/akshat/Documents/hello-module/hello.o
+Building modules, stage 2.
+MODPOST 1 modules
+CC      /home/akshat/Documents/hello-module/hello.mod.o
+LD [M]  /home/akshat/Documents/hello-module/hello.ko
+make[1]: Leaving directory `/usr/src/linux-headers-4.2.0-42-generic'
+```
+```python
+akshat@gfg:~$ sudo insmod hello.ko
+```
+```python
+akshat@gfg:~$ modinfo hello.ko
+filename:       /home/akshat/Documents/hello-module/hello.ko
+version:        0.1
+description:    A simple Hello world LKM
+author:         Akshat Sinha
+license:        GPL
+srcversion:     2F2B1B95DA1F08AC18B09BC
+depends:
+vermagic:       4.2.0-42-generic SMP mod_unload modversions
+```
+```python
+akshat@gfg:~$ tail /var/log/kern.log
+...
+...
+Sep 10 17:43:39 akshat-gfg kernel: [26380.327886] Hello world
+To unload the module, we run rmmod:
+akshat@gfg:~$ sudo rmmod hello
+Now run the tail command to get the exit message.
+akshat@gfg:~$ tail /var/log/kern.log
+...
+Sep 10 17:43:39 akshat-gfg kernel: [26380.327886] Hello world
+Sep 10 17:45:42 akshat-gfg kernel: [26503.773982] Goodbye Mr.
+```
+### Explore
+- Introduction to Linux Operating System 7 min read
+- LINUX Full Form -  Lovable Intellect Not Using XP 2 min read
+- Difference between Linux and Windows 7 min read
+- Linux Distributions 6 min read
+- Difference between Unix and Linux 6 min read
+- Installation of Arch Linux in VirtualBox 4 min read
+- Fedora Linux Operating System 5 min read
+- How to install Ubuntu on VirtualBox? 6 min read
+- How to Install Linux Mint? 3 min read
+- Installation of Kali Linux in Virtual Machine 2 min read
+- How to Install Linux on Windows PowerShell Subsystem? 2 min read
+- How to Find openSUSE Linux Version? 2 min read
+- Installation of CentOS 2 min read
+- Linux Commands 15+ min read
+- Essential Unix Commands 7 min read
+- Find Command in Linux 7 min read
+- Linux File System 12 min read
+- Linux File Hierarchy Structure 5 min read
+- Linux Directory Structure 6 min read
+- Linux Kernel 4 min read
+- Kernel in Operating System 3 min read
+- How Linux Kernel Boots? 11 min read
+- Difference between Operating System and Kernel 3 min read
+- Linux Kernel Module Programming: Hello World Program 7 min read
+- Linux Loadable Kernel Module 7 min read
+- Loadable Kernel Module - Linux Device Driver Development 4 min read
+- Network configuration and troubleshooting commands in Linux 5 min read
+- How to configure network interfaces in CentOS? 5 min read
+- Command-Line Tools and Utilities For Network Management in Linux 8 min read
+- Linux - Network Monitoring Tools 4 min read
+- Processes in Linux/Unix 5 min read
+- How to Manage Process in Linux 4 min read
+- Getting System and Process Information Using C Programming and Shell in Linux 2 min read
+- Process states and Transitions in a UNIX Process 4 min read
+- LINUX Firewall 7 min read
+- iptables command in Linux with Examples 7 min read
+- How to Configure your Linux Firewall - 3 Methods 12 min read
+- Introduction to Linux Shell and Shell Scripting 7 min read
+- Understanding Terminal, Console, Shell and Kernel 3 min read
+- How to Create a Shell Script in linux 7 min read
+- Shell Scripting - Different types of Variables 4 min read
+- Bash Scripting - Introduction to Bash and Bash Scripting 12 min read
+- Bash Script - Define Bash Variables and its types 12 min read
+- Shell Scripting - Shell Variables 6 min read
+- Bash Script - Difference between Bash Script and Shell Script 4 min read
+- Shell Scripting - Difference between Korn Shell and Bash shell 3 min read
+- Shell Scripting - Interactive and Non-Interactive Shell 3 min read
+- Shell Script to Show the Difference Between echo “$SHELL” and echo ‘$SHELL’ 4 min read
+- What is Linux System Administration? 6 min read
+- Beginner's Guide to Linux System Administration 5 min read
+- How to Monitor System Usage, Outages and Troubleshoot Linux Servers 6 min read
+- Linux - Systemd and its Components 3 min read
+- Boot Process with Systemd in Linux 3 min read
+- How to Control Systemd Services on Remote Linux Server 2 min read
+- How to Start, Stop and Restart Services in Linux Using systemctl Command 9 min read

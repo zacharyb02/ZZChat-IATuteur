@@ -1,0 +1,187 @@
+SOURCE_URL: https://www.geeksforgeeks.org/linux-unix/how-linux-kernel-boots/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- Linux-Unix
+- Interview Questions
+- Shell Scripting
+- Kali
+- Ubuntu
+- Red Hat
+- CentOS
+- Docker
+- Kubernetes
+- Python
+- R
+- Java
+# How Linux Kernel Boots?
+Many processes are running in the background when we press the system's power button. It is very important to learn the Linux boot process to understand the workings of any operating system. Knowing how the kernel boots is a must to solve the booting error. It is a very interesting topic to learn, let us start with the basics. A simplified read of the boot method is given below:
+## Stages of Linux Boot Process:
+Key Steps in the Linux Startup Proces:
+- The machine’s BIOS (Basic Input/Output System) or boot microcode hundreds or UEFI initializes hardware and runs a Power-On Self-Test (POST) or a boot loader.
+- Boot loader finds the kernel image on the disk and loads it into memory, to start the system.
+- The kernel initializes the devices and their drivers.
+- The kernel mounts the basis filesystem.
+- The kernel starts a program referred to as init with a method ID zero
+- init sets the remainder of the system processes in motion.
+- For some purpose, init starts a method permitting you to log in, typically at the top or close to the top of the boot sequence.
+### Step 1. BIOS/UEFI and Power-On Self-Test (POST)
+When we press the power button of your system than the your Linux machine than BIOS (Basic Input/Output System) or UEFI (Unified Extensible Firmware Interface) initiates the boot process.Here’s how it works:
+Power-On Self-Test (POST):
+- The POST procedure is carried out by the BIOS/UEFI control which will do a basic device check on the most important hardware components which includes the RAM , CPU, and storage devices (HDD, SSD, and USB). If something goes wrong (for example: broken GPU), POST will abort the booting process and signal the user with a series of beeps or error codes.
+Storage Initialization:
+- The BIOS/UEFI will try to find and set up connected storage devices while looking for media files that can be used to boot the computer. In legacy BIOS systems, the partition scheme used to locate the operating system files is called Master Boot Record (MBR) , which has a limitation of 2TB disks. In modern UEFI systems, it is done through EFI partition and GPT (GUID Partition Table) on bigger drives (>2TB).
+Bootloader Search:
+- BIOS will look into the MBR on the first storage device to find the bootloader (like GRUB). UEFI does not go through the MBR but rather goes directly to the boot loader location in the EFI System Partition (ESP). it can find the boot loaders on a certain predefined folder path (/EFI/).
+### Step 2. Role of Boot Loaders in the Linux Boot Process
+What is a Boot Loader?
+A boot loader is a crucial component in the Linux boot process that initializes the system by loading the Linux kernel and passing necessary boot parameters . It is the first software that runs once the system's BIOS/UEFI firmware completes the Power-On Self-Test (POST) and finds a bootable disk.
+Boot Loader Tasks:
+- Select from multiple kernels.
+- Switch between sets of kernel parameters.
+- Provide support for booting different operating systems.
+- Load initrd/initramfs to prepare the system before mounting the root filesystem.
+- Pass kernel arguments such as ro (read-only root), quiet (disable verbose boot messages), nomodeset (disable graphics drivers for troubleshooting) .
+- Recover from boot failures by providing a minimal recovery shell in case of errors (GRUB rescue mode).
+Bootloaders have become significantly advanced since the origin of the Linux kernel, with options like command-line history and menu systems, however, a basic want has perpetually been flexibility in kernel image and parameter choice. One stunning development is that some wants to have really diminished. As an example, as a result of being able to perform associate emergency or recovery boot from a USB device, you seldom need to worry about manually getting into kernel parameters or going into single-user mode. Current bootloaders supply a lot of power than ever, which may be notably handy if you’re building custom kernels or simply wish to tweak parameters.
+### Boot LoaderOverview:
+- GRUB - A near-universal normal on Linux systems, with BIOS/MBR and UEFI versions.
+- LILO - One of the primary Linux bootloaders. ELILO could be a UEFI version.
+- SYSLINUX - It may be organized to run from many alternative styles of filesystems.
+- LOADLIN - Boots a kernel from DOS.
+- System-boot a straightforward UEFI boot manager.
+- coreboot - A superior replacement for the computer BIOS which will embody a kernel.
+- Linux Kernel EFISTUB A kernel plug-in for loading the kernel directly from associate EFI/UEFI System Partition.
+- EFI Linux - A UEFI boot loader meant to function as a model and reference for different UEFI boot loaders.
+### Introduction and Work of Few Linux Boot Loaders mentioned above:
+GRUB stands for Grand Unified Boot Loader . One of GRUB’s most vital capabilities is filesystem navigation that enables straightforward kernel image and configuration choice.
+- Upon finding the boot code, the BIOS hundreds and executes it. This is often wherever GRUB begins.
+- The GRUB core hundreds.
+- The core initializes. At now, GRUB will currently access disks and filesystems.
+- GRUB identifies its boot partition and hundreds of configurations there.
+- GRUB offers the user an opportunity to vary the configuration.
+- GRUB executes the configuration after a timeout or user action.
+- In the course of execution of the configuration, GRUB might load further code within the boot partition. a number of these modules are also preloaded.
+- To load and execute the kernel GRUB executes boot commands.
+It was the first bootloader developed for Linux, still some users use it today. If we compare it to the GRUB bootloader it is quite simple and primarily used with BIOS system. To install it on Linux system one can install it using package manager like apt or yum. After installation it can be easily configured by editing its configuration file located at `/etc/lolo.conf`.
+It is lightest among other bootloaders; it can perform booting from removable media such as CDs or USB drives. Its key feature is that it supports different filesystems, a command-line interface and the ability to boot from multiple devices.  For example, to install SYSLINUX on a USB drive we can configure SYSLINUX setting by editing its configuration file located in `/syslinux/syslinux.cfg`.
+### Step 3. Linux Kernel Initialization and Boot Parameters
+Once the boot loader (GRUB, LILO, SYSLINUX) loads the Linux kernel into memory, the kernel initialization process begins. The Linux kernel is responsible for hardware detection, memory management, device driver loading, and starting system services .
+- CPU examination
+- Memory examination
+- Device bus discovery
+- Device discovery
+- Auxiliary kernel system setup
+- Root filesystem mount
+- User-space begin.
+The first 2 steps aren’t too exceptional, however, once the kernel gets to devices, the question of dependencies arises. As an example, the disk device drivers might rely on bus support and SCSI system support. In general, you won’t need to worry regarding the dependencies, except that some necessary parts are also loadable kernel modules instead of a part of the most kernel.
+### Kernel Parameters in Linux Booy Process:
+When the Linux kernel starts, it receives a group of text-based kernel parameters containing some further system details. The parameters specify many alternative kinds of behavior, like the number of diagnostic outputs the kernel ought to manufacture and device driver–specific choices. The Ro parameter instructs the kernel to mount the basis filesystem in read-only mode upon user area begins. This normal read-only mode ensures that fsck can safely check the basis filesystem before attempting to do something serious. When the check, the bootup method remounts the basis filesystem in read-write mode.
+Common Kernel Boot Parameters
+Initrd (Initial RAM Disk) and Initramfs
+Before mounting the actual root filesystem , the Linux kernel loads an initial, temporary filesystem called initrd or initramfs .
+- initrd (Initial RAM Disk) – A compressed block-based filesystem that includes essential drivers and utilities needed for booting.
+- initramfs (Initial RAM Filesystem) – A modern replacement for initrd , it is a cpio archive that does not require mounting and loads directly into RAM.
+### Step 4. Init System (SysVinit, Upstart, systemd) and Runlevels in the Linux Boot Process
+When the kernel is initialized, the subsequent Linux boot process action progresses into the init system, which handles system services, processes, and sessions. The init system takes care of provisioning all required background services such as networking, logging, and the system daemons in the right sequence.
+### Types of Init Systems in Linux
+There are three major init systems used in different Linux distributions :
+SysVinit (System V Init)
+- The oldest Linux distributions have this init system as a component.
+- Administers runlevels (0-6) using /etc/inittab.
+- Sequential startup: Each service is started on its own, which increases boot time.
+- In widespread use with older distros like RHEL 5, CentOS 5, Debian 6.
+Upstart
+- Developed as a replacement to SysVinit.
+- Event-driven: Starting services on most events to be more efficient.
+- In use in Ubuntu before switching to systemd in Ubuntu 15.04.
+- Has support for some SysVinit scripts.
+systemd (Modern Standard in Linux Boot Process)
+- Default init system in many distributions today like RHEL, Ubuntu, Debian, Fedora.
+- Parallel service startup (improves performance compared to SysVinit).
+- Uses targets instead of traditional runlevels .
+- Manages cgroups (Control Groups) enabling better resource control.
+Runlevel Programs in SysVinit
+The SysVinit system defines six different runlevels , each associated with a specific system state. Depending on the runlevel , Linux executes different startup and shutdown programs located in different directories.
+Runlevels and Their Directories:
+- Run level 0 – /etc/rc0.d/ → Shutdown
+- Run level 1 – /etc/rc1.d/ → Single-user mode
+- Run level 2 – /etc/rc2.d/ → Multi-user mode (without networking)
+- Run level 3 – /etc/rc3.d/ → Full multi-user mode
+- Run level 4 – /etc/rc4.d/ → User-defined/custom runlevel
+- Run level 5 – /etc/rc5.d/ → Multi-user with GUI
+- Run level 6 – /etc/rc6.d/ → System reboot
+Programs prefixed with "S" (Start) execute during system startup and programs prefixed with "K" (Kill) execute during system shutdown.
+### Step 5. Reaching the User Login Prompt in the Linux Boot Process
+After all the system services are loaded, the last part of the Linux boot phase is reached, which is displaying the user login prompt.
+### CLI vs GUI Login in Linux Boot Process
+For CLI (Multi-User Target):
+- The system boots into multi-user mode and presents a TTY terminal login prompt .
+- Users type their credentials to log in.
+- Used in servers or light versions of Linux.
+For GUI (Graphical Target):
+- The display manager (GDM, LightDM, SDDM, Xorg, Wayland) starts the graphical login screen .
+- Then, users can log in on a graphical secession, for example, GNOME , KDE, or XFCE.
+- Common in desktop environments.
+### Step 6. Startup Message:
+Traditional UNIX operating system manufactures several diagnostic messages upon boot that tell you regarding the boot method. The messages come back initially from the kernel and so from processes and low-level formatting procedures that init starts. However, these messages aren’t pretty or consistent, and in some cases, they aren’t even terribly informative. Additionally, hardware enhancements have caused the kernel to start a lot quicker than before the messages flash by therefore quickly, it may be tough to check what’s happening. As a result, most current Linux distributions do their best to cover boot medical specialty with splash screens and different varieties of filler to distract you whereas the system starts.
+## Conclusion:
+It is very important to know how Linux kernel boots and to know that one must know how to solve boot problems. The Linux boot process has several stages that include BIOS, boot loader, kernel initialization, device and driver initialization. While kernel is responsible for specifying various behaviors and device drivers-specific option whereas bootloader is responsible for providing flexible kernel image and parameter selection. We discussed the most common boot loader and overall, we can conclude that it is important for system administrators, developers and single users using Linux operating systems.
+### Explore
+- Introduction to Linux Operating System 7 min read
+- LINUX Full Form -  Lovable Intellect Not Using XP 2 min read
+- Difference between Linux and Windows 7 min read
+- Linux Distributions 6 min read
+- Difference between Unix and Linux 6 min read
+- Installation of Arch Linux in VirtualBox 4 min read
+- Fedora Linux Operating System 5 min read
+- How to install Ubuntu on VirtualBox? 6 min read
+- How to Install Linux Mint? 3 min read
+- Installation of Kali Linux in Virtual Machine 2 min read
+- How to Install Linux on Windows PowerShell Subsystem? 2 min read
+- How to Find openSUSE Linux Version? 2 min read
+- Installation of CentOS 2 min read
+- Linux Commands 15+ min read
+- Essential Unix Commands 7 min read
+- Find Command in Linux 7 min read
+- Linux File System 12 min read
+- Linux File Hierarchy Structure 5 min read
+- Linux Directory Structure 6 min read
+- Linux Kernel 4 min read
+- Kernel in Operating System 3 min read
+- How Linux Kernel Boots? 11 min read
+- Difference between Operating System and Kernel 3 min read
+- Linux Kernel Module Programming: Hello World Program 7 min read
+- Linux Loadable Kernel Module 7 min read
+- Loadable Kernel Module - Linux Device Driver Development 4 min read
+- Network configuration and troubleshooting commands in Linux 5 min read
+- How to configure network interfaces in CentOS? 5 min read
+- Command-Line Tools and Utilities For Network Management in Linux 8 min read
+- Linux - Network Monitoring Tools 4 min read
+- Processes in Linux/Unix 5 min read
+- How to Manage Process in Linux 4 min read
+- Getting System and Process Information Using C Programming and Shell in Linux 2 min read
+- Process states and Transitions in a UNIX Process 4 min read
+- LINUX Firewall 7 min read
+- iptables command in Linux with Examples 7 min read
+- How to Configure your Linux Firewall - 3 Methods 12 min read
+- Introduction to Linux Shell and Shell Scripting 7 min read
+- Understanding Terminal, Console, Shell and Kernel 3 min read
+- How to Create a Shell Script in linux 7 min read
+- Shell Scripting - Different types of Variables 4 min read
+- Bash Scripting - Introduction to Bash and Bash Scripting 12 min read
+- Bash Script - Define Bash Variables and its types 12 min read
+- Shell Scripting - Shell Variables 6 min read
+- Bash Script - Difference between Bash Script and Shell Script 4 min read
+- Shell Scripting - Difference between Korn Shell and Bash shell 3 min read
+- Shell Scripting - Interactive and Non-Interactive Shell 3 min read
+- Shell Script to Show the Difference Between echo “$SHELL” and echo ‘$SHELL’ 4 min read
+- What is Linux System Administration? 6 min read
+- Beginner's Guide to Linux System Administration 5 min read
+- How to Monitor System Usage, Outages and Troubleshoot Linux Servers 6 min read
+- Linux - Systemd and its Components 3 min read
+- Boot Process with Systemd in Linux 3 min read
+- How to Control Systemd Services on Remote Linux Server 2 min read
+- How to Start, Stop and Restart Services in Linux Using systemctl Command 9 min read

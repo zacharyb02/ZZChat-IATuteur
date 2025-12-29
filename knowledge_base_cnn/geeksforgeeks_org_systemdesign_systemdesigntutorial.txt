@@ -1,0 +1,141 @@
+SOURCE_URL: https://www.geeksforgeeks.org/system-design/system-design-tutorial/
+SUJET: CNN_DEEP_LEARNING
+
+# System Design Tutorial
+System Design is the process of designing the architecture, components, and interfaces for a system so that it meets the end-user requirements. This specifically designed System Design tutorial will help you to learn and master System Design concepts in the most efficient way, from the basics to the advanced level.
+## Why Learn System Design?
+System design is important for anyone who wants to build a robust, scalable, and efficient software application. Whether you are building a small-scale application or a large one, understanding system design allows you to architect solutions that can handle real-world complexities.
+- Scalability and Reliability: System design ensures systems can grow and handle increased demand without failure.
+- Efficient Resource Management: It helps in optimizing resource allocation, ensuring fast and responsive applications.
+- Adaptability : System design enables the creation of systems that can evolve with changing business needs, reducing long-term costs.
+- Architectural Understanding: Learning different system architectures (e.g., microservices, monolithic) helps in building applications suited to various needs.
+- Interview Preparation: Mastering system design is key to excelling in system design interviews, commonly asked in tech company hiring processes.
+## Basics
+- System Design Introduction - HLD & LLD
+- Functional and Non Functional Requirements
+## High Level Design
+- What is High Level Design?
+### System Architectural Styles
+- Monolithic Architecture
+- Microservices
+- Monolithic vs Microservices Architecture
+- Event-Driven Architecture
+- Serverless Architecture
+- Stateful vs. Stateless Architecture
+- Pub/Sub Architecture
+### Scalability
+- Horizontal and Vertical Scaling
+- Which Scalability approach is right for our Application?
+- Primary Bottlenecks that Hurt the Scalability of an Application
+### Databases in Designing Systems
+- Choosing a Database - SQL or NoSQL
+- File and Database Storage Systems
+- Database Replication in System Design
+- Database Sharding
+- Block, Object, and File Storage
+- Normalization Process in DBMS
+- SQL Query Optimization
+- Denormalization in Databases
+- Intro to Redis
+### Consistency, Availability, Reliability & Maintainability
+- Availability in System Design
+- How to achieve High Availability?
+- Consistency in System Design
+- Consistency pattern
+- CAP Theorem
+- Reliability in System Design
+- Fault Tolerance in System Design
+- Maintainability
+### Load Balancing
+- Concurrency and Parallelism
+- Load Balancer
+- Load Balancing Algorithms
+- Consistent Hashing
+### Latency, Throughput and Caching
+- Latency and Throughput
+- Caching in System Design
+### API Gateway, Message Queues & Rate Limiting
+- What is API Gateway
+- Message Queues
+- Rate Limiting
+- Rate Limiting Algorithm
+### Protocols, CDN, Proxies & WebSockets
+- Communication Protocols
+- Domain Name System
+- DNS Caching
+- Time to Live(TTL)
+- Content Delivery Network(CDN)
+- Proxies in System Design
+- Forward Proxy vs Reverse Proxy
+- Websockets
+### Testing
+- Unit Testing
+- Integration Testing
+- CI/CD Pipeline
+### Security Measures
+- Security Measures in System Design
+- Authentication and Authorization
+- Secure Socket Layer (SSL) and Transport Layer Security (TLS)
+- Secure Software Developement Life Cycle (SSDLC)
+- Data Backup and Disaster Recovery
+### Distributed System Design
+- Consensus Algorithms in Distributed System
+- Distributed Tracing
+- Secure Communication in Distributed System
+### Cost & Performance Optimizations
+- Software Cost Estimation
+- Performance Optimization Techniques
+## Low Level Design(LLD)
+### Core Concepts
+- Object-Oriented Programing(OOP) Concepts
+- Modularity and Interfaces
+- What is Low Level Design or LLD
+### Design Principles
+- SOLID Principles
+- DRY Principle
+- KISS Principle
+- YAGNI Principle
+### UML
+- Unified Modeling Language (UML)
+### Design Patterns
+- Singleton Pattern
+- Factory Method
+- Abstract Factory
+- Builder Pattern
+- Prototype Pattern
+- Adapter Pattern
+- Decorator Pattern
+- Composite Pattern
+- Proxy Pattern
+- Facade Pattern
+- Observer Pattern
+- Strategy Pattern
+- Command Pattern
+- State Pattern
+- Template Method Pattern
+## Interview Questions & Answers of System Design
+- URL Shortening Service
+- Design Dropbox
+- Design Twitter
+- System Design Netflix – Complete Architecture
+- System Design of Uber App – Uber System Architecture
+- Design BookMyShow
+- Designing Facebook Messenger
+- Designing Whatsapp Messenger
+- Designing Instagram
+- Designing Airbnb
+- System Designing of Airline Management System
+- Common Design Interview Questions
+## Tips for System Design interview
+- How to Crack System Design Round in Interviews?
+- 5 Tips to Crack Low-Level System Design Interviews
+- 5 Common System Design Concepts for Interview Preparation
+- 6 Steps To Approach Object-Oriented Design Questions in Interview
+## System Design Life Cycle
+## Introduction of SOLID Design
+## Introduction to the Design Patterns
+## Creational Design Patterns
+## System Design Tutorial | A complete Overview
+A
+- System Design
+- Tutorials

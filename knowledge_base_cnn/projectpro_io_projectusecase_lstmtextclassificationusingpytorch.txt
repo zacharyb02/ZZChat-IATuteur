@@ -1,0 +1,254 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/lstm-text-classification-using-pytorch
+SUJET: CNN_DEEP_LEARNING
+
+# PyTorch Project to Build a LSTM Text Classification Model
+In this PyTorch Project you will learn how to build an LSTM Text Classification model for Classifying the Reviews of an App .
+## Project Outcomes
+- What is PyTorch?
+- PyTorch vs Tensorflow
+- Limitations of current algorithms
+- What is a text analytics and the need for text analytics?
+- What is RNN and the need for RNN?
+- Architecture of RNN
+- What is LSTM?
+- Architecture of LSTM
+- Working of LSTM
+- Application of LSTM
+- Tokenization of text
+- Lemmatization of text
+- Converting data to tensors
+- Handling class imbalance
+- Building LSTM model in PyTorch
+Get started today
+Request for free demo with us.
+## Architecture Diagram
+## Topics
+- Introduction to PyTorch 10m
+- Introduction to Text Analytics 10m
+- Need of Recurrent Neural Network 07m
+- Introduction to RNN 09m
+- Long Short Term Memory 09m
+- Data Loading 07m
+- Data Preprocessing 08m
+- Model Training 12m
+- Model Evaluation and Modular Code 11m
+## Source code + Project materials
+## Project Description
+Overview
+Long short-term memory(LSTM) is a recurrent neural network architecture(RNN) used in the field of deep learning. These architectures are capable of learning long-term dependencies faced by recurrent neural networks. LSTMs have feedback connections which makes them different from the traditional feed-forward neural networks. LSTMs are particularly good at text data, speech, and time series.
+In this project, an LSTM model for classifying the review of an app on a scale of 1 to 5 based on the feedback has been built in PyTorch. If you haven't visited already, here is the previous project of the series Build a CNN Model with PyTorch for Image Classification
+Aim
+- To understand the  working of LSTM
+- To classify the review of an app on a scale of 1 to 5 using LSTM
+Data Description
+The dataset contains the reviews and the ratings of the app. The dataset has a score column and content column. The score columns have a number range between 1 to 5 based on the content column.
+Tech Stack
+- Language: Python
+- Libraries: pandas, tensorflow, matplotlib, sci-kit learn, nltk, numpy, pytorch
+Approach
+- Data Preprocessing Lowering Text, removing punctuation, removing links Balancing classes Tokenizing the text Scaling
+Data Preprocessing
+- Lowering Text, removing punctuation, removing links
+- Balancing classes
+- Tokenizing the text
+- Scaling
+- Model Training Training LSTM model in PyTorch
+Model Training
+- Training LSTM model in PyTorch
+- Model Evaluation Evaluation of model on test data
+Model Evaluation
+- Evaluation of model on test data
+## Unlimited 1:1 Live Interactive Sessions
+- 30-minute live session Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+- No extra charges Unlimited number of sessions with no extra charges. Yes, unlimited!
+Unlimited number of sessions with no extra charges. Yes, unlimited!
+- We match you to the right expert Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+- Schedule recurring sessions Schedule recurring sessions, once a week or bi-weekly, or monthly.
+Schedule recurring sessions, once a week or bi-weekly, or monthly.
+- Pick your favorite expert If you find a favorite expert, schedule all future sessions with them.
+If you find a favorite expert, schedule all future sessions with them.
+- Use the 1-to-1 sessions to Troubleshoot your projects Customize our templates to your use-case Build a project portfolio Brainstorm architecture design Bring any project, even from outside ProjectPro Mock interview practice Career guidance Resume review
+- Troubleshoot your projects
+- Customize our templates to your use-case
+- Build a project portfolio
+- Brainstorm architecture design
+- Bring any project, even from outside ProjectPro
+- Mock interview practice
+- Career guidance
+- Resume review
+### Land Your Dream Job Faster
+AI-powered interview prep with recruiter connections
+### Upload Resume & Job Role
+Submit your resume and target job description
+### Tailored Mock Interview
+AI conducts interview based on your resume
+### Actionable Feedback
+Detailed report with strengths and improvements
+### Unlimited Practice
+Record multiple attempts, all saved
+### Select Best Performance
+Choose your strongest interview
+### Connect with Recruiters
+Shared with 121+ top tech recruiters conditions apply*
+## Benefits
+250+ end-to-end project solutions
+Each project solves a real business problem from start to finish. These projects cover the domains of Data Science, Machine Learning, Data Engineering, Big Data and Cloud.
+15 new projects added every month
+New projects every month to help you stay updated in the latest tools and tactics.
+500,000 lines of code
+Each project comes with verified and tested solutions including code, queries, configuration files, and scripts. Download and reuse them.
+Cloud Lab Workspace
+Unlimited 1:1 sessions
+Technical Support
+Chat with our technical experts to solve any issues you face while building your projects.
+7 Days risk-free trial
+We offer an unconditional 7-day money-back guarantee. Use the product for 7 days and if you don't like it we will make a 100% full refund. No terms or conditions.
+Payment Options
+0% interest monthly payment schemes available for all countries.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Comparison with other platforms
+### We provide ready-made project templates that solve real business problems, end-to-end and comes with solution code,explanation videos, cloud lab environment and tech support.
+## Our expert panel
+### Kai Tarafdar
+NLP Engineer, Speechkit
+### Camille Girabawe
+Machine Learning Manager, Adobe
+### Shaurya Uppal
+Data Scientist, Inmobi
+### Deepak Sahu
+Senior Data Engineer, Slintel-6sense company
+### Victoria Williams
+Senior Data Engineer, Hogan Assessment Systems
+### Hariharan Sampathkumar
+Senior Machine Learning Engineer | Data Scientist
+### Manoj Kumar
+Data Scientist, Boeing
+### Guang Yang
+Senior Applied Scientist, Amazon
+### Brian Zhu
+Big Data Engineer, Beyond Limits
+### Mehmet Akgun
+University of Economics and Technology, Instructor
+### Benjamin Larson
+Principal Data Scientist - Cyber Security Risk Management, Verizon
+### Tory Borsboom-Hanson
+Data Science Consultant, Fractal Analytics
+### Pawan Kumar Yerravelly
+Data Engineer - Capacity Supply Chain and Provisioning, Microsoft India CoE
+### Stefan Jenkins
+Data Engineer, Microsoft
+### James Briggs
+Dev Advocate, Pinecone and Freelance ML
+### Anh Le
+Data and Blockchain Professional
+### Dina Jankovic
+Data Science, Yelp
+### Kirk Borne
+Chief Science Officer at DataPrime, Inc.
+### Mir Muntasar Ali Agha
+Senior Data Engineer, National Bank of Belgium
+### Nihit Saxena
+CEO at Datastunt?Labs
+### Ted Anderson
+Director of Business Intelligence , CouponFollow
+### Balram Singh
+Data Engineering Manager, Microsoft Corporation
+### Sara Beck
+Head of Data Science, Slated
+### Ana Garcia
+Director of Data Science & AnalyticsDirector, ZipRecruiter
+### Kedar Kanhere
+Data Scientist, Credit Suisse
+### Carlos Contreras
+Big Data & Analytics architect, Amazon
+### Diego Argueta
+Senior Data Platform Engineer, GoodRx
+### Gareth Morinan
+Chief Scientific Officer, Machine Medicine Technologies
+### Shraddha Surana
+Global Data Community Lead | Lead Data Scientist, Thoughtworks
+### Bertil Hatt
+Head of Data science, OutFund
+### Saniya Zahid
+Principal Software Engineer, Afiniti
+### Muhy Eddin Zater
+Senior Data Scientist, Mawdoo3 Ltd
+### Varun Jain
+Senior Data Engineer, Publicis Sapient
+### Divya Sistla
+Data Engineering Lead - Uber
+### Amedeo Biolatti
+Data Scientist, SwissRe
+## RecommendedProjects
+Recommended Projects
+Data Science
+Pytorch
+NLP Projects
+Data Science Projects in Python
+Deep Learning Projects
+## Latest Blogs
+MMLU Benchmark: Definition, How to Run, Leaderboards, and Use Cases
+A detailed guide to MMLU benchmark, its methods, challenges, and significance by ProjectPro
+Beginner’s Guide to Alpha-Beta Pruning: From Minimax to AI
+A practical guide to Alpha-Beta Pruning with code, visuals, and real-world AI applications by ProjectPro
+How Does Multi-Head Attention Improve Transformer Models?
+Learn how Multi-Head Attention drives Transformer models and allows LLMs to understand complex patterns and achieve superior AI performance with ProjectPro.
+View all blogs
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+Please Enter Your Email to Get Started
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

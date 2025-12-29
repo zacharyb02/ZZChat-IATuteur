@@ -1,0 +1,88 @@
+SOURCE_URL: https://www.geeksforgeeks.org/python/filter-in-python/
+SUJET: CNN_DEEP_LEARNING
+
+# filter() in python
+filter() function is used to extract elements from an iterable (like a list, tuple or set) that satisfy a given condition. It works by applying a function to each element and keeping only those for which function returns True.
+## Basic Example
+This simple example shows how to keep only the words starting with the letter 'a' from a list of fruits.
+```python
+def starts_a(w):
+return w.startswith("a")
+li = ["apple", "banana", "avocado", "cherry", "apricot"]
+res = filter(starts_a, li)
+print(list(res))
+```
+```python
+['apple', 'avocado', 'apricot']
+```
+Explanation: function starts_a checks if a word begins with ' a ' and filter() applies this function to each fruit and returns only matching ones.
+### Syntax
+filter(function, iterable)
+Parameters:
+- function: tests each element and if return, True - Keep the element, if False - Discard the element
+- iterable: Any iterable (list, tuple, set, etc.).
+Return Value: A filter object (an iterator), which can be converted into a list, tuple, set, etc.
+## Examples of filter function
+Let's explore some examples of filter() function and see how it is used.
+### Example 1: Using filter() with a Named Function
+This code defines a regular function to check if a number is even and then uses filter() to extract all even numbers from a list.
+```python
+def even(n):
+return n % 2 == 0
+a = [1, 2, 3, 4, 5, 6]
+b = filter(even, a)
+print(list(b)) # Convert filter object to a list
+```
+```python
+[2, 4, 6]
+```
+Explanation:
+- even function checks if a number is divisible by 2.
+- filter() applies this function to each item in a.
+- Only even numbers are included in output.
+### Example 2: Using filter() with a Lambda Function
+Instead of creating a separate named function, use a lambda function for concise code. Below code uses a lambda function with filter() to select even numbers from a list.
+```python
+a = [1, 2, 3, 4, 5, 6]
+b = filter(lambda x: x % 2 == 0, a)
+print(list(b))
+```
+Explanation: filter(lambda x: x % 2 == 0, a) keeps only numbers divisible by 2 (even numbers).
+### Example 3: Filtering and Transforming Data
+In this Example lambda functions is used with filter() and map() to first get even numbers from a list and then double them.
+```python
+a = [1, 2, 3, 4, 5, 6]
+b = filter(lambda x: x % 2 == 0, a)
+c = map(lambda x: x * 2, b)
+print(list(c))
+```
+```python
+[4, 8, 12]
+```
+- filter(lambda x: x % 2 == 0, a): Selects only even numbers from the list ([2, 4, 6]).
+- map(lambda x: x * 2, b): Doubles each of the filtered even numbers ([4, 8, 12]).
+### Example 4: Filtering Strings
+Here, lambda function is used with filter() to keep only words that have more than 5 letters from a list of fruits.
+```python
+a = ["apple", "banana", "cherry", "kiwi", "grape"]
+b = filter(lambda w: len(w) > 5, a)
+print(list(b))
+```
+```python
+['banana', 'cherry']
+```
+### Example 5: Filtering with None (Truthiness Check)
+This code uses filter() with None as the function to remove all falsy values (like empty strings, None and 0) from a list.
+```python
+L = ["apple", "", None, "banana", 0, "cherry"]
+A = filter(None, L)
+print(list(A))
+```
+```python
+['apple', 'banana', 'cherry']
+```
+Explanation: filter(None, L) removes all falsy values (empty string, None and 0) and keeps only truthy ones.
+P
+- Misc
+- Python
+- Python-Built-in-functions

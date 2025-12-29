@@ -1,0 +1,26 @@
+SOURCE_URL: https://www.geeksforgeeks.org/operating-systems/difference-between-shell-and-kernel/
+SUJET: CNN_DEEP_LEARNING
+
+# Difference between Shell and Kernel
+In computing, the operating system (OS) serves as the fundamental layer that bridges the gap between computer hardware and the user. Two critical components of an operating system are the kernel and the shell. Understanding the relationship between these two components is fundamental to grasping how operating systems function and how users interact with their computers.
+## What is a Shell?
+The shell is a command-line interface that allows the user to enter commands to interact with the operating system. It acts as an intermediary between the user and the kernel, interpreting commands entered by the user and translating them into instructions that the kernel can execute. The shell also provides various features like command history, tab completion, and scripting capabilities to make it easier for the user to work with the system.
+### Advantages
+- Efficient Command Execution
+- Scripting capability
+### Disadvantages
+- Limited Visualization
+- Steep Learning Curve
+## What is Kernel?
+The kernel is the core component of the operating system that manages system resources and provides services to other programs running on the system. It acts as a bridge between the user and the resources of the system by accessing various computer resources like the CPU , I/O devices and other resources. It is responsible for tasks such as memory management, process scheduling, and device drivers . The kernel operates at a lower level than the shell and interacts directly with the hardware of the computer.
+- Efficient Resource Management
+- Process Management
+- Hardware Abstraction
+- Limited Flexibility
+- Dependency on Hardware
+## Difference Between Shell and Kernel
+## Conclusion
+The kernel operates at the core of the system, managing hardware resources and ensuring the smooth execution of processes, while the shell acts as an interface between the user and the system, allowing commands to be issued and executed.
+A
+- Operating Systems
+- Difference Between

@@ -1,0 +1,261 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/image-segmentation-mask-rcnn
+SUJET: CNN_DEEP_LEARNING
+
+# Image Segmentation using Mask R-CNN with Tensorflow
+In this Deep Learning Project on Image Segmentation Python, you will learn how to implement the Mask R-CNN model for early fire detection.
+## Project Outcomes
+- Understanding the business problem.
+- Understanding the concepts of image detection, image localisation and image segmentation.
+- Understanding the concepts behind Region Proposal Network (RPN), ROI Classifier and bounding box Regressor.
+- Understanding the concept behind transfer learning and how is it different from machine learning.
+- Understanding the concept of Backbone and role of backbone (restnet101) in Mask RCNN model.
+- Understanding of MS COCO and how to load the pretrained COCO as weights.
+- Performing image annotation using VGG Annotator.
+- Importing the image data and required libraries.
+- Defining and understanding a class for configuration for training on the dataset.
+- Learning how to add and use annotated images.
+- Fitting Mask RCNN modelling over train and validation images along with annotation files.
+- Understanding how to create and store the log files per epoch.
+- Defining of Inference configuration and model
+- Making predictions over the test data (Inference)
+- Using matplotlib.image to visualize our results i.e., the bounding and masking over the inference image.
+Get started today
+Request for free demo with us.
+## Architecture Diagram
+## Topics
+- Understanding the business problem 09m
+- Understanding data 08m
+- Understanding image annotations 09m
+- Understanding mask architecture 09m
+- Understanding transfer learning 09m
+- Understanding backbone 09m
+- Maskrcnn with backbone 09m
+- Maskrcnn general dependencies 10m
+- Model building 1 10m
+- Model building 2 09m
+- Model building 3 09m
+- Model building 4 10m
+## Source code + Project materials
+## Project Description
+Business Objective
+Fire is one of the deadliest risks any person can encounter in his life. In a concise time frame, fire can wreck an area, say in a forest, hut, house, building, etc. Fire can lead to the loss of expensive property, and in the worst possible scenario, it can also lead to the loss of human life. Detecting fire thus becomes a significant concern.
+Our project will carry out fire detection by adopting an RGB (Red, Green, Blue) model based on chromatic and disorder measurement for extracting fire pixels and smoke pixels. Our main aim is to locate the position where the fire is present, which will help the authorities take proper measures to avoid any loss. To prevent this, we will build an early fire detection using image segmentation with the help of the mrcnn model.
+Image Localization helps to detect the location of a single object in any given image. In our case, image localization can locate the fire in a given image.
+We will be using image segmentation, in which we group a similar set of pixels, i.e., divide the image into segments and thus make use of the essential segments. Hence image segmentation is used in this project as it gives us the desired location of our object in the image.
+Further, we will use the Mask RCNN model to train and build predictions over our input images. Mask RCNN is a deep neural network algorithm that is used for solving segmentation problems.
+This project aims to build a deep neural network model that will give the best accuracy in detecting fire in an image.
+Note
+Since the original Mask R-CNN implementation has not been updated for newer TensorFlow versions and is incompatible with Python 3.12, an updated PyTorch version has been added to the code folder.
+Data Description
+- In this case, we use 20 fire images for the training set and ten fire images for the validation set, and one image for test data. These images can be JPG, PNG, TIF formats.
+- Via_project.json is the annotation file containing the region of interest marked.
+Aim
+This project aims to make predictions over images and detect mask and bounding boxes around the area of interest, i.e., mask and bounding around the fire in a given image.
+Tech stack
+- Language - Python
+- Libraries – n umpy, keras, tensorflow, mrcnn, scikit-image, etc (as mentioned in the requirements.txt file)
+Approach
+- Install the requirements.txt file.
+- Import the required libraries.
+- Using the VGG Annotator, create annotations and save them in the JSON files. Then creating a class to add these annotations and use them. (Link for the VGG Annotator - https://www.robots.ox.ac.uk/~vgg/software/via/via_demo.html )
+- Define LoadDatatset class for loading of image data and annotations for train and inference data.
+- The setting of the root directory for the project and the path of the weights file.
+- Define config class for setting configuration for training on the dataset.
+- Define the LoadBackBone for train and inference data class, for loading the backbone pre-trained weights to extract features.
+- Model Building (Using Mask RCNN)
+- On training data images
+- On validation data images.
+- Predict the mask and then plot it over the test data images.
+## Unlimited 1:1 Live Interactive Sessions
+- 30-minute live session Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+- No extra charges Unlimited number of sessions with no extra charges. Yes, unlimited!
+Unlimited number of sessions with no extra charges. Yes, unlimited!
+- We match you to the right expert Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+- Schedule recurring sessions Schedule recurring sessions, once a week or bi-weekly, or monthly.
+Schedule recurring sessions, once a week or bi-weekly, or monthly.
+- Pick your favorite expert If you find a favorite expert, schedule all future sessions with them.
+If you find a favorite expert, schedule all future sessions with them.
+- Use the 1-to-1 sessions to Troubleshoot your projects Customize our templates to your use-case Build a project portfolio Brainstorm architecture design Bring any project, even from outside ProjectPro Mock interview practice Career guidance Resume review
+- Troubleshoot your projects
+- Customize our templates to your use-case
+- Build a project portfolio
+- Brainstorm architecture design
+- Bring any project, even from outside ProjectPro
+- Mock interview practice
+- Career guidance
+- Resume review
+### Land Your Dream Job Faster
+AI-powered interview prep with recruiter connections
+### Upload Resume & Job Role
+Submit your resume and target job description
+### Tailored Mock Interview
+AI conducts interview based on your resume
+### Actionable Feedback
+Detailed report with strengths and improvements
+### Unlimited Practice
+Record multiple attempts, all saved
+### Select Best Performance
+Choose your strongest interview
+### Connect with Recruiters
+Shared with 121+ top tech recruiters conditions apply*
+## Benefits
+250+ end-to-end project solutions
+Each project solves a real business problem from start to finish. These projects cover the domains of Data Science, Machine Learning, Data Engineering, Big Data and Cloud.
+15 new projects added every month
+New projects every month to help you stay updated in the latest tools and tactics.
+500,000 lines of code
+Each project comes with verified and tested solutions including code, queries, configuration files, and scripts. Download and reuse them.
+Cloud Lab Workspace
+Unlimited 1:1 sessions
+Technical Support
+Chat with our technical experts to solve any issues you face while building your projects.
+7 Days risk-free trial
+We offer an unconditional 7-day money-back guarantee. Use the product for 7 days and if you don't like it we will make a 100% full refund. No terms or conditions.
+Payment Options
+0% interest monthly payment schemes available for all countries.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Comparison with other platforms
+### We provide ready-made project templates that solve real business problems, end-to-end and comes with solution code,explanation videos, cloud lab environment and tech support.
+## Our expert panel
+### Hariharan Sampathkumar
+Senior Machine Learning Engineer | Data Scientist
+### Deepak Sahu
+Senior Data Engineer, Slintel-6sense company
+### Pawan Kumar Yerravelly
+Data Engineer - Capacity Supply Chain and Provisioning, Microsoft India CoE
+### Divya Sistla
+Data Engineering Lead - Uber
+### Stefan Jenkins
+Data Engineer, Microsoft
+### Ted Anderson
+Director of Business Intelligence , CouponFollow
+### Victoria Williams
+Senior Data Engineer, Hogan Assessment Systems
+### Sara Beck
+Head of Data Science, Slated
+### Manoj Kumar
+Data Scientist, Boeing
+### Mir Muntasar Ali Agha
+Senior Data Engineer, National Bank of Belgium
+### Camille Girabawe
+Machine Learning Manager, Adobe
+### Brian Zhu
+Big Data Engineer, Beyond Limits
+### Kirk Borne
+Chief Science Officer at DataPrime, Inc.
+### Varun Jain
+Senior Data Engineer, Publicis Sapient
+### Balram Singh
+Data Engineering Manager, Microsoft Corporation
+### Mehmet Akgun
+University of Economics and Technology, Instructor
+### Shraddha Surana
+Global Data Community Lead | Lead Data Scientist, Thoughtworks
+### Diego Argueta
+Senior Data Platform Engineer, GoodRx
+### Gareth Morinan
+Chief Scientific Officer, Machine Medicine Technologies
+### Saniya Zahid
+Principal Software Engineer, Afiniti
+### Amedeo Biolatti
+Data Scientist, SwissRe
+### Benjamin Larson
+Principal Data Scientist - Cyber Security Risk Management, Verizon
+### Bertil Hatt
+Head of Data science, OutFund
+### Carlos Contreras
+Big Data & Analytics architect, Amazon
+### Dina Jankovic
+Data Science, Yelp
+### Muhy Eddin Zater
+Senior Data Scientist, Mawdoo3 Ltd
+### Guang Yang
+Senior Applied Scientist, Amazon
+### Anh Le
+Data and Blockchain Professional
+### James Briggs
+Dev Advocate, Pinecone and Freelance ML
+### Kai Tarafdar
+NLP Engineer, Speechkit
+### Tory Borsboom-Hanson
+Data Science Consultant, Fractal Analytics
+### Shaurya Uppal
+Data Scientist, Inmobi
+### Kedar Kanhere
+Data Scientist, Credit Suisse
+### Ana Garcia
+Director of Data Science & AnalyticsDirector, ZipRecruiter
+### Nihit Saxena
+CEO at Datastunt?Labs
+## RecommendedProjects
+Recommended Projects
+Data Science
+Data Science Projects in Python
+Tensorflow Projects
+Deep Learning Projects
+## Latest Blogs
+MMLU Benchmark: Definition, How to Run, Leaderboards, and Use Cases
+A detailed guide to MMLU benchmark, its methods, challenges, and significance by ProjectPro
+A Complete Guide to Data Science Models: Types, Applications, and Deployment
+Master types, applications, and deployment of impactful data science models with ProjectPro.
+Context Engineering: The AI Skill You Should Master in 2025
+Learn how context engineering powers intelligent, more accurate LLMs and why it's the #1 skill for building production-grade AI systems |ProjectPro
+View all blogs
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+Please Enter Your Email to Get Started
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

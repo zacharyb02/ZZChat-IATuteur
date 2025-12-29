@@ -1,0 +1,116 @@
+SOURCE_URL: https://www.geeksforgeeks.org/software-engineering/image-sharpening-using-laplacian-filter-and-high-boost-filtering-in-matlab/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- Software Engineering Tutorial
+- Software Development Life Cycle
+- Waterfall Model
+- Software Requirements
+- Software Measurement and Metrics
+- Software Design Process
+- System configuration management
+- Software Maintenance
+- Software Development Tutorial
+- Software Testing Tutorial
+- Product Management Tutorial
+- Project Management Tutorial
+# Image Sharpening using Laplacian, High Boost Filtering in MATLAB
+Image sharpening is a crucial process in digital image processing, aimed at improving the clarity and crispness of visual content. By emphasizing the edges and fine details in a picture, sharpening transforms dull or blurred images into visuals where objects stand out more distinctly from their backgrounds. This not only makes photographs more visually appealing but also enhances their usefulness in analysis, recognition and interpretation tasks. Two effective and commonly used sharpening techniques in MATLAB are the Laplacian filter and high boost filtering.
+### Laplacian Filter
+The Laplacian filter is an edge-detection operator that highlights regions of rapid intensity change, which are typically found at edges within an image. It works by applying a special convolution mask that calculates the second derivative of pixel values in all directions. This method:
+- Detects edges regardless of direction.
+- Produces an "edge map" that can be added or subtracted from the original image to enhance sharpness.
+- Is sensitive to noise, so minor details may appear more pronounced after processing.
+### High Boost Filtering
+High boost filtering is a technique that sharpens an image by boosting its edge information while still retaining the low-frequency (smooth) areas. This method goes beyond simple edge enhancement by allowing us to control the degree of sharpness through an amplification constant (often denoted as "A"). The essential steps are:
+- Create a mask that accentuates details and edges even further than a traditional Laplacian filter.
+- Combine the original image with the enhanced edge information, with the degree of sharpening controlled by the parameter A.
+- Particularly useful for images that need strong emphasis on details without losing the context of the entire image.
+## Implementation
+Step 1: Load a Test Image
+```python
+a = imread('cameraman.tif');
+imshow(a);
+title('Original Image');
+```
+### Laplacian Filter Sharpening
+The Laplacian filter is a simple edge detector, we can sharpen the images by either subtracting or adding the edge map, based on the filter used.
+1. Using a Basic Laplacian Filter
+- The filter highlights edges.
+- We subtract the filtered image from the original to highlight the edges.
+```python
+Lap = [0 1 0; 1 -4 1; 0 1 0];
+a1 = conv2(double(a), Lap, 'same');
+a2 = uint8(a1);
+sharp1 = abs(double(a) - double(a2));
+imshow(uint8(sharp1), []);
+title('Sharpened Image (Basic Laplacian)');
+```
+2. Using a Stronger Laplacian Filter
+- This mask intensifies the edge detection.
+- We add the filtered image to the original for sharpening.
+```python
+lap = [-1 -1 -1; -1 8 -1; -1 -1 -1];
+a3 = conv2(double(a), lap, 'same');
+a4 = uint8(a3);
+sharp2 = abs(double(a) + double(a4));
+imshow(uint8(sharp2), []);
+title('Sharpened Image (Strong Laplacian)');
+```
+High boost filtering combines the original image with an edge-enhanced version for more aggressive detail enhancement.
+1. Standard High Boost Filter: The filter enhances image details by combining edge emphasis and the original image.
+```python
+HBF = [0 -1 0; -1 5 -1; 0 -1 0];
+a1 = conv2(double(a), HBF, 'same');
+a2 = uint8(a1);
+imshow(a2, []);
+title('High Boost Filtered Image (A=1)');
+```
+2. Stronger High Boost Filter:
+- Larger central value increases sharpening intensity.
+- Use this for images where we want very clear, crisp edges.
+```python
+SHBF = [-1 -1 -1; -1 9 -1; -1 -1 -1];
+a3 = conv2(double(a), SHBF, 'same');
+a4 = uint8(a3);
+imshow(a4, []);
+title('High Boost Filtered Image (A=2)');
+```
+Image sharpening enhances the clarity and distinction of edges in digital pictures. Using MATLAB, both Laplacian and high boost filtering offer straightforward, effective ways to make images look crisper and more detailed. By applying these filters,  we can quickly improve image quality for better analysis, presentation or interpretation.
+### Explore
+- Introduction to Software Engineering 7 min read
+- Software Development Life Cycle (SDLC) 6 min read
+- Software Quality - Software Engineering 5 min read
+- ISO/IEC 9126 in Software Engineering 4 min read
+- Boehm's Software Quality Model 4 min read
+- Software Crisis - Software Engineering 3 min read
+- Software Measurement and Metrics 4 min read
+- People Metrics and Process Metrics in Software Engineering 7 min read
+- Halstead’s Software Metrics - Software Engineering 10 min read
+- Cyclomatic Complexity 6 min read
+- Functional Point (FP) Analysis - Software Engineering 8 min read
+- Lines of Code (LOC) in Software Engineering 4 min read
+- Waterfall Model - Software Engineering 12 min read
+- What is Spiral Model in Software Engineering? 9 min read
+- Prototyping Model - Software Engineering 7 min read
+- Incremental Process Model - Software Engineering 6 min read
+- Rapid Application Development Model (RAD) - Software Engineering 9 min read
+- Coupling and Cohesion - Software Engineering 10 min read
+- Agile Software Development - Software Engineering 15+ min read
+- Software Requirement Specification (SRS) Format 5 min read
+- Software Engineering | Quality Characteristics of a good SRS 7 min read
+- Software Project Management (SPM) - Software Engineering 8 min read
+- COCOMO Model - Software Engineering 15+ min read
+- Capability Maturity Model (CMM) - Software Engineering 10 min read
+- Integrating Risk Management in SDLC | Set 1 8 min read
+- Software Maintenance - Software Engineering 13 min read
+- What is Software Testing? 11 min read
+- Types of Software Testing 15+ min read
+- Testing Guidelines - Software Engineering 3 min read
+- What is Debugging in Software Engineering? 11 min read
+- Verification and Validation in Software Engineering 6 min read
+- Role of Verification and Validation (V&V) in SDLC 5 min read
+- Requirements Validation Techniques - Software Engineering 8 min read
+- Top 50+ Software Engineering Interview Questions and Answers 15+ min read

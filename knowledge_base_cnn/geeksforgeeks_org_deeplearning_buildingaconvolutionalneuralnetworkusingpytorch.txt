@@ -1,0 +1,138 @@
+SOURCE_URL: https://www.geeksforgeeks.org/deep-learning/building-a-convolutional-neural-network-using-pytorch/?utm_source=chatgpt.com
+SUJET: CNN_DEEP_LEARNING
+
+# Building a Convolutional Neural Network using PyTorch
+Convolutional Neural Networks (CNNs) are deep learning models used for image processing tasks. They automatically learn spatial hierarchies of features from images through convolutional, pooling and fully connected layers. In this article, we'll learn how to build a CNN model using PyTorch which includes defining the network architecture, preparing the data, training the model and evaluating its performance.
+## 1.Importing necessary libraries
+We are import necessary modules from the PyTorch library.
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torchvision
+import torchvision.transforms as transforms
+import torch.nn.functional as F
+```
+## 2. Preparing Dataset
+We are setting up the CIFAR-10 dataset for training and testing in PyTorch. We apply basic image transformations, load the datasets and use data loaders to handle batching and shuffling. Finally, we define the 10 class labels for the dataset.
+```python
+transform = transforms.Compose(
+[transforms.ToTensor(),
+transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+download=True, transform=transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=4,
+shuffle=True, num_workers=2)
+testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+download=True, transform=transform)
+testloader = torch.utils.data.DataLoader(testset, batch_size=4,
+shuffle=False, num_workers=2)
+classes = ('plane', 'car', 'bird', 'cat',
+'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+```
+## 3. Define CNN Architecture
+We are defining a neural network by creating a class Net that inherits from nn.Module. It includes two convolutional layers with ReLU and max pooling, followed by three fully connected layers. In the forward method, we pass the input through these layers, flattening it before the dense layers. Finally we create an instance of this model as net.
+```python
+class Net(nn.Module):
+def __init__(self):
+super(Net, self).__init__()
+self.conv1 = nn.Conv2d(3, 6, 5)
+self.pool = nn.MaxPool2d(2, 2)
+self.conv2 = nn.Conv2d(6, 16, 5)
+self.fc1 = nn.Linear(16 * 5 * 5, 120)
+self.fc2 = nn.Linear(120, 84)
+self.fc3 = nn.Linear(84, 10)
+def forward(self, x):
+x = self.pool(F.relu(self.conv1(x)))
+x = self.pool(F.relu(self.conv2(x)))
+x = x.view(-1, 16 * 5 * 5)
+x = F.relu(self.fc1(x))
+x = F.relu(self.fc2(x))
+x = self.fc3(x)
+return x
+net = Net()
+```
+## 4. Defining Loss Function and Optimizer
+We are setting up the training components of the model. nn.CrossEntropyLoss() is used as the loss function for handling classification tasks by comparing predicted outputs with true labels. optim.SGD is chosen as the optimizer to update model weights using Stochastic Gradient Descent (SGD) with a learning rate of 0.001 and momentum of 0.9.
+```python
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+```
+## 5. Training Network
+We are training the neural network (net) on the CIFAR-10 dataset for 2 epochs. During training we use the defined loss function and optimizer and print the average loss every 2000 mini-batches to monitor progress.
+```python
+for epoch in range(2):
+running_loss = 0.0
+for i, data in enumerate(trainloader, 0):
+inputs, labels = data
+optimizer.zero_grad()
+outputs = net(inputs)
+loss = criterion(outputs, labels)
+loss.backward()
+optimizer.step()
+running_loss += loss.item()
+if i % 2000 == 1999:
+print('[%d, %5d] loss: %.3f' %
+(epoch + 1, i + 1, running_loss / 2000))
+running_loss = 0.0
+print('Finished Training')
+```
+Output :
+## 6. Testing Network
+We are evaluating the trained network (net) on the test dataset by computing predictions and comparing them with the actual labels. This helps us calculate the overall accuracy of the model.
+```python
+correct = 0
+total = 0
+with torch.no_grad():
+for data in testloader:
+images, labels = data
+outputs = net(images)
+_, predicted = torch.max(outputs.data, 1)
+total += labels.size(0)
+correct += (predicted == labels).sum().item()
+print('Accuracy of the network on the 10000 test images: %d %%' % (
+100 * correct / total))
+```
+Accuracy of the network on the 10000 test images: 53 %
+The model's accuracy of 55% shows that it is underperforming due to simple network architecture. To improve this we can experiment with adjusting the learning rate and momentum or can use better optimization techniques like Adam optimizer . These optimizations can help model achieve higher accuracy.
+You can download source code from here.
+In a CNN, what is the purpose of pooling layers?
+- A To increase the number of learnable parameters
+To increase the number of learnable parameters
+- B To add more convolutional layers
+To add more convolutional layers
+- C To reduce the spatial dimensions of feature maps
+To reduce the spatial dimensions of feature maps
+- D To directly classify the images
+To directly classify the images
+Pooling layers such as max pooling or average pooling are used to downsample feature maps by reducing their spatial dimensions. This helps decrease computational complexity, prevents overfitting, and retains the most important features of an image.
+In PyTorch, which module is used to define a convolutional layer?
+- A torch.nn.Linear
+- B torch.nn.Conv2d
+- C torch.nn.ReLU
+- D torch.nn.MaxPool2d
+In PyTorch the torch.nn.Conv2d module is used to define a 2D convolutional layer. It takes parameters such as the number of input and output channels, kernel size and stride to perform convolution operations on input data.
+What is the role of the torch.nn.CrossEntropyLoss() function in PyTorch CNN models?
+- A It is used for binary classification problems
+It is used for binary classification problems
+- B It applies pooling operations to the output
+It applies pooling operations to the output
+- C It initializes the CNN model
+It initializes the CNN model
+- D It computes the loss for multi-class classification tasks
+It computes the loss for multi-class classification tasks
+The torch.nn.CrossEntropyLoss() function is used to compute the loss in multi-class classification tasks. It combines softmax activation and negative log-likelihood loss making it suitable for categorical predictions.
+Which function in PyTorch is used to reshape the tensor before passing it into the fully connected layers of the CNN?
+- A torch.flatten()
+- B x.view()
+- C torch.reshape()
+- D torch.squeeze()
+In the PyTorch CNN code, tensors are reshaped using x.view(-1, 16 * 5 * 5) before feeding into fully connected layers. This flattens the feature maps into a 1D vector, which linear layers require.
+A
+- Blogathon
+- Deep Learning
+- AI-ML-DS
+- Neural Network
+- Python-PyTorch
+- AI-ML-DS With Python
+- Data Science Blogathon 2024

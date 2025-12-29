@@ -1,0 +1,42 @@
+SOURCE_URL: https://www.geeksforgeeks.org/computer-vision/spatial-filtering-and-its-types/
+SUJET: CNN_DEEP_LEARNING
+
+# Spatial Filtering and its Types
+Spatial Filtering technique is used directly on pixels of an image. Mask is usually considered to be added in size so that it has specific center pixel. This mask is moved on the image such that the center of the mask traverses all image pixels.
+## Classification on the basis of Linearity
+There are two types:
+1. Linear Spatial Filter 2. Non-linear Spatial Filter
+## General Classification:
+### Smoothing Spatial Filter
+Smoothing filter is used for blurring and noise reduction in the image. Blurring is pre-processing steps for removal of small details and Noise Reduction is accomplished by blurring.
+Types of Smoothing Spatial Filter
+1. Linear Filter (Mean Filter) 2. Order Statistics (Non-linear) filter
+These are explained as following below.
+- Mean Filter: Linear spatial filter is simply the average of the pixels contained in the neighborhood of the filter mask. The idea is replacing the value of every pixel in an image by the average of the grey levels in the neighborhood define by the filter mask.  Below are the types of mean filter: Averaging filter: It is used in reduction of the detail in image. All coefficients are equal. Weighted averaging filter: In this, pixels are multiplied by different coefficients. Center pixel is multiplied by a higher value than average filter.
+- Averaging filter: It is used in reduction of the detail in image. All coefficients are equal.
+- Weighted averaging filter: In this, pixels are multiplied by different coefficients. Center pixel is multiplied by a higher value than average filter.
+- Order Statistics Filter: It is based on the ordering the pixels contained in the image area encompassed by the filter. It replaces the value of the center pixel with the value determined by the ranking result. Edges are better preserved in this filtering. Below are the types of order statistics filter: Minimum filter: 0th percentile filter is the minimum filter. The value of the center is replaced by the smallest value in the window. Maximum filter: 100th percentile filter is the maximum filter. The value of the center is replaced by the largest value in the window. Median filter: Each pixel in the image is considered. First neighboring pixels are sorted and original values of the pixel is replaced by the median of the list.
+- Minimum filter: 0th percentile filter is the minimum filter. The value of the center is replaced by the smallest value in the window.
+- Maximum filter: 100th percentile filter is the maximum filter. The value of the center is replaced by the largest value in the window.
+- Median filter: Each pixel in the image is considered. First neighboring pixels are sorted and original values of the pixel is replaced by the median of the list.
+### Sharpening Spatial Filter
+It is also known as derivative filter. The purpose of the sharpening spatial filter is just the opposite of the smoothing spatial filter. Its main focus in on the removal of blurring and highlight the edges. It is based on the first and second order derivative.
+First Order Derivative:
+- Must be zero in flat segments.
+- Must be non zero at the onset of a grey level step.
+- Must be non zero along ramps.
+First order derivative in 1-D is given by:
+```python
+f' = f(x+1) - f(x)
+```
+Second Order Derivative:
+- Must be zero in flat areas.
+- Must be non zero at the onset and end of a ramp.
+- Must be zero along ramps.
+Second order derivative in 1-D is given by:
+```python
+f'' = f(x+1) + f(x-1) - 2f(x)
+```
+P
+- Computer Vision
+- Image-Processing

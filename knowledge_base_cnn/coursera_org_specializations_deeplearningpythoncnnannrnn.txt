@@ -1,0 +1,86 @@
+SOURCE_URL: https://www.coursera.org/specializations/deep-learning-python-cnn-ann-rnn
+SUJET: CNN_DEEP_LEARNING
+
+Enjoy unlimited growth with a year of Coursera Plus for €171 (regularly €342). Save now .
+# Deep Learning with Python: CNN, ANN & RNN Specialization
+Build Neural Networks for Real AI Projects. Master CNN, ANN, and RNN in Python with hands-on projects and real-world case studies
+Instructor: EDUCBA
+Included with
+Learn more
+Recommended experience
+Beginner level
+Basic Python, statistics, and machine learning knowledge recommended
+## What you'll learn
+- Design, build, and evaluate CNN, ANN, and RNN models in Python using TensorFlow and Keras.
+- Apply preprocessing, feature engineering, and optimization techniques to real-world datasets.
+- Implement deep learning solutions for image recognition, customer churn, and stock forecasting.
+## Skills you'll gain
+- Convolutional Neural Networks
+- Cloud Computing
+- Artificial Neural Networks
+- Image Analysis
+- Recurrent Neural Networks (RNNs)
+- Customer Analysis
+- Exploratory Data Analysis
+- Time Series Analysis and Forecasting
+- Keras (Neural Network Library)
+- Data Transformation
+- Deep Learning
+- Python Programming
+- Model Evaluation
+- Financial Forecasting
+- Data Visualization
+- Data Preprocessing
+- Tensorflow
+- Applied Machine Learning
+- Computer Vision
+- Data Manipulation
+## Details to know
+Add to your LinkedIn profile
+October 2025
+# See how employees at top companies are mastering in-demand skills
+## Advance your subject-matter expertise
+- Learn in-demand skills from university and industry experts
+- Master a subject or tool with hands-on projects
+- Develop a deep understanding of key concepts
+- Earn a career certificate from EDUCBA
+## Specialization - 3 course series
+This Specialization provides a practical, project-driven pathway to mastering deep learning with Python. Learners will explore Convolutional Neural Networks (CNNs), Artificial Neural Networks (ANNs), and Recurrent Neural Networks (RNNs) with LSTM layers through real-world case studies in image recognition, customer churn prediction, and stock price forecasting. Each course emphasizes both theory and hands-on coding using TensorFlow and Keras, ensuring you graduate with job-ready AI skills and the ability to apply neural networks to authentic business and financial problems.
+Applied Learning Project
+Learners will complete guided projects that apply deep learning to real datasets, including image classification, customer churn analysis, and stock price forecasting. These projects ensure practical application of Python-based neural networks, building confidence to solve real-world AI challenges.
+### Master CNNs with Python: Build, Train & Evaluate Models
+- Explain CNN fundamentals and apply Python for model building.
+- Preprocess and augment image datasets for training workflows.
+- Design, implement, and evaluate CNNs for image classification.
+### Deep Learning with ANN in Python: Build & Optimize
+- Configure Python environments and preprocess structured data.
+- Build, train, and optimize ANN models with TensorFlow & Keras.
+- Handle imbalanced datasets and apply ANN to churn prediction.
+### Deep Learning RNN & LSTM: Stock Price Prediction
+- Preprocess stock datasets with feature scaling and EDA.
+- Build and train RNNs with LSTM layers for time-series data.
+- Evaluate and visualize stock predictions using real datasets.
+### Earn a career certificate
+Add this credential to your LinkedIn profile, resume, or CV. Share it on social media and in your performance review.
+### Instructor
+### Offered by
+Welcome to EDUCBA, a place where knowledge is limitless! We provide a wide selection of instructive and engaging programmes designed to empower students of all ages and experiences. From the convenience of your home, start a revolutionary educational experience with our cutting-edge technologies courses and experienced instructors.
+## Why people choose Coursera for their career
+## Open new doors with Coursera Plus
+Unlimited access to 10,000+ world-class courses, hands-on projects, and job-ready certificate programs - all included in your subscription
+## Advance your career with an online degree
+Earn a degree from world-class universities - 100% online
+## Join over 3,400 global companies that choose Coursera for Business
+Upskill your employees to excel in the digital economy
+## Frequently asked questions
+Learners can expect to complete this Specialization in approximately 5 to 6 weeks with a dedicated study time of 3–4 hours per week. The flexible, self-paced structure allows you to balance learning with your personal or professional commitments, while still progressing through hands-on projects and case studies that reinforce practical deep learning skills. By the end, you will have developed the ability to confidently apply CNNs, ANNs, and RNNs to real-world problems using Python.
+A foundational understanding of Python programming, statistics, and basic machine learning concepts is recommended. Familiarity with data preprocessing and linear algebra will also help learners maximize their experience.
+Yes. The courses are designed to build progressively, starting with ANN fundamentals, then advancing to CNNs, and finally exploring RNNs with LSTM for sequential data. Following the order ensures you develop a solid foundation before tackling more complex architectures.
+By completing this Specialization, you will be able to design, train, and evaluate deep learning models using Python. You will gain hands-on experience with CNNs for image tasks, ANNs for predictive modeling, and RNNs with LSTMs for time-series forecasting. These skills will empower you to apply neural networks to practical business and AI-driven projects.
+This course is completely online, so there’s no need to show up to a classroom in person. You can access your lectures, readings and assignments anytime and anywhere via the web or your mobile device.
+Yes! To get started, click the course card that interests you and enroll. You can enroll and complete the course to earn a shareable certificate. When you subscribe to a course that is part of a Specialization, you’re automatically subscribed to the full Specialization. Visit your learner dashboard to track your progress.
+Yes. In select learning programs, you can apply for financial aid or a scholarship if you can’t afford the enrollment fee. If fin aid or scholarship is available for your learning program selection, you’ll find a link to apply on the description page.
+No, you cannot take this course for free. When you enroll in the course, you get access to all of the courses in the Specialization, and you earn a certificate when you complete the work. If you cannot afford the fee, you can apply for financial aid.
+This Specialization doesn't carry university credit, but some universities may choose to accept Specialization Certificates for credit. Check with your institution to learn more.
+### More questions
+Financial aid available,

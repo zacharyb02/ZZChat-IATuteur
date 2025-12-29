@@ -1,0 +1,53 @@
+SOURCE_URL: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_multilabel_classification.html
+SUJET: CNN_DEEP_LEARNING
+
+# make_multilabel_classification#
+Generate a random multilabel classification problem.
+- pick the number of labels: n ~ Poisson(n_labels)
+- n times, choose a class c: c ~ Multinomial(theta)
+- pick the document length: k ~ Poisson(length)
+- k times, choose a word: w ~ Multinomial(theta_c)
+In the above process, rejection sampling is used to make sure that
+n is never zero or more than n_classes , and that the document length
+is never zero. Likewise, we reject classes which have already been chosen.
+For an example of usage, see Plot randomly generated multilabel dataset .
+Read more in the User Guide .
+The number of samples.
+The total number of features.
+The number of classes of the classification problem.
+The average number of labels per instance. More precisely, the number
+of labels per sample is drawn from a Poisson distribution with n_labels as its expected value, but samples are bounded (using
+rejection sampling) by n_classes , and must be nonzero if allow_unlabeled is False.
+The sum of the features (number of words if documents) is drawn from
+a Poisson distribution with this expected value.
+If True , some instances might not belong to any class.
+If True , return a sparse feature matrix.
+Added in version 0.17: parameter to allow sparse output.
+If 'dense' return Y in the dense binary indicator format. If 'sparse' return Y in the sparse binary indicator format. False returns a list of lists of labels.
+If True , return the prior class probability and conditional
+probabilities of features given classes, from which the data was
+drawn.
+Determines random number generation for dataset creation. Pass an int
+for reproducible output across multiple function calls.
+See Glossary .
+The generated samples.
+The label sets. Sparse matrix should be of CSR format.
+The probability of each class being drawn. Only returned if return_distributions=True .
+The probability of each feature being drawn given each class.
+Only returned if return_distributions=True .
+Examples
+```python
+>>> from sklearn.datasets import make_multilabel_classification
+>>> X, y = make_multilabel_classification(n_labels=3, random_state=42)
+>>> X.shape
+(100, 20)
+>>> y.shape
+(100, 5)
+>>> list(y[:3])
+[array([1, 1, 0, 1, 0]), array([0, 1, 1, 1, 0]), array([0, 1, 0, 0, 0])]
+```
+## Gallery examples#
+Plot randomly generated multilabel dataset
+Multilabel classification
+### This Page
+- Show Source

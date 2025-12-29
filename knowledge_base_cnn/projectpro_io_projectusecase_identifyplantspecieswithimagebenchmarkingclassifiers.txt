@@ -1,0 +1,279 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/identify-plant-species-with-image-benchmarking-classifiers
+SUJET: CNN_DEEP_LEARNING
+
+# Build an Image Classifier for Plant Species Identification
+In this machine learning project, we will use binary leaf images and extracted features, including shape, margin, and texture to accurately identify plant species using different benchmark classification techniques.
+## Project Outcomes
+- Understanding the problem statement and importing the file
+- Initializing the libraries and understand it's use
+- Difference between StratifiedShuffleSplit and Simple Random Sampling
+- Using info and describe the function and extracting information from the results
+- Label encoding necessary columns
+- Importing necessary classifiers; Linear, Non-linear, bagging and boosting
+- Applying models like Random Forest, KNN, SVC, GradientBoosting and naive Bayes for on-spot checking
+- Hyperparameter tuning them by defining suitable parameters
+- Defining evaluation metrics "Log Loss"
+- Performing LDA(Linear Discriminant Analysis)
+- Plotting graphs for accuracy and loss versus classifier
+- Selecting the best model for prediction
+- Understanding Confusion Matrix and it's importance
+- Standardization and Normalization of the Dataset
+- Comparing the final output before and after standardization of the Dataset
+- Making final predictions and saving the result
+Get started today
+Request for free demo with us.
+## Architecture Diagrams
+## Topics
+- Problem Statement 14m
+- Data Set Overview 02m
+- Encoding 06m
+- Stratified Random Sampling 06m
+- Selection of Classifiers 02m
+- Logging for Visual Comparison 05m
+- Grid Search Mode 14m
+- Grid Search for Hyper Parameter Tuning 03m
+- KNeighbour Classifier Tuning 06m
+- SVC Classifier Tuning 09m
+- NSVC Classifier Tuning 05m
+- Decision Tree Classifier Tuning 03m
+- Random Forest Classifier Tuning 04m
+- Adapting Boosting Classifier 04m
+- Gradient Boosting Classifier 08m
+- Run all Classifiers 02m
+- Linear Descriminant Analysis 02m
+- Gaussian Naive Bayes 00m
+- Quadratic Discriminant Analysis 00m
+- Re Run all Classifiers 05m
+- Recap 00m
+- Apply Tensor Flow Models 19m
+- Accuracy and Loss of the Model 04m
+- Conclusion 06m
+- Interview 20m
+## Source code + Project materials
+## Project Description
+## Introduction to Plant Species Identification
+Imagine you are planning to start your own tea-leaves business. You’d want to price them depending on their quality. And if you have no idea how to do that, there is no need to worry as we have the leaf classification python code in this image identification project that will help you achieve it. Due to their volume, prevalence, and unique characteristics, leaves are an effective means of differentiating plant species. They also provide a fun introduction to applying techniques that involve image-based features. Thus, one can build an image classifier for plant species identification by implementing image processing techniques and computer vision methods over images of leaves .
+### Plant Identification Project Objective
+The objective of this machine learning project is to use binary leaf images and extracted features, including shape, margin, and texture, to identify 99 species of plants accurately. We will apply different classification techniques to benchmark the relevance of classifiers in image classification problems. This project will help you understand which Python libraries out of sklearn, scipy, and TensorFlow will best suit the specific files in the dataset for building an efficient plant species identification system .
+### Plant Data used in this Machine Learning Project
+The dataset for this plant classification project is divided into four files: train.csv, test.csv, sample_submission.csv, and images. The train and test files contain the following:
+id- an anonymous id unique to an image
+margin_1, margin_2,..., margin_64 - each of the 64 attribute vectors for the margin feature
+shape_1, shape_2,..., shape_64- each of the 64 attribute vectors for the shape feature
+texture_1, texture_2,..., texture_64 - each of the 64 attribute vectors for the texture feature
+Species- species of the plant in the image
+There are about 990 images in the dataset, 10 for each class of species. Thus, the dataset contains information on 99 different plant species.
+## Concepts to Learn in this Machine Learning Plant Identification Project
+Let us discuss the concepts that you will master through this plant identification project.
+### Data Preprocessing
+In this project, the task is to build a plant classifier using the given dataset. The dataset has various features: margins, shapes, and textures of different plants, which have been extracted from the plant images. And before serving this data of 99 other species to machine learning algorithms, the species variable (target variable) will be converted into numerical value using encoding techniques in this project. Additionally, the project solution shows how to split the training dataset into training and validation subsets so that the split is unbiased towards any particular class in the dataset.
+### Machine Learning Classification Algorithms
+As the problem is of classification type, you will learn about different classification algorithms in this project. We will discuss the following algorithms in detail:
+- K-Nearest neighbors
+- Support Vector Classifier
+- Decision Tree
+- Random Forests
+- Gradient Boosting
+- Adaptive Boosting
+- Naive Bayes
+- Linear Discriminant Analysis
+- Quadrant Discriminant Analysis
+You will apply all these algorithms to the given dataset and evaluate which model performs the best by default. For hyperparameter tuning, the project solution will use the grid search method and assess the accuracy of each model. Additionally, it will show you how to evaluate the loss for each algorithm and visualize it using a logarithmic plot.
+### Deep Learning Algorithm: Neural Networks
+Besides the train and test data files, the dataset contains images of different leaves. So, why not build a plant classifier app that can search a plant by its image? This project will cover that and teach you how to perform plant identification using TensorFlow. You will learn simple neural network algorithms and a special type of neural network called CNN (convolutional neural networks) that are widely used with image datasets. Using Keras with TensorFlow in the backend, you will learn how to build different layers of a CNN, how to set activation functions, choose pooling methods, etc., in the Python programming language. Furthermore, the project will also teach you how to determine the accuracy and loss of a convolutional neural network.
+### FAQs for Plant Search by Image Project
+An image classifier is a generic term used to describe application systems that can correctly identify the image's class by analyzing its pixels.
+CNN(convolutional neural network) is a kind of neural network used to solve classification problems in deep learning. It is not only limited to classification problems but can also be used in summarization, machine translation, time series, etc. Because it involves the convolution operation, CNNs are widely used to solve image and text classification problems.
+## Unlimited 1:1 Live Interactive Sessions
+- 30-minute live session Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+- No extra charges Unlimited number of sessions with no extra charges. Yes, unlimited!
+Unlimited number of sessions with no extra charges. Yes, unlimited!
+- We match you to the right expert Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+- Schedule recurring sessions Schedule recurring sessions, once a week or bi-weekly, or monthly.
+Schedule recurring sessions, once a week or bi-weekly, or monthly.
+- Pick your favorite expert If you find a favorite expert, schedule all future sessions with them.
+If you find a favorite expert, schedule all future sessions with them.
+- Use the 1-to-1 sessions to Troubleshoot your projects Customize our templates to your use-case Build a project portfolio Brainstorm architecture design Bring any project, even from outside ProjectPro Mock interview practice Career guidance Resume review
+- Troubleshoot your projects
+- Customize our templates to your use-case
+- Build a project portfolio
+- Brainstorm architecture design
+- Bring any project, even from outside ProjectPro
+- Mock interview practice
+- Career guidance
+- Resume review
+### Land Your Dream Job Faster
+AI-powered interview prep with recruiter connections
+### Upload Resume & Job Role
+Submit your resume and target job description
+### Tailored Mock Interview
+AI conducts interview based on your resume
+### Actionable Feedback
+Detailed report with strengths and improvements
+### Unlimited Practice
+Record multiple attempts, all saved
+### Select Best Performance
+Choose your strongest interview
+### Connect with Recruiters
+Shared with 121+ top tech recruiters conditions apply*
+## Benefits
+250+ end-to-end project solutions
+Each project solves a real business problem from start to finish. These projects cover the domains of Data Science, Machine Learning, Data Engineering, Big Data and Cloud.
+15 new projects added every month
+New projects every month to help you stay updated in the latest tools and tactics.
+500,000 lines of code
+Each project comes with verified and tested solutions including code, queries, configuration files, and scripts. Download and reuse them.
+Cloud Lab Workspace
+Unlimited 1:1 sessions
+Technical Support
+Chat with our technical experts to solve any issues you face while building your projects.
+7 Days risk-free trial
+We offer an unconditional 7-day money-back guarantee. Use the product for 7 days and if you don't like it we will make a 100% full refund. No terms or conditions.
+Payment Options
+0% interest monthly payment schemes available for all countries.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Comparison with other platforms
+### We provide ready-made project templates that solve real business problems, end-to-end and comes with solution code,explanation videos, cloud lab environment and tech support.
+## Our expert panel
+### Amedeo Biolatti
+Data Scientist, SwissRe
+### Ana Garcia
+Director of Data Science & AnalyticsDirector, ZipRecruiter
+### Shaurya Uppal
+Data Scientist, Inmobi
+### Kirk Borne
+Chief Science Officer at DataPrime, Inc.
+### Pawan Kumar Yerravelly
+Data Engineer - Capacity Supply Chain and Provisioning, Microsoft India CoE
+### Kedar Kanhere
+Data Scientist, Credit Suisse
+### Mir Muntasar Ali Agha
+Senior Data Engineer, National Bank of Belgium
+### Carlos Contreras
+Big Data & Analytics architect, Amazon
+### Brian Zhu
+Big Data Engineer, Beyond Limits
+### Manoj Kumar
+Data Scientist, Boeing
+### Sara Beck
+Head of Data Science, Slated
+### Anh Le
+Data and Blockchain Professional
+### Guang Yang
+Senior Applied Scientist, Amazon
+### Saniya Zahid
+Principal Software Engineer, Afiniti
+### Balram Singh
+Data Engineering Manager, Microsoft Corporation
+### Dina Jankovic
+Data Science, Yelp
+### Benjamin Larson
+Principal Data Scientist - Cyber Security Risk Management, Verizon
+### Mehmet Akgun
+University of Economics and Technology, Instructor
+### Hariharan Sampathkumar
+Senior Machine Learning Engineer | Data Scientist
+### Bertil Hatt
+Head of Data science, OutFund
+### Diego Argueta
+Senior Data Platform Engineer, GoodRx
+### Deepak Sahu
+Senior Data Engineer, Slintel-6sense company
+### Muhy Eddin Zater
+Senior Data Scientist, Mawdoo3 Ltd
+### Varun Jain
+Senior Data Engineer, Publicis Sapient
+### Stefan Jenkins
+Data Engineer, Microsoft
+### James Briggs
+Dev Advocate, Pinecone and Freelance ML
+### Ted Anderson
+Director of Business Intelligence , CouponFollow
+### Shraddha Surana
+Global Data Community Lead | Lead Data Scientist, Thoughtworks
+### Camille Girabawe
+Machine Learning Manager, Adobe
+### Divya Sistla
+Data Engineering Lead - Uber
+### Kai Tarafdar
+NLP Engineer, Speechkit
+### Nihit Saxena
+CEO at Datastunt?Labs
+### Victoria Williams
+Senior Data Engineer, Hogan Assessment Systems
+### Gareth Morinan
+Chief Scientific Officer, Machine Medicine Technologies
+### Tory Borsboom-Hanson
+Data Science Consultant, Fractal Analytics
+## RecommendedProjects
+Recommended Projects
+Data Science
+Data Science Projects in Python
+Data Science Projects in R
+Deep Learning Projects
+## Latest Blogs
+MMLU Benchmark: Definition, How to Run, Leaderboards, and Use Cases
+A detailed guide to MMLU benchmark, its methods, challenges, and significance by ProjectPro
+Beginner’s Guide to Alpha-Beta Pruning: From Minimax to AI
+A practical guide to Alpha-Beta Pruning with code, visuals, and real-world AI applications by ProjectPro
+LLM Compression Techniques to Build Faster and Cheaper LLMs
+Learn why every AI engineer must master LLM compression to keep LLMs efficient and affordable.| ProjectPro.
+View all blogs
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+Please Enter Your Email to Get Started
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

@@ -1,0 +1,475 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/human-activity-recognition
+SUJET: CNN_DEEP_LEARNING
+
+# Solvedend-to-endData Science Projects in Python
+## Get ready to use Data Science Projects in Python for solving real-world business problems
+## Data Science Projects in Python
+### Build Real Estate Price Prediction Model with NLP and FastAPI
+In this Real Estate Price Prediction Project, you will learn to build a real estate price prediction machine learning model and deploy it on Heroku using FastAPI Framework.
+View Project Details
+### Learn to Build a Polynomial Regression Model from Scratch
+In this  Machine Learning Regression project, you will learn to build a polynomial regression model to predict points scored by the sports team.
+### PyTorch Project to Build a GAN Model on MNIST Dataset
+In this deep learning project, you will learn how to build a GAN Model on MNIST Dataset for generating new images of handwritten digits.
+### Linear Regression Model Project in Python for Beginners Part 2
+Machine Learning Linear Regression Project for Beginners in Python to Build a Multiple Linear Regression Model on Soccer Player Dataset.
+### Build a Dashboard using Looker Studio for Household Analytics
+In this data analysis project, build a dynamic dashboard for analyzing household income and expenditure data for insights into social assistance effectiveness across transitioning economies.
+### NLP Project for Beginners on Text Processing and Classification
+This Project Explains the Basic Text Preprocessing and How to Build a Classification Model in Python
+### AWS MLOps Project to Deploy a Classification Model [Banking]
+In this AWS MLOps project, you will learn how to deploy a classification model using Flask on AWS.
+### CI/CD Deployment of Gaussian Process Time Series Models
+In this MLOps project, you will learn to build an automated, end-to-end MLOps pipeline to deploy a Gaussian Process Time Series forecasting model on AWS. Using Terraform for infrastructure provisioning, the solution implements CI/CD pipelines that support safe, reproducible staging and production environments.
+### MLOps using Azure Devops to Deploy a Classification Model
+In this MLOps Azure project, you will learn how to deploy a classification machine learning model to predict the customer's license status on Azure through scalable CI/CD ML pipelines.
+### Stock Price Prediction Project using LSTM and RNN
+Learn how to predict stock prices using RNN and LSTM models. Understand deep learning concepts and apply them to real-world financial data for accurate forecasting.
+### Predictive Analytics Project for Working Capital Optimization
+In this Predictive Analytics Project, you will build a model to accurately forecast the timing of customer and supplier payments for optimizing working capital.
+### MLOps Project for a Mask R-CNN on GCP using uWSGI Flask
+MLOps on GCP - Solved end-to-end MLOps Project to deploy a Mask RCNN Model for Image Segmentation as a Web Application using uWSGI Flask, Docker, and TensorFlow.
+### ML Model Deployment on AWS for Customer Churn Prediction
+MLOps Project-Deploy Machine Learning Model to Production Python on AWS for Customer Churn Prediction
+### Build an AI Email Assistant Using AWS Lambda,Bedrock and OpenAI
+In this AI project, you will learn to design and deploy an AI-powered Gmail workflow that automatically classifies emails by urgency, applies contextual organization with labels, drafts responses, and delivers actionable summaries.
+### Autogen Project to Build an Intelligent AI Personal Assistant
+Build a multi-agent AI personal assistant using Autogen that can handle tasks like managing calendars, emails, reminders, messaging, research, and weather updates, automating everyday workflows with LLMs and tool integrations.
+### Build and Deploy Text-2-SQL LLM Using OpenAI and AWS
+In this LLM project, you will learn to build a user-friendly web application that leverages Large Language Models (LLMs) to convert natural language queries into optimized SQL commands.
+### Learn to Build an End-to-End Machine Learning Pipeline - Part 2
+In this Machine Learning Project, you will learn how to build an end-to-end machine learning pipeline for predicting truck delays, incorporating Hopsworks' feature store and Weights and Biases for model experimentation.
+### Learn to Build an End-to-End Machine Learning Pipeline - Part 1
+In this Machine Learning Project, you will learn how to build an end-to-end machine learning pipeline for predicting truck delays, addressing a major challenge in the logistics industry.
+### Build an Outreach AI Agent using CrewAI,Twilio and OpenAI APIs
+In this project, you will learn to build an end-to-end AI-powered customer outreach system using CrewAI. You’ll design a workflow where different AI agents handle different tasks like analyzing customer data, creating personalized call scripts, making voice calls, and sending follow-up emails.
+### Build a Wealth Management Agentic AI Chatbot with MS Fabric
+In this Agentic AI project , you will learn to build an intelligent financial assistant that autonomously analyzes your financial data, assesses risks, and designs personalized investment strategies, making wealth management more efficient and personalized to your needs
+### Microsoft Fabric Project to Build a Financial Reporting Agent
+In this Microsoft Fabric project, you'll build a financial reporting agent that simplifies data management, automates analysis, and delivers real-time dashboards  for wealth advisors and their clients.
+### Build and Deploy an AI Resume Analyzer with OpenAI and Azure
+In this AI Resume Analyzer project,  you will learn to build and deploy AI resume analyzer that helps job seekers assess how effectively their resumes match job descriptions  using OpenAI's language models and Azure's cloud infrastructure.
+### Build a Customer Support Agent using OpenAI and AzureML
+In this LLM Project, you will  build an intelligent customer support agent using OpenAI and Azure ML to automate ticket categorization, prioritization, and response generation.
+### Build a Multimodal RAG System using AWS Bedrock and FAISS
+In this LLM RAG Project, you will learn to build a Multimodal RAG system for a restaurant aggregator app, integrating text and visuals to deliver personalized food recommendations using advanced technologies like Amazon S3, Amazon Bedrock, and FAISS.
+### AI Video Summarization Project using Mixtral, Whisper, and AWS
+In this AI Video Summarization Project, you will build a quiz generation tool by extracting key concepts from educational videos and generating concise summaries.
+### Build a Langchain Streamlit Chatbot for EDA using LLMs
+In this LLM project, you will build a Streamlit Chatbot integrated with Langchain technology for natural language interactions with a SQL database, facilitating real-time visualization and insightful insights, streamlining data exploration and analysis.
+### Llama2 Project for MetaData Generation using FAISS and RAGs
+In this LLM Llama2 Project, you will automate metadata generation using Llama2, RAGs, and AWS to reduce manual efforts.
+### Langchain Project for Customer Support App in Python
+In this LLM Project,  you will learn how to enhance customer support interactions through Large Language Models (LLMs), enabling intelligent, context-aware responses. This Langchain project aims to seamlessly integrate LLM technology with databases, PDF knowledge bases, and audio processing agents to create a comprehensive customer support application.
+### MLOps Project to Build Search Relevancy Algorithm with SBERT
+In this MLOps SBERT project you will learn to build and deploy an accurate and scalable search algorithm on AWS using SBERT and ANNOY to enhance search relevancy in news articles.
+### End-to-End Snowflake Healthcare Analytics Project on AWS-2
+In this AWS Snowflake project, you will build an end to end retraining pipeline by checking Data and Model Drift and learn how to redeploy the model if  needed
+### End-to-End Snowflake Healthcare Analytics Project on AWS-1
+In this Snowflake Healthcare Analytics Project, you will leverage Snowflake on AWS to predict patient length of stay (LOS) in hospitals. The prediction of LOS can help in efficient resource allocation, lower the risk of staff/visitor infections, and improve overall hospital functioning.
+### Build CI/CD Pipeline for Machine Learning Projects using Jenkins
+In this project, you will learn how to create a CI/CD pipeline for a search engine application using Jenkins.
+### End-to-End ML Model Monitoring using Airflow and Docker
+In this MLOps Project, you will learn to build an end to end pipeline to monitor any changes in the predictive power of model or degradation of data.
+### Build an End-to-End AWS SageMaker Classification Model
+MLOps on AWS SageMaker -Learn to Build an End-to-End Classification Model on SageMaker to predict a patient’s cause of death.
+### Digit Recognition using CNN for MNIST Dataset in Python
+In this deep learning project, you will build a convolutional neural network using MNIST dataset for handwritten digit recognition.
+### Ecommerce product reviews - Pairwise ranking and sentiment analysis
+This project analyzes a dataset containing ecommerce product reviews. The goal is to use machine learning models to perform sentiment analysis on product reviews and rank them based on relevance. Reviews play a key role in product recommendation systems.
+### LLM Project to Build and Fine Tune a Large Language Model
+In this LLM project for beginners, you will learn to build a knowledge-grounded chatbot using LLM's and learn how to fine tune it.
+### MLOps Project to Deploy Resume Parser Model on Paperspace
+In this MLOps project, you will learn how to deploy a Resume Parser Streamlit Application on Paperspace Private Cloud.
+### Model Deployment on GCP using Streamlit for Resume Parsing
+Perform model deployment on GCP for resume parsing model using Streamlit App.
+### Build a Multi Touch Attribution Machine Learning Model in Python
+Identifying the ROI on marketing campaigns is an essential KPI for any business. In this ML project, you will learn to build a Multi Touch Attribution Model in Python to identify the ROI of various marketing efforts and their impact on conversions or sales..
+### AWS MLOps Project for Gaussian Process Time Series Modeling
+MLOps Project to Build and Deploy a Gaussian Process Time Series Model in Python on AWS
+### AWS MLOps Project to Deploy Multiple Linear Regression Model
+Build and Deploy a Multiple Linear Regression Model in Python on AWS
+### Azure Deep Learning-Deploy RNN CNN models for TimeSeries
+In this Azure MLOps Project, you will learn to perform docker-based deployment of RNN and CNN Models for Time Series Forecasting on Azure Cloud.
+### Time Series Forecasting Project-Building ARIMA Model in Python
+Build a time series ARIMA model in Python to forecast the use of arrival rate density to support staffing decisions at call centres.
+### Hands-On Approach to Regression Discontinuity Design Python
+In this machine learning project, you will learn to implement Regression Discontinuity Design Example in Python to determine the effect of age on Mortality Rate in Python.
+### Deep Learning Project for Time Series Forecasting in Python
+Deep Learning for Time Series Forecasting in Python -A Hands-On Approach to Build Deep Learning Models (MLP, CNN, LSTM, and a Hybrid Model CNN-LSTM) on Time Series Data.
+### Insurance Pricing Forecast Using XGBoost Regressor
+In this project, we are going to talk about insurance forecast by using linear and xgboost regression techniques.
+### Ensemble Machine Learning Project - All State Insurance Claims Severity Prediction
+In this ensemble machine learning project, we will predict what kind of claims an insurance company will get. This is implemented in python using ensemble machine learning algorithms.
+### Image Segmentation using Mask R-CNN with Tensorflow
+In this Deep Learning Project on Image Segmentation Python, you will learn how to implement the Mask R-CNN model for early fire detection.
+### AWS MLOps Project for ARCH and GARCH Time Series Models
+Build and deploy ARCH and GARCH time series forecasting models in Python on AWS .
+### Build ARCH and GARCH Models in Time Series using Python
+In this Project we will build an ARCH and a GARCH model using Python
+### Machine Learning Project to Forecast Rossmann Store Sales
+In this machine learning project you will work on creating a robust prediction model of Rossmann's daily sales using store, promotion, and competitor data.
+### Build Piecewise and Spline Regression Models in Python
+In this Regression Project, you will learn how to build a piecewise and spline regression model from scratch in Python to predict the points scored by a sports team.
+### Classification Projects on Machine Learning for Beginners - 1
+Classification ML Project for Beginners - A Hands-On Approach to Implementing Different Types of Classification Algorithms in Machine Learning for Predictive Modelling
+### Build Regression Models in Python for House Price Prediction
+In this Machine Learning Regression project, you will build and evaluate various regression models in Python for house price prediction.
+### Build PowerBI Dashboard for Water Quality Sensor Data Analysis
+In this PowerBI Project, you will learn to build a PowerBI Dashboard to analyze and visualize water quality sensor data from various European countries.
+### Customer Churn Prediction Analysis using Ensemble Techniques
+In this machine learning churn project, we implement a churn prediction model in python using ensemble techniques.
+### Loan Eligibility Prediction using Gradient Boosting Classifier
+This data science in python project predicts if a loan should be given to an applicant or not. We predict if the customer is eligible for loan based on several factors like credit score and past history.
+### Classification Projects on Machine Learning for Beginners - 2
+Learn to implement various ensemble techniques to predict license status for a given business.
+### Build Time Series Models for Gaussian Processes in Python
+Time Series Project - A hands-on approach to Gaussian Processes for Time Series Modelling in Python
+### PyCaret Project to Build and Deploy an ML App using Streamlit
+In this PyCaret Project, you will build a customer segmentation model with PyCaret and deploy the machine learning application using Streamlit.
+### Build Customer Propensity to Purchase Model in Python
+In this machine learning project, you will learn to build a machine learning model to estimate customer propensity to purchase.
+### Build Regression (Linear,Ridge,Lasso) Models in NumPy Python
+In this machine learning regression project, you will learn to build NumPy Regression Models (Linear Regression, Ridge Regression, Lasso Regression) from Scratch.
+### Build a Logistic Regression Model in Python from Scratch
+Regression project to implement logistic regression in python from scratch on streaming app data.
+### Build a Customer Churn Prediction Model using Decision Trees
+Develop a customer churn prediction model using decision tree machine learning algorithms and data science on  streaming service data.
+### Build an AI Quiz Generator from Video with OpenAI API
+In this LLM project, you will build a model to automate the transcription of video content and generate interactive quizzes using OpenAI’s Whisper and GPT-4o.
+### Build Classification Algorithms for Digital Transformation[Banking]
+Implement a machine learning approach using various classification techniques in Python to examine the digitalisation process of bank customers.
+### Topic modelling using Kmeans clustering to group customer reviews
+In this Kmeans clustering machine learning project, you will perform topic modelling in order to group customer reviews based on recurring patterns.
+### Data Analysis of Working Capital Management using Tableau
+In this Data Analysis Project using Tableau, you will focus on optimizing working capital by analyzing receivables and payables data using Tableau and build actionable dashboards.
+### Loan Default Prediction Project using Explainable AI ML Models
+Loan Default Prediction Project that employs sophisticated machine learning models, such as XGBoost and Random Forest and delves deep into the realm of Explainable AI, ensuring every prediction is transparent and understandable.
+### Build a Churn Prediction Model using Ensemble Learning
+Learn how to build ensemble machine learning models like Random Forest, Adaboost, and Gradient Boosting for Customer Churn Prediction using Python
+### Loan Eligibility Prediction Project using Machine learning on GCP
+Loan Eligibility Prediction Project - Use SQL and Python to build a predictive model on GCP to determine whether an application requesting loan is eligible or not.
+### NLP Project to Build a Resume Parser in Python using Spacy
+Use the popular Spacy NLP python library for OCR and text classification to build a Resume Parser in Python.
+### CycleGAN Implementation for Image-To-Image Translation
+In this GAN Deep Learning Project, you will learn how to build an image to image translation model in PyTorch with Cycle GAN.
+### Demand prediction of driver availability using multistep time series analysis
+In this supervised learning machine learning project, you will predict the availability of a driver in a specific area by using multi step time series analysis.
+### Mastering A/B Testing: A Practical Guide for Production
+In this A/B Testing for Machine Learning Project, you will gain hands-on experience in conducting A/B tests, analyzing statistical significance, and understanding the challenges of building a solution for A/B testing in a production environment.
+### Build a Graph Based Recommendation System in Python-Part 2
+In this Graph Based Recommender System Project, you will build a recommender system project for eCommerce platforms and learn to use FAISS for efficient similarity search.
+### Build a Graph Based Recommendation System in Python -Part 1
+Python Recommender Systems Project - Learn to build a graph based recommendation system in eCommerce to recommend products.
+### Multilabel Classification Project for Predicting Shipment Modes
+Multilabel Classification Project to build a machine learning model that predicts the appropriate mode of transport for each shipment, using a transport dataset with 2000 unique products. The project explores and compares four different approaches to multilabel classification, including naive independent models, classifier chains, natively multilabel models, and multilabel to multiclass approaches.
+### Learn to Build an End-to-End Machine Learning Pipeline - Part 3
+This machine learning project integrates model monitoring, CI/CD practices and Amazon Sagemaker pipelines into the logistics-oriented machine learning pipeline to streamline workflow orchestration for scalable and reliable deployment of ML models in logistics.
+### Many-to-One LSTM for Sentiment Analysis and Text Generation
+In this LSTM Project , you will build develop a sentiment detection model using many-to-one LSTMs for accurate prediction of sentiment labels in airline text reviews. Additionally, we will also train many-to-one LSTMs on 'Alice's Adventures in Wonderland' to generate contextually relevant text.
+### Time Series Forecasting with LSTM Neural Network Python
+Deep Learning Project- Learn to apply deep learning paradigm to forecast univariate time series data.
+### Build a Similar Images Finder with Python, Keras, and Tensorflow
+Build your own image similarity application using Python to search and find images of products that are similar to any given product. You will implement the K-Nearest Neighbor algorithm to find products with maximum similarity.
+### Time Series Classification Project for Elevator Failure Prediction
+In this Time Series Project, you will predict the failure of elevators using IoT sensor data as a time series classification machine learning problem.
+### Medical Image Segmentation Deep Learning Project
+In this deep learning project, you will learn to implement Unet++ models for medical image segmentation to detect and classify colorectal polyps.
+### Azure Text Analytics for Medical Search Engine Deployment
+Microsoft Azure Project - Use Azure text analytics cognitive service to deploy a machine learning model into Azure Databricks
+### Machine Learning project for Retail Price Optimization
+In this machine learning pricing project, we implement a retail price optimization algorithm using regression trees. This is one of the first steps to building a dynamic pricing model.
+### BigMart Sales Prediction ML Project in Python
+The goal of the BigMart Sales Prediction ML project is to build and evaluate different predictive models and determine the sales of each product at a store.
+### Personalized Medicine: Redefining Cancer Treatment
+In this Personalized Medicine Machine Learning Project you will learn to classify genetic mutations on the basis of medical literature into 9 classes.
+### Recommender System Machine Learning Project for Beginners-1
+Recommender System Machine Learning Project for Beginners - Learn how to design, implement and train a rule-based recommender system in Python
+### Build an AI Chatbot from Scratch using Keras Sequential Model
+In this NLP Project, you will learn how to build an AI Chatbot from Scratch using Keras Sequential Model.
+### Customer Market Basket Analysis using Apriori and Fpgrowth algorithms
+In this data science project, you will learn how to perform market basket analysis with the application of Apriori and FP growth algorithms based on the concept of association rule learning.
+### Recommender System Machine Learning Project for Beginners-3
+Content Based Recommender System Project - Building a Content-Based Product Recommender App with Streamlit
+### Build OCR from Scratch Python using YOLO and Tesseract
+In this deep learning project, you will learn how to build your custom OCR (optical character recognition) from scratch by using Google Tesseract and YOLO to read the text from any images.
+### Build a Hybrid Recommender System in Python using LightFM
+In this Recommender System project,  you will build a hybrid recommender system in Python using LightFM .
+### Learn to Build Generative Models Using PyTorch Autoencoders
+In this deep learning project, you will learn how to build a Generative Model using Autoencoders in PyTorch
+### Time Series Analysis with Facebook Prophet Python and Cesium
+Time Series Analysis Project - Use the Facebook Prophet and Cesium Open Source Library for Time Series Forecasting in Python
+### Recommender System Machine Learning Project for Beginners-4
+Collaborative Filtering Recommender System Project - Comparison of different model based and memory based methods to build recommendation system using collaborative filtering.
+### Recommender System Machine Learning Project for Beginners-2
+Recommender System Machine Learning Project for Beginners Part 2- Learn how to build a recommender system for market basket analysis using association rule mining.
+### Abstractive Text Summarization using Transformers-BART Model
+Deep Learning Project to implement an Abstractive Text Summarizer using Google's Transformers-BART Model to generate news article headlines.
+### Build a Collaborative Filtering Recommender System in Python
+Use the Amazon Reviews/Ratings dataset of 2 Million records to build a recommender system using memory-based collaborative filtering in Python.
+### House Price Prediction Project using Machine Learning in Python
+Use the Zillow Zestimate Dataset to build a machine learning model for house price prediction.
+### Natural language processing Chatbot application using NLTK for text classification
+In this NLP AI application, we build the core conversational engine for a chatbot. We use the popular NLTK text classification library to achieve this.
+### Isolation Forest Model and LOF for Anomaly Detection in Python
+Credit Card Fraud Detection Project - Build an Isolation Forest Model and Local Outlier Factor (LOF) in Python to identify fraudulent credit card transactions.
+### End-to-End Speech Emotion Recognition Project using ANN
+Speech Emotion Recognition using RAVDESS Audio Dataset - Build an Artificial Neural Network Model to Classify Audio Data into various Emotions like Sad, Happy, Angry, and Neutral
+### AWS Project to Build and Deploy LSTM Model with Sagemaker
+In this AWS Sagemaker Project, you will learn to build a LSTM model on Sagemaker for sales forecasting while analyzing the impact of weather conditions on Sales.
+### Build an Image Segmentation Model using Amazon SageMaker
+In this Machine Learning Project, you will learn to implement the UNet Architecture and build an Image Segmentation Model using Amazon SageMaker
+### Loan Eligibility Prediction in Python using H2O.ai
+In this loan prediction project you will build predictive models in Python using H2O.ai to predict if an applicant is able to repay the loan or not.
+### Ola Bike Rides Request Demand Forecast
+Given big data at taxi service (ride-hailing) i.e. OLA, you will learn multi-step time series forecasting and clustering with Mini-Batch K-means Algorithm on geospatial data to predict future ride requests for a particular region at a given time.
+### MLOps Project on GCP using Kubeflow for Model Deployment
+MLOps using Kubeflow on GCP - Build and deploy a deep learning model on Google Cloud Platform using Kubeflow pipelines in Python
+### Deep Learning Project- Real-Time Fruit Detection using YOLOv4
+In this deep learning project, you will learn to build an accurate, fast, and reliable real-time fruit detection system using the YOLOv4 object detection model for robotic harvesting platforms.
+### Credit Card Fraud Detection as a Classification Problem
+In this data science project, we will predict the credit card fraud in the transactional dataset using some of the predictive models.
+### Build a Credit Default Risk Prediction Model with LightGBM
+In this Machine Learning Project, you will build a classification model for default prediction with LightGBM.
+### Learn to Build a Siamese Neural Network for Image Similarity
+In this Deep Learning Project, you will learn how to build a siamese neural network with Keras and Tensorflow for Image Similarity.
+### GCP MLOps Project to Deploy ARIMA Model using uWSGI Flask
+Build an end-to-end MLOps Pipeline to deploy a Time Series ARIMA Model on GCP using uWSGI and Flask
+### Avocado Machine Learning Project Python for Price Prediction
+In this ML Project, you will use the Avocado dataset to build a machine learning model to predict the average price of avocado which is continuous in nature based on region and varieties of avocado.
+### Build a Text Generator Model using Amazon SageMaker
+In this Deep Learning Project, you will train a Text Generator Model on Amazon Reviews Dataset using LSTM Algorithm in PyTorch and deploy it on Amazon SageMaker.
+### Build a Music Recommendation Algorithm using KKBox's Dataset
+Music Recommendation Project using Machine Learning - Use the KKBox dataset to predict the chances of a user listening to a song again after their very first noticeable listening event.
+### Build an Image Classifier for Plant Species Identification
+In this machine learning project, we will use binary leaf images and extracted features, including shape, margin, and texture to accurately identify plant species using different benchmark classification techniques.
+### Build a Face Recognition System in Python using FaceNet
+In this deep learning project, you will build your own face recognition system in Python using OpenCV and FaceNet by extracting features from an image of a person's face.
+### Locality Sensitive Hashing Python Code for Look-Alike Modelling
+In this deep learning project, you will find similar images (lookalikes) using deep learning and locality sensitive hashing to find customers who are most likely to click on an ad.
+### Time Series Python Project using Greykite and Neural Prophet
+In this time series project, you will forecast Walmart sales over time using the powerful, fast, and flexible time series forecasting library Greykite that helps automate time series problems.
+### FEAST Feature Store Example for Scaling Machine Learning
+FEAST Feature Store Example- Learn to use FEAST Feature Store to manage, store, and discover features for customer churn prediction machine learning project.
+### Deploy Transformer BART Model for Text summarization on GCP
+Learn to Deploy a Machine Learning Model for the Abstractive Text Summarization on Google Cloud Platform (GCP)
+### Detectron2 Object Detection and Segmentation Example Python
+Object Detection using Detectron2 - Build a Dectectron2 model to detect the zones and inhibitions in antibiogram images.
+### Learn Object Tracking (SOT, MOT) using OpenCV and Python
+Get Started with Object Tracking using OpenCV and Python - Learn to implement Multiple Instance Learning Tracker (MIL) algorithm, Generic Object Tracking Using Regression Networks Tracker (GOTURN) algorithm, Kernelized Correlation Filters Tracker (KCF) algorithm, Tracking, Learning, Detection Tracker (TLD) algorithm for single and multiple object tracking  from various video clips.
+### Deploy Transformer-BART Model on Paperspace Cloud
+In this MLOps Project you will learn how to deploy a Tranaformer BART Model for Abstractive Text Summarization on Paperspace Private Cloud
+### Build a Multi-Class Classification Model in Python on Saturn Cloud
+In this machine learning classification project, you will build a multi-class classification model in Python on Saturn Cloud to predict the license status of a business.
+### Build a Speech-Text Transcriptor with Nvidia Quartznet Model
+In this Deep Learning Project, you will leverage transfer learning from Nvidia QuartzNet pre-trained models to develop a speech-to-text transcriptor.
+### Expedia Hotel Recommendations Data Science Project
+In this data science project, you will contextualize customer data and predict the likelihood a customer will stay at 100 different hotel groups.
+### Build an AI Insurance Agent for Eligibility Analysis Using CrewAI
+Build an AI Insurance Agent that automates eligibility checks by extracting medical details, mapping conditions to policy terms, and generating explainable coverage decisions using CrewAI and LLMs. This is an upcoming project that is expected to be launched in August.
+### Machine learning for Retail Price Recommendation with R
+Use the Mercari Dataset with dynamic pricing to build a price recommendation algorithm using machine learning in R to automatically suggest the right product prices.
+### Build a Moving Average Time Series Forecasting Model in Python
+Python Moving Average Time Series Project -Explore various time series smoothing techniques and build a moving average time series forecasting model in python from scratch.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Latest Blogs
+LLM Compression Techniques to Build Faster and Cheaper LLMs
+Learn why every AI engineer must master LLM compression to keep LLMs efficient and affordable.| ProjectPro.
+A Data Engineer’s Guide to Azure Medallion Architecture
+Learn to build scalable Azure Medallion Architecture from Bronze to Gold layers with best practices and tools | ProjectPro
+What is Google Agent-to-Agent (A2A) Protocol and How to Use it?
+Learn Google’s Agent-to-Agent Protocol for seamless multi-agent AI collaboration with ProjectPro.
+View all blogs
+## A Complete Guide for Data Science Projects in Python
+When you are entirely new to learning data science, it’s natural to focus on what and how you need to know to become a successful data scientist in the industry. But no e-learning provider, offline or online, has information that you cannot find using Google or a top data science book. There isn’t a secret stash of real-world industry data science knowledge that educators are keeping behind their paywalls. Most e-learning providers often attempt to provide the best, most useful, and concise data science knowledge and package it into a neat, bundled, comprehensive data science course. However, that’s not where most learning value is to be found in mastering data science and machine learning. If we had to put a number on it, we would say 10% of the value comes from data science courses while 90% of the value comes from working on interesting data science projects. You can transform your theoretical data science knowledge into hands-on skills and industry-level proficiency by working through diverse data science project ideas.
+Here at ProjectPro, we believe that working on interesting data science project briefs is a valuable method of learning data science. ProjectPro enables you to seek technical support from industry experts to progress much more quickly than working alone on a data science project.
+Whether you are looking for data science mini projects in python, python data analysis projects, or simply python data science projects, ProjectPro’s repository has one of each kind. The exciting part about data science python projects that belong to the ProjectPro library is that we offer various projects that will cater to all your different needs. Suppose you are a beginner in Data Science who wants to first upgrade your data analysis skills through data analysis projects in python. In that case, you can start exploring our beginner-friendly projects. Suppose you are interested in enhancing your programming skills in Python. In that case, we will recommend you work on data science python projects by ProjectPro that will help you improve your performance in Python and add Data Science techniques to your skillset as a bonus. On the other hand, if you are an experienced candidate searching for challenging projects, ProjectPro experts have brainstorming projects for you.
+But, but, but! Before we present you with our list of projects, take a few minutes to read the next section to understand what you can do with Python for data science solutions.
+## Why choose Python for Data Science?
+The digital revolution has blessed us with large amounts of data. To leverage this data, one needs to have decent programming skills for data science. Gone are the days when equations were solved manually; now is the time for programming languages to shine and rise. One such programming language that has recently gained much traction among data science enthusiasts and professionals.
+While Python is a language that can be used for general-purpose programming, it has particularly become popular in the data science field because of its exciting libraries like NumPy, Pandas, Matplotlib, etc. It beat its competitor R in 2016 and emerged as a popular choice for Kaggle users. The year 2016 was only the start. The popularity continued to evolve over the next few years as Python topped KDNugget’s list of the most used tools by data scientists. In 2018, the same website reported that 66% of the data scientists used Python daily. Since then, the language has only expanded its outreach among data scientists, and as per the US Data Science Institute, Python ranked second in June 2021.
+More recently, if you look at the January 2022 rankings of the TIOBE index, you can quickly notice that Python is on the top. This suggests that, at present, it is the most popular programming language in the world.
+In case you are still apprehensive about choosing python for data science and are wondering what is python for data science, check out the following exciting feature of Python that makes it the best choice for data scientists.
+- It is a beginner-friendly language, and one can learn it quickly.
+- It supports the easy scalability of projects in data science through its exciting libraries like Pandas, NumPy, StatsModels, etc.
+- Its scikit-learn library is one of the most popular libraries for implementing machine learning models.
+- It is open-source and is supported by a tightly-knit community of developers worldwide who continue to create more exciting libraries for data scientists.
+- It supports data analysis through its visualization libraries Matplotlib, Seaborn, etc.
+We suggest you try out a few projects and figure them out. So, take a look at the list below, specially curated by ProjectPro Data Science experts to assist you in choosing the right data science project in Python.
+### Data Science Projects for Beginners with Source Code in Python
+As Python is gradually becoming a preferred choice for beginners in Data Science, because of its popularity, more students and professionals are showing a significantly higher interest in projects on data science that use python.
+Here are industry expert panel recommendations on some cool and interesting python data science projects for beginners –
+- Sentiment Analysis
+Here is a fun project for beginners to learn to process textual data. The project will teach you how to perform Exploratory Data Analysis techniques over text data and implement TF-IDF. Using similar techniques, the task is to predict the sentiment of a buyer of a product purchased from an E-commerce website.
+Source Code: Sentiment Analysis of Product Reviews
+- Fraud Detection
+This project uses popular machine learning algorithms like Logistic regression, Support Vector Machine, Decision Tree, etc., to predict fraudulent transactions in a credit card dataset.
+Source Code: Fraud Detection as a Classification Problem
+- Market Basket Analysis
+This data science project uses Python to understand the technique of Market Basket Analysis used by product/service providing companies. You will learn how to use the Fprgrowth and Apriori algorithm to understand the method of associate-rule learning.
+Source Code: Market Basket Analysis using Apriori Algorithm
+- Building a ChatBot
+Through this project, you will learn one of the most popular applications of Natural Language processing techniques used in python projects for data science.  You will learn how to implement methods like Stemming, Tokenization, Lemmatization, removing stop words, etc over the textual dataset and use them to create a Chatbot application in Python.
+Source Code: Build a Chatbot from Scratch in Python using NLTK
+For any business, it is essential to keep track of their customer churn rate and analyze various factors responsible for churn. In this project, you will use decision trees to predict the probability of a customer churning out. You will learn about Classification and Regression Trees (CART) and various metrics like F1 score, recall, precision, etc., that assist in analyzing the model performance.
+Libraries - NumPy, pandas, matplotlib, sklearn, pickle, imblearn
+Source Code : Build a Customer Churn Prediction Model using Decision Trees
+- Resume Parsing Application
+Python offers a Spacy NLP library, making it convenient to use OCR and text classification techniques while implementing data science projects with Python. In this project, you will learn how to build a Resume Parsing using the NLP-Spacy library. This project will be a good choice for those who are explicitly searching for data science projects in python for beginners in NLP.
+Libraries - NumPy, pandas, matplotlib, sklearn, Tika, SpaCy
+Source Code: Build a Resume Parser using NLP -Spacy
+- Image Classification System
+This project will be a good starting point for machine learning enthusiasts eager to work on a project that uses images. In this project, you will identify plant species by using binary leaf images and their extracted features.
+Source Code: Build an Image Classifier Using Tensorflow
+- Predicting Rankings of Players in a Game
+If you are into Data Science and the popular game PUBG (PlayerUnknown’s Battleground), you will find this project is a must on your list of python for data science projects. This project aims to estimate the probability that a player playing the game PUBG will win if they play it themselves.
+Source Code : PUBG Finish Placement Prediction
+- Survival Prediction of Passengers
+This is a popular project among beginners in Data Science. This project aims to predict passengers' chances of survival on the Titanic ship using the given dataset. You will learn how to use the logistic regression machine-learning algorithm to make such predictions.
+Source Code: Survival Prediction on Titanic using Machine Learning
+- Fake News Detection
+In the current scenario, one can access gigabytes of information with a single click. They probably come across content that may not hold factually correct information. Data scientists have leveraged NLP and deep learning to build a fake news detection system to avoid that. In this project, you will use NLP techniques like stemming, lemmatization, Tokenization, etc. on the textual dataset. You will learn how to implement deep learning models like RNN, GRU, LSTM over the dataset to build a classifier that can identify fake news.
+Libraries: Scikit-learn , Tensorflow , Keras, Glove, Flask, nltk, pandas, numpy
+Source Code: NLP and Deep Learning For Fake News Classification
+### Data Science Projects for Intermediate Professionals in Python with source code
+This section will find data science real-world projects in Python that are meant for professionals with experience in Data Science. If you are searching for data science with python projects that are not straightforward and will test your skills in Data Science, then check out the list below that contains such data science projects with source code in Python.
+- Speech Emotion Recognition
+When humans are happy, it is easy to detect that by looking at them and listening to them carefully. The same holds when they are sad. In this project, you will use audio files to detect the speaker's emotions using artificial neural networks. You will learn how Fourier transforms are utilized for analyzing sound waves.
+Libraries: Keras , TensorFlow, librosa, soundfile, sklearn, pandas, matplotlib, NumPy, pickle, mlfoundry
+Source Code: End-to-End Speech Emotion Recognition Project using ANN
+- Human Activity Recognition
+Walking, Dancing, Climbing - There are so many different activities that human beings perform daily. In this project, you will work on using machine learning algorithms like SVM, Random Forest Regressor, XGBoost, and KNN for building a system that can identify the activity performed using sensor data.
+Source Code: Human Activity Recognition Using Multiclass Classification
+- Handwritten Digit Recognition
+Identifying characters from handwritten text is a challenging task for computers, but with CNN, it can be made easy. In this project, you will use the MNIST dataset to build a handwritten digit recognition system, and you will use a convolutional neural network to build that system.
+Libraries: pandas, numpy, tensorflow, matplotlib, seaborn, scikit-learn
+Source Code: Digit Recognition using CNN for MNIST Dataset
+- Driver Demand Prediction
+This project will guide you in implementing supervised machine learning algorithms in Python. You will utilize multi-step time series analysis in Python to predict the availability of a driver and efficiently allocate them to a specific area.
+Source Code: Demand prediction of driver availability
+- House Price Prediction
+This project will teach you how to estimate the prices of houses based on their features. You will be provided with the Zillow dataset and taught how to use machine learning on this dataset to predict house prices.
+Source Code: Predicting House Prices
+- Assembly Line Performance Prediction
+This project will help you in strengthening your data science skills by working on this practical dataset by Bosch, one of the world’s leading companies in the manufacturing sector. You will use the machine learning algorithms on the dataset to predict the chances of internal failures along the assembly line.
+Source Code: Bosch Production Line Performance
+### Advance Data Science Projects in Python
+- Insurance Claim Severity Prediction
+Through this project, you will understand how ensemble machine learning algorithms are implemented in Python. You will learn to use this algorithm to estimate the type of claims an insurance company will get. This project is a good fit for the list of data analytics projects in Python.
+Source Code: Model Insurance Claim Severity
+- Loan Eligibility Prediction
+This project uses machine learning models to predict which loan applicant will most likely repay the loan. That will significantly interest the banks who spend countless hours analyzing numerous loan applications. They can use this project to quickly classify loan applications based on the applicants’ history and credit score.
+Source Code : Loan Default Prediction
+- Image Classification with Transfer Learning
+In real-world applications, predefined models are unlikely to solve your specific problems, and in such cases, fine-tuning them through transfer learning is critical. In this project, you will learn how to implement transfer learning with Inception and Resnet models for solving an image classification problem. You will also learn about data augmentation and the architecture of CNNs.
+Libraries: Pandas, NumPy, Seaborn, MatplotLib, sklearn, TensorFlow
+Source Code : Tensorflow Transfer Learning Model for Image Classification
+- Recommendation System
+In this project, you will utilize machine learning algorithms to analyze the context customer dataset of Expedia. Also, you will learn how to predict the chances of a customer staying at 100 different hotel groups.
+Source Code: Building a Recommender System
+- Medical Image Segmentation
+Polyps are clusters of cells likely to form in the uterine and colon. They have the potential to transform into cancerous cells and thus should be removed as early as possible. This project will teach you how to use deep learning algorithms to detect polyps in colonoscopy videos.
+Source Code: Medical Image Segmentation Project
+- Similar Images Finder
+In this project, you will explore the Python libraries: Keras and Tensorflow to build an application that presents images similar to an image it receives at the input. You will use the machine learning algorithm K-nearest neighbor to generate the desired output images.
+Source Code: Image Similarity Application
+## FAQs on Python Data Science Projects
+### 1) Where can I practice Python for data science?
+Pycharm, Visual Studio Code, Jupyter Notebooks, and other integrated development environments (IDEs) are among the many options available. Participating in Hackathons or data science competitions will also increase your confidence and will prepare you to tackle more challenging problems in the future. You can acquire hands-on experience by practicing some interesting end-to-end solved Python projects on data science offered by ProjectPro.
+### 2) What is Python used for in Data Science?
+Python has a lot of excellent machine learning libraries that make life easier for data scientists by providing open-source access to tools for implementing machine learning algorithms. These libraries are easy to use and efficient at the same time. Also, these machine learning libraries make it easy to create robust and reliable neural networks.
+### 3) Is Python good for data science?
+Yes, Python is a good choice for data science, given that it is an object-oriented programming language that comes with exciting libraries for data science. These libraries include NumPy, Pandas, Matplotlib, Scikit-learn, etc., which allow easy implementation of various tasks like data analysis, data visualization, utilization of machine learning algorithms, etc.
+### 4) What is data science for Python?
+There are many options available for selecting a programming language for a data science project, including R, Python, SAS, etc. But, out of all the programming languages for data science, Python is the best option for building efficient and scalable data science projects.
+### 5) Why should you work on ProjectPro’s Data Science Projects in Python?
+- Python is a great data science programming language for beginners to start with elegant and math-like syntax.
+- It has special libraries and packages like SciPy and NumPy with relatively easier syntax to make implementations easier and faster.
+- According to a survey by industry analyst  O’Reilly, 40% of data scientists today use Python programming language for data science.
+### 6) How many projects from the ProjectPro’s Data Science projects library use Python/R?
+Data Science experts at ProjectPro constantly make efforts to update their users with the latest advancements in machine learning tools, techniques, and algorithms. We, therefore, release new solved end-to-end data science projects with real-world applications every month for our subscribers. Thus, it is difficult to provide you with an exact number for data science projects in R/Python that our repository has.
+However, if you are still curious about a number, we suggest you take a look at the projects in both categories here, End-to-End Data Science Projects with Source Code .
+### 7) Will the ProjectPro subscribers have access to a customized lab environment where the projects can be implemented?
+At the moment, the ProjectPro dashboard does not provide you with the feature of a customized lab environment where the project can be implemented alongside. The feature is in the pipeline and will be soon introduced to the ProjectPro subscribers.
+Till that is not introduced, industry experts of Data Science and Big Data at ProjectPro suggest that you stick to popular and industry-relevant tools practicing the projects from our repository.
+For implementing Big Data projects, you can work with AWS Free Tier and Azure Free Tier to access lab environments in the cloud. These environments are real-time, safe, and support risk-free trial and error. You can comfortably use them irrespective of your connection type. For Data Science projects, we suggest you utilize Jupyter Ipython notebooks that offer interactive development, presentation, and well-organized data science workflows.
+### 8) What will you get when you enroll for ProjectPro’s Data Science Mini Projects in Python?
+Data Science Project with Source Code  -Examine and implement end-to-end real-world interesting data science and data analytics project ideas from eCommerce, Retail, Healthcare, Finance, and Entertainment domains using the source code.
+Recorded Demo – Watch a video explanation on how to execute these data science project examples.
+Mentor Support – Get your technical questions answered with mentorship from experienced data scientists.
+Complete Data Science Project Solution Kit – Get access to the data science project dataset, solution, and supporting reference material for every python data science project.
+There are tons of cool and interesting data science project ideas that one can create and are not limited to what we have listed. ProjectPro’s python data science projects will help you implement your imagination in building data products using python language. Drop us an email at care@projectpro.io if you require or are interested in working on any other kind of dataset. We will try to help you at our best.
+### 9) How can ProjectPro’s Python Data Science Projects help you learn data science?
+- They compel you to learn new data science skills.
+One of the hardships of learning any skill, data science included, is that you often repeat what you already know how to do. For example, anyone learning to play a keyboard often repeatedly plays the music notes on the first page because it feels good to hear the right notes. But, one can better spend that time by learning the music notes on the pages he didn’t know. A data scientist who only practices the skills they already know will have difficulty improving soon. Of course, the secret sauce to improvement is to practice data science techniques you don’t know how to implement. Data science projects are valuable learning tools because they’ve been designed by constraints you have not set yourself. Where a data science project demands data science skills that you don’t yet have, you are forced to seek out extra knowledge and cultivate those data science skills. By forcing you to learn about new data science techniques, tools, and technologies through projects, you’re made to expand your knowledge and grow in confidence.
+- They encourage you to iterate on your models.
+Data science projects let you produce different versions of your model (“iterations”) to achieve a more refined, optimized, and accurate result. On completing a project, the iterative process of building machine learning models lets you reflect on how you reached from A to Z of model building and reflect on the steps you took along the data science project workflow. This reflection is a crucial data science skill that maximizes one’s learning from each data science and machine learning project and sharpens your critical thinking skills. Reflecting at the end of a data science project helps you understand why you applied a specific machine learning algorithm or why you tuned the parameters for a particular model so that you can consolidate your new knowledge in data science.
+- They help you enhance your critical skills.
+For data science beginners, it is challenging to self-critique their model. That is because beginners don’t yet have enough bank of experience and data science knowledge that helps them evaluate their machine learning models. However, working with diverse datasets on interesting data science project ideas across different business domains will allow them to see a range of different data science solutions to the same kind of business problem. It will make data science beginners' eyes keener as they begin to identify the pros and cons of each modeling approach.
+- They help you build a job-winning data science portfolio.
+One of the happy side-effects of learning data science through projects is that you can effortlessly produce the content for a winning data science portfolio, which many employers want to see. Hiring managers are looking for specific data science skills for any data scientist job.  Balancing a data science portfolio with different projects helps showcase to the hiring managers that you have a diverse data science skillset.
+- They give you a sense of accomplishment.
+Last but not least, the most enjoyable part of learning data science through projects is that you are constantly completing various data science tasks like data cleaning, data munging, data visualization, data storytelling, and improving your skillset. When you take a step back on completing data science projects, you will feel pride in your accomplishments and feel good. Checking data science skills off your list motivates you to do more projects!
+### 10) Who should work on ProjectPro’s Python Data Science Projects?
+- ANYONE who is interested in learning more about data science and data analytics can work on these projects. The data science projects have been designed so that anybody can follow even if they have no prior experience in doing data science with Python.
+- Anybody who is interested to explore various areas of data science by solving insightful and interesting data science problems.
+### 11) What are the key Learnings from ProjectPro’s Data Science Projects in Python?
+- Evaluate and apply the most effective models to interesting data science problems using python data science programming language.
+- Successfully perform all the steps involved in a complex data science project using Python.
+- You will explore and learn to use Python’s impressive data science libraries like – NumPy, SciPy, Pandas, Sci-Kit, and more.
+- These data science projects will help you integrate all the data science skills you have self-learned.
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

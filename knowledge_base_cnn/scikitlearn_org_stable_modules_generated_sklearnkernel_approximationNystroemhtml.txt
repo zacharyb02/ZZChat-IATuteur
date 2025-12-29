@@ -1,0 +1,128 @@
+SOURCE_URL: https://scikit-learn.org/stable/modules/generated/sklearn.kernel_approximation.Nystroem.html
+SUJET: CNN_DEEP_LEARNING
+
+# Nystroem#
+Approximate a kernel map using a subset of the training data.
+Constructs an approximate feature map for an arbitrary kernel
+using a subset of the data as basis.
+Read more in the User Guide .
+Added in version 0.13.
+Kernel map to be approximated. A callable should accept two arguments
+and the keyword arguments passed to this object as kernel_params , and
+should return a floating point number.
+Gamma parameter for the RBF, laplacian, polynomial, exponential chi2
+and sigmoid kernels. Interpretation of the default value is left to
+the kernel; see the documentation for sklearn.metrics.pairwise.
+Ignored by other kernels.
+Zero coefficient for polynomial and sigmoid kernels.
+Ignored by other kernels.
+Degree of the polynomial kernel. Ignored by other kernels.
+Additional parameters (keyword arguments) for kernel function passed
+as callable object.
+Number of features to construct.
+How many data points will be used to construct the mapping.
+Pseudo-random number generator to control the uniform sampling without
+replacement of n_components of the training data to construct the
+basis kernel.
+Pass an int for reproducible output across multiple function calls.
+See Glossary .
+The number of jobs to use for the computation. This works by breaking
+down the kernel matrix into n_jobs even slices and computing them in
+parallel.
+None means 1 unless in a joblib.parallel_backend context. -1 means using all processors. See Glossary for more details.
+Added in version 0.24.
+Subset of training points used to construct the feature map.
+Indices of components_ in the training set.
+Normalization matrix needed for embedding.
+Square root of the kernel matrix on components_ .
+Number of features seen during fit .
+Names of features seen during fit . Defined only when X has feature names that are all strings.
+Added in version 1.0.
+See also
+Approximate feature map for additive chi2 kernel.
+Polynomial kernel approximation via Tensor Sketch.
+Approximate a RBF kernel feature map using random Fourier features.
+Approximate feature map for “skewed chi-squared” kernel.
+List of built-in kernels.
+References
+- Williams, C.K.I. and Seeger, M.
+“Using the Nystroem method to speed up kernel machines”,
+Advances in neural information processing systems 2001
+- T. Yang, Y. Li, M. Mahdavi, R. Jin and Z. Zhou
+“Nystroem Method vs Random Fourier Features: A Theoretical and Empirical
+Comparison”,
+Advances in Neural Information Processing Systems 2012
+Examples
+```python
+>>> from sklearn import datasets, svm
+>>> from sklearn.kernel_approximation import Nystroem
+>>> X, y = datasets.load_digits(n_class=9, return_X_y=True)
+>>> data = X / 16.
+>>> clf = svm.LinearSVC()
+>>> feature_map_nystroem = Nystroem(gamma=.2,
+...                                 random_state=1,
+...                                 n_components=300)
+>>> data_transformed = feature_map_nystroem.fit_transform(data)
+>>> clf.fit(data_transformed, y)
+LinearSVC()
+>>> clf.score(data_transformed, y)
+0.9987...
+```
+Fit estimator to data.
+Samples a subset of training points, computes kernel
+on these and computes normalization matrix.
+Training data, where n_samples is the number of samples
+and n_features is the number of features.
+Target values (None for unsupervised transformations).
+Returns the instance itself.
+Fit to data, then transform it.
+Fits transformer to X and y with optional parameters fit_params and returns a transformed version of X .
+Input samples.
+Additional fit parameters.
+Pass only if the estimator accepts additional params in its fit method.
+Transformed array.
+Get output feature names for transformation.
+The feature names out will prefixed by the lowercased class name. For
+example, if the transformer outputs 3 features, then the feature names
+out are: ["class_name0", "class_name1", "class_name2"] .
+Only used to validate feature names with the names seen in fit .
+Transformed feature names.
+Get metadata routing of this object.
+Please check User Guide on how the routing
+mechanism works.
+A MetadataRequest encapsulating
+routing information.
+Get parameters for this estimator.
+If True, will return the parameters for this estimator and
+contained subobjects that are estimators.
+Parameter names mapped to their values.
+Set output container.
+See Introducing the set_output API for an example on how to use the API.
+Configure output of transform and fit_transform .
+- "default" : Default output format of a transformer
+- "pandas" : DataFrame output
+- "polars" : Polars output
+- None : Transform configuration is unchanged
+Added in version 1.4: "polars" option was added.
+Estimator instance.
+Set the parameters of this estimator.
+The method works on simple estimators as well as on nested objects
+(such as Pipeline ). The latter have
+parameters of the form <component>__<parameter> so that it’s
+possible to update each component of a nested object.
+Estimator parameters.
+Apply feature map to X.
+Computes an approximate feature map using the kernel
+between some training points and X.
+Data to transform.
+Transformed data.
+## Gallery examples#
+Time-related feature engineering
+Plot classification probability
+Visualizing the probabilistic predictions of a VotingClassifier
+Imputing missing values with variants of IterativeImputer
+One-Class SVM versus One-Class SVM using Stochastic Gradient Descent
+Comparing anomaly detection algorithms for outlier detection on toy datasets
+Explicit feature map approximation for RBF kernels
+### This Page
+- Show Source

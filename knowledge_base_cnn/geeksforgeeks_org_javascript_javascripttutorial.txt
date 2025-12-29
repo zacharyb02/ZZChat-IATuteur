@@ -1,0 +1,275 @@
+SOURCE_URL: https://www.geeksforgeeks.org/javascript/javascript-tutorial/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- JS Tutorial
+- Web Tutorial
+- A to Z Guide
+- Projects
+- OOP
+- DOM
+- Set
+- Map
+- Math
+- Number
+- Boolean
+- Exercise
+# JavaScript Tutorial
+JavaScript is a programming language used to create dynamic content for websites. It is a lightweight, cross-platform, and single-threaded programming language. It's an interpreted language that executes code line by line, providing more flexibility .
+- Client Side: On the client side, JavaScript works along with HTML and CSS. HTML adds structure to a web page, CSS styles it, and JavaScript brings it to life by allowing users to interact with elements on the page, such as actions on clicking buttons, filling out forms, and showing animations. JavaScript on the client side is directly executed in the user's browser.
+- Server Side :  On the Server side (on Web Servers), JavaScript is used to access databases, file handling, and security features to send responses , to browsers.
+## Why Learn JavaScript?
+- Core language for web development, enabling dynamic and interactive features in websites with fewer lines of code.
+- Highly in demand, offering many job opportunities in Frontend, Backend (Node.js), and Full Stack Development.
+- Supports powerful frameworks and libraries like React, Angular, Vue.js, Node.js, and Express.js, widely used in modern web applications.
+- Object-oriented and event-driven language, ideal for building scalable and responsive applications.
+- Cross-platform and runs directly in all modern web browsers without the need for installation.
+- Major companies like Google, Facebook, and Amazon use JavaScript in their tech stacks.
+## Write and Run Your First JavaScript Program
+Mostly browsers can run JavaScript directly, so there's no need to install a compiler. However, the built-in browser console isn’t very beginner-friendly. That’s why we’ve added an online editor below to help you get started easily.
+```python
+console.log("Hello World!");
+```
+```python
+Hello World!
+```
+Before we start, we recommend you to edit the code and try to print your own name.
+## Fundamentals
+- Introduction
+- Quiz: JS Basics
+- Using JS in HTML
+- Variables and Datatypes
+- Quiz: Variables & Data Types
+- Operators
+- Type Conversion and Coercion
+- Control Flow Statements
+- Quiz: Operators , Control Flow
+- Scope
+- Browser console
+## Functions and Events
+Functions in JavaScript are reusable blocks of code that perform a specific task. Events are actions that happen in the browser, such as mouse clicks, keyboard input, or page loading.
+- Functions
+- Function binding
+- Hoisting
+- Closures
+- Higher-Order Functions
+- Iterator
+- Function Generator
+- Quiz: Functions
+- Events
+- Event Loop
+- Event Bubbling
+- Quiz: Event Handling
+## JavaScript Beginner Projects
+Now you have a basic understanding of JavaScript. So start with some beginner level projects to clear your concept and to implement in real world applications.
+- Counter Application
+- Prime Number Checker
+- Show and Hide Password
+- Palindrome Checker App
+- JavaScript Carousel
+- Email Validator App
+- Unicode Character Value
+- Random Number Generator
+- Random Password Generator
+## JavaScript Data Structure
+JavaScript provides a versatile set of data structures that help in efficient data storage, manipulation, and problem-solving. In this section, we will explore each data structure and algorithm in detail.
+- Numbers
+- String
+- Quiz: Numbers , String
+- Array
+- LinkedList
+- Quiz: Arrays , Linked List
+- Stack
+- Queue
+- Quiz: Stack , Queue
+- Sorting Algorithms
+JavaScript's built-in utilities and ES6+ enhancements provide additional data structures, including the following
+- WeakMap
+- WeakSet
+- Typed Arrays
+- Deque
+- Priority Queue (Heap)
+- Quiz: Data Structure
+To learn data structure and algorithm with JavaScript in detail, you can refer to our DSA with JavaScript Tutorial.
+## Object Oriented Programming
+Object-Oriented Programming (OOP) in JavaScript, a concept that enables the structure of code by modeling real-world entities as objects with properties and behaviors.
+- Introduction to OOP
+- Objects
+- Quiz: Objects
+- Classes
+- Constructor Method
+- Prototype
+- Static Methods
+- Inheritance
+- Quiz: Classes and Inheritance
+- Encapsulation
+- Abstraction
+- Polymorphism
+- Getters and Setters
+- Quiz: OOP
+## Browser and Document Object Model
+- Browser Object Model
+- Document Object Model
+- Manipulate DOM Elements
+- Event Handling in the DOM
+- Quiz: BOM and DOM
+## Asynchronous JavaScript
+- Callbacks
+- Promise
+- Promise Chaining
+- Async/Await
+- Quiz: Asynchronous JavaScript
+## JavaScript Intermediate Projects
+Now you have a good understanding of JavaScript. So let's implement all these in some real world applications.
+- Price Range Slider with Min-Max Input
+- GitHub Profile Search
+- Toast Notification
+- Multi-Step Progress Bar
+- Quiz App with Timer
+- Expense Tracker
+- Sortable and Filterable Table
+- Dynamic Resume Builder
+- OTP Input Field
+- Student Grade Calculator
+## JavaScript JSON
+It is a lightweight data format for storing and exchanging data widely used to send data between a server and a client.
+- JSON Tutorial
+- JSON vs JavaScript Object
+- Read JSON File Using JS
+- Parse JSON Data in JS
+- JavaScript JSON Parser
+- JavaScript JSON Complete Reference
+- Quiz : JSON
+## Regular Expression and Validation
+Regular expressions plays important role for validation. Validations help ensure that data entered by users meets specific criteria.
+- Regular expressions
+- Form Validation
+- Email Validation
+- Number Validation
+- Password Validation
+- URL Validation
+- UserName Validation
+- Quiz: Regular Expressions
+## Exception and Error Handling
+Exception and Error handling is crucial for ensuring the reliability and stability of JavaScript applications by handling errors effectively
+- Exception Handling
+- Debugging
+- Quiz: Error Handling & Debugging
+## Testing and Performance Optimization
+- Unit testing with Jest
+- Memory Management
+- Garbage Collection
+- Lazy Loading
+- Debouncing
+- Throttling
+- Quiz: Testing & Optimization
+## Interesting Facts
+This section covers all the interesting facts and features which made JavaScript so popular and will easy if you are switching from other programming languages also.
+- Data Types
+- Strings
+- Arrays
+- Object
+- Complete JavaScript
+## JavaScript Advanced Projects
+Now you have covered almost all the important concepts of JavaScript. These projects will improve and revise your JavaScript Knowledge.
+- Employee Database Management System
+- Nested Chat Comments
+- Responsive Admin Dashboard
+- Task Scheduler
+- Dragon’s World Game
+- Tic-Tac-Toe Game
+- QR Code Generator
+- Resize and Compress Images
+- QR Code Scanner or Reader
+For all lists of Projects follow the article- JavaScript Project Ideas with Source Code
+## JavaScript Quiz
+This section offers a collection of practice Quiz designed to test and support understanding of various concepts in JavaScript.
+- Quizzes
+- Practice Quiz-1
+- Practice Quiz-2
+- Practice Quiz-3
+## JavaScript Practice
+The javaScript Coding Practice Problems page offers exercises for all skill levels, covering basic Numbers, String to advanced structures like Stack, Queue. These problems help build a strong foundation and boost confidence in solving real-world coding challenges.
+- Coding Problems
+## JavaScript Exercises
+- JavaScript Exercises, Practice Questions and Solutions
+- JavaScript String Exercise
+- JavaScript Array Exercise
+- JavaScript Coding Questions and Answers
+- JavaScript Programming Examples
+## Interview Questions
+This section provides a list of interview questions related to JavaScript.
+- JavaScript Interview Questions and Answers (2025) For Begineers
+- Intermediate JavaScript Interview Questions and Answers (2025)
+- Advance JS Interview Questions and Answers (2025) For Experienced
+- JavaScript this Operator Interview Questions
+- JavaScript String Interview Questions
+- JavaScript Array Interview Questions
+- JavaScript Object Interview Questions
+- Top 50 Array Coding Problems for Interviews
+- JavaScript Output Based Interview Questions
+For a quick recap of JavaScript read the article - JavaScript Cheat Sheet
+## Libraries and Frameworks
+JavaScript libraries and frameworks play a important role in modern web development. They offer built-in functions and methods that enhance web pages, making them more dynamic and interactive. They handle repetitive tasks, allowing developers to focus on core functionality.
+Also, they provide project structure and data flow structure that helps to create fast and more reliable applications.
+### Libraries
+Libraries provide pre-built solutions for common tasks. Developers can use these functions instead of writing code from scratch, saving valuable time. Here are a few popular libraries of JavaScript.
+- Frontend Libraries : React , Preact , Lodash , Moment.js , jQuery , Axios
+- Backend Libraries: Socket.io , JWT , Bcrypt , Passport.js , CORS
+### Frameworks
+Frameworks, offer a comprehensive structure for building applications. Here are a few popular frameworks of JavaScript.
+- Frontend Frameworks: Vue.js , Angular , Next.js , Nuxt.js , Gatsby , Remix
+- Backend Frameworks: Express.js , NestJS , Koa.js , Sails.js, Fastify
+- FullStack FrameWorks: Meteor.js , Next.js, Nuxt.js, RedwoodJS
+## Applications of JavaScript
+JavaScript is a versatile language that powers various applications, from web development to mobile apps, making it an essential tool for modern programming.
+- Web Development : JavaScript is widely used in web development to create interactive and dynamic websites. Frameworks like React and Angular make front-end development faster, while Node.js is used for building server-side applications.
+- Mobile App Development : JavaScript helps in developing mobile apps using frameworks like React Native, allowing developers to build cross-platform apps for both iOS and Android.
+- Game Development : JavaScript is also used for creating browser-based games with libraries like Phaser, making it easy to develop 2D games that run directly in the browser.
+- Server-Side Development : With Node.js, JavaScript is used for server-side programming, enabling developers to build scalable applications and APIs, especially for real-time features like chat systems.
+- Scripting & Automation : JavaScript is ideal for automating web-related tasks like form validation and data manipulation, improving efficiency and reducing manual work.
+- Web Scraping : JavaScript, along with libraries like Puppeteer , is used to extract information from websites for data analysis or research, making it useful for web scraping tasks.
+- IoT (Internet of Things) : JavaScript is used to control devices and sensors in IoT projects, allowing developers to build smart systems with frameworks like Johnny-Five.
+Real-Time Applications : JavaScript powers real-time applications, such as live chats or notifications, using technologies like WebSockets and Socket.io for instant communication between users and servers.
+## Important Links
+- Comparison of various programming languages
+- Careers and Jobs in JavaScript
+- Companies That Use JavaScript
+### Explore
+- Introduction to JavaScript 4 min read
+- Variables and Datatypes in JavaScript 6 min read
+- JavaScript Operators 5 min read
+- Control Statements in JavaScript 4 min read
+- JavaScript Arrays 7 min read
+- JavaScript Array Methods 7 min read
+- JavaScript Strings 5 min read
+- JavaScript String Methods 9 min read
+- Functions in JavaScript 5 min read
+- JavaScript Function Expression 3 min read
+- Function Overloading in JavaScript 4 min read
+- Objects in JavaScript 4 min read
+- JavaScript Object Constructors 4 min read
+- Object Oriented Programming in JavaScript 3 min read
+- Classes and Objects in JavaScript 4 min read
+- What Are Access Modifiers In JavaScript ? 5 min read
+- JavaScript Constructor Method 7 min read
+- Asynchronous JavaScript 2 min read
+- JavaScript Callbacks 4 min read
+- JavaScript Promise 4 min read
+- Event Loop in JavaScript 4 min read
+- Async and Await in JavaScript 2 min read
+- Javascript Error and Exceptional Handling 6 min read
+- JavaScript Errors Throw and Try to Catch 2 min read
+- How to create custom errors in JavaScript ? 2 min read
+- JavaScript TypeError - Invalid Array.prototype.sort argument 1 min read
+- HTML DOM (Document Object Model) 8 min read
+- How to select DOM Elements in JavaScript ? 3 min read
+- JavaScript Custom Events 4 min read
+- JavaScript addEventListener() with Examples 9 min read
+- Closure in JavaScript 4 min read
+- JavaScript Hoisting 6 min read
+- Scope of Variables in JavaScript 3 min read
+- JavaScript Higher Order Functions 7 min read
+- Debugging in JavaScript 4 min read

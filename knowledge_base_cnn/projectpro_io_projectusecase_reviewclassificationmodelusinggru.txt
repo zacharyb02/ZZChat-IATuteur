@@ -1,0 +1,258 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/review-classification-model-using-gru
+SUJET: CNN_DEEP_LEARNING
+
+# Build a Review Classification Model using Gated Recurrent Unit
+In this Machine Learning project, you will build a classification model in python to classify the reviews of an app on a scale of 1 to 5 using Gated Recurrent Unit.
+## Project Outcomes
+- What is Gated Recurrent Unit(GRU)?
+- How does GRU work?
+- What is a Recurrent Neural Network(RNN)?
+- Why not use deep neural networks?
+- Architecture of RNN
+- RNN vs GRU
+- The problem of short term memory
+- Maths behind GRU
+- Applications of GRU
+- What are stopwords?
+- Data Preprocessing
+- Lemmatization of words
+- Tokenization of text
+- Building GRU neural network
+- Deployment on flask
+Get started today
+Request for free demo with us.
+## Architecture Diagrams
+## Topics
+- Introduction to Gated Recurrent Neural Network 03m
+- Why not Deep Neural Network 03m
+- Architecture of Recurrent Neural Network 02m
+- Short term memory problem of RNN 02m
+- GRU vs RNN 02m
+- Maths and Applications of GRU 04m
+- Business Problem 03m
+- Libraries Used 03m
+- Data Preprocessing 06m
+- Model Training 04m
+- Model Evaluation 02m
+- Code Structure 03m
+- Training Module 05m
+- Batch Prediction 03m
+- Model Deployment 05m
+## Source code + Project materials
+## Project Description
+## Overview
+Gated Recurrent Unit(GRU) is an improved version of the standard Recurrent Neural Network(RNNs). As a variant of the recurrent neural network, they are able to process memories of sequential data by storing previous inputs in the internal state of networks and plan from the history of previous inputs.
+In this project, an application review classification model has been built using GRU. The project focuses on classifying the review of the application based on a 1 to 5 scale with 1 being negative sentiment and 5 being positive sentiment. If you haven’t visited already, here is the previous project of the series Build CNN Image Classification Models for Real Time Prediction
+### Aim
+- To understand the Gated Recurrent Unit
+- To classify the review of an app on a scale of 1 to 5 using Gated Recurrent Unit
+### Data Description
+The dataset contains the reviews and the ratings of the app. The dataset has a score column and content column. The score columns have a number range between 1 to 5 based on the content column.
+### Tech Stack
+- Language: Python
+- Libraries: pandas, tensorflow, matplotlib, sci-kit learn, pillow, gunicorn, textblob, nltk, keras, flask
+## Approach
+- Data Preprocessing Converting words to lower case Lemmatization of the words Tokenization of the words One hot encoding of the scores
+- Converting words to lower case
+- Lemmatization of the words
+- Tokenization of the words
+- One hot encoding of the scores
+- Model Training Training sequential model in Tensorflow
+### Model Training
+- Training sequential model in Tensorflow
+- Model Evaluation Evaluation of model on test data
+### Model Evaluation
+- Evaluation of model on test data
+## Unlimited 1:1 Live Interactive Sessions
+- 30-minute live session Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+- No extra charges Unlimited number of sessions with no extra charges. Yes, unlimited!
+Unlimited number of sessions with no extra charges. Yes, unlimited!
+- We match you to the right expert Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+- Schedule recurring sessions Schedule recurring sessions, once a week or bi-weekly, or monthly.
+Schedule recurring sessions, once a week or bi-weekly, or monthly.
+- Pick your favorite expert If you find a favorite expert, schedule all future sessions with them.
+If you find a favorite expert, schedule all future sessions with them.
+- Use the 1-to-1 sessions to Troubleshoot your projects Customize our templates to your use-case Build a project portfolio Brainstorm architecture design Bring any project, even from outside ProjectPro Mock interview practice Career guidance Resume review
+- Troubleshoot your projects
+- Customize our templates to your use-case
+- Build a project portfolio
+- Brainstorm architecture design
+- Bring any project, even from outside ProjectPro
+- Mock interview practice
+- Career guidance
+- Resume review
+### Land Your Dream Job Faster
+AI-powered interview prep with recruiter connections
+### Upload Resume & Job Role
+Submit your resume and target job description
+### Tailored Mock Interview
+AI conducts interview based on your resume
+### Actionable Feedback
+Detailed report with strengths and improvements
+### Unlimited Practice
+Record multiple attempts, all saved
+### Select Best Performance
+Choose your strongest interview
+### Connect with Recruiters
+Shared with 121+ top tech recruiters conditions apply*
+## Benefits
+250+ end-to-end project solutions
+Each project solves a real business problem from start to finish. These projects cover the domains of Data Science, Machine Learning, Data Engineering, Big Data and Cloud.
+15 new projects added every month
+New projects every month to help you stay updated in the latest tools and tactics.
+500,000 lines of code
+Each project comes with verified and tested solutions including code, queries, configuration files, and scripts. Download and reuse them.
+Cloud Lab Workspace
+Unlimited 1:1 sessions
+Technical Support
+Chat with our technical experts to solve any issues you face while building your projects.
+7 Days risk-free trial
+We offer an unconditional 7-day money-back guarantee. Use the product for 7 days and if you don't like it we will make a 100% full refund. No terms or conditions.
+Payment Options
+0% interest monthly payment schemes available for all countries.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Comparison with other platforms
+### We provide ready-made project templates that solve real business problems, end-to-end and comes with solution code,explanation videos, cloud lab environment and tech support.
+## Our expert panel
+### Ana Garcia
+Director of Data Science & AnalyticsDirector, ZipRecruiter
+### Tory Borsboom-Hanson
+Data Science Consultant, Fractal Analytics
+### Varun Jain
+Senior Data Engineer, Publicis Sapient
+### Dina Jankovic
+Data Science, Yelp
+### Amedeo Biolatti
+Data Scientist, SwissRe
+### Brian Zhu
+Big Data Engineer, Beyond Limits
+### Hariharan Sampathkumar
+Senior Machine Learning Engineer | Data Scientist
+### Guang Yang
+Senior Applied Scientist, Amazon
+### Pawan Kumar Yerravelly
+Data Engineer - Capacity Supply Chain and Provisioning, Microsoft India CoE
+### Kirk Borne
+Chief Science Officer at DataPrime, Inc.
+### Anh Le
+Data and Blockchain Professional
+### Gareth Morinan
+Chief Scientific Officer, Machine Medicine Technologies
+### Mehmet Akgun
+University of Economics and Technology, Instructor
+### Divya Sistla
+Data Engineering Lead - Uber
+### Manoj Kumar
+Data Scientist, Boeing
+### Nihit Saxena
+CEO at Datastunt?Labs
+### James Briggs
+Dev Advocate, Pinecone and Freelance ML
+### Balram Singh
+Data Engineering Manager, Microsoft Corporation
+### Stefan Jenkins
+Data Engineer, Microsoft
+### Ted Anderson
+Director of Business Intelligence , CouponFollow
+### Kedar Kanhere
+Data Scientist, Credit Suisse
+### Mir Muntasar Ali Agha
+Senior Data Engineer, National Bank of Belgium
+### Bertil Hatt
+Head of Data science, OutFund
+### Shaurya Uppal
+Data Scientist, Inmobi
+### Deepak Sahu
+Senior Data Engineer, Slintel-6sense company
+### Sara Beck
+Head of Data Science, Slated
+### Kai Tarafdar
+NLP Engineer, Speechkit
+### Diego Argueta
+Senior Data Platform Engineer, GoodRx
+### Shraddha Surana
+Global Data Community Lead | Lead Data Scientist, Thoughtworks
+### Muhy Eddin Zater
+Senior Data Scientist, Mawdoo3 Ltd
+### Saniya Zahid
+Principal Software Engineer, Afiniti
+### Victoria Williams
+Senior Data Engineer, Hogan Assessment Systems
+### Benjamin Larson
+Principal Data Scientist - Cyber Security Risk Management, Verizon
+### Carlos Contreras
+Big Data & Analytics architect, Amazon
+### Camille Girabawe
+Machine Learning Manager, Adobe
+## RecommendedProjects
+Recommended Projects
+Data Science
+Data Science Projects in Python
+Deep Learning Projects
+NLP Projects
+## Latest Blogs
+13 Speech Processing Projects for Practice
+A list of hands-on audio processing projects using Python, MATLAB, and respective source code by ProjectPro.
+Beginner's Guide to RAGAS Score for Evaluating RAG Systems
+Learn how to evaluate (RAG) systems using the Ragas Score and how to apply it to your LLM applications | ProjectPro
+Snowflake Data Sharing Explained for Data Engineering Projects
+Snowflake Data Sharing for data engineers: Understand setup, access control, billing, and best practices for secure, scalable data sharing
+View all blogs
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+Please Enter Your Email to Get Started
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

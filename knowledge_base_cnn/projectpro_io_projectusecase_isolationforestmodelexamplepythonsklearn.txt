@@ -1,0 +1,253 @@
+SOURCE_URL: https://www.projectpro.io/project-use-case/isolation-forest-model-example-python-sklearn
+SUJET: CNN_DEEP_LEARNING
+
+# Isolation Forest Model and LOF for Anomaly Detection in Python
+Credit Card Fraud Detection Project - Build an Isolation Forest Model and Local Outlier Factor (LOF) in Python to identify fraudulent credit card transactions.
+## Project Outcomes
+- Understanding problem statement
+- Understanding anomaly detection
+- Understanding fraudulent transaction
+- Understanding the nature of data
+- Learning the approach of choosing the ideal algorithm
+- Learning Isolation Forest Algorithm
+- Learning missing value imputation
+- Learning how to find correlations between features
+- Learning how to find contamination amount of Isolation Forest
+- Model training using isolation
+- Plotting countplots and boxplots
+- Using libraries like matplotlib, sklearn, seaborn, etc.
+- Using pandas and NumPy libraries
+- Creating config files
+- Learning how to plot heatmaps
+- Understanding the functioning of Local Outlier Factor Algorithm
+- Implementing Local Outlier Factor Algorithm
+- Calculating anomaly scores
+Get started today
+Request for free demo with us.
+## Architecture Diagrams
+## Topics
+- Understanding problem statement 01m
+- Introduction to Anomaly detection 01m
+- Understanding Fraudulent transaction and nature of dataset 03m
+- Choosing the ideal algorithm for anomaly detection 03m
+- Introduction to Isolation forest 04m
+- Isolation forest implementation 16m
+- Introduction to Local Outlier Factor for anomaly detection 05m
+- Implementation of Local Outlier Factor (LOF) 11m
+- Different algorithms for fraud detection 04m
+## Source code + Project materials
+## Project Description
+Business Objective
+In the Banking or payment industry, fraud is an illegal usage of credit card details without the real cardholder’s knowledge. A stolen credit card/card number is usually the cause of a fraudulent charge. Once a cardholder sees a payment transaction, he did not make on his credit card statement, he/she has the right to dispute the charge by contacting his/her bank. The bank or Credit Card Company conducts an investigation and returns the money to the cardholder.
+But what if we can detect fraudulent transaction activity in real-time? This way we can take the required action to stop the same. We can use machine learning techniques to detect fraudulent transactions. We can use supervised or unsupervised methods of learning depending upon the dataset. For this project, we will be opting for unsupervised learning using Isolation Forest and Local Outlier Factor (LOF) algorithms.
+Isolation Forests are similar to Random forests that are built based on decision trees. There are no pre-defined labels here and hence it is an unsupervised algorithm. It was built based on the fact that anomalies or outliers are the data points that are “few and different.” In an Isolation Forest, randomly sub-sampled data is processed in a tree structure based on randomly selected features. The sub-samples that travel deeper into the tree are less likely to be anomalies as they required more cuts to isolate them. The ones which ended up in shorter branches indicated anomalies as it was easier for the tree to separate them from other observations.
+Local Outlier Factor or LOF is an unsupervised ML algorithm that identifies outliers with respect to the local neighborhoods as opposed to using the entire data distribution. The advantage of using a LOF is identifying points that are outliers relative to a local cluster of points. This algorithm is based on a concept of local density, where locality is given by k nearest neighbors, whose distance is used to estimate the density.
+Data Description
+The dataset that we will use for this project consists of 15 numerical columns with 140000 rows which are a result of PCA transformation. These numerical values are nothing but masked credit card transactions. We do not have any background information on the features due to confidentiality reasons.
+Aim
+To build a model that is able to correctly identify fraudulent credit card transactions from the valid transactions using Isolation Forest and Local Outlier Factor.
+Tech Stack
+- Language - Python
+- Libraries - sklearn, pandas, matplotlib, numpy, seaborn
+Approach
+- Importing the required libraries and packages
+- Open the config.ini file. (This is a configuration file that can be edited according to your dataset)
+- Read the dataset (audio files)
+- Perform exploratory data analysis
+- Handle Missing Values
+- Find contamination amount
+- Model Training
+- Making predictions
+## Unlimited 1:1 Live Interactive Sessions
+- 30-minute live session Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+Schedule 30-minute live interactive 1-to-1 video sessions with experts.
+- No extra charges Unlimited number of sessions with no extra charges. Yes, unlimited!
+Unlimited number of sessions with no extra charges. Yes, unlimited!
+- We match you to the right expert Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+Give us 72 hours prior notice with a problem statement so we can match you to the right expert.
+- Schedule recurring sessions Schedule recurring sessions, once a week or bi-weekly, or monthly.
+Schedule recurring sessions, once a week or bi-weekly, or monthly.
+- Pick your favorite expert If you find a favorite expert, schedule all future sessions with them.
+If you find a favorite expert, schedule all future sessions with them.
+- Use the 1-to-1 sessions to Troubleshoot your projects Customize our templates to your use-case Build a project portfolio Brainstorm architecture design Bring any project, even from outside ProjectPro Mock interview practice Career guidance Resume review
+- Troubleshoot your projects
+- Customize our templates to your use-case
+- Build a project portfolio
+- Brainstorm architecture design
+- Bring any project, even from outside ProjectPro
+- Mock interview practice
+- Career guidance
+- Resume review
+### Land Your Dream Job Faster
+AI-powered interview prep with recruiter connections
+### Upload Resume & Job Role
+Submit your resume and target job description
+### Tailored Mock Interview
+AI conducts interview based on your resume
+### Actionable Feedback
+Detailed report with strengths and improvements
+### Unlimited Practice
+Record multiple attempts, all saved
+### Select Best Performance
+Choose your strongest interview
+### Connect with Recruiters
+Shared with 121+ top tech recruiters conditions apply*
+## Benefits
+250+ end-to-end project solutions
+Each project solves a real business problem from start to finish. These projects cover the domains of Data Science, Machine Learning, Data Engineering, Big Data and Cloud.
+15 new projects added every month
+New projects every month to help you stay updated in the latest tools and tactics.
+500,000 lines of code
+Each project comes with verified and tested solutions including code, queries, configuration files, and scripts. Download and reuse them.
+Cloud Lab Workspace
+Unlimited 1:1 sessions
+Technical Support
+Chat with our technical experts to solve any issues you face while building your projects.
+7 Days risk-free trial
+We offer an unconditional 7-day money-back guarantee. Use the product for 7 days and if you don't like it we will make a 100% full refund. No terms or conditions.
+Payment Options
+0% interest monthly payment schemes available for all countries.
+## Customer Reviews
+Harsh Navalgund
+Associate Software Engineer
+Aravind Maguluri
+Senior Associate - Projects
+Abhishek SIngh
+Senior Data Analyst
+Pradip Wasrei
+Analyst
+Anand Kumpatla
+Advisor, Data Engineer
+Piyush Shukla
+AI Engineer
+Deepak Kumar Digar
+QA Manager
+Savvy Sahai
+Apprentice BI & Data Engineer
+Maddipudi Prabhudev
+Data Scientist
+Dao Tran
+Data Analyst
+Abhinav
+Consultant - Data Engineering
+Vatsal Raicha
+Robert Nicholas Moss
+Data Scientist/Quantitative Researcher
+Diego Sabajo
+Data Scientist / ML Engineer
+Venkata Vedula
+Business Consulting Manager
+Suneeta Modekurty
+Sr. Consultant (Data Science - Generative AI)
+Shady Rafat
+AWS Engineer
+Swati Patra
+AVP
+Swagat Mishra
+Karthi Jeyabalan
+Technical Strategist
+Swapnil Naik
+Senior Manager, Technical Program management
+Erick Yegon
+Global Director of Performance, Evidence and Insights
+Himanshu Dandle
+Senior Engineer
+Heramb Ithape
+Manager of Machine Learning
+## Comparison with other platforms
+### We provide ready-made project templates that solve real business problems, end-to-end and comes with solution code,explanation videos, cloud lab environment and tech support.
+## Our expert panel
+### Ana Garcia
+Director of Data Science & AnalyticsDirector, ZipRecruiter
+### Varun Jain
+Senior Data Engineer, Publicis Sapient
+### Nihit Saxena
+CEO at Datastunt?Labs
+### Sara Beck
+Head of Data Science, Slated
+### Diego Argueta
+Senior Data Platform Engineer, GoodRx
+### Balram Singh
+Data Engineering Manager, Microsoft Corporation
+### Deepak Sahu
+Senior Data Engineer, Slintel-6sense company
+### Benjamin Larson
+Principal Data Scientist - Cyber Security Risk Management, Verizon
+### Ted Anderson
+Director of Business Intelligence , CouponFollow
+### Bertil Hatt
+Head of Data science, OutFund
+### Amedeo Biolatti
+Data Scientist, SwissRe
+### Shaurya Uppal
+Data Scientist, Inmobi
+### Gareth Morinan
+Chief Scientific Officer, Machine Medicine Technologies
+### Kedar Kanhere
+Data Scientist, Credit Suisse
+### Anh Le
+Data and Blockchain Professional
+### Kirk Borne
+Chief Science Officer at DataPrime, Inc.
+### James Briggs
+Dev Advocate, Pinecone and Freelance ML
+### Tory Borsboom-Hanson
+Data Science Consultant, Fractal Analytics
+### Muhy Eddin Zater
+Senior Data Scientist, Mawdoo3 Ltd
+### Manoj Kumar
+Data Scientist, Boeing
+### Brian Zhu
+Big Data Engineer, Beyond Limits
+### Stefan Jenkins
+Data Engineer, Microsoft
+### Divya Sistla
+Data Engineering Lead - Uber
+### Shraddha Surana
+Global Data Community Lead | Lead Data Scientist, Thoughtworks
+### Hariharan Sampathkumar
+Senior Machine Learning Engineer | Data Scientist
+### Kai Tarafdar
+NLP Engineer, Speechkit
+### Guang Yang
+Senior Applied Scientist, Amazon
+### Carlos Contreras
+Big Data & Analytics architect, Amazon
+### Dina Jankovic
+Data Science, Yelp
+### Mir Muntasar Ali Agha
+Senior Data Engineer, National Bank of Belgium
+### Saniya Zahid
+Principal Software Engineer, Afiniti
+### Mehmet Akgun
+University of Economics and Technology, Instructor
+### Pawan Kumar Yerravelly
+Data Engineer - Capacity Supply Chain and Provisioning, Microsoft India CoE
+### Victoria Williams
+Senior Data Engineer, Hogan Assessment Systems
+### Camille Girabawe
+Machine Learning Manager, Adobe
+## RecommendedProjects
+Recommended Projects
+Data Science
+Data Science Projects in Python
+Data Science Projects in R
+Machine Learning Projects in Python
+## Latest Blogs
+How to Become an Agentic AI Developer?
+A beginner-friendly guide to becoming an agentic AI developer, from learning essential Python and AI frameworks to mastering agentic systems through projects.
+How Can Practicing Data Science Make You Job-Ready?
+Learn why practicing data science is essential for gaining hands-on experience and becoming job-ready | ProjectPro
+13 Speech Processing Projects for Practice
+A list of hands-on audio processing projects using Python, MATLAB, and respective source code by ProjectPro.
+View all blogs
+## We power Data Science & Data Engineeringprojects at
+## Join more than115,000+ developers worldwide
+Get a free demo
+Please Enter Your Email to Get Started
+ProjectPro
+About us
+Contact us
+Privacy policy
+User policy
+Write for ProjectPro

@@ -1,0 +1,40 @@
+SOURCE_URL: https://www.geeksforgeeks.org/computer-vision/applications-of-computer-vision/
+SUJET: CNN_DEEP_LEARNING
+
+# Applications of Computer Vision
+Have you ever wondered how machines can "see" and understand the world around them, much like humans do? This is the magic of computer vision —a branch of artificial intelligence that enables computers to interpret and analyze digital images, videos, and other visual inputs . From self-driving cars to healthcare diagnostics, computer vision is revolutionizing industries by allowing machines to recognize objects, track movements, and even make decisions based on what they "see."
+In this article, we’ll explore what computer vision is, how it works, and the vast array of applications it has across different sectors.
+## What is Computer Vision?
+Computer vision can be defined as that branch of computer science dealing with the computer's understanding of digital images, videos, and other forms of visual input. It enables machines to see and comprehend the world around them similarly to human beings. In layman's terms, computer vision lets machines recognize objects, trace their movements, and interpret scenes. They are ultimately able to decide based on what their eyesight tells them. It includes different processes such as image processing , pattern recognition , and machine learning . Algorithms analyze visual data, detecting patterns and making predictions. The aim of the technique is to allow machines to automatically interpret and make decisions based on visual data.
+Computer vision has applications in all industries and sectors and they are as follows:
+### 1. Oil and natural gas
+The oil and natural gas companies produce millions of barrels of oil and billions of cubic feet of gas every day but for this to happen, first, the geologists have to find a feasible location from where oil and gas can be extracted. To find these locations they have to analyze thousands of different locations using images taken on the spot. Suppose if geologists had to analyze each image manually how long would it take to find the best location? Maybe months or even a year but due to the introduction of computer vision the period of analyzing can be brought down to a few days or even a few hours. You just need to feed in the images taken to the pre-trained model and it will get the work done.
+### 2. Hiring process
+In the HR world, computer vision is changing how candidates get hired in the interview process. By using computer vision, machine learning, and data science , they're able to quantify soft skills and conduct early candidate assessments to help large companies shortlist the candidates.
+### 3. Video surveillance
+The Concept of video tagging is used to tag videos with keywords based on the objects that appear in each scene. Now imagine being that security company who's asking to look for a suspect in a blue van amongst hours and hours of footage. You will just have to feed the video to the algorithm. With computer vision and object recognition, searching through videos has become a thing of the past.
+### 4. Construction
+Take for example the electric towers or buildings, which require some degree of maintenance to check for degrees of rust and other structural defects. Certainly, manually climbing up the tower to look at every inch and corner would be extremely time-consuming, costly, and dangerous. Flying a drone with wires around the electric tower doesn't sound particularly safe either. So how could you apply computer vision here? Imagine that if a person on the ground took high-resolution images from different angles. Then the computer vision specialist could create a custom classifier and use it to detect the flaws and amount of rust or cracks present.
+### 5. Healthcare
+From the past few years, the healthcare industry has adopted many next-generation technologies that include artificial intelligence and machine learning concept. One of them is computer vision which helps determine or diagnose disease in humans or any living creatures.
+### 6. Agriculture
+The agricultural farms have started using computer vision technologies in various forms such as smart tractors, smart farming equipment, and drones to help monitor and maintain the fields efficiently and easily. It also helps improve yield and the quality of crops.
+### 7. Military
+For modern armies, Computer Vision is an important technology that helps them to detect enemy troops and it also enhances the targeting capabilities of guided missile systems. It uses image sensors to deliver battlefield intelligence used for tactical decision-making. One more important Computer Vision application in the areas of autonomous vehicles like UAV's and remote-controlled semi-automatic vehicles , which need to navigate challenging terrain.
+### 8. Industry
+In manufacturing or assembly line, computer vision is being used for automated inspections, identifying defective products on the production line, and for remote inspections of machinery. The technology is also used to increase the efficiency of the production line.
+### 9. Automotive
+This is one of the best examples of computer vision technologies , which is a dream come true for humans. Self-driving AI analyzes data from a camera mounted on the vehicle to automate lane finding, detect obstacles, and recognize traffic signs and signals.
+### 10. Automated Lip Reading
+This is one of the practical implementations of computer vision to help people with disabilities or who cannot speak , it reads the movement of lips and compares it to already known movements that were recorded and used to create the model.
+## Conclusion
+Computer vision is an exciting field with endless possibilities that continues to grow rapidly. The applications reach from transforming industries from healthcare to automotive and security; improving experiences in daily life through shopping and social media. The advancement of technology is expected to bring forth even more innovative usages of computer vision, increasing the efficiency, convenience, and safety of our daily lives.
+Must Read:
+- Top Sectors for Computer Vision Applications
+- Computer Vision 101
+- Computer Vision Algorithms
+Many industries benefit from computer vision, including healthcare, automotive, manufacturing, retail, agriculture, security, and entertainment. It helps automate tasks, improve safety, enhance efficiency, and offer innovative solutions.
+K
+- Computer Vision
+- Computer Vision Blogs
+- GBlog 2025

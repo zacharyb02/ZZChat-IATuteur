@@ -1,0 +1,118 @@
+SOURCE_URL: https://www.geeksforgeeks.org/linux-unix/the-linux-kernel/
+SUJET: CNN_DEEP_LEARNING
+
+- Interview Prep
+- Tutorials
+- Tracks
+- Linux-Unix
+- Interview Questions
+- Shell Scripting
+- Kali
+- Ubuntu
+- Red Hat
+- CentOS
+- Docker
+- Kubernetes
+- Python
+- R
+- Java
+# Linux Kernel
+Linux Kernel is the heart of Linux operating systems. It is an open-source (source code that can be used by anyone freely) software that is most popular and widely used in the industry as well as on a personal use basis. Who created Linux and why? Linux was created by Linus Torvalds in 1991 as a hobby project. Since then, many of the users have contributed to its growth and development of it. Before Jumping directly to the main topic "Linux Kernel" one must know a few concepts (prerequisites) to better understand the Linux Kernel.
+### What is Linux Operating System and Kernel?
+An operating system (OS) is a software system that manages the computer that provides some services for computer programs and manages computer hardware and software. Basically, it is a communication or resource allocation between computer hardware and applications. It provides some services like managing input and output devices, managing file systems, providing UI (User Interface) and also managing computer memory. It also governs and executes all the programs.
+Linux operating System also consists of various components for example system libraries, user-space utilities, Linux kernel, and applications. The kernel is the core component of an operating system. This provides a platform for programs and various services to run on top of it. The Linux kernel is modifiable according to the user's needs. Overall, the Linux Operating System and Linux kernel together provide a strong and user-friendly platform.
+In a General-Purpose Computer running many processes simultaneously, we need a middle layer to manage the distribution of the computer's hardware resources efficiently and fairly among all the various processes running on the computer. This middle layer is referred to as the kernel . The kernel virtualizes the computer's common hardware resources to provide each process with its own virtual resources. This makes the process seem as if it is the sole process running on the machine. The kernel is also responsible for preventing and mitigating conflicts between different processes. This is schematically represented below:
+Figure: Virtual Resources for each Process
+The Core Subsystems of the Linux Kernel are as follows:
+- The Process Scheduler
+- The Memory Management Unit (MMU)
+- The Virtual File System (VFS)
+- The Networking Unit
+- Inter-Process Communication Unit
+Figure: The Linux Kernel for the purpose of this article we will only be focusing on the 1st three important subsystems of the Linux Kernel. The basic functioning of each of the 1st three subsystems is elaborated below:
+- The Process Scheduler: This kernel subsystem is responsible for fairly distributing the CPU time among all the processes running on the system simultaneously.
+- The Memory Management Unit: This kernel sub-unit is responsible for proper distribution of the memory resources among the various processes running on the system. The MMU does more than just simply provide separate virtual address spaces for each of the processes.
+- The Virtual File System: This subsystem is responsible for providing a unified interface to access stored data across different filesystems and physical storage media.
+### Some Basic Commands:
+Some Basic Commands we need to know while working on Linux Kernel.
+- `ls` : Use to list all the files and directories in a particular location specified by us.
+Syntax:
+```python
+ls [OPTION] [FILE]
+```
+Example:
+In this example we are going to list all the file and directories in our current location , we have one directory name `snap`.
+Here in second time we use `a` option (to see all the hidden files).
+In third time we specified a `snap` directory.
+- `mkdir` : In this we will create a new directory.
+```python
+mkdir [OPTION] DIRECTORY
+```
+In this we will make a directory name `test` and to check it we can use command `ls`.
+- `cat` : In this we will print the context inside a text file on terminal.
+```python
+cat [OPTION] [FILE]
+```
+Printing a content inside a text file name `example`.
+- `pwd` : In this we will get to know the name and path of the current working directory.
+```python
+pwd
+```
+### Conclusion:
+The most powerful and versatile component of the Linux Operating System is known as the Linux kernel. The Kernel has provided a wide range of features, for example, memory management, filesystem management, process management, device drive management and networking support. After understanding all this one can conclude that customizability and extensibility have made it the most popular choice for a computer system.
+### Explore
+- Introduction to Linux Operating System 7 min read
+- LINUX Full Form -  Lovable Intellect Not Using XP 2 min read
+- Difference between Linux and Windows 7 min read
+- Linux Distributions 6 min read
+- Difference between Unix and Linux 6 min read
+- Installation of Arch Linux in VirtualBox 4 min read
+- Fedora Linux Operating System 5 min read
+- How to install Ubuntu on VirtualBox? 6 min read
+- How to Install Linux Mint? 3 min read
+- Installation of Kali Linux in Virtual Machine 2 min read
+- How to Install Linux on Windows PowerShell Subsystem? 2 min read
+- How to Find openSUSE Linux Version? 2 min read
+- Installation of CentOS 2 min read
+- Linux Commands 15+ min read
+- Essential Unix Commands 7 min read
+- Find Command in Linux 7 min read
+- Linux File System 12 min read
+- Linux File Hierarchy Structure 5 min read
+- Linux Directory Structure 6 min read
+- Linux Kernel 4 min read
+- Kernel in Operating System 3 min read
+- How Linux Kernel Boots? 11 min read
+- Difference between Operating System and Kernel 3 min read
+- Linux Kernel Module Programming: Hello World Program 7 min read
+- Linux Loadable Kernel Module 7 min read
+- Loadable Kernel Module - Linux Device Driver Development 4 min read
+- Network configuration and troubleshooting commands in Linux 5 min read
+- How to configure network interfaces in CentOS? 5 min read
+- Command-Line Tools and Utilities For Network Management in Linux 8 min read
+- Linux - Network Monitoring Tools 4 min read
+- Processes in Linux/Unix 5 min read
+- How to Manage Process in Linux 4 min read
+- Getting System and Process Information Using C Programming and Shell in Linux 2 min read
+- Process states and Transitions in a UNIX Process 4 min read
+- LINUX Firewall 7 min read
+- iptables command in Linux with Examples 7 min read
+- How to Configure your Linux Firewall - 3 Methods 12 min read
+- Introduction to Linux Shell and Shell Scripting 7 min read
+- Understanding Terminal, Console, Shell and Kernel 3 min read
+- How to Create a Shell Script in linux 7 min read
+- Shell Scripting - Different types of Variables 4 min read
+- Bash Scripting - Introduction to Bash and Bash Scripting 12 min read
+- Bash Script - Define Bash Variables and its types 12 min read
+- Shell Scripting - Shell Variables 6 min read
+- Bash Script - Difference between Bash Script and Shell Script 4 min read
+- Shell Scripting - Difference between Korn Shell and Bash shell 3 min read
+- Shell Scripting - Interactive and Non-Interactive Shell 3 min read
+- Shell Script to Show the Difference Between echo “$SHELL” and echo ‘$SHELL’ 4 min read
+- What is Linux System Administration? 6 min read
+- Beginner's Guide to Linux System Administration 5 min read
+- How to Monitor System Usage, Outages and Troubleshoot Linux Servers 6 min read
+- Linux - Systemd and its Components 3 min read
+- Boot Process with Systemd in Linux 3 min read
+- How to Control Systemd Services on Remote Linux Server 2 min read
+- How to Start, Stop and Restart Services in Linux Using systemctl Command 9 min read
