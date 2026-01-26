@@ -1,0 +1,43 @@
+We are excited to announce the release of PyTorch® 2.10 ( release notes )! This release features a number of improvements for performance and numerical debugging. Performance has been a focus for PyTorch throughout the 2.x release series, building on the capabilities of the PyTorch compiler stack introduced in 2.0. Determinism and Numerical Debugging have become more important as more models are being post-trained using distributed reinforcement learning workflows.
+The PyTorch 2.10 release features the following changes:
+- Python 3.14 support for torch.compile(). Python 3.14t (freethreaded build) is experimentally supported as well.
+- Reduced kernel launch overhead with combo-kernels horizontal fusion in torchinductor
+- A new varlen_attn() op providing support for ragged and packed sequences
+- Efficient eigenvalue decompositions with DnXgeev
+- Intel GPU performance optimizations and feature enhancements
+- torch.compile() now respects use_deterministic_mode
+- DebugMode for tracking dispatched calls and debugging numerical divergence – This makes it simpler to track down subtle numerical bugs.
+This release is composed of 4160 commits from 536 contributors since PyTorch 2.9. We want to sincerely thank our dedicated community for your contributions. As always, we encourage you to try these out and report any issues as we improve 2.10. More information about how to get started with the PyTorch 2-series can be found at our Getting Started page.
+On Wednesday, January 28, Andrey Talaman, Nikita Shulga, and Shangdi Yu will host a short live session to walk through what’s new in 2.10, including updates to the release cadence, TorchScript deprecation, torch.compile support for Python 3.14, DebugMode and tlparse , and more, followed by a live Q&A. Register to attend.
+
+
+### Performance Related API-UNSTABLE Features
+Reduced kernel launch overhead with Combo-kernels horizontal fusion in torchinductor
+Combo Kernels is a horizontal fusion optimization that combines multiple independent operations with no data dependencies into a single unified GPU kernel. Unlike vertical fusion (producer-consumer), which fuses sequential operations, combo kernels fuse parallel operations. See example here in the RFC .
+varlen_attn() – Variable  length attention
+A new torch.nn.attention op is provided for ragged / packed  sequences called varlen_attn().  This API supports forward + backward, and is torch.compile-able. It’s currently being supported by FA2 with plans to add cuDNN and FA4 support. This op is available on NVIDIA CUDA with an A100 GPU or newer, and supports BF16 and FP16 dtypes. To learn more, please see the API doc and Tutorial
+PyTorch linalg has been extended to be able to use cuSOLVER’s DnXgeev to provide highly efficient general eigenvalue decomposition on NVIDIA GPUs.
+This latest release introduces feature enhancement and performance optimizations for Intel GPU architectures through the following key enhancements:
+- Expand the Intel GPUs support to latest Intel® Core™ Ultra Series 3 with Intel® Arc™ Graphics on both Windows and Linux.
+- Implement FP8 support on Intel GPUs by adding commonly used basic operators(e.g., type promotion and shape operators) and scaled matrix multiplication using tensor- and channel-wise scaling factors.
+- Implement Aten operator MatMul complex data type support on Intel GPUs.
+- Extend SYCL support in PyTorch CPP Extension API to allow users to implement new custom operators in Windows.
+
+
+### NumericalDebugging Related API-UNSTABLE Features
+Run-to-run determinism makes it easier to debug training runs and has been one of the most requested features for users running at scale and for users who want to reliably test their code that uses torch.compile. This can now be switched on using torch.use_deterministic_algorithms(True) and makes sure that two invocations of torch.compile will perform the same operations exactly.
+DebugMode for tracking dispatched calls and debugging numerical divergence
+DebugMode is a custom TorchDispatchMode that provides profiling-style runtime dumps. With the growing importance of numerical equivalence, we’ve enhanced it so you can more easily isolate divergences with tensor hashing. With Tensor hashing, you can run two versions of a model with the same input, and you should see that all the tensors have the same hash. Where they go from matching to diverging is often the op that is behaving differently.
+- Runtime logging – Records dispatched operations and TorchInductor compiled Triton kernels.
+- Tensor hashing – Attaches deterministic hashes to inputs/outputs to make it easier to see where subtle numerical errors are introduced.
+- Dispatch hooks – Allows registration of custom hooks to annotate calls
+More details in the tutorial here .
+
+
+## Non-Feature Updates
+Torchscript is deprecated in 2.10, and torch.export should be used instead. For more details, see this talk from PTC.
+tlparse & TORCH_TRACE can be used to submit clearer bug reports on compiler issues
+When PyTorch developers encounter complex issues for which standalone reproduction is difficult,  tlparse results are a viable solution with a log format that is easy to upload and share on GitHub. Non-PyTorch developers can still extract useful information from it, and we encourage attaching tlparse log artifacts when reporting bugs to PyTorch developers. More details here on Github & this tutorial .
+For 2026, the expected release cadence will be increased to 1 per 2 months, from quarterly. See the published release schedule.
+
+# Source: https://pytorch.org/blog/pytorch-2-10-release-blog/

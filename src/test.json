@@ -1,0 +1,30 @@
+PS C:\Users\mohaa\Desktop\IA\AI-Tutor\src> python .\LLM.py
+Question: C'est quoi une couche de pooling dans un CNN ?
+------------------------------
+RÉPONSE DE Mistral :
+ Une couche de pooling, dans le contexte des réseaux de neurones convolutifs (CNN), est une technique utilisée pour réduire la dimensionnalité de l'entrée tout en conservant les caractéristiques importantes. Il existe plusieurs types d'opérations de pooling, tels que le max pooling, le pooling moyennant et le pooling somme. Le max pooling est le type le plus communément utilisé dans les CNNs.
+
+La couche de pooling permet de réduire la taille des images d'entrée en conservant les informations les plus importantes, ce qui aide à accélérer le temps d'apprentissage et à éviter l'overfitting. En effet, lorsque vous utilisez un pooling max, seules les valeurs maximales de chaque sous-région sont conservées, ce qui permet de conserver les informations les plus importantes tout en réduisant la taille des images d'entrée.
+
+Dans le cas du max pooling, chaque sous-région est divisée en blocs de tailles identiques et seules les valeurs maximales de chaque bloc sont conservées. Par exemple, si vous utilisez un pooling max avec une taille de bloc de 2x2, chaque sous-région sera divisée en 4 blocs de 2x2 et seules les valeurs maximales de chaque bloc seront conservées.
+
+Voici un exemple de code PyTorch pour implémenter un pooling max dans une couche convolutive :
+```python
+import torch
+import torch.nn as nn
+
+class MaxPool2d(nn.Module):
+    def __init__(self, kernel_size=(2, 2)):
+        super().__init__()
+        self.pool = nn.MaxPool2d(kernel_size=kernel_size)
+
+    def forward(self, x):
+        return self.pool(x)
+```
+Dans cet exemple, nous créons une classe `MaxPool2d` qui hérite de la classe `nn.Module`. Nous définissons également un pooling max avec une taille de bloc par défaut de 2x2. La méthode `forward()` est utilisée pour appliquer le pooling max à l'entrée `x`.
+
+==================================================
+EXTRAITS DU DOCUMENT UTILISÉS (SOURCES) :
+==================================================
+[Document(id='efd9461e-4a5c-4006-87c4-5433762a7782', metadata={'source': 'C:\\Users\\mohaa\\Desktop\\IA\\AI-Tutor\\knowledge_base_cnn\\d2l_ai_chapter_convolutionalneuralnetworks_poolinghtml.txt'}, page_content='SOURCE_URL: https://d2l.ai/chapter_convolutional-neural-networks/pooling.html\nSUJET: CNN_DEEP_LEARNING'), Document(id='fd70b151-9cd3-4887-b100-00392bbb1d56', metadata={'source': 'C:\\Users\\mohaa\\Desktop\\IA\\AI-Tutor\\knowledge_base_cnn\\geeksforgeeks_org_deeplearning_cnnintroductiontopoolinglayer.txt'}, page_content='SOURCE_URL: https://www.geeksforgeeks.org/deep-learning/cnn-introduction-to-pooling-layer/\nSUJET: CNN_DEEP_LEARNING'), Document(id='8f51a805-9496-45ea-ad78-e0655006f202', metadata={'source': 'C:\\Users\\mohaa\\Desktop\\IA\\AI-Tutor\\knowledge_base_cnn\\geeksforgeeks_org_deeplearning_whatisthedifferencebetweensameandvalidpaddingintfnnmax_pooloftensorfl.txt'}, page_content='## Pooling\nPooling is a technique used in convolutional neural networks (CNNs) to reduce the dimensionality of the input while retaining important features. There are several types of pooling operations, such as max pooling, average pooling, and sum pooling. Max pooling is the most commonly used type of pooling in CNNs.')]
+PS C:\Users\mohaa\Desktop\IA\AI-Tutor\src> 

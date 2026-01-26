@@ -1,9 +1,5 @@
-SOURCE_URL: https://www.tensorflow.org/tutorials/images/transfer_learning
-SUJET: CNN_DEEP_LEARNING
 
-- TensorFlow
-- Learn
-- TensorFlow Core
+
 # Transfer learning and fine-tuningStay organized with collectionsSave and categorize content based on your preferences.
 In this tutorial, you will learn how to classify images of cats and dogs by using transfer learning from a pre-trained network.
 A pre-trained model is a saved network that was previously trained on a large dataset, typically on a large-scale image-classification task. You either use the pretrained model as is or use transfer learning to customize this model to a given task.
@@ -19,22 +15,34 @@ You will follow the general machine learning workflow.
 - Compose the model Load in the pretrained base model (and pretrained weights) Stack the classification layers on top
 - Load in the pretrained base model (and pretrained weights)
 - Stack the classification layers on top
-- Train the model
-- Evaluate model
+
+
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 import os
 import tensorflow as tf
 ```
+
+
+
+
 ```python
 2024-08-16 03:08:02.565490: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:485] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
 2024-08-16 03:08:02.586942: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:8454] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
 2024-08-16 03:08:02.593445: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1452] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
 ```
+
+
+
+
 ## Data preprocessing
+
+
 ### Data download
 In this tutorial, you will use a dataset containing several thousand images of cats and dogs. Download and extract a zip file containing the images, then create a tf.data.Dataset for training and validation using the tf.keras.utils.image_dataset_from_directory utility. You can learn more about loading images in this tutorial .
+
+
 ```python
 _URL = 'https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip'
 path_to_zip = tf.keras.utils.get_file('cats_and_dogs.zip', origin=_URL, extract=True)
@@ -44,10 +52,14 @@ validation_dir = os.path.join(PATH, 'validation')
 BATCH_SIZE = 32
 IMG_SIZE = (160, 160)
 train_dataset = tf.keras.utils.image_dataset_from_directory(train_dir,
-shuffle=True,
-batch_size=BATCH_SIZE,
-image_size=IMG_SIZE)
+                                                            shuffle=True,
+                                                            batch_size=BATCH_SIZE,
+                                                            image_size=IMG_SIZE)
 ```
+
+
+
+
 ```python
 Downloading data from https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip
 68606236/68606236 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
@@ -90,96 +102,164 @@ I0000 00:00:1723777687.760671  124422 cuda_executor.cc:1015] successful NUMA nod
 I0000 00:00:1723777687.763079  124422 cuda_executor.cc:1015] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
 I0000 00:00:1723777687.765514  124422 cuda_executor.cc:1015] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
 ```
+
+
+
+
 ```python
 validation_dataset = tf.keras.utils.image_dataset_from_directory(validation_dir,
-shuffle=True,
-batch_size=BATCH_SIZE,
-image_size=IMG_SIZE)
+                                                                 shuffle=True,
+                                                                 batch_size=BATCH_SIZE,
+                                                                 image_size=IMG_SIZE)
 ```
+
+
+
+
 ```python
 Found 1000 files belonging to 2 classes.
 ```
+
+
 Show the first nine images and labels from the training set:
+
+
 ```python
 class_names = train_dataset.class_names
 plt.figure(figsize=(10, 10))
 for images, labels in train_dataset.take(1):
-for i in range(9):
-ax = plt.subplot(3, 3, i + 1)
-plt.imshow(images[i].numpy().astype("uint8"))
-plt.title(class_names[labels[i]])
-plt.axis("off")
+  for i in range(9):
+    ax = plt.subplot(3, 3, i + 1)
+    plt.imshow(images[i].numpy().astype("uint8"))
+    plt.title(class_names[labels[i]])
+    plt.axis("off")
 ```
+
+
 As the original dataset doesn't contain a test set, you will create one. To do so, determine how many batches of data are available in the validation set using tf.data.experimental.cardinality , then move 20% of them to a test set.
+
+
 ```python
 val_batches = tf.data.experimental.cardinality(validation_dataset)
 test_dataset = validation_dataset.take(val_batches // 5)
 validation_dataset = validation_dataset.skip(val_batches // 5)
 ```
+
+
+
+
 ```python
 print('Number of validation batches: %d' % tf.data.experimental.cardinality(validation_dataset))
 print('Number of test batches: %d' % tf.data.experimental.cardinality(test_dataset))
 ```
+
+
+
+
 ```python
 Number of validation batches: 26
 Number of test batches: 6
 ```
+
+
+
+
 ### Configure the dataset for performance
 Use buffered prefetching to load images from disk without having I/O become blocking. To learn more about this method see the data performance guide.
+
+
 ```python
 AUTOTUNE = tf.data.AUTOTUNE
 train_dataset = train_dataset.prefetch(buffer_size=AUTOTUNE)
 validation_dataset = validation_dataset.prefetch(buffer_size=AUTOTUNE)
 test_dataset = test_dataset.prefetch(buffer_size=AUTOTUNE)
 ```
+
+
+
+
 ### Use data augmentation
 When you don't have a large image dataset, it's a good practice to artificially introduce sample diversity by applying random, yet realistic, transformations to the training images, such as rotation and horizontal flipping. This helps expose the model to different aspects of the training data and reduce overfitting . You can learn more about data augmentation in this tutorial .
+
+
 ```python
 data_augmentation = tf.keras.Sequential([
-tf.keras.layers.RandomFlip('horizontal'),
-tf.keras.layers.RandomRotation(0.2),
+  tf.keras.layers.RandomFlip('horizontal'),
+  tf.keras.layers.RandomRotation(0.2),
 ])
 ```
+
+
 Let's repeatedly apply these layers to the same image and see the result.
+
+
 ```python
 for image, _ in train_dataset.take(1):
-plt.figure(figsize=(10, 10))
-first_image = image[0]
-for i in range(9):
-ax = plt.subplot(3, 3, i + 1)
-augmented_image = data_augmentation(tf.expand_dims(first_image, 0))
-plt.imshow(augmented_image[0] / 255)
-plt.axis('off')
+  plt.figure(figsize=(10, 10))
+  first_image = image[0]
+  for i in range(9):
+    ax = plt.subplot(3, 3, i + 1)
+    augmented_image = data_augmentation(tf.expand_dims(first_image, 0))
+    plt.imshow(augmented_image[0] / 255)
+    plt.axis('off')
 ```
+
+
+
+
 ### Rescale pixel values
 In a moment, you will download tf.keras.applications.MobileNetV2 for use as your base model. This model expects pixel values in [-1, 1] , but at this point, the pixel values in your images are in [0, 255] . To rescale them, use the preprocessing method included with the model.
+
+
 ```python
 preprocess_input = tf.keras.applications.mobilenet_v2.preprocess_input
 ```
+
+
+
+
 ```python
 rescale = tf.keras.layers.Rescaling(1./127.5, offset=-1)
 ```
+
+
+
+
 ## Create the base model from the pre-trained convnets
 You will create the base model from the MobileNet V2 model developed at Google. This is pre-trained on the ImageNet dataset, a large dataset consisting of 1.4M images and 1000 classes. ImageNet is a research training dataset with a wide variety of categories like jackfruit and syringe . This base of knowledge will help us classify cats and dogs from our specific dataset.
 First, you need to pick which layer of MobileNet V2 you will use for feature extraction. The very last classification layer (on "top", as most diagrams of machine learning models go from bottom to top) is not very useful. Instead, you will follow the common practice to depend on the very last layer before the flatten operation. This layer is called the "bottleneck layer". The bottleneck layer features retain more generality as compared to the final/top layer.
 First, instantiate a MobileNet V2 model pre-loaded with weights trained on ImageNet. By specifying the include_top=False argument, you load a network that doesn't include the classification layers at the top, which is ideal for feature extraction.
+
+
 ```python
 # Create the base model from the pre-trained model MobileNet V2
 IMG_SHAPE = IMG_SIZE + (3,)
 base_model = tf.keras.applications.MobileNetV2(input_shape=IMG_SHAPE,
-include_top=False,
-weights='imagenet')
+                                               include_top=False,
+                                               weights='imagenet')
 ```
+
+
+
+
 ```python
 Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/mobilenet_v2/mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_160_no_top.h5
 9406464/9406464 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step
 ```
+
+
 This feature extractor converts each 160x160x3 image into a 5x5x1280 block of features. Let's see what it does to an example batch of images:
+
+
 ```python
 image_batch, label_batch = next(iter(train_dataset))
 feature_batch = base_model(image_batch)
 print(feature_batch.shape)
 ```
+
+
+
+
 ```python
 W0000 00:00:1723777693.629145  124422 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
 W0000 00:00:1723777693.685023  124422 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
@@ -198,42 +278,64 @@ W0000 00:00:1723777693.716142  124422 gpu_timer.cc:114] Skipping the delay kerne
 W0000 00:00:1723777693.737652  124422 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
 (32, 5, 5, 1280)
 ```
+
+
+
+
 ## Feature extraction
 In this step, you will freeze the convolutional base created from the previous step and to use as a feature extractor. Additionally, you add a classifier on top of it and train the top-level classifier.
+
+
 ### Freeze the convolutional base
 It is important to freeze the convolutional base before you compile and train the model. Freezing (by setting layer.trainable = False) prevents the weights in a given layer from being updated during training. MobileNet V2 has many layers, so setting the entire model's trainable flag to False will freeze all of them.
+
+
 ```python
 base_model.trainable = False
 ```
+
+
+
+
 ### Important note about BatchNormalization layers
 Many models contain tf.keras.layers.BatchNormalization layers. This layer is a special case and precautions should be taken in the context of fine-tuning, as shown later in this tutorial.
 When you set layer.trainable = False , the BatchNormalization layer will run in inference mode, and will not update its mean and variance statistics.
 When you unfreeze a model that contains BatchNormalization layers in order to do fine-tuning, you should keep the BatchNormalization layers in inference mode by passing training = False when calling the base model. Otherwise, the updates applied to the non-trainable weights will destroy what the model has learned.
 For more details, see the Transfer learning guide .
+
+
 ```python
 # Let's take a look at the base model architecture
 base_model.summary()
 ```
+
+
+
+
 ### Add a classification head
 To generate predictions from the block of features, average over the spatial 5x5 spatial locations, using a tf.keras.layers.GlobalAveragePooling2D layer to convert the features to  a single 1280-element vector per image.
+
+
 ```python
 global_average_layer = tf.keras.layers.GlobalAveragePooling2D()
 feature_batch_average = global_average_layer(feature_batch)
 print(feature_batch_average.shape)
 ```
-```python
-(32, 1280)
-```
+
+
 Apply a tf.keras.layers.Dense layer to convert these features into a single prediction per image. You don't need an activation function here because this prediction will be treated as a logit , or a raw prediction value. Positive numbers predict class 1, negative numbers predict class 0.
+
+
 ```python
 prediction_layer = tf.keras.layers.Dense(1, activation='sigmoid')
 prediction_batch = prediction_layer(feature_batch_average)
 print(prediction_batch.shape)
 ```
-```python
-(32, 1)
-```
+
+
 Build a model by chaining together the data augmentation, rescaling, base_model and feature extractor layers using the Keras Functional API . As previously mentioned, use training=False as our model contains a BatchNormalization layer.
+
+
 ```python
 inputs = tf.keras.Input(shape=(160, 160, 3))
 x = data_augmentation(inputs)
@@ -244,32 +346,51 @@ x = tf.keras.layers.Dropout(0.2)(x)
 outputs = prediction_layer(x)
 model = tf.keras.Model(inputs, outputs)
 ```
-```python
-model.summary()
-```
+
+
 The 8+ million parameters in MobileNet are frozen, but there are 1.2 thousand trainable parameters in the Dense layer. These are divided between two tf.Variable objects, the weights and biases.
+
+
 ```python
 len(model.trainable_variables)
 ```
-```python
-2
-```
+
+
+
+
 ```python
 tf.keras.utils.plot_model(model, show_shapes=True)
 ```
+
+
+
+
 ### Compile the model
 Compile the model before training it. Since there are two classes and a sigmoid oputput, use the BinaryAccuracy .
+
+
 ```python
 base_learning_rate = 0.0001
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=base_learning_rate),
-loss=tf.keras.losses.BinaryCrossentropy(),
-metrics=[tf.keras.metrics.BinaryAccuracy(threshold=0.5, name='accuracy')])
+              loss=tf.keras.losses.BinaryCrossentropy(),
+              metrics=[tf.keras.metrics.BinaryAccuracy(threshold=0.5, name='accuracy')])
 ```
+
+
+
+
+### Train the model
 After training for 10 epochs, you should see ~96% accuracy on the validation set.
+
+
 ```python
 initial_epochs = 10
 loss0, accuracy0 = model.evaluate(validation_dataset)
 ```
+
+
+
+
 ```python
 W0000 00:00:1723777695.929524  124620 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
 W0000 00:00:1723777695.931125  124620 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
@@ -912,19 +1033,35 @@ W0000 00:00:1723777697.713545  124619 gpu_timer.cc:114] Skipping the delay kerne
 W0000 00:00:1723777697.714244  124619 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
 W0000 00:00:1723777697.715044  124619 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
 ```
+
+
+
+
 ```python
 print("initial loss: {:.2f}".format(loss0))
 print("initial accuracy: {:.2f}".format(accuracy0))
 ```
+
+
+
+
 ```python
 initial loss: 0.70
 initial accuracy: 0.56
 ```
+
+
+
+
 ```python
 history = model.fit(train_dataset,
-epochs=initial_epochs,
-validation_data=validation_dataset)
+                    epochs=initial_epochs,
+                    validation_data=validation_dataset)
 ```
+
+
+
+
 ```python
 Epoch 1/10
 61/63 ━━━━━━━━━━━━━━━━━━━━ 0s 30ms/step - accuracy: 0.5997 - loss: 0.6990
@@ -1276,8 +1413,14 @@ Epoch 9/10
 Epoch 10/10
 63/63 ━━━━━━━━━━━━━━━━━━━━ 3s 41ms/step - accuracy: 0.9256 - loss: 0.2171 - val_accuracy: 0.9653 - val_loss: 0.1308
 ```
+
+
+
+
 ### Learning curves
 Let's take a look at the learning curves of the training and validation accuracy/loss when using the MobileNetV2 base model as a fixed feature extractor.
+
+
 ```python
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
@@ -1301,16 +1444,28 @@ plt.title('Training and Validation Loss')
 plt.xlabel('epoch')
 plt.show()
 ```
+
+
 To a lesser extent, it is also because training metrics report the average for an epoch, while validation metrics are evaluated after the epoch, so validation metrics see a model that has trained slightly longer.
+
+
 ## Fine tuning
 In the feature extraction experiment, you were only training a few layers on top of an MobileNetV2 base model. The weights of the pre-trained network were not updated during training.
 One way to increase performance even further is to train (or "fine-tune") the weights of the top layers of the pre-trained model alongside the training of the classifier you added. The training process will force the weights to be tuned from generic feature maps to features associated specifically with the dataset.
 Also, you should try to fine-tune a small number of top layers rather than the whole MobileNet model. In most convolutional networks, the higher up a layer is, the more specialized it is. The first few layers learn very simple and generic features that generalize to almost all types of images. As you go higher up, the features are increasingly more specific to the dataset on which the model was trained. The goal of fine-tuning is to adapt these specialized features to work with the new dataset, rather than overwrite the generic learning.
+
+
 ### Un-freeze the top layers of the model
 All you need to do is unfreeze the base_model and set the bottom layers to be un-trainable. Then, you should recompile the model (necessary for these changes to take effect), and resume training.
+
+
 ```python
 base_model.trainable = True
 ```
+
+
+
+
 ```python
 # Let's take a look to see how many layers are in the base model
 print("Number of layers in the base model: ", len(base_model.layers))
@@ -1318,30 +1473,45 @@ print("Number of layers in the base model: ", len(base_model.layers))
 fine_tune_at = 100
 # Freeze all the layers before the `fine_tune_at` layer
 for layer in base_model.layers[:fine_tune_at]:
-layer.trainable = False
+  layer.trainable = False
 ```
+
+
+
+
 ```python
 Number of layers in the base model:  154
 ```
+
+
 As you are training a much larger model and want to readapt the pretrained weights, it is important to use a lower learning rate at this stage. Otherwise, your model could overfit very quickly.
+
+
 ```python
 model.compile(loss=tf.keras.losses.BinaryCrossentropy(),
-optimizer = tf.keras.optimizers.RMSprop(learning_rate=base_learning_rate/10),
-metrics=[tf.keras.metrics.BinaryAccuracy(threshold=0.5, name='accuracy')])
+              optimizer = tf.keras.optimizers.RMSprop(learning_rate=base_learning_rate/10),
+              metrics=[tf.keras.metrics.BinaryAccuracy(threshold=0.5, name='accuracy')])
 ```
-```python
-56
-```
+
+
+
+
 ### Continue training the model
 If you trained to convergence earlier, this step will improve your accuracy by a few percentage points.
+
+
 ```python
 fine_tune_epochs = 10
 total_epochs =  initial_epochs + fine_tune_epochs
 history_fine = model.fit(train_dataset,
-epochs=total_epochs,
-initial_epoch=len(history.epoch),
-validation_data=validation_dataset)
+                         epochs=total_epochs,
+                         initial_epoch=len(history.epoch),
+                         validation_data=validation_dataset)
 ```
+
+
+
+
 ```python
 Epoch 11/20
 W0000 00:00:1723777737.423707  124625 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
@@ -1678,15 +1848,23 @@ Epoch 19/20
 Epoch 20/20
 63/63 ━━━━━━━━━━━━━━━━━━━━ 4s 63ms/step - accuracy: 0.9499 - loss: 0.1243 - val_accuracy: 0.9876 - val_loss: 0.0355
 ```
+
+
 Let's take a look at the learning curves of the training and validation accuracy/loss when fine-tuning the last few layers of the MobileNetV2 base model and training the classifier on top of it. The validation loss is much higher than the training loss, so you may get some overfitting.
 You may also get some overfitting as the new training set is relatively small and similar to the original MobileNetV2 datasets.
 After fine tuning the model nearly reaches 98% accuracy on the validation set.
+
+
 ```python
 acc += history_fine.history['accuracy']
 val_acc += history_fine.history['val_accuracy']
 loss += history_fine.history['loss']
 val_loss += history_fine.history['val_loss']
 ```
+
+
+
+
 ```python
 plt.figure(figsize=(8, 8))
 plt.subplot(2, 1, 1)
@@ -1694,7 +1872,7 @@ plt.plot(acc, label='Training Accuracy')
 plt.plot(val_acc, label='Validation Accuracy')
 plt.ylim([0.8, 1])
 plt.plot([initial_epochs-1,initial_epochs-1],
-plt.ylim(), label='Start Fine Tuning')
+          plt.ylim(), label='Start Fine Tuning')
 plt.legend(loc='lower right')
 plt.title('Training and Validation Accuracy')
 plt.subplot(2, 1, 2)
@@ -1702,23 +1880,37 @@ plt.plot(loss, label='Training Loss')
 plt.plot(val_loss, label='Validation Loss')
 plt.ylim([0, 1.0])
 plt.plot([initial_epochs-1,initial_epochs-1],
-plt.ylim(), label='Start Fine Tuning')
+         plt.ylim(), label='Start Fine Tuning')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.xlabel('epoch')
 plt.show()
 ```
+
+
+
+
 ### Evaluation and prediction
 Finally you can verify the performance of the model on new data using test set.
+
+
 ```python
 loss, accuracy = model.evaluate(test_dataset)
 print('Test accuracy :', accuracy)
 ```
+
+
+
+
 ```python
 6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 29ms/step - accuracy: 0.9600 - loss: 0.0837
 Test accuracy : 0.96875
 ```
+
+
 And now you are all set to use this model to predict if your pet is a cat or dog.
+
+
 ```python
 # Retrieve a batch of images from the test set
 image_batch, label_batch = test_dataset.as_numpy_iterator().next()
@@ -1728,23 +1920,33 @@ print('Predictions:\n', predictions.numpy())
 print('Labels:\n', label_batch)
 plt.figure(figsize=(10, 10))
 for i in range(9):
-ax = plt.subplot(3, 3, i + 1)
-plt.imshow(image_batch[i].astype("uint8"))
-plt.title(class_names[predictions[i]])
-plt.axis("off")
+  ax = plt.subplot(3, 3, i + 1)
+  plt.imshow(image_batch[i].astype("uint8"))
+  plt.title(class_names[predictions[i]])
+  plt.axis("off")
 ```
+
+
+
+
 ```python
 Predictions:
-[1 0 0 0 1 1 1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0 0 1 1 1 1 1 1 0 0 0]
+ [1 0 0 0 1 1 1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0 0 1 1 1 1 1 1 0 0 0]
 Labels:
-[1 0 0 0 1 1 1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0 0 1 1 1 1 1 1 0 0 0]
+ [1 0 0 0 1 1 1 1 0 1 1 1 0 1 1 0 1 1 1 1 1 0 0 1 1 1 1 1 1 0 0 0]
 ```
+
+
+
+
 ## Summary
 - Using a pre-trained model for feature extraction :  When working with a small dataset, it is a common practice to take advantage of features learned by a model trained on a larger dataset in the same domain. This is done by instantiating the pre-trained model and adding a fully-connected classifier on top. The pre-trained model is "frozen" and only the weights of the classifier get updated during training.
 In this case, the convolutional base extracted all the features associated with each image and you just trained a classifier that determines the image class given that set of extracted features.
 - Fine-tuning a pre-trained model : To further improve performance, one might want to repurpose the top-level layers of the pre-trained models to the new dataset via fine-tuning.
 In this case, you tuned your weights such that your model learned high-level features specific to the dataset. This technique is usually recommended when the training dataset is large and very similar to the original dataset that the pre-trained model was trained on.
 To learn more, visit the Transfer learning guide .
+
+
 ```python
 # MIT License
 #
@@ -1768,5 +1970,8 @@ To learn more, visit the Transfer learning guide .
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 ```
+
+
 Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates.
-Last updated 2024-08-16 UTC.
+
+# Source: https://www.tensorflow.org/tutorials/images/transfer_learning

@@ -1,0 +1,320 @@
+
+
+# Pruning for on-device inference w/ XNNPACKStay organized with collectionsSave and categorize content based on your preferences.
+Welcome to the guide on Keras weights pruning for improving latency of on-device inference via XNNPACK .
+This guide presents the usage of the newly introduced tfmot.sparsity.keras.PruningPolicy API and demonstrates how it could be used for accelerating mostly convolutional models on modern CPUs using XNNPACK Sparse inference .
+The guide covers the following steps of the model creation process:
+- Build and train the dense baseline
+
+
+## Setup
+
+
+pip install -q tensorflow
+ pip install -q tensorflow-model-optimization
+
+
+
+
+import tempfile
+import tensorflow as tf
+import numpy as np
+from tensorflow import keras
+import tensorflow_datasets as tfds
+import tensorflow_model_optimization as tfmot
+import tf_keras as keras
+%load_ext tensorboard
+
+
+
+
+## Build and train the dense model
+We build and train a simple baseline CNN for classification task on CIFAR10 dataset.
+
+
+# Load CIFAR10 dataset.
+(ds_train, ds_val, ds_test), ds_info = tfds.load(
+    'cifar10',
+    split=['train[:90%]', 'train[90%:]', 'test'],
+    as_supervised=True,
+    with_info=True,
+)
+# Normalize the input image so that each pixel value is between 0 and 1.
+def normalize_img(image, label):
+  return tf.image.convert_image_dtype(image, tf.float32), label
+# Load the data in batches of 128 images.
+batch_size = 128
+def prepare_dataset(ds, buffer_size=None):
+  ds = ds.map(normalize_img, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+  ds = ds.cache()
+    ds = ds.shuffle(buffer_size)
+  ds = ds.batch(batch_size)
+  ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
+  return ds
+ds_train = prepare_dataset(ds_train,
+                           buffer_size=ds_info.splits['train'].num_examples)
+ds_val = prepare_dataset(ds_val)
+ds_test = prepare_dataset(ds_test)
+# Build the dense baseline model.
+dense_model = keras.Sequential([
+    keras.layers.InputLayer(input_shape=(32, 32, 3)),
+    keras.layers.ZeroPadding2D(padding=1),
+    keras.layers.Conv2D(
+        filters=8,
+        kernel_size=(3, 3),
+        strides=(2, 2),
+        padding='valid'),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.DepthwiseConv2D(kernel_size=(3, 3), padding='same'),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.Conv2D(filters=16, kernel_size=(1, 1)),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.ZeroPadding2D(padding=1),
+    keras.layers.DepthwiseConv2D(
+        kernel_size=(3, 3), strides=(2, 2), padding='valid'),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.Conv2D(filters=32, kernel_size=(1, 1)),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.GlobalAveragePooling2D(),
+    keras.layers.Flatten(),
+    keras.layers.Dense(10)
+])
+# Compile and train the dense model for 10 epochs.
+dense_model.compile(
+    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    optimizer='adam',
+    metrics=['accuracy'])
+dense_model.fit(
+  epochs=10,
+  validation_data=ds_val)
+# Evaluate the dense model.
+_, dense_model_accuracy = dense_model.evaluate(ds_test, verbose=0)
+
+
+
+
+2026-01-14 12:32:55.730751: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+Epoch 1/10
+352/352 [==============================] - 13s 22ms/step - loss: 1.9668 - accuracy: 0.2833 - val_loss: 2.2913 - val_accuracy: 0.1540
+Epoch 2/10
+352/352 [==============================] - 6s 16ms/step - loss: 1.6859 - accuracy: 0.3875 - val_loss: 1.6921 - val_accuracy: 0.3608
+Epoch 3/10
+352/352 [==============================] - 6s 16ms/step - loss: 1.5759 - accuracy: 0.4264 - val_loss: 1.6195 - val_accuracy: 0.4164
+Epoch 4/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.5202 - accuracy: 0.4491 - val_loss: 1.5032 - val_accuracy: 0.4524
+Epoch 5/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.4907 - accuracy: 0.4615 - val_loss: 1.4889 - val_accuracy: 0.4602
+Epoch 6/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.4670 - accuracy: 0.4696 - val_loss: 1.4803 - val_accuracy: 0.4598
+Epoch 7/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.4472 - accuracy: 0.4774 - val_loss: 1.4714 - val_accuracy: 0.4754
+Epoch 8/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.4319 - accuracy: 0.4839 - val_loss: 1.4444 - val_accuracy: 0.4696
+Epoch 9/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.4188 - accuracy: 0.4884 - val_loss: 1.4423 - val_accuracy: 0.4800
+Epoch 10/10
+352/352 [==============================] - 6s 17ms/step - loss: 1.4063 - accuracy: 0.4931 - val_loss: 1.4648 - val_accuracy: 0.4800
+
+
+
+
+## Build the sparse model
+Using the instructions from the comprehensive guide , we apply tfmot.sparsity.keras.prune_low_magnitude function with parameters that target on-device acceleration via pruning i.e. tfmot.sparsity.keras.PruneForLatencyOnXNNPack policy.
+
+
+prune_low_magnitude = tfmot.sparsity.keras.prune_low_magnitude
+# Compute end step to finish pruning after after 5 epochs.
+end_epoch = 5
+num_iterations_per_epoch = len(ds_train)
+end_step =  num_iterations_per_epoch * end_epoch
+# Define parameters for pruning.
+pruning_params = {
+      'pruning_schedule': tfmot.sparsity.keras.PolynomialDecay(initial_sparsity=0.25,
+                                                               final_sparsity=0.75,
+                                                               begin_step=0,
+                                                               end_step=end_step),
+      'pruning_policy': tfmot.sparsity.keras.PruneForLatencyOnXNNPack()
+}
+# Try to apply pruning wrapper with pruning policy parameter.
+  model_for_pruning = prune_low_magnitude(dense_model, **pruning_params)
+  print(e)
+
+
+The call prune_low_magnitude results in ValueError with the message Could not find a GlobalAveragePooling2D layer with keepdims = True in all output branches . The message indicates that the model isn't supported for pruning with policy tfmot.sparsity.keras.PruneForLatencyOnXNNPack and specifically the layer GlobalAveragePooling2D requires the parameter keepdims = True . Let's fix that and reapply prune_low_magnitude function.
+
+
+fixed_dense_model = keras.Sequential([
+    keras.layers.InputLayer(input_shape=(32, 32, 3)),
+    keras.layers.ZeroPadding2D(padding=1),
+    keras.layers.Conv2D(
+        filters=8,
+        kernel_size=(3, 3),
+        strides=(2, 2),
+        padding='valid'),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.DepthwiseConv2D(kernel_size=(3, 3), padding='same'),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.Conv2D(filters=16, kernel_size=(1, 1)),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.ZeroPadding2D(padding=1),
+    keras.layers.DepthwiseConv2D(
+        kernel_size=(3, 3), strides=(2, 2), padding='valid'),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.Conv2D(filters=32, kernel_size=(1, 1)),
+    keras.layers.BatchNormalization(),
+    keras.layers.ReLU(),
+    keras.layers.GlobalAveragePooling2D(keepdims=True),
+    keras.layers.Flatten(),
+    keras.layers.Dense(10)
+])
+# Use the pretrained model for pruning instead of training from scratch.
+fixed_dense_model.set_weights(dense_model.get_weights())
+# Try to reapply pruning wrapper.
+model_for_pruning = prune_low_magnitude(fixed_dense_model, **pruning_params)
+
+
+Invocation of prune_low_magnitude has finished without any errors meaning that the model is fully supported for the tfmot.sparsity.keras.PruneForLatencyOnXNNPack policy and can be accelerated using XNNPACK Sparse inference .
+
+
+### Fine-tune the sparse model
+Following the pruning example , we fine-tune the sparse model using the weights of the dense model. We start fine-tuning of the model with 25% sparsity (25% of the weights are set to zero) and end with 75% sparsity.
+
+
+logdir = tempfile.mkdtemp()
+callbacks = [
+  tfmot.sparsity.keras.UpdatePruningStep(),
+  tfmot.sparsity.keras.PruningSummaries(log_dir=logdir),
+]
+model_for_pruning.compile(
+    loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    optimizer='adam',
+    metrics=['accuracy'])
+model_for_pruning.fit(
+  epochs=15,
+  validation_data=ds_val,
+  callbacks=callbacks)
+# Evaluate the dense model.
+_, pruned_model_accuracy = model_for_pruning.evaluate(ds_test, verbose=0)
+print('Dense model test accuracy:', dense_model_accuracy)
+print('Pruned model test accuracy:', pruned_model_accuracy)
+
+
+
+
+Epoch 1/15
+352/352 [==============================] - 9s 18ms/step - loss: 1.4085 - accuracy: 0.4916 - val_loss: 1.4902 - val_accuracy: 0.4638
+Epoch 2/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4298 - accuracy: 0.4865 - val_loss: 1.8659 - val_accuracy: 0.3472
+Epoch 3/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4390 - accuracy: 0.4802 - val_loss: 1.4456 - val_accuracy: 0.4814
+Epoch 4/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4368 - accuracy: 0.4835 - val_loss: 1.5627 - val_accuracy: 0.4478
+Epoch 5/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4296 - accuracy: 0.4858 - val_loss: 1.5052 - val_accuracy: 0.4550
+Epoch 6/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4193 - accuracy: 0.4912 - val_loss: 1.5369 - val_accuracy: 0.4366
+Epoch 7/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4129 - accuracy: 0.4937 - val_loss: 1.5370 - val_accuracy: 0.4464
+Epoch 8/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.4040 - accuracy: 0.4962 - val_loss: 1.4021 - val_accuracy: 0.5070
+Epoch 9/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3988 - accuracy: 0.4967 - val_loss: 1.4761 - val_accuracy: 0.4616
+Epoch 10/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3962 - accuracy: 0.5008 - val_loss: 1.4817 - val_accuracy: 0.4764
+Epoch 11/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3897 - accuracy: 0.5017 - val_loss: 1.4608 - val_accuracy: 0.4482
+Epoch 12/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3877 - accuracy: 0.5010 - val_loss: 1.6052 - val_accuracy: 0.4224
+Epoch 13/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3842 - accuracy: 0.5029 - val_loss: 1.4055 - val_accuracy: 0.4946
+Epoch 14/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3782 - accuracy: 0.5054 - val_loss: 1.4613 - val_accuracy: 0.4736
+Epoch 15/15
+352/352 [==============================] - 6s 17ms/step - loss: 1.3719 - accuracy: 0.5092 - val_loss: 1.4394 - val_accuracy: 0.4754
+Dense model test accuracy: 0.47209998965263367
+Pruned model test accuracy: 0.4652999937534332
+
+
+The logs show the progression of sparsity on a per-layer basis.
+
+
+#docs_infra: no_execute
+%tensorboard --logdir={logdir}
+
+
+After the fine-tuning with pruning, test accuracy demonstrates a modest improvement (43% to 44%) compared to the dense model. Let's compare on-device latency using TFLite benchmark .
+
+
+## Model conversion and benchmarking
+To convert the pruned model into TFLite, we need replace the PruneLowMagnitude wrappers with original layers via the strip_pruning function. Also, since the weights of the pruned model ( model_for_pruning ) are mostly zeros, we may apply an optimization tf.lite.Optimize.EXPERIMENTAL_SPARSITY to efficiently store the resulted TFLite model. This optimization flag is not required for the dense model.
+
+
+converter = tf.lite.TFLiteConverter.from_keras_model(dense_model)
+dense_tflite_model = converter.convert()
+_, dense_tflite_file = tempfile.mkstemp('.tflite')
+with open(dense_tflite_file, 'wb') as f:
+  f.write(dense_tflite_model)
+model_for_export = tfmot.sparsity.keras.strip_pruning(model_for_pruning)
+converter = tf.lite.TFLiteConverter.from_keras_model(model_for_export)
+converter.optimizations = [tf.lite.Optimize.EXPERIMENTAL_SPARSITY]
+pruned_tflite_model = converter.convert()
+_, pruned_tflite_file = tempfile.mkstemp('.tflite')
+with open(pruned_tflite_file, 'wb') as f:
+  f.write(pruned_tflite_model)
+
+
+
+
+INFO:tensorflow:Assets written to: /tmpfs/tmp/tmpc29r6vfp/assets
+INFO:tensorflow:Assets written to: /tmpfs/tmp/tmpc29r6vfp/assets
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1768394142.636881   34376 tf_tfl_flatbuffer_helpers.cc:364] Ignored output_format.
+W0000 00:00:1768394142.636932   34376 tf_tfl_flatbuffer_helpers.cc:367] Ignored drop_control_dependency.
+I0000 00:00:1768394142.670183   34376 mlir_graph_optimization_pass.cc:437] MLIR V1 optimization pass is not enabled
+INFO:tensorflow:Assets written to: /tmpfs/tmp/tmptrmedi95/assets
+INFO:tensorflow:Assets written to: /tmpfs/tmp/tmptrmedi95/assets
+W0000 00:00:1768394145.481023   34376 tf_tfl_flatbuffer_helpers.cc:364] Ignored output_format.
+W0000 00:00:1768394145.481069   34376 tf_tfl_flatbuffer_helpers.cc:367] Ignored drop_control_dependency.
+2026-01-14 12:35:45.730032: W tensorflow/compiler/mlir/lite/flatbuffer_export.cc:3705] Skipping runtime version metadata in the model. This will be generated by the exporter.
+
+
+Following the instructions of TFLite Model Benchmarking Tool , we build the tool, upload it to the Android device together with dense and pruned TFLite models, and benchmark both models on the device.
+
+
+! adb shell /data/local/tmp/benchmark_model \
+    --graph=/data/local/tmp/dense_model.tflite \
+    --use_xnnpack=true \
+    --num_runs=100 \
+    --num_threads=1
+
+
+
+
+
+
+
+
+! adb shell /data/local/tmp/benchmark_model \
+    --graph=/data/local/tmp/pruned_model.tflite \
+    --use_xnnpack=true \
+    --num_runs=100 \
+    --num_threads=1
+
+
+Benchmarks on Pixel 4 resulted in average inference time of 17us for the dense model and 12us for the pruned model. The on-device benchmarks demonstrate a clear 5us or 30% improvements in latency even for such small models. In our experience, larger models based on MobileNetV3 or EfficientNet-lite show similar performance improvements. The speed-up varies based on the relative contribution of 1x1 convolutions to the overall model.
+
+
+## Conclusion
+In this tutorial, we show how one may create sparse models for faster on-device performance using the new functionality introduced by the TF MOT API and XNNPack. These sparse models are smaller and faster than their dense counterparts while retaining or even surpassing their quality.
+We encourage you to try this new capability which can be particularly important for deploying your models on device.
+
+# Source: https://www.tensorflow.org/model_optimization/guide/pruning/pruning_for_on_device_inference

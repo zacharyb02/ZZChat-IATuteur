@@ -1,0 +1,37 @@
+
+
+# tf.VariableSynchronizationStay organized with collectionsSave and categorize content based on your preferences.
+Indicates when a distributed variable will be synced.
+Compat aliases for migration See Migration guide for
+more details. tf.compat.v1.VariableSynchronization
+See Migration guide for
+more details.
+tf.compat.v1.VariableSynchronization
+- AUTO : Indicates that the synchronization will be determined by the current DistributionStrategy (eg. With MirroredStrategy this would be ON_WRITE ).
+- NONE : Indicates that there will only be one copy of the variable, so
+there is no need to sync.
+- ON_WRITE : Indicates that the variable will be updated across devices
+every time it is written.
+- ON_READ : Indicates that the variable will be aggregated across devices
+when it is read (eg. when checkpointing or when evaluating an op that uses
+the variable). Example:
+ON_READ : Indicates that the variable will be aggregated across devices
+when it is read (eg. when checkpointing or when evaluating an op that uses
+the variable).
+
+
+```python
+>>> temp_grad=[tf.Variable([0.], trainable=False,
+...                      synchronization=tf.VariableSynchronization.ON_READ,
+...                      aggregation=tf.VariableAggregation.MEAN
+...                      )]
+```
+
+
+
+
+## Class Variables
+AUTO <VariableSynchronization.AUTO: 0> NONE <VariableSynchronization.NONE: 1> ON_READ <VariableSynchronization.ON_READ: 3> ON_WRITE <VariableSynchronization.ON_WRITE: 2>
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/VariableSynchronization

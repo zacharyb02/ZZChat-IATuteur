@@ -1,0 +1,96 @@
+
+
+# TensorFlow Data Validation: Checking and analyzing your dataStay organized with collectionsSave and categorize content based on your preferences.
+and transform it. You can use these tools even before you train a model.
+- To find problems in your data. Common problems include: Missing data, such as features with empty values. Labels treated as features, so that your model gets to peek at the right
+answer during training. Features with values outside the range you expect. Data anomalies. Transfer learned model has preprocessing that does not match the
+training data.
+- Labels treated as features, so that your model gets to peek at the right
+answer during training.
+- Transfer learned model has preprocessing that does not match the
+training data.
+
+
+## TensorFlow Data Validation
+- Schema Based Example Validation
+- Training-Serving Skew Detection
+
+
+### Overview
+TensorFlow Data Validation identifies anomalies in training and serving data,
+- Detect training-serving skew by comparing examples in training and serving
+TensorFlow Data Validation identifies any anomalies in the input data by
+which the input data is expected to satisfy, such as data types or categorical
+Tensorflow Data Validation is typically invoked multiple times within the
+context of the TFX pipeline: (i) for every split obtained from ExampleGen,
+(ii) for all pre-transformed data used by Transform and (iii) for all
+Transform (ii-iii), statistics options and schema-based constraints can be set
+useful when validating unstructured data (e.g. text features). See the user code for an example.
+feature: WeightedCategories = [('CategoryA', 0.3), ('CategoryX', 0.7)] would be encoded using separate Features for index and value: WeightedCategoriesIndex = ['CategoryA', 'CategoryX']
+WeightedCategoriesValue = [0.3, 0.7] with the restriction that the valency of the index and value feature should
+defining a sparse_feature: sparse_feature {
+  index_feature { name: 'WeightedCategoriesIndex' }
+  value_feature { name: 'WeightedCategoriesValue' }
+}
+
+
+WeightedCategories = [('CategoryA', 0.3), ('CategoryX', 0.7)]
+
+
+
+
+WeightedCategoriesIndex = ['CategoryA', 'CategoryX']
+WeightedCategoriesValue = [0.3, 0.7]
+
+
+
+
+sparse_feature {
+  index_feature { name: 'WeightedCategoriesIndex' }
+  value_feature { name: 'WeightedCategoriesValue' }
+}
+
+
+By default validations assume that all Examples in a pipeline adhere to a single
+instance features used as labels are required during training (and should be
+validated), but are missing during serving. Environments can be used to express
+such requirements, in particular default_environment() , in_environment() , not_in_environment() .
+For example, assume a feature named 'LABEL' is required for training, but is
+- Define two distinct environments in the schema: ["SERVING", "TRAINING"] and
+associate 'LABEL' only with environment "TRAINING".
+- Associate the training data with environment "TRAINING" and the
+The input data schema is specified as an instance of the TensorFlow Schema .
+TensorFlow Data Validation's automatic schema construction. Specifically,
+TensorFlow Data Validation automatically constructs an initial schema based on
+statistics computed over training data available in the pipeline. Users can
+validation.
+TFDV includes infer_schema() to generate a schema automatically.  For example:
+
+
+schema = tfdv.infer_schema(statistics=train_stats)
+tfdv.display_schema(schema=schema)
+
+
+- Otherwise, TensorFlow Data Validation examines the available data statistics
+TensorFlow Data Validation can detect distribution skew between training and
+for training data is significantly different from serving data. One of the key
+training data generation to overcome lack of initial data in the desired corpus.
+See the TensorFlow Data Validation Get Started Guide for information about configuring training-serving skew detection.
+
+
+### Drift Detection
+spans of data (i.e., between span N and span N+1), such as between different
+days of training data. We express drift in terms of L-infinity distance for
+See the TensorFlow Data Validation Get Started Guide for information about configuring drift detection.
+
+
+## Using Visualizations to Check Your Data
+TensorFlow Data Validation provides tools for visualizing the distribution of
+
+
+### Identifying Suspicious Distributions
+If your features vary widely in scale, then the model may have difficulties
+TensorFlow's Estimators have restrictions on the type of data they accept as
+labels. For example, binary classifiers typically only work with {0, 1} labels.
+
+# Source: https://www.tensorflow.org/tfx/guide/tfdv

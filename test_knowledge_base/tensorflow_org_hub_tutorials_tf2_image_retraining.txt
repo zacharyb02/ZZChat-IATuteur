@@ -1,0 +1,60 @@
+
+
+# Retraining an Image ClassifierStay organized with collectionsSave and categorize content based on your preferences.
+
+
+## Introduction
+Image classification models have millions of parameters. Training them from
+scratch requires a lot of labeled training data and a lot of computing power. Transfer learning is a technique that shortcuts much of this by taking a piece of a model that has already been trained on a related task and reusing it in a new model.
+This Colab demonstrates how to build a Keras model for classifying five species of flowers by using a pre-trained TF2 SavedModel from TensorFlow Hub for image feature extraction, trained on the much larger and more general ImageNet dataset. Optionally, the feature extractor can be trained ("fine-tuned") alongside the newly added classifier.
+
+
+### Looking for a tool instead?
+This is a TensorFlow coding tutorial. If you want a tool that just builds the TensorFlow or TFLite model for, take a look at the make_image_classifier command-line tool that gets installed by the PIP package tensorflow-hub[make_image_classifier] , or at this TFLite colab.
+
+
+## Setup
+
+
+import itertools
+import os
+import matplotlib.pylab as plt
+import numpy as np
+import tensorflow as tf
+import tensorflow_hub as hub
+print("TF version:", tf.__version__)
+print("Hub version:", hub.__version__)
+print("GPU is", "available" if tf.config.list_physical_devices('GPU') else "NOT AVAILABLE")
+
+
+
+
+## Select the TF2 SavedModel module to use
+For starters, use https://tfhub.dev/google/imagenet/mobilenet_v2_100_224/feature_vector/4 . The same URL can be used in code to identify the SavedModel and in your browser to show its documentation. (Note that models in TF1 Hub format won't work here.)
+You can find more TF2 models that generate image feature vectors here .
+There are multiple possible models to try. All you need to do is select a different one on the cell below and follow up with the notebook.
+
+
+model_name = "efficientnetv2-xl-21k" # @param ['efficientnetv2-s', 'efficientnetv2-m', 'efficientnetv2-l', 'efficientnetv2-s-21k', 'efficientnetv2-m-21k', 'efficientnetv2-l-21k', 'efficientnetv2-xl-21k', 'efficientnetv2-b0-21k', 'efficientnetv2-b1-21k', 'efficientnetv2-b2-21k', 'efficientnetv2-b3-21k', 'efficientnetv2-s-21k-ft1k', 'efficientnetv2-m-21k-ft1k', 'efficientnetv2-l-21k-ft1k', 'efficientnetv2-xl-21k-ft1k', 'efficientnetv2-b0-21k-ft1k', 'efficientnetv2-b1-21k-ft1k', 'efficientnetv2-b2-21k-ft1k', 'efficientnetv2-b3-21k-ft1k', 'efficientnetv2-b0', 'efficientnetv2-b1', 'efficientnetv2-b2', 'efficientnetv2-b3', 'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2', 'efficientnet_b3', 'efficientnet_b4', 'efficientnet_b5', 'efficientnet_b6', 'efficientnet_b7', 'bit_s-r50x1', 'inception_v3', 'inception_resnet_v2', 'resnet_v1_50', 'resnet_v1_101', 'resnet_v1_152', 'resnet_v2_50', 'resnet_v2_101', 'resnet_v2_152', 'nasnet_large', 'nasnet_mobile', 'pnasnet_large', 'mobilenet_v2_100_224', 'mobilenet_v2_130_224', 'mobilenet_v2_140_224', 'mobilenet_v3_small_100_224', 'mobilenet_v3_small_075_224', 'mobilenet_v3_large_100_224', 'mobilenet_v3_large_075_224']
+model_handle_map = {
+  "efficientnet_b0": "https://tfhub.dev/tensorflow/efficientnet/b0/feature-vector/1",
+  "efficientnet_b1": "https://tfhub.dev/tensorflow/efficientnet/b1/feature-vector/1",
+  "efficientnet_b2": "https://tfhub.dev/tensorflow/efficientnet/b2/feature-vector/1",
+  "efficientnet_b3": "https://tfhub.dev/tensorflow/efficientnet/b3/feature-vector/1",
+  "efficientnet_b4": "https://tfhub.dev/tensorflow/efficientnet/b4/feature-vector/1",
+  "efficientnet_b5": "https://tfhub.dev/tensorflow/efficientnet/b5/feature-vector/1",
+  "efficientnet_b6": "https://tfhub.dev/tensorflow/efficientnet/b6/feature-vector/1",
+  "efficientnet_b7": "https://tfhub.dev/tensorflow/efficientnet/b7/feature-vector/1",
+}
+model_image_size_map = {
+}
+model_handle = model_handle_map.get(model_name)
+pixels = model_image_size_map.get(model_name, 224)
+print(f"Selected model: {model_name} : {model_handle}")
+IMAGE_SIZE = (pixels, pixels)
+print(f"Input size {IMAGE_SIZE}")
+BATCH_SIZE = 16
+
+
+
+# Source: https://www.tensorflow.org/hub/tutorials/tf2_image_retraining

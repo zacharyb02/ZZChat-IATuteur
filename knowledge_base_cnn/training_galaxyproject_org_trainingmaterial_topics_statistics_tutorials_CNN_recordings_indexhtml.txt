@@ -1,8 +1,0 @@
-SOURCE_URL: https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/recordings/index.html
-SUJET: CNN_DEEP_LEARNING
-
-# Recordings - Deep Learning (Part 3) - Convolutional neural networks (CNN)
-This is a collection of recordings from various training events where the Deep Learning (Part 3) - Convolutional neural networks (CNN) tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.
-Want to add your own recording? We would love to have it to our library!
-## Tutorial Recording - 5 October 2024
-## Tutorial Recording - 15 February 2021

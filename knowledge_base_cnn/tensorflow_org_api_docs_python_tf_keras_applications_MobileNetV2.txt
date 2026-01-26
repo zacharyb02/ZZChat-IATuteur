@@ -1,27 +1,29 @@
-SOURCE_URL: https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV2
-SUJET: CNN_DEEP_LEARNING
 
-- TensorFlow
-- API
-- TensorFlow v2.16.1
-- Python
+
 # tf.keras.applications.MobileNetV2Stay organized with collectionsSave and categorize content based on your preferences.
 Instantiates the MobileNetV2 architecture.
 Main aliases tf.keras.applications.mobilenet_v2.MobileNetV2
 tf.keras.applications.mobilenet_v2.MobileNetV2
+
+
 ```python
 tf.keras.applications.MobileNetV2(
-input_shape=None,
-alpha=1.0,
-include_top=True,
-weights='imagenet',
-input_tensor=None,
-pooling=None,
-classes=1000,
-classifier_activation='softmax'
+    input_shape=None,
+    alpha=1.0,
+    include_top=True,
+    weights='imagenet',
+    input_tensor=None,
+    pooling=None,
+    classes=1000,
+    classifier_activation='softmax'
 )
 ```
+
+
+
+
 ### Used in the notebooks
+- Transfer learning and fine-tuning
 MobileNetV2 is very similar to the original MobileNet,
 except that it uses inverted residual blocks with
 bottlenecking features. It has a drastically lower
@@ -34,7 +36,9 @@ This function returns a Keras image classification model,
 optionally loaded with weights pre-trained on ImageNet.
 For image classification use cases, see this page for detailed examples .
 For transfer learning use cases, make sure to read the guide to transfer learning & fine-tuning .
-Args
+
+
+## Args
 input_shape Optional shape tuple, only to be specified if include_top is False (otherwise the input shape has to be (224, 224, 3) (with "channels_last" data format) or (3, 224, 224) (with "channels_first" data format).
 It should have exactly 3 inputs channels, and width and
 height should be no smaller than 32. E.g. (200, 200, 3) would
@@ -63,7 +67,9 @@ no weights argument is specified. Defaults to 1000 . classifier_activation A str
 to use on the "top" layer. Ignored unless include_top=True .
 Set classifier_activation=None to return the logits of the "top"
 layer. When loading pretrained weights, classifier_activation can only be None or "softmax" .
-Returns A model instance.
+
+
 ## Returns
 Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
-Last updated 2024-06-07 UTC.
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/keras/applications/MobileNetV2

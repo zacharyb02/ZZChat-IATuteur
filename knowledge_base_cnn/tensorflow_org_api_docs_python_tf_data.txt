@@ -1,0 +1,28 @@
+
+
+# Module: tf.dataStay organized with collectionsSave and categorize content based on your preferences.
+Public API for tf._api.v2.data namespace
+
+
+## Modules
+experimental module: Public API for tf._api.v2.data.experimental namespace
+
+
+## Classes
+class Dataset : Represents a potentially large set of elements.
+class DatasetSpec : Type specification for tf.data.Dataset .
+class FixedLengthRecordDataset : A Dataset of fixed-length records from one or more binary files.
+class Iterator : Represents an iterator of a tf.data.Dataset .
+class IteratorSpec : Type specification for tf.data.Iterator .
+class NumpyIterator : Iterator over a dataset with elements converted to numpy.
+class Options : Represents options for tf.data.Dataset .
+class TFRecordDataset : A Dataset comprising records from one or more TFRecord files.
+class TextLineDataset : Creates a Dataset comprising lines from one or more text files.
+class ThreadingOptions : Represents options for dataset threading.
+
+
+## Other Members
+AUTOTUNE -1 INFINITE_CARDINALITY -1 UNKNOWN_CARDINALITY -2
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/data

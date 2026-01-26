@@ -1,0 +1,15 @@
+
+
+# Tools
+Explore tools to support and accelerate TensorFlow workflows.
+Colaboratory is a free Jupyter notebook environment that requires no setup and runs entirely in the cloud, allowing you to execute TensorFlow code in your browser with a single click.
+A visual coding web framework to prototype ML workflows using I/O devices, models, data augmentation, and even Colab code as reusable building blocks.
+A suite of visualization tools to understand, debug, and optimize TensorFlow programs.
+A tool for code-free probing of machine learning models, useful for model understanding, debugging, and fairness. Available in TensorBoard and jupyter or colab notebooks.
+XLA (Accelerated Linear Algebra) is a domain-specific compiler for linear algebra that optimizes TensorFlow computations. The results are improvements in speed, memory usage, and portability on server and mobile platforms.
+The TPU Research Cloud (TRC) program enables researchers to apply for access to a cluster of more than 1,000 Cloud TPUs at no charge to help them accelerate the next wave of research breakthroughs.
+
+
+## Explore libraries that build advanced models, methods, and extensions using TensorFlow
+
+# Source: https://www.tensorflow.org/resources/tools

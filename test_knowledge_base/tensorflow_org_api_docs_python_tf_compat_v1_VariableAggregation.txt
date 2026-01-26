@@ -1,0 +1,28 @@
+
+
+# tf.compat.v1.VariableAggregationStay organized with collectionsSave and categorize content based on your preferences.
+tf.distribute.Strategy distributes a model by making multiple copies
+(called "replicas") acting on different elements of the input batch in a
+data parallel model. When performing some variable-update operation,
+for example var.assign_add(x) , in a model, we need to resolve how to combine
+- MEAN : Take the arithmetic mean ("average") of the updates across replicas.
+
+
+strategy = tf.distribute.MirroredStrategy(["GPU:0", "GPU:1"])
+with strategy.scope():
+  v = tf.Variable(5.0, aggregation=tf.VariableAggregation.MEAN)
+def update_fn():
+  return v.assign_add(1.0)
+strategy.run(update_fn)
+PerReplica:{
+  0: <tf.Tensor: shape=(), dtype=float32, numpy=6.0>,
+  1: <tf.Tensor: shape=(), dtype=float32, numpy=6.0>
+}
+
+
+
+
+## Class Variables
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/compat/v1/VariableAggregation

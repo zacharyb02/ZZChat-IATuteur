@@ -1,0 +1,98 @@
+
+
+# tf.random.set_seedStay organized with collectionsSave and categorize content based on your preferences.
+
+
+tf.random.set_seed(
+    seed
+)
+
+
+
+
+### Used in the notebooks
+- Distributed training with Core APIs and DTensor
+- Logistic regression for binary classification with Core APIs
+- Multilayer perceptrons for digit recognition with Core APIs
+- Quickstart for the TensorFlow Core APIs
+- TensorFlow Probability Case Study: Covariance Estimation
+- TFP Release Notes notebook (0.11.0)
+same version of tensorflow and user code, this sequence is deterministic.
+
+
+print(tf.random.uniform([1]))  # generates 'A1'
+print(tf.random.uniform([1]))  # generates 'A2'
+
+
+(now close the program and run it again)
+
+
+print(tf.random.uniform([1]))  # generates 'A3'
+print(tf.random.uniform([1]))  # generates 'A4'
+
+
+
+
+tf.random.set_seed(1234)
+print(tf.random.uniform([1]))  # generates 'A1'
+print(tf.random.uniform([1]))  # generates 'A2'
+
+
+
+
+tf.random.set_seed(1234)
+def f():
+  a = tf.random.uniform([1])
+  b = tf.random.uniform([1])
+  return a, b
+def g():
+  a = tf.random.uniform([1])
+  b = tf.random.uniform([1])
+  return a, b
+print(f())  # prints '(A1, A2)'
+print(g())  # prints '(A1, A2)'
+
+
+
+
+print(tf.random.uniform([1], seed=1))  # generates 'A1'
+print(tf.random.uniform([1], seed=1))  # generates 'A2'
+
+
+The reason we get 'A2' instead 'A1' on the second call of tf.random.uniform above is because the same tf.random.uniform kernel (i.e. internal
+representation) is used by TensorFlow for all calls of it with the same
+arguments, and the kernel maintains an internal counter which is incremented
+
+
+tf.random.set_seed(1234)
+print(tf.random.uniform([1], seed=1))  # generates 'A1'
+print(tf.random.uniform([1], seed=1))  # generates 'A2'
+tf.random.set_seed(1234)
+print(tf.random.uniform([1], seed=1))  # generates 'A1'
+print(tf.random.uniform([1], seed=1))  # generates 'A2'
+
+
+
+
+def foo():
+  a = tf.random.uniform([1], seed=1)
+  b = tf.random.uniform([1], seed=1)
+  return a, b
+print(foo())  # prints '(A1, A1)'
+print(foo())  # prints '(A2, A2)'
+def bar():
+  a = tf.random.uniform([1])
+  b = tf.random.uniform([1])
+  return a, b
+print(bar())  # prints '(A1, A2)'
+print(bar())  # prints '(A3, A4)'
+
+
+The second call of foo returns '(A2, A2)' instead of '(A1, A1)' because tf.random.uniform maintains an internal counter. If you want foo to return
+'(A1, A1)' every time, use the stateless random ops such as tf.random.stateless_uniform . Also see tf.random.experimental.Generator for
+
+
+## Args
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/random/set_seed

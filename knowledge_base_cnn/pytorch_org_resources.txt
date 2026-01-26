@@ -1,0 +1,22 @@
+
+
+# Developer Resources
+Explore resources, get your questions answered, and join the discussion with other PyTorch developers.
+Access comprehensive developer documentation.
+Browse and join discussions on deep learning with PyTorch.
+Get in-depth tutorials for beginners and advanced developers.
+Docs and tutorials in Chinese, translated by the community.
+Report bugs, request features, discuss issues, and more.
+Tutorials in Korean, translated by the community.
+Tutorials in Japanese, translated by the community.
+View example projects for vision, text, RL, and more.
+Learn about the PyTorch core and module maintainers.
+Learn how you can contribute to PyTorch code and documentation.
+PyTorch design principles for contributors and maintainers.
+Forums used by PyTorch core developers and contributors to the PyTorch codebase for technical discussions.
+Learn about the PyTorch governance hierarchy.
+Check out the PyTorch Mobile demo app for iOS and Android.
+Further your education and career goals.
+Stay up -to- date with the latest updates .
+
+# Source: https://pytorch.org/resources/

@@ -1,0 +1,112 @@
+
+
+# tf.py_functionStay organized with collectionsSave and categorize content based on your preferences.
+Wraps a python function into a TensorFlow op that executes it eagerly.
+
+
+tf.py_function(
+    func=None, inp=None, Tout=None, name=None
+)
+
+
+
+
+### Used in the notebooks
+- tf.data: Build TensorFlow input pipelines
+- This allows you to use nofunc=None, inp=None, Tout=None tensorflow code
+relying on tf.autograph to convert the code to use tensorflow control logic
+(tf.cond, tf.while_loop).
+Since tf.py_function operates on Tensor s it is still
+differentiable (once).
+
+
+### As a decorator
+
+
+@tf.py_function(Tout=tf.float32)
+def py_log_huber(x, m):
+  print('Running with eager execution.')
+  if tf.abs(x) <= m:
+    return x**2
+    return m**2 * (1 - 2 * tf.math.log(m) + tf.math.log(x**2))
+
+
+
+
+x = tf.constant(1.0)
+m = tf.constant(2.0)
+print(py_log_huber(x,m).numpy())
+
+
+Inside a tf.function the tf.py_function is not converted to a tf.Graph .:
+
+
+def tf_wrapper(x):
+  print('Tracing.')
+  m = tf.constant(2.0)
+  return py_log_huber(x,m)
+
+
+
+
+print(tf_wrapper(x).numpy())
+print(tf_wrapper(x).numpy())
+
+
+
+
+with tf.GradientTape() as t:
+  t.watch(x)
+  y = tf_wrapper(x)
+t.gradient(y, x).numpy()
+
+
+
+
+### Inplace
+
+
+# No decorator
+def log_huber(x, m):
+  if tf.abs(x) <= m:
+    return x**2
+    return m**2 * (1 - 2 * tf.math.log(m) + tf.math.log(x**2))
+x = tf.constant(1.0)
+m = tf.constant(2.0)
+tf.py_function(func=log_huber, inp=[x, m], Tout=tf.float32).numpy()
+
+
+
+
+### More info
+You can also use tf.py_function to debug your models at runtime
+tf.py_function is similar in spirit to tf.numpy_function , but unlike
+the latter, the former lets you use TensorFlow operations in the wrapped
+and wraps functions that take NumPy arrays as inputs and return NumPy arrays
+as outputs, tf.py_function can be placed on GPUs and wraps functions
+that take Tensors as inputs, execute TensorFlow operations in their bodies,
+and return Tensors as outputs.
+(GIL) that allows only one thread to run at any point in time. This will
+- The body of the function (i.e. func ) will not be serialized in a GraphDef . Therefore, you should not use this function if you need to
+serialize your model and restore it in a different environment.
+that calls tf.py_function() . If you are using distributed
+TensorFlow, you must run a tf.distribute.Server in the same process as the
+program that calls tf.py_function() and you must pin the created
+operation to a device in that server (e.g. using with tf.device(): ).
+- Currently tf.py_function is not compatible with XLA. Calling tf.py_function inside tf.function(jit_compile=True) will raise an
+
+
+## Args
+func A Python function that accepts inp as arguments, and returns a value
+(or list of values) whose type is described by Tout . Do not set func when using tf.py_function as a decorator. inp Input arguments for func .  A list whose elements are Tensor s or CompositeTensors (such as tf.RaggedTensor ); or a single Tensor or CompositeTensor . Do not set inp when using tf.py_function as a
+decorator. Tout The type(s) of the value(s) returned by func .  One of the following.
+- If func returns a Tensor (or a value that can be converted to a
+Tensor): the tf.DType for that value. * If func returns a CompositeTensor : The tf.TypeSpec for that value. * If func returns None : the empty list ( [] ). * If func returns a list of Tensor and CompositeTensor values: a corresponding list of tf.DType s and tf.TypeSpec s for each value. name A name for the operation (optional).
+
+
+## Returns
+- If func is None this returns a decorator that will ensure the
+and returns the result: a Tensor , CompositeTensor , or list of Tensor and CompositeTensor ; or an empty list if func returns None .
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/py_function

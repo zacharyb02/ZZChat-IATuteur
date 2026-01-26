@@ -1,0 +1,60 @@
+
+
+# Parameter server training with ParameterServerStrategyStay organized with collectionsSave and categorize content based on your preferences.
+
+
+## Overview
+Parameter server training is a common data-parallel method to scale up model training on multiple machines.
+A parameter server training cluster consists of workers and parameter servers . Variables are created on parameter servers and they are read and updated by workers in each step. By default, workers read and update these variables independently without synchronizing with each other. This is why sometimes parameter server-style training is called asynchronous training .
+In TensorFlow 2, parameter server training is powered by the tf.distribute.ParameterServerStrategy class, which distributes the training steps to a cluster that scales up to thousands of workers (accompanied by parameter servers).
+
+
+### Supported training methods
+There are two main supported training methods:
+- The Keras Model.fit API: if you prefer a high-level abstraction and handling of training. This is generally recommended if you are training a tf.keras.Model .
+- A custom training loop: if you prefer to define the details of your training loop (you can refer to guides on Custom training , Writing a training loop from scratch and Custom training loop with Keras and MultiWorkerMirroredStrategy for more details).
+
+
+### A cluster with jobs and tasks
+Regardless of the API of choice ( Model.fit or a custom training loop), distributed training in TensorFlow 2 involves a 'cluster' with several 'jobs' , and each of the jobs may have one or more 'tasks' .
+When using parameter server training, it is recommended to have:
+- One coordinator job (which has the job name chief )
+- Multiple worker jobs (job name worker )
+- Multiple parameter server jobs (job name ps )
+The coordinator creates resources, dispatches training tasks, writes checkpoints, and deals with task failures. The workers and parameter servers run tf.distribute.Server instances that listen for requests from the coordinator.
+
+
+### Parameter server training with theModel.fitAPI
+Parameter server training with the Model.fit API requires the coordinator to use a tf.distribute.ParameterServerStrategy object. Similar to Model.fit usage with no strategy, or with other strategies, the workflow involves creating and compiling the model, preparing the callbacks, and calling Model.fit .
+
+
+### Parameter server training with a custom training loop
+With custom training loops, the tf.distribute.coordinator.ClusterCoordinator class is the key component used for the coordinator.
+- The ClusterCoordinator class needs to work in conjunction with a tf.distribute.ParameterServerStrategy object.
+- This tf.distribute.Strategy object is needed to provide the information of the cluster and is used to define a training step, as demonstrated in Custom training with tf.distribute.Strategy .
+- The ClusterCoordinator object then dispatches the execution of these training steps to remote workers.
+The most important API provided by the ClusterCoordinator object is schedule :
+- The schedule API enqueues a tf.function and returns a future-like RemoteValue immediately.
+- The queued functions will be dispatched to remote workers in background threads and their RemoteValue s will be filled asynchronously.
+- Since schedule doesn’t require worker assignment, the tf.function passed in can be executed on any available worker.
+- If the worker it is executed on becomes unavailable before its completion, the function will be retried on another available worker.
+- Because of this fact and the fact that function execution is not atomic, a single function call may be executed more than once.
+In addition to dispatching remote functions, the ClusterCoordinator also helps
+to create datasets on all the workers and rebuild these datasets when a worker recovers from failure.
+
+
+## Tutorial setup
+The tutorial will branch into Model.fit and custom training loop paths, and you can choose the one that fits your needs. Sections other than "Training with X" are applicable to both paths.
+
+
+```python
+import multiprocessing
+import os
+import random
+import portpicker
+import tensorflow as tf
+```
+
+
+
+# Source: https://www.tensorflow.org/tutorials/distribute/parameter_server_training

@@ -1,5 +1,4 @@
 import os
-import time
 import re
 import requests
 from bs4 import BeautifulSoup
@@ -7,249 +6,241 @@ from urllib.parse import urlparse, urljoin
 
 # --- CONFIGURATION ---
 OUTPUT_FOLDER = "knowledge_base_cnn"
-MAX_DEPTH = 3     
-MAX_PAGES = 50    
-DELAY = 0.5
+MAX_DEPTH = 2           # Réduit à 2 pour éviter de trop s'éloigner du sujet
+MAX_PAGES = 30          # Par site
+TIMEOUT = 10
 
-# --- MOTS-CLÉS CIBLES ---
-KEYWORDS_CNN = [
-    "cnn", "conv", "convolution", "pooling", "stride", "padding","Supervised Learning","Unsupervised Learning","Training","Convolution","ReLU","Sigmoid","Hinge Loss","Focal Loss"
-    "image", "vision", "feature_map", "kernel", "filter","Tanh","Softmax","Adaptive Pooling","Dense Layer","Classification Layer","Stochastic Gradient Descent (SGD)","Adam","Learning Rate","Optimizer"
-    "resnet", "vgg", "alexnet", "inception", "mobilenet","Global Average Pooling","Global Max Pooling","Output Layer","Batch Normalization","Gradient Descent","Image Classification",
-    "classification", "detection" ,"Layer Normalization","Instance Normalization","Dropout","Weight Decay","L1 Regularization","L2 Regularization","Loss","Binary Cross-Entropy","Categorical Cross-Entropy","Sparse Categorical Cross-Entropy","Mean Squared Error (MSE)","Mean Absolute Error (MAE)"
-]
-
+# Headers pour ne pas se faire bloquer
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
 
+# Mots-clés pour valider qu'une page est pertinente
+KEYWORDS_CNN = [
+    "cnn", "convolution", "pooling", "stride", "padding", "relu", 
+    "softmax", "adam", "sgd", "pytorch", "tensorflow", "keras", 
+    "layer", "model", "training", "loss", "accuracy", "codecarbon", 
+    "emission", "tracker", "inference", "neural"
+]
+
 visited_urls = set()
-pages_scanned = 0
-pages_saved = 0
+pages_saved_count = 0
 
 def nettoyer_nom_fichier(url):
+    """Crée un nom de fichier propre à partir de l'URL."""
     parsed = urlparse(url)
     path = parsed.path.strip("/").replace("/", "_")
-    if not path: path = "index"
+    if not path: path = "home"
     domain = parsed.netloc.replace("www.", "").replace(".", "_")
     filename = f"{domain}_{path}"
-    
-    return "".join([c for c in filename if c.isalnum() or c in ('_')]).strip()[:100] + ".txt"
+    # Garde seulement les caractères alphanumériques et underscores
+    clean_name = "".join([c for c in filename if c.isalnum() or c == '_'])
+    return clean_name[:100] + ".txt"
 
-
-def nettoyer_texte_final(texte):
+def extraire_contenu_intelligent(soup):
     """
-    Nettoie le texte brut pour le rendre lisible ligne par ligne.
+    Extrait le texte et le CODE en respectant la structure.
+    CORRECTION MAJEURE : Préservation de l'indentation et des lignes de code.
     """
-    lines = []
-    for line in texte.splitlines():
-        cleaned = line.strip()
-        # On garde la ligne si elle n'est pas vide
-        if cleaned:
-            lines.append(cleaned)
-    
-    # On rejoint tout
-    result = "\n".join(lines)
-    
-    # On supprime les accumulations de sauts de ligne (max 2)
-    result = re.sub(r'\n{3,}', '\n\n', result)
-    
-    return result
-
-
-def extraire_contenu(soup):
-    # 1. On vire tout ce qui pollue la lecture
-    for balise in soup(["script", "style", "nav", "footer", "header", "aside", "form", "noscript", "svg", "button", "input"]):
+    # 1. Nettoyage des balises inutiles
+    for balise in soup(["script", "style", "nav", "footer", "header", "aside", "form", "noscript", "svg", "button", "iframe", "ad"]):
         balise.decompose()
 
-    # On cible le contenu principal
-    corps = soup.find('main') or soup.find('article') or soup.find('div', {'role': 'main'}) or soup.body
-    if not corps: return ""
+    # 2. Trouver le contenu principal
+    corps = soup.find('main') or soup.find('article') or soup.find('div', {'role': 'main'}) or soup.find('div', class_='content') or soup.body
+    
+    if not corps:
+        return ""
 
-    contenu = []
-    
-    # Ordre de scan
-    tags = ['h1', 'h2', 'h3', 'p', 'pre', 'li', 'div'] 
-    
-    # On utilise un Set pour éviter de scanner deux fois le même texte (fréquent avec les div imbriquées)
+    contenu_final = []
     textes_vus = set()
 
-    for element in corps.find_all(tags):
+    # 3. Parcours intelligent des éléments
+    # On ajoute 'code' et les classes spécifiques aux docs techniques
+    tags_to_find = ['h1', 'h2', 'h3', 'p', 'pre', 'code', 'div', 'li']
+    
+    all_elements = corps.find_all(tags_to_find)
+
+    for element in all_elements:
+        text_content = ""
+        is_code = False
+        prefix = ""
+
+        # --- CAS 1 : CODE PYTHON ---
+        classes = element.get('class', [])
         
-        # --- GESTION DU CODE (C'est là que ça change) ---
-        if element.name == 'pre':
-            # IMPORTANT : On ne met PAS de separator="\n" ici pour le code
-            # On récupère le texte brut tel qu'il est affiché
-            code_text = element.get_text().strip()
-            
-            # On évite les doublons et les blocs vides
-            if code_text and code_text not in textes_vus:
-                contenu.append(f"\n```python\n{code_text}\n```\n")
-                textes_vus.add(code_text)
+        # Détection améliorée pour TensorFlow, PyTorch, GitHub, etc.
+        is_pre_block = element.name == 'pre'
+        is_code_div = element.name == 'div' and ('highlight' in classes or 'code' in classes or 'devsite-code-button' in str(classes))
         
-        # --- GESTION DES TITRES ---
+        # On ignore les balises 'code' qui sont à l'intérieur d'un 'pre' (pour éviter les doublons)
+        if element.name == 'code' and element.find_parent('pre'):
+            continue
+
+        if is_pre_block or is_code_div:
+            is_code = True
+            # --- CORRECTION ICI ---
+            # On N'UTILISE PAS separator="\n" pour le code, sinon ça casse tout.
+            # On utilise get_text() brut pour garder les espaces et indentations.
+            text_content = element.get_text().strip()
+        
+        # --- CAS 2 : TITRES ---
         elif element.name in ['h1', 'h2', 'h3']:
-            text = element.get_text(strip=True)
-            if text and text not in textes_vus:
-                contenu.append(f"\n\n{'#' * int(element.name[1])} {text}\n")
-                textes_vus.add(text)
-
-        # --- GESTION DU TEXTE STANDARD ---
+            text_content = element.get_text(strip=True)
+            prefix = "\n\n" + "#" * int(element.name[1]) + " "
+        
+        # --- CAS 3 : TEXTE NORMAL ---
         elif element.name in ['p', 'li']:
-            # On ignore si c'est dans un bloc de code ou un tableau
-            if element.find_parent(['pre', 'table']):
+            # On ignore les paragraphes qui sont DANS un tableau ou du code
+            if element.find_parent(['table', 'pre', 'div'], class_='highlight'):
                 continue
-                
-            text = element.get_text(" ", strip=True) # On remplace les sauts internes par des espaces
             
-            # Filtre : on ne garde que les phrases qui ont du sens (plus de 20 caractères ou commence par une majuscule)
-            if len(text) > 20 or (text and text[0].isupper()):
-                if text not in textes_vus:
-                    prefix = "- " if element.name == 'li' else ""
-                    contenu.append(f"{prefix}{text}")
-                    textes_vus.add(text)
+            # Pour le texte, on veut des espaces entre les balises inline (comme les liens)
+            text_content = element.get_text(" ", strip=True)
+            if element.name == 'li':
+                prefix = "- "
 
-    # On assemble et on passe le grand nettoyage final
-    texte_brut = "\n".join(contenu)
-    return nettoyer_texte_final(texte_brut)
+        # --- FILTRAGE ET AJOUT ---
+        if text_content and text_content not in textes_vus:
+            
+            if is_code:
+                # Nettoyage spécifique code : on retire les lignes vides multiples
+                lines = [line for line in text_content.splitlines() if line.strip()]
+                cleaned_code = "\n".join(lines)
+                
+                # On ne garde que les blocs de code > 20 caractères
+                if len(cleaned_code) > 20:
+                    # On vérifie que ce n'est pas juste des commandes shell inutiles
+                    if "pip install" in cleaned_code and len(cleaned_code) < 50:
+                        continue
 
-def lien_est_interessant(lien_element, url_complete):
-    """
-    Vérifie si un lien vaut la peine d'être cliqué.
-    On regarde : 
-    1. Le texte du lien (ex: "Comprendre les Convolutions")
-    2. L'URL elle-même (ex: .../tf/keras/layers/Conv2D)
-    """
-    texte_lien = lien_element.get_text(strip=True).lower()
-    url_lower = url_complete.lower()
-    
-    # Si un mot clé est dans le TEXTE du lien OU dans l'URL
-    match_texte = any(k in texte_lien for k in KEYWORDS_CNN)
-    match_url = any(k in url_lower for k in KEYWORDS_CNN)
-    
-    return match_texte or match_url
+                    block = f"\n\n```python\n{cleaned_code}\n```\n\n"
+                    contenu_final.append(block)
+                    textes_vus.add(text_content) # On ajoute le brut au set pour éviter doublons
+            
+            else:
+                # Pour le texte normal
+                if len(text_content) > 30 or element.name.startswith('h'):
+                    contenu_final.append(f"{prefix}{text_content}")
+                    textes_vus.add(text_content)
+
+    return "\n".join(contenu_final)
 
 def crawler(url, current_depth, domain_restriction):
-    global pages_scanned, pages_saved
+    global pages_saved_count
     
-    if current_depth > MAX_DEPTH or pages_scanned >= MAX_PAGES or url in visited_urls:
+    if current_depth > MAX_DEPTH or url in visited_urls:
         return
 
     visited_urls.add(url)
-    pages_scanned += 1
-    
-    print(f" Scan (Prof {current_depth}): {url}")
+    print(f"[{current_depth}] Scan: {url}")
 
     try:
-        response = requests.get(url, headers=HEADERS, timeout=10)
-        if response.status_code != 200: 
-            print(f"   -> Erreur Status: {response.status_code}")
-            return
+        response = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+        if response.status_code != 200: return
 
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        # Extraction du texte
-        texte = extraire_contenu(soup)
-        
-        # On sauvegarde si le texte est long OU si c'est la page de départ (depth 0)
-        # On s'assure juste qu'il y a un minimum de contenu (> 50 chars) pour éviter les pages blanches
-        if len(texte) > 500 or (current_depth == 0 and len(texte) > 50):
+        # Extraction
+        texte_propre = extraire_contenu_intelligent(soup)
+
+        # SAUVEGARDE (Uniquement si contenu suffisant)
+        if len(texte_propre) > 500:
             filename = nettoyer_nom_fichier(url)
             filepath = os.path.join(OUTPUT_FOLDER, filename)
             
             with open(filepath, "w", encoding="utf-8") as f:
-                f.write(f"SOURCE_URL: {url}\nSUJET: CNN_DEEP_LEARNING\n\n{texte}")
+                # ⚠️ IMPORTANT : PLUS DE "SUJET:" NI DE METADATA EN HAUT
+                # On met juste l'URL en commentaire tout en bas si besoin
+                f.write(texte_propre)
+                f.write(f"\n\n# Source: {url}")
             
-            print(f"    [V] Sauvegardé ({len(texte)} chars)")
-            pages_saved += 1
+            print(f"   -> Sauvegardé : {filename} ({len(texte_propre)} chars)")
+            pages_saved_count += 1
         else:
-            print(f"    [X] Ignoré (Contenu trop court: {len(texte)} chars)")
+            print("   -> Ignoré (Contenu trop court/vide)")
 
-        # 2. NAVIGATION FILTRÉE
+        # NAVIGATION (Récursive)
         if current_depth < MAX_DEPTH:
-            liens = soup.find_all('a', href=True)
-            for lien in liens:
+            for lien in soup.find_all('a', href=True):
                 full_url = urljoin(url, lien['href']).split('#')[0]
                 
-                # Vérification du domaine
-                if urlparse(full_url).netloc == domain_restriction:
-                    if full_url not in visited_urls:
-                        # Si le lien est intéressant OU si on est sur la page d'accueil (pour trouver le sommaire)
-                        if lien_est_interessant(lien, full_url) or (current_depth == 0 and "tutorial" in full_url):
-                            crawler(full_url, current_depth + 1, domain_restriction)
+                # On reste sur le même domaine et on évite les doublons
+                if domain_restriction in full_url and full_url not in visited_urls:
+                    # Filtre simple sur les mots clés dans l'URL pour rester pertinent
+                    if any(kw in full_url.lower() for kw in KEYWORDS_CNN) or "tutorial" in full_url:
+                        crawler(full_url, current_depth + 1, domain_restriction)
 
     except Exception as e:
-        print(f" Erreur critique : {e}")
-
+        print(f"   -> Erreur: {e}")
 
 # --- LANCEMENT ---
 if __name__ == "__main__":
     if not os.path.exists(OUTPUT_FOLDER):
         os.makedirs(OUTPUT_FOLDER)
+    
+    # Liste ciblée (Docs officielles + Tutoriels fiables)
+    urls_cibles = [
+        # --- 1. LES INDISPENSABLES (DOCS OFFICIELLES) ---
+    # Ces pages sont "propres" et contiennent le code exact que l'IA doit apprendre.
+    
+    # TensorFlow / Keras (Le standard pour débuter)
+    "https://www.tensorflow.org/tutorials/images/cnn",
+    "https://www.tensorflow.org/tutorials/images/classification",
+    "https://www.tensorflow.org/tutorials/images/data_augmentation",
+    "https://www.tensorflow.org/tutorials/images/transfer_learning",
+    "https://www.tensorflow.org/guide/keras/functional",  # Pour les architectures complexes
 
-    # --- LISTE STRATÉGIQUE POUR LE PROJET RAG ---
-    start_urls_list = [
-        # 1. MLP (Perceptron Multicouche) - Scikit-Learn
-        "https://scikit-learn.org/stable/modules/neural_networks_supervised.html",
-        
-        # 2. CNN (Réseaux Convolutifs) - TensorFlow
-        "https://www.tensorflow.org/tutorials/images/cnn",
-        "https://www.tensorflow.org/tutorials/images/classification",
-        
-        # 3. Transfer Learning - TensorFlow
-        "https://www.tensorflow.org/tutorials/images/transfer_learning",
-        
-        # 4. PyTorch (CNN & Transfer Learning) - Alternative demandée
-        "https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html",
-        "https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html",
-        #datacamp
-        "https://www.datacamp.com/tutorial/introduction-to-convolutional-neural-networks-cnns?utm_source=chatgpt.com",
-        "https://learnopencv.com/understanding-convolutional-neural-networks-cnn/?utm_source=chatgpt.com",
-        "https://cs231n.github.io/convolutional-networks/?utm_source=chatgpt.com",
-        "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/tutorial.html?utm_source=chatgpt.com",
-        "https://www.projectpro.io/article/learn-convolutional-neural-networks/803?utm_source=chatgpt.com",
-        "https://www.scribd.com/document/892468764/cours-CNN-1?utm_source=chatgpt.com",
-        "https://www.geeksforgeeks.org/deep-learning/building-a-convolutional-neural-network-using-pytorch/?utm_source=chatgpt.com",
-        "https://www.kaggle.com/code/kanncaa1/convolutional-neural-network-cnn-tutorial?utm_source=chatgpt.com",
-        ""
-        # 5. Green AI & CodeCarbon (Dimension Énergétique - OBLIGATOIRE)
-        "https://mlco2.github.io/codecarbon/usage.html",
-        "https://mlco2.github.io/codecarbon/methodology.html",
-        "https://deeplearning.stanford.edu/tutorial/supervised/ConvolutionalNeuralNetwork/",
-        "https://www.datacamp.com/tutorial/introduction-to-convolutional-neural-networks-cnns",
-        "https://learnopencv.com/understanding-convolutional-neural-networks-cnn/",
-        "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/tutorial.html",
-        "https://www.coursera.org/learn/convolutional-neural-networks",
-        "https://www.tensorflow.org/tutorials/images/cnn",
-        "https://poloclub.github.io/cnn-explainer/",
-        "https://medium.com/@prathammodi001/convolutional-neural-networks-for-dummies-a-step-by-step-cnn-tutorial-e68f464d608f",
-        "https://d2l.ai/chapter_convolutional-neural-networks/",
-        "https://cs231n.github.io/convolutional-networks/",
-        "https://parktwin2.medium.com/building-a-convolutional-neural-network-cnn-with-pytorch-bdd3c5fe47cb"
+    # PyTorch (Le standard recherche/industrie)
+    "https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html",
+    "https://pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html",
+    "https://pytorch.org/tutorials/beginner/transfer_learning_tutorial.html",
+    "https://pytorch.org/tutorials/recipes/recipes/defining_a_neural_network.html",
 
+    # --- 2. THÉORIE APPROFONDIE (BIBLE DES CNN) ---
+    # Stanford CS231n : C'est la référence mondiale. Très riche en texte explicatif.
+    "https://cs231n.github.io/convolutional-networks/",
+    "https://cs231n.github.io/neural-networks-1/",
+    "https://cs231n.github.io/neural-networks-2/",
+    "https://cs231n.github.io/optimization-1/",
+    
+    # MIT Deep Learning
+    "http://introtodeeplearning.com/", 
+
+    # --- 3. TUTORIELS PRATIQUES & CODE ---
+    # Machine Learning Mastery (Très facile à scraper, format clair)
+    "https://machinelearningmastery.com/convolutional-layers-for-deep-learning-neural-networks/",
+    "https://machinelearningmastery.com/how-to-develop-a-cnn-from-scratch-for-cifar-10-photo-classification/",
+    "https://machinelearningmastery.com/image-augmentation-deep-learning-keras/",
+    
+    # Papers with Code (Pour relier théorie et implémentation)
+    "https://paperswithcode.com/method/cnn",
+    "https://paperswithcode.com/method/resnet",
+    
+    # --- 4. GREEN AI & MLOps (Ton exigence spécifique) ---
+    # CodeCarbon & Mesure d'énergie
+    "https://mlco2.github.io/codecarbon/usage.html",
+    "https://mlco2.github.io/codecarbon/methodology.html",
+    "https://mlco2.github.io/codecarbon/parameters.html",
+    
+    # Hugging Face (Documentation efficace)
+    "https://huggingface.co/docs/transformers/tasks/image_classification",
+
+    # --- 5. MATHÉMATIQUES & CONCEPTS CLÉS ---
+    # Explications visuelles des convolutions
+    "https://poloclub.github.io/cnn-explainer/",  # Attention: bcp de visuel, peut-être dur à scraper
+    "https://distill.pub/2017/feature-visualization/", # Excellent mais complexe techniquement
+    
+    # --- 6. ARCHITECTURES CÉLÈBRES ---
+    "https://iq.opengenus.org/vgg16/",
+    "https://iq.opengenus.org/resnet50-architecture/",
+    "https://iq.opengenus.org/mobile-net-architecture/"
     ]
 
-    # --- DANS LA SECTION IF NAME == MAIN ---
-
-    print("--- Démarrage du Scraping Multi-Sources ---")
+    print("--- Démarrage du Scraping Optimisé ---")
     
-    # Boucle sur chaque URL de la liste
-    for i, url in enumerate(start_urls_list):
-        if not url.strip(): continue # Saute les lignes vides
-
-        print(f"\n [Source {i+1}/{len(start_urls_list)}] Traitement de : {url}")
-        
-        domain_start = urlparse(url).netloc
+    for url in urls_cibles:
+        domain = urlparse(url).netloc
+        crawler(url, 0, domain)
     
-        # On remet le compteur à zéro pour chaque nouveau site
-        # Sinon le premier site mange tout le budget de pages !
-        pages_scanned = 0 
-        
-        # Optionnel : On remet visited_urls à zéro si on veut traiter 
-        # des pages similaires sur des sites différents, 
-        # mais garder le set évite les boucles infinies.
-        # visited_urls.clear() 
-
-        crawler(url, 0, domain_start)
-
-    print(f"\n GRAND TOTAL : {pages_saved} pages sauvegardées.")
+    print(f"\nTerminé ! {pages_saved_count} pages extraites avec succès.")

@@ -1,43 +1,48 @@
-SOURCE_URL: https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D
-SUJET: CNN_DEEP_LEARNING
 
-- TensorFlow
-- API
-- TensorFlow v2.16.1
-- Python
+
 # tf.keras.layers.Conv2DStay organized with collectionsSave and categorize content based on your preferences.
-2D convolution layer.
 Inherits From: Layer , Operation
 Main aliases tf.keras.layers.Convolution2D
-tf.keras.layers.Convolution2D
+
+
 ```python
 tf.keras.layers.Conv2D(
-filters,
-kernel_size,
-strides=(1, 1),
-padding='valid',
-data_format=None,
-dilation_rate=(1, 1),
-groups=1,
-activation=None,
-use_bias=True,
-kernel_initializer='glorot_uniform',
-bias_initializer='zeros',
-kernel_regularizer=None,
-bias_regularizer=None,
-activity_regularizer=None,
-kernel_constraint=None,
-bias_constraint=None,
-**kwargs
+    filters,
+    kernel_size,
+    strides=(1, 1),
+    padding='valid',
+    data_format=None,
+    dilation_rate=(1, 1),
+    groups=1,
+    activation=None,
+    use_bias=True,
+    kernel_initializer='glorot_uniform',
+    bias_initializer='zeros',
+    kernel_regularizer=None,
+    bias_regularizer=None,
+    activity_regularizer=None,
+    kernel_constraint=None,
+    bias_constraint=None,
+    **kwargs
 )
 ```
+
+
+
+
 ### Used in the notebooks
+- Use TF1.x models in TF2 workflows
+- Better performance with tf.function
+- Pruning for on-device inference w/ XNNPACK
+- pix2pix: Image-to-image translation with a conditional GAN
 This layer creates a convolution kernel that is convolved with the layer
 input over a single spatial (or temporal) dimension to produce a tensor of
 outputs. If use_bias is True, a bias vector is created and added to the
 outputs. Finally, if activation is not None , it is applied to the
 outputs as well.
-Args
+
+
+## Args
 filters int, the dimension of the output space (the number of filters
 in the convolution). kernel_size int or tuple/list of 2 integer, specifying the size of the
 convolution window. strides int or tuple/list of 2 integer, specifying the stride length
@@ -66,41 +71,70 @@ A 4D tensor with shape: (batch_size, new_height, new_width, filters)
 - If data_format="channels_first" :
 A 4D tensor with shape: (batch_size, filters, new_height, new_width)
 Returns A 4D tensor representing activation(conv2d(inputs, kernel) + bias) .
+
+
 ## Returns
-Raises
+
+
+## Raises
 ValueError when both strides > 1 and dilation_rate > 1 .
+
+
 ```python
 x = np.random.rand(4, 10, 10, 128)
 y = keras.layers.Conv2D(32, 3, activation='relu')(x)
 print(y.shape)
 (4, 8, 8, 32)
 ```
-Attributes
+
+
+
+
+## Attributes
 input Retrieves the input tensor(s) of a symbolic operation.
 Only returns the tensor(s) corresponding to the first time the operation was called. kernel
 output Retrieves the output tensor(s) of a layer.
 Only returns the tensor(s) corresponding to the first time the operation was called.
+
+
 ## Methods
+
+
 ### convolution_op
-View source
+
+
 ```python
 convolution_op(
-inputs, kernel
+    inputs, kernel
 )
 ```
+
+
+
+
 ### enable_lora
+
+
 ```python
 enable_lora(
-rank, a_initializer='he_uniform', b_initializer='zeros'
+    rank, a_initializer='he_uniform', b_initializer='zeros'
 )
 ```
+
+
+
+
 ### from_config
+
+
 ```python
 @classmethod
 from_config(
-config
+    config
 )
 ```
+
+
 Creates a layer from its config.
 This method is the reverse of get_config ,
 capable of instantiating the same layer from the config
@@ -108,12 +142,18 @@ dictionary. It does not handle layer connectivity
 (handled by Network), nor weights (handled by set_weights ).
 config A Python dictionary, typically the
 output of get_config.
-Returns A layer instance.
+
+
 ### symbolic_call
+
+
 ```python
 symbolic_call(
-*args, **kwargs
+    *args, **kwargs
 )
 ```
+
+
 Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
-Last updated 2024-06-07 UTC.
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D

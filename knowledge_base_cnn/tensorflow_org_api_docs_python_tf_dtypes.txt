@@ -1,0 +1,69 @@
+
+
+# Module: tf.dtypesStay organized with collectionsSave and categorize content based on your preferences.
+Public API for tf._api.v2.dtypes namespace
+
+
+## Modules
+experimental module: Public API for tf._api.v2.dtypes.experimental namespace
+
+
+## Classes
+class DType : Represents the type of the elements in a Tensor .
+
+
+## Functions
+as_dtype(...) : Converts the given type_value to a tf.DType .
+cast(...) : Casts a tensor to a new type.
+complex(...) : Converts two real numbers to a complex number.
+saturate_cast(...) : Performs a safe saturating cast of value to dtype .
+
+
+## Other Members
+
+
+```python
+{
+ tf.qint16,
+ tf.qint16_ref,
+ tf.qint32,
+ tf.qint32_ref,
+ tf.qint8,
+ tf.qint8_ref,
+ tf.quint16,
+ tf.quint16_ref,
+ tf.quint8,
+ tf.quint8_ref
+}
+```
+
+
+bfloat16 Instance of tf.dtypes.DType
+16-bit bfloat (brain floating point). bool Instance of tf.dtypes.DType
+Boolean. complex128 Instance of tf.dtypes.DType
+128-bit complex. complex64 Instance of tf.dtypes.DType
+64-bit complex. double Instance of tf.dtypes.DType
+64-bit (double precision) floating-point. float16 Instance of tf.dtypes.DType
+16-bit (half precision) floating-point. float32 Instance of tf.dtypes.DType
+32-bit (single precision) floating-point. float64 Instance of tf.dtypes.DType
+64-bit (double precision) floating-point. half Instance of tf.dtypes.DType
+16-bit (half precision) floating-point. int16 Instance of tf.dtypes.DType
+Signed 16-bit integer. int32 Instance of tf.dtypes.DType
+Signed 32-bit integer. int64 Instance of tf.dtypes.DType
+Signed 64-bit integer. int8 Instance of tf.dtypes.DType
+Signed 8-bit integer. qint16 Instance of tf.dtypes.DType
+Signed quantized 16-bit integer. qint32 Instance of tf.dtypes.DType
+signed quantized 32-bit integer. qint8 Instance of tf.dtypes.DType
+Signed quantized 8-bit integer. quint16 Instance of tf.dtypes.DType
+Unsigned quantized 16-bit integer. quint8 Instance of tf.dtypes.DType
+Unsigned quantized 8-bit integer. resource Instance of tf.dtypes.DType
+Handle to a mutable, dynamically allocated resource. string Instance of tf.dtypes.DType
+Variable-length string, represented as byte array. uint16 Instance of tf.dtypes.DType
+Unsigned 16-bit (word) integer. uint32 Instance of tf.dtypes.DType
+Unsigned 32-bit (dword) integer. uint64 Instance of tf.dtypes.DType
+Unsigned 64-bit (qword) integer. uint8 Instance of tf.dtypes.DType
+Unsigned 8-bit (byte) integer. variant Instance of tf.dtypes.DType
+Data of arbitrary type (known at runtime).
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/dtypes

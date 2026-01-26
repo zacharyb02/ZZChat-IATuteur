@@ -1,0 +1,38 @@
+Learn how to migrate your TensorFlow code from TensorFlow 1.x to TensorFlow 2. It may take a little work to convert your code, but every change results in access to new features and models, increased clarity and simplicity, and easier debugging. Before starting to migrate, read the behaviors guide . Briefly, the migration process is: Run the automated script to convert your TF1.x API usage to tf.compat.v1 . Remove old tf.contrib.layers and replace them with TF Slim symbols. Also check TF Addons for other tf.contrib symbols. Rewrite your TF1.x model forward passes to run in TF2 with eager execution enabled. Validate the accuracy and numerical correctness of your migrated code. Upgrade your training, evaluation and model saving code to TF2 equivalents. (Optional) Migrate your TF2-compatible tf.compat.v1 APIs including TF Slim usage to idiomatic TF2 APIs.
+Run the automated script to convert your TF1.x API usage to tf.compat.v1 . Remove old tf.contrib.layers and replace them with TF Slim symbols. Also check TF Addons for other tf.contrib symbols. Rewrite your TF1.x model forward passes to run in TF2 with eager execution enabled. Validate the accuracy and numerical correctness of your migrated code. Upgrade your training, evaluation and model saving code to TF2 equivalents. (Optional) Migrate your TF2-compatible tf.compat.v1 APIs including TF Slim usage to idiomatic TF2 APIs.
+- Run the automated script to convert your TF1.x API usage to tf.compat.v1 .
+- Remove old tf.contrib.layers and replace them with TF Slim symbols. Also check TF Addons for other tf.contrib symbols.
+- Rewrite your TF1.x model forward passes to run in TF2 with eager execution enabled.
+- Validate the accuracy and numerical correctness of your migrated code.
+- Upgrade your training, evaluation and model saving code to TF2 equivalents.
+- (Optional) Migrate your TF2-compatible tf.compat.v1 APIs including TF Slim usage to idiomatic TF2 APIs.
+
+
+### TensorFlow 1.x vs TensorFlow 2
+
+
+### Map TF1.x models to TF2
+
+
+### Rewrite TF1.x API symbols
+
+
+### Validate migrated TF2 code
+
+
+### Moving off Estimators
+
+
+### Moving off feature columns
+
+
+### Multi-worker CPU/GPU training workflows
+
+
+### TPU workflows
+
+
+### TensorFlow Lite
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates.
+
+# Source: https://www.tensorflow.org/guide/migrate

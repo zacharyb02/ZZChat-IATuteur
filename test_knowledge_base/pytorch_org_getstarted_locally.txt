@@ -1,0 +1,111 @@
+
+
+## Start Locally
+Select your preferences and run the install command. Stable represents the most currently tested and supported version of PyTorch. This should
+   be suitable for many users. Preview is available if you want the latest, not fully tested and supported, builds that are generated nightly.
+   Please ensure that you have met the prerequisites below (e.g., numpy) ,  depending on your package manager. You can also install previous versions of PyTorch . Note that LibTorch is only available for C++.
+NOTE: Latest Stable PyTorch requires Python 3.10 or later.
+
+
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+
+
+
+# Installing on macOS
+PyTorch can be installed and used on macOS. Depending on your system and GPU capabilities, your experience with PyTorch on macOS may vary in terms of processing time.
+
+
+## Prerequisites
+
+
+### macOS Version
+PyTorch is supported on macOS 10.15 (Catalina) or above.
+
+
+### Python
+
+
+### Package Manager
+To install the PyTorch binaries, you will need to use the supported package manager: pip .
+
+
+## Installation
+
+
+### pip
+To install PyTorch via pip, use the following command, depending on your Python version:
+
+
+# Python 3.x
+pip3 install torch torchvision
+
+
+
+
+## Verification
+To ensure that PyTorch was installed correctly, we can verify the installation by running sample PyTorch code. Here we will construct a randomly initialized tensor.
+
+
+import torch
+x = torch.rand(5, 3)
+print(x)
+
+
+The output should be something similar to:
+
+
+tensor([[0.3380, 0.3845, 0.3217],
+        [0.8337, 0.9050, 0.2650],
+        [0.2979, 0.7141, 0.9069],
+        [0.1449, 0.1132, 0.1375],
+        [0.4675, 0.3947, 0.1426]])
+
+
+
+
+## Building from source
+For the majority of PyTorch users, installing from a pre-built binary via a package manager will provide the best experience. However, there are times when you may want to install the bleeding edge PyTorch code, whether for testing or actual development on the PyTorch core. To install the latest PyTorch code, you will need to build PyTorch from source .
+- Follow the steps described here: https://github.com/pytorch/pytorch#from-source
+
+
+# Installing on Linux
+PyTorch can be installed and used on various Linux distributions. Depending on your system and compute requirements, your experience with PyTorch on Linux may vary in terms of processing time. It is recommended, but not required, that your Linux system has an NVIDIA or AMD GPU in order to harness the full power of PyTorch’s CUDA support or ROCm support.
+
+
+### Supported Linux Distributions
+PyTorch is supported on Linux distributions that use glibc >= v2.28, which include the following:
+- Ubuntu , minimum version 20.04 (please note that 20.04 reached EOL)
+
+
+
+
+
+
+
+
+To install PyTorch via pip, and do not have a CUDA-capable or ROCm-capable system or do not require CUDA/ROCm (i.e. GPU support), in the above selector, choose OS: Linux, Package: Pip, Language: Python and Compute Platform: CPU.
+To install PyTorch via pip, and do have a CUDA-capable system, in the above selector, choose OS: Linux, Package: Pip, Language: Python and the CUDA version suited to your machine. Often, the latest CUDA version is better.
+To install PyTorch via pip, and do have a ROCm-capable system, in the above selector, choose OS: Linux, Package: Pip, Language: Python and the ROCm version supported.
+Additionally, to check if your GPU driver and CUDA/ROCm is enabled and accessible by PyTorch, run the following commands to return whether or not the GPU driver is enabled (the ROCm build of PyTorch uses the same semantics at the python API level link , so the below commands should also work for ROCm):
+
+
+import torch
+torch.cuda.is_available()
+
+
+- If you need to build PyTorch with GPU support
+
+
+# Installing on Windows
+PyTorch can be installed and used on various Windows distributions. Depending on your system and compute requirements, your experience with PyTorch on Windows may vary in terms of processing time. It is recommended, but not required, that your Windows system has an NVIDIA GPU in order to harness the full power of PyTorch’s CUDA support .
+
+
+### Supported Windows Distributions
+PyTorch is supported on the following Windows distributions:
+Currently, PyTorch on Windows only supports Python 3.10-3.14; Python 2.x is not supported.
+To install PyTorch via pip, and do not have a CUDA-capable system or do not require CUDA, in the above selector, choose OS: Windows, Package: Pip and CUDA: None.
+To install PyTorch via pip, and do have a CUDA-capable system, in the above selector, choose OS: Windows, Package: Pip and the CUDA version suited to your machine. Often, the latest CUDA version is better.
+Additionally, to check if your GPU driver and CUDA is enabled and accessible by PyTorch, run the following commands to return whether or not the CUDA driver is enabled:
+
+# Source: https://pytorch.org/get-started/locally/

@@ -1,0 +1,49 @@
+
+
+# Case Studies
+
+
+### Read case studies on how our community solves real, everyday machine learning problems with PyTorch
+May 14, 2025 In Energy , PyTorch
+
+
+### How OpenSynth Uses PyTorch to Accelerate Compute for Energy Modelling Applications
+OpenSynth has recently leveraged PyTorch to improve the experience of its users and community. OpenSynth is an open source community hosted by LF Energy that is democratising access to synthetic energy demand data.  Access to smart meter data is essential to rapid and successful energy transitions. Researchers, modelers and policymakers…
+May 1, 2025 In Geospatial AI , PyTorch
+
+
+### How IBM Research Uses PyTorch and TerraTorch to Make Geospatial Computer Vision Accessible for Everyone
+Earth Observation-based analytics are becoming essential for understanding our planet — from monitoring deforestation to tracking urban development and analyzing the impacts of climate change. However, the coding and deep learning skills for applying AI models to satellite imagery and earth observation data has traditionally been a major barrier for…
+Jan 24, 2025 In Gaming , PyTorch
+
+
+### How Intel Uses PyTorch to Empower Generative AI through Intel Arc GPUs
+Intel has long been at the forefront of technological innovation, and its recent venture into Generative AI (GenAI) solutions is no exception. With the rise of AI-powered gaming experiences, Intel sought to deliver an accessible and intuitive GenAI inferencing solution tailored for AI PCs powered by Intel’s latest GPUs. By…
+
+
+### Using PyTorch for Monocular Depth Estimation Webinar
+In this webinar, Bob Chesebrough of Intel guides you through the steps he took to create a clipped image with background clutter removed from the image. He accomplished this using monocular depth estimation with PyTorch. This could potentially be used to automate structure from motion and other image-related tasks where…
+
+
+### AI Helps Duolingo Personalize Language Learning
+
+
+### ML Model Server Resource Saving – Transition From High-Cost GPUs to Intel CPUs and oneAPI powered Software with performance
+Here, We will be sharing our experience in moving AI workloads from our GPU servers to our Intel CPU servers without any performance or quality degradation, and saving annual costs of approximately 340 thousand U.S. Dollar (refer to the Conclusion) in the process.
+
+
+### Axon offers technology boost for public safety with in-car Automated License Plate Recognition on Azure
+
+
+### HippoScreen Improves AI Performance by 2.4x with oneAPI Tools
+The Taiwan-based neurotechnology startup used tools and frameworks in the Intel® oneAPI Base and AI Analytics Toolkits to the improve efficiency and build times of deep-learning models used in its Brain Waves AI system. As a result, HippoScreen is able to broaden the system’s applications to a wider range of…
+
+
+### NASA and IBM to Speed AI Creation with New Foundation Models
+NASA and IBM are working together to create foundation models based on NASA’s data sets — including geospatial data — with the goal of accelerating the creation of AI models.
+
+
+### Search Model Serving Using PyTorch and TorchServe
+Walmart Search has embarked on the journey of adopting Deep Learning in the search ecosystem to improve search relevance. For our pilot use case, we served the computationally intensive Bert Base model at runtime with an objective to achieve low latency and high throughput.
+
+# Source: https://pytorch.org/case-studies/

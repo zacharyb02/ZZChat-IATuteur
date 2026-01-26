@@ -1,0 +1,335 @@
+
+
+# Training a Classifier#
+This is it. You have seen how to define neural networks, compute loss and make
+updates to the weights of the network.
+
+
+## What about data?#
+you can use standard python packages that load data into a numpy array.
+Then you can convert this array into a torch.*Tensor .
+Specifically for vision, we have created a package called torchvision , that has data loaders for common datasets such as
+ImageNet, CIFAR10, MNIST, etc. and data transformers for images, viz., torchvision.datasets and torch.utils.data.DataLoader .
+This provides a huge convenience and avoids writing boilerplate code.
+
+
+## Training an image classifier#
+- Load and normalize the CIFAR10 training and test datasets using torchvision
+- Define a Convolutional Neural Network
+- Train the network on the training data
+- Test the network on the test data
+
+
+### 1. Load and normalize CIFAR10#
+Using torchvision , it’s extremely easy to load CIFAR10.
+
+
+import torch
+import torchvision
+import torchvision.transforms as transforms
+
+
+The output of torchvision datasets are PILImage images of range [0, 1].
+We transform them to Tensors of normalized range [-1, 1].
+the num_worker of torch.utils.data.DataLoader() to 0.
+
+
+transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+batch_size = 4
+trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+                                        download=True, transform=transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
+                                          shuffle=True, num_workers=2)
+testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                       download=True, transform=transform)
+testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
+                                         shuffle=False, num_workers=2)
+classes = ('plane', 'car', 'bird', 'cat',
+           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+
+
+
+0%|          | 0.00/170M [00:00<?, ?B/s]
+  0%|          | 229k/170M [00:00<01:26, 1.96MB/s]
+  2%|▏         | 3.08M/170M [00:00<00:10, 16.5MB/s]
+  7%|▋         | 11.6M/170M [00:00<00:03, 46.6MB/s]
+ 12%|█▏        | 21.0M/170M [00:00<00:02, 64.9MB/s]
+ 18%|█▊        | 30.5M/170M [00:00<00:01, 75.5MB/s]
+ 23%|██▎       | 39.9M/170M [00:00<00:01, 81.8MB/s]
+ 29%|██▉       | 49.4M/170M [00:00<00:01, 85.7MB/s]
+ 35%|███▍      | 59.0M/170M [00:00<00:01, 88.6MB/s]
+ 40%|███▉      | 68.0M/170M [00:00<00:01, 86.8MB/s]
+ 45%|████▌     | 76.7M/170M [00:01<00:01, 78.8MB/s]
+ 50%|████▉     | 85.2M/170M [00:01<00:01, 80.2MB/s]
+ 55%|█████▍    | 93.5M/170M [00:01<00:00, 80.4MB/s]
+ 60%|█████▉    | 102M/170M [00:01<00:00, 81.0MB/s]
+ 65%|██████▍   | 110M/170M [00:01<00:00, 81.6MB/s]
+ 70%|██████▉   | 119M/170M [00:01<00:00, 82.5MB/s]
+ 75%|███████▍  | 127M/170M [00:01<00:00, 83.8MB/s]
+ 80%|███████▉  | 136M/170M [00:01<00:00, 81.6MB/s]
+ 85%|████████▍ | 145M/170M [00:01<00:00, 83.7MB/s]
+ 90%|█████████ | 154M/170M [00:01<00:00, 85.5MB/s]
+ 95%|█████████▌| 162M/170M [00:02<00:00, 85.8MB/s]
+100%|██████████| 170M/170M [00:02<00:00, 78.3MB/s]
+
+
+Let us show some of the training images, for fun.
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+# functions to show an image
+def imshow(img):
+    img = img / 2 + 0.5     # unnormalize
+    npimg = img.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.show()
+# get some random training images
+dataiter = iter(trainloader)
+images, labels = next(dataiter)
+# show images
+imshow(torchvision.utils.make_grid(images))
+# print labels
+print(' '.join(f'{classes[labels[j]]:5s}' for j in range(batch_size)))
+
+
+
+
+
+
+
+
+### 2. Define a Convolutional Neural Network#
+take 3-channel images (instead of 1-channel images as it was defined).
+
+
+import torch.nn as nn
+import torch.nn.functional as F
+class Net(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 6, 5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = torch.flatten(x, 1) # flatten all dimensions except batch
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+net = Net()
+
+
+
+
+### 3. Define a Loss function and optimizer#
+Let’s use a Classification Cross-Entropy loss and SGD with momentum.
+
+
+import torch.optim as optim
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+
+
+
+
+### 4. Train the network#
+We simply have to loop over our data iterator, and feed the inputs to the
+
+
+for epoch in range(2):  # loop over the dataset multiple times
+    running_loss = 0.0
+    for i, data in enumerate(trainloader, 0):
+        # get the inputs; data is a list of [inputs, labels]
+        inputs, labels = data
+        # zero the parameter gradients
+        optimizer.zero_grad()
+        # forward + backward + optimize
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+        # print statistics
+        running_loss += loss.item()
+        if i % 2000 == 1999:    # print every 2000 mini-batches
+            print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 2000:.3f}')
+            running_loss = 0.0
+print('Finished Training')
+
+
+
+
+[1,  2000] loss: 2.145
+[1,  4000] loss: 1.808
+[1,  6000] loss: 1.638
+[1,  8000] loss: 1.561
+[1, 10000] loss: 1.508
+[1, 12000] loss: 1.477
+[2,  2000] loss: 1.401
+[2,  4000] loss: 1.382
+[2,  6000] loss: 1.327
+[2,  8000] loss: 1.342
+[2, 10000] loss: 1.309
+[2, 12000] loss: 1.268
+Finished Training
+
+
+Let’s quickly save our trained model:
+
+
+PATH = './cifar_net.pth'
+torch.save(net.state_dict(), PATH)
+
+
+See here for more details on saving PyTorch models.
+
+
+### 5. Test the network on the test data#
+We have trained the network for 2 passes over the training dataset.
+We will check this by predicting the class label that the neural network
+outputs, and checking it against the ground-truth. If the prediction is
+correct, we add the sample to the list of correct predictions.
+Okay, first step. Let us display an image from the test set to get familiar.
+
+
+dataiter = iter(testloader)
+images, labels = next(dataiter)
+# print images
+imshow(torchvision.utils.make_grid(images))
+print('GroundTruth: ', ' '.join(f'{classes[labels[j]]:5s}' for j in range(4)))
+
+
+
+
+
+
+Next, let’s load back in our saved model (note: saving and re-loading the model
+wasn’t necessary here, we only did it to illustrate how to do so):
+
+
+net = Net()
+net.load_state_dict(torch.load(PATH, weights_only=True))
+
+
+
+
+
+
+
+
+outputs = net(images)
+
+
+The outputs are energies for the 10 classes.
+
+
+_, predicted = torch.max(outputs, 1)
+print('Predicted: ', ' '.join(f'{classes[predicted[j]]:5s}'
+                              for j in range(4)))
+
+
+
+
+
+
+
+
+correct = 0
+total = 0
+# since we're not training, we don't need to calculate the gradients for our outputs
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        # calculate outputs by running images through the network
+        outputs = net(images)
+        # the class with the highest energy is what we choose as prediction
+        _, predicted = torch.max(outputs, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+print(f'Accuracy of the network on the 10000 test images: {100 * correct // total} %')
+
+
+
+
+Accuracy of the network on the 10000 test images: 53 %
+
+
+That looks way better than chance, which is 10% accuracy (randomly picking
+a class out of 10 classes).
+
+
+# prepare to count predictions for each class
+correct_pred = {classname: 0 for classname in classes}
+total_pred = {classname: 0 for classname in classes}
+# again no gradients needed
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        outputs = net(images)
+        _, predictions = torch.max(outputs, 1)
+        # collect the correct predictions for each class
+        for label, prediction in zip(labels, predictions):
+            if label == prediction:
+                correct_pred[classes[label]] += 1
+            total_pred[classes[label]] += 1
+# print accuracy for each class
+for classname, correct_count in correct_pred.items():
+    accuracy = 100 * float(correct_count) / total_pred[classname]
+    print(f'Accuracy for class: {classname:5s} is {accuracy:.1f} %')
+
+
+
+
+Accuracy for class: plane is 69.0 %
+Accuracy for class: car   is 72.1 %
+Accuracy for class: bird  is 29.0 %
+Accuracy for class: cat   is 53.0 %
+Accuracy for class: deer  is 34.5 %
+Accuracy for class: dog   is 25.5 %
+Accuracy for class: frog  is 59.5 %
+Accuracy for class: horse is 63.1 %
+Accuracy for class: ship  is 53.4 %
+Accuracy for class: truck is 76.6 %
+
+
+
+
+## Training on GPU#
+Just like how you transfer a Tensor onto the GPU, you transfer the neural
+
+
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+# Assuming that we are on a CUDA machine, this should print a CUDA device:
+print(device)
+
+
+Then these methods will recursively go over all modules and convert their
+parameters and buffers to CUDA tensors:
+Remember that you will have to send the inputs and targets at every step
+
+
+inputs, labels = data[0].to(device), data[1].to(device)
+
+
+Exercise: Try increasing the width of your network (argument 2 of
+the first nn.Conv2d , and argument 1 of the second nn.Conv2d –
+they need to be the same number), see what kind of speedup you get.
+- Understanding PyTorch’s Tensor library and neural networks at a high level.
+
+
+## Training on multiple GPUs#
+
+
+## Where do I go next?#
+- Train a word-level language model using Recurrent LSTM networks
+Total running time of the script: (1 minutes 28.634 seconds)
+
+# Source: https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html

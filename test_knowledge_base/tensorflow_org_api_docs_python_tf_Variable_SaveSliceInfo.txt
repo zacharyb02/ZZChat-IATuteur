@@ -1,0 +1,43 @@
+
+
+# tf.Variable.SaveSliceInfoStay organized with collectionsSave and categorize content based on your preferences.
+Main aliases tf.experimental.dtensor.DVariable.SaveSliceInfo Compat aliases for migration See Migration guide for
+tf.experimental.dtensor.DVariable.SaveSliceInfo
+
+
+tf.Variable.SaveSliceInfo(
+    full_name=None,
+    full_shape=None,
+    var_offset=None,
+    var_shape=None,
+    save_slice_info_def=None,
+    import_scope=None
+)
+
+
+
+
+## Args
+slice. full_shape Shape of the full variable, as a list of int. var_offset Offset of this Variable into the full variable, as a list
+of int. var_shape Shape of this Variable , as a list of int. save_slice_info_def SaveSliceInfoDef protocol buffer. If not None ,
+recreates the SaveSliceInfo object its contents. save_slice_info_def and other arguments are mutually exclusive. import_scope Optional string . Name scope to add. Only used when
+
+
+## Attributes
+
+
+## Methods
+
+
+### to_proto
+
+
+to_proto(
+    export_scope=None
+)
+
+
+Returns a SaveSliceInfoDef() proto.
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/Variable/SaveSliceInfo

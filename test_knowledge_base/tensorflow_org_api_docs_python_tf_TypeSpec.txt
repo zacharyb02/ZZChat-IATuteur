@@ -1,0 +1,116 @@
+
+
+# tf.TypeSpecStay organized with collectionsSave and categorize content based on your preferences.
+Specifies a TensorFlow value type.
+A tf.TypeSpec provides metadata describing an object accepted or returned
+by TensorFlow APIs.  Concrete subclasses, such as tf.TensorSpec and tf.RaggedTensorSpec , are used to describe different value types.
+For example, tf.function 's input_signature argument accepts a list
+(or nested structure) of TypeSpec s.
+Creating new subclasses of TypeSpec (outside of TensorFlow core) is not
+
+
+spec = tf.TensorSpec(shape=[None, None], dtype=tf.int32)
+@tf.function(input_signature=[spec])
+def double(x):
+  return x * 2
+double(tf.constant([[1, 2], [3, 4]]))
+<tf.Tensor: shape=(2, 2), dtype=int32,
+    numpy=array([[2, 4], [6, 8]], dtype=int32)>
+
+
+
+
+## Attributes
+
+
+## Methods
+
+
+### experimental_as_proto
+
+
+experimental_as_proto() -> struct_pb2.TypeSpecProto
+
+
+
+
+### experimental_from_proto
+
+
+experimental_from_proto(
+    proto: struct_pb2.TypeSpecProto
+) -> 'TypeSpec'
+
+
+
+
+### experimental_type_proto
+
+
+experimental_type_proto() -> Type[struct_pb2.TypeSpecProto]
+
+
+
+
+### is_compatible_with
+
+
+is_compatible_with(
+    spec_or_value
+)
+
+
+
+
+### is_subtype_of
+
+
+is_subtype_of(
+    other: tf.types.experimental.TraceType
+) -> bool
+
+
+
+
+### most_specific_common_supertype
+
+
+most_specific_common_supertype(
+    others: Sequence[tf.types.experimental.TraceType]
+) -> Optional['TypeSpec']
+
+
+
+
+### most_specific_compatible_type
+
+
+most_specific_compatible_type(
+    other: 'TypeSpec'
+) -> 'TypeSpec'
+
+
+Returns the most specific TypeSpec compatible with self and other . (deprecated)
+
+
+### __eq__
+
+
+__eq__(
+    other
+) -> bool
+
+
+
+
+### __ne__
+
+
+__ne__(
+    other
+) -> bool
+
+
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api_docs/python/tf/TypeSpec

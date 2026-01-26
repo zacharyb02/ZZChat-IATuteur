@@ -1,0 +1,15 @@
+
+
+# TensorFlow API VersionsStay organized with collectionsSave and categorize content based on your preferences.
+The following versions of the TensorFlow api-docs are currently available.
+Major features, improvements, and changes of each version are available in the release notes .
+
+
+## TensorFlow 2
+
+
+## TensorFlow 1
+Earlier branches of the documentation can be found on GitHub .
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .
+
+# Source: https://www.tensorflow.org/api

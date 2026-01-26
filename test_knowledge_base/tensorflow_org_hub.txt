@@ -1,0 +1,48 @@
+
+
+!pip install --upgrade tensorflow_hub
+  import tensorflow_hub as hub
+  model = hub.KerasLayer("https://tfhub.dev/google/nnlm-en-dim128/2")
+  embeddings = model(["The rain in Spain.", "falls",
+                      "mainly", "In the plain!"])
+  print(embeddings.shape)  #(4,128)
+
+
+- See the guide Learn about how to use TensorFlow Hub and how it works.
+- See tutorials Tutorials show you end-to-end examples using TensorFlow Hub.
+- See models Find trained TF, TFLite, and TF.js models for your use case.
+
+
+### BERT
+
+
+### Object detection
+
+
+### Style transfer
+
+
+### On-device food classifier
+
+
+### TensorFlow Hub for Real World Impact at Google I/O
+
+
+### On-device ML solutions
+
+
+### Making BERT Easier with Preprocessing Models From TensorFlow Hub
+
+
+### From singing to musical scores: Estimating pitch with SPICE and Tensorflow Hub
+
+
+### TensorFlow Hub on GitHub
+
+
+### Contribute models
+
+
+### Get started with TensorFlow Hub
+
+# Source: https://www.tensorflow.org/hub
