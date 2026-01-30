@@ -1,0 +1,11 @@
+# Domains
+Learn about the various parts of the PyTorch ecosystem
+Torchaudio is a library for audio and signal processing with PyTorch. It provides I/O, signal and data processing functions, datasets, model implementations and application components.
+A PyTorch-native library designed for fine-tuning large language models (LLMs). torchtune provides supports the full fine-tuning workflow and offers compatibility with popular production inference systems.
+This library is part of the PyTorch project. PyTorch is an open source machine learning framework. The torchvision package consists of popular datasets, model architectures, and common image transformations for computer vision.
+TorchRec is a PyTorch domain library built to provide common sparsity & parallelism primitives needed for large-scale recommender systems (RecSys). It allows authors to train models with large embedding tables sharded across many GPUs.
+A PyTorch library for fast media decoding and encoding. When running PyTorch models on audio and video, torchcodec is our recommended way to turn audio and video files into data your model can use.
+A Beta library of common modular data loading primitives for easily constructing flexible and performant data pipelines. And, there are a few features still in prototype stage.
+torchrl is an open-source, Python-first Reinforcement Learning library for PyTorch with a focus on high modularity and good runtime performance, providing low and high-level RL abstractions and reusable functionals for cost functions, returns, and data processing.
+tensordict is a dictionary-like class that simplifies operations on batches of tensors, enhancing code readability, compactness, and modularity by abstracting tailored operations and reducing errors through automatic operation dispatching on the leaves.
+PyTorch runs on XLA devices, like TPUs, with the torch_xla package. This document describes how to run your models on these devices.

@@ -1,0 +1,71 @@
+THEORETICAL CONCEPTS
+====================
+
+Q1: Why do CNNs work better than fully connected networks for images?
+A: Three fundamental reasons:
+1. SPATIAL LOCALITY: Neighboring pixels are correlated. CNNs exploit this with local filters.
+2. WEIGHT SHARING: Same filter applied everywhere (translation invariance).
+3. PARAMETER REDUCTION: 224x224x3 image = 150K pixels. FC would need billions of parameters. CNN: few millions.
+
+Q2: What is translation invariance and why is it important?
+A: Translation invariance means an object is recognized regardless of its position in the image. CNNs achieve this via:
+- Weight sharing: same filter applied everywhere
+- Pooling: abstraction of exact position
+Crucial because a cat is still a cat whether left or right in image.
+
+Q3: What is a feature and how do CNNs learn them?
+A: A feature is a visual pattern learned by the network:
+- LOW LAYERS: simple features (edges, corners, colors)
+- MIDDLE LAYERS: textures, repetitive patterns
+- HIGH LAYERS: object parts (eyes, wheels, windows)
+- FINAL LAYERS: complete objects (faces, cars)
+
+CNNs learn these features through backpropagation automatically!
+
+Q4: Why stack multiple small convolutions (3x3) better than one large (7x7)?
+A: VGGNet discovery (2014):
+- IDENTICAL RECEPTIVE FIELD: 2x(3x3) = 1x(5x5), 3x(3x3) = 1x(7x7)
+- FEWER PARAMETERS: 3x(3x3) = 27 weights vs 7x7 = 49 weights
+- MORE NON-LINEARITY: More ReLU between layers
+- BETTER EXPRESSION: More complex functions representable
+
+Q5: What is the receptive field and why is it important?
+A: The receptive field is the region of input image that influences a given neuron.
+
+Example:
+- Layer 1 (conv 3x3): receptive field = 3x3
+- Layer 2 (conv 3x3): receptive field = 5x5
+- Layer 3 (conv 3x3): receptive field = 7x7
+
+Deeper network = larger receptive field = captures broader context.
+
+Q6: Why is depth more important than width in CNNs?
+A: Depth (number of layers) allows:
+- FEATURE HIERARCHY: simple → complex
+- PROGRESSIVE ABSTRACTION: pixels → edges → textures → objects
+- LARGER RECEPTIVE FIELD: see more context
+- FUNCTION COMPOSITION: very complex functions
+
+Width (channels) increases capacity but without hierarchy.
+
+Q7: What is the vanishing gradient and how to solve it?
+A: Vanishing gradient happens when gradients become exponentially small in deep layers:
+- Cause: multiplication of small numbers (sigmoid/tanh derivatives < 1)
+- Consequence: deep layers don't learn
+- Solutions:
+  * ReLU: derivative = 1 (no saturation)
+  * Batch Normalization: normalizes activations
+  * Skip connections (ResNet): gradient passes directly
+  * Better initialization: Kaiming/Xavier
+
+Q8: Why does batch normalization improve training?
+A: Batch Normalization normalizes layer activations:
+
+BENEFITS:
+- Reduces "Internal Covariate Shift"
+- Allows higher learning rates
+- Regularization (similar to dropout)
+- Less sensitive to initialization
+- Enables deeper networks
+
+THEORY: keeps activations in reasonable range, avoiding saturation and explosion.

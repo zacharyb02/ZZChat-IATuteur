@@ -1,9 +1,0 @@
-
-
-# Transform library for non-TFX usersStay organized with collectionsSave and categorize content based on your preferences.
-- Getting Started with TensorFlow Transform
-- TensorFlow Transform API Reference
-You can also use the Apache Beam MLTransform class to preprocess data
-for training and inference. The MLTransform class wraps multiple TFX data
-
-# Source: https://www.tensorflow.org/tfx/guide/tft

@@ -1,0 +1,71 @@
+DATA AUGMENTATION
+==================
+
+Q1: What is Data Augmentation?
+A: Technique that artificially creates new training data by applying transformations to existing images. Increases dataset size and reduces overfitting.
+
+Q2: Basic transformations in PyTorch?
+A:
+from torchvision import transforms
+
+transform = transforms.Compose([
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomRotation(degrees=15),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2),
+    transforms.RandomResizedCrop(224, scale=(0.8, 1.0)),
+    transforms.ToTensor(),
+    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+])
+
+Q3: How to implement MixUp?
+A:
+def mixup_data(x, y, alpha=1.0):
+    lam = np.random.beta(alpha, alpha)
+    batch_size = x.size(0)
+    index = torch.randperm(batch_size)
+    
+    mixed_x = lam * x + (1 - lam) * x[index]
+    y_a, y_b = y, y[index]
+    return mixed_x, y_a, y_b, lam
+
+# In training loop:
+images, labels_a, labels_b, lam = mixup_data(images, labels)
+outputs = model(images)
+loss = lam * criterion(outputs, labels_a) + (1-lam) * criterion(outputs, labels_b)
+
+Q4: How to implement CutMix?
+A:
+def cutmix_data(x, y, alpha=1.0):
+    lam = np.random.beta(alpha, alpha)
+    batch_size, _, h, w = x.size()
+    index = torch.randperm(batch_size)
+    
+    cut_rat = np.sqrt(1. - lam)
+    cut_w = int(w * cut_rat)
+    cut_h = int(h * cut_rat)
+    
+    cx = np.random.randint(w)
+    cy = np.random.randint(h)
+    bbx1 = np.clip(cx - cut_w // 2, 0, w)
+    bby1 = np.clip(cy - cut_h // 2, 0, h)
+    bbx2 = np.clip(cx + cut_w // 2, 0, w)
+    bby2 = np.clip(cy + cut_h // 2, 0, h)
+    
+    x[:, :, bby1:bby2, bbx1:bbx2] = x[index, :, bby1:bby2, bbx1:bbx2]
+    lam = 1 - ((bbx2 - bbx1) * (bby2 - bby1) / (w * h))
+    return x, y, y[index], lam
+
+Q5: Using Albumentations?
+A:
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
+
+transform = A.Compose([
+    A.RandomRotate90(),
+    A.Flip(),
+    A.ShiftScaleRotate(rotate_limit=45),
+    A.OneOf([A.GaussNoise(), A.GaussianBlur(), A.MotionBlur()], p=0.5),
+    A.HueSaturationValue(),
+    A.Normalize(),
+    ToTensorV2()
+])

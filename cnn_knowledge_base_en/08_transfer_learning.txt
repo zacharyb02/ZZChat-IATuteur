@@ -1,0 +1,44 @@
+TRANSFER LEARNING
+==================
+
+Q1: What is Transfer Learning?
+A: Technique using a pretrained model on large database (e.g. ImageNet) as starting point for a new task. Very effective with limited data.
+
+Q2: When to use Transfer Learning?
+A:
+- Small dataset (< 10K images): ESSENTIAL
+- Medium dataset (10K-100K): RECOMMENDED  
+- Large dataset (> 100K): OPTIONAL but speeds up training
+- Domain similar to ImageNet: VERY EFFECTIVE
+
+Q3: How to load a pretrained model?
+A:
+import torchvision.models as models
+
+# Pretrained ResNet18
+resnet18 = models.resnet18(pretrained=True)
+
+# Pretrained EfficientNet
+efficientnet = models.efficientnet_b0(pretrained=True)
+
+# Adapt for new task
+num_features = resnet18.fc.in_features
+resnet18.fc = nn.Linear(num_features, 10)
+
+Q4: How to use different learning rates?
+A:
+import torch.optim as optim
+
+model = models.resnet18(pretrained=True)
+model.fc = nn.Linear(model.fc.in_features, 10)
+
+# Different learning rates for each part
+params = [
+    {'params': model.layer1.parameters(), 'lr': 1e-5},
+    {'params': model.layer2.parameters(), 'lr': 1e-5},
+    {'params': model.layer3.parameters(), 'lr': 1e-4},
+    {'params': model.layer4.parameters(), 'lr': 1e-4},
+    {'params': model.fc.parameters(), 'lr': 1e-3}
+]
+
+optimizer = optim.Adam(params)

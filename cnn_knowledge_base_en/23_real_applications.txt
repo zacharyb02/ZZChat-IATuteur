@@ -1,0 +1,100 @@
+REAL-WORLD CNN APPLICATIONS
+============================
+
+Q1: In which domains are CNNs used today?
+A:
+COMPUTER VISION:
+- Face recognition (iPhone Face ID, security)
+- Autonomous cars (Tesla, Waymo)
+- Surveillance and security
+- Retail (Amazon Go)
+
+MEDICINE:
+- Cancer detection (X-rays, mammograms)
+- Diabetic retinopathy analysis
+- Organ and tumor segmentation
+
+AGRICULTURE:
+- Plant disease detection
+- Livestock counting
+- Crop optimization
+
+INDUSTRY:
+- Automated quality control
+- Manufacturing defect detection
+- Predictive maintenance
+
+CREATIVE:
+- Photo filters (Snapchat, Instagram)
+- Image generation (DALL-E, Stable Diffusion)
+- Old photo restoration
+
+Q2: How are CNNs used in autonomous vehicles?
+A: Autonomous vehicles like Tesla use multiple CNNs simultaneously:
+
+OBJECT DETECTION:
+- Pedestrians, cyclists, other vehicles
+- Traffic signs
+- Traffic lights
+- Road obstacles
+
+SEMANTIC SEGMENTATION:
+- Road vs sidewalk
+- Lane lines
+- Drivable zones
+
+ARCHITECTURE:
+- Multi-camera (8 cameras on Tesla)
+- Data fusion (camera + LIDAR + RADAR)
+- Real-time inference (< 100ms)
+
+Q3: How are CNNs used in medicine?
+A: Major impact on medical diagnosis:
+
+RADIOLOGY:
+- Breast tumor detection (mammography)
+- Lung X-ray analysis (COVID-19, pneumonia)
+- Brain MRI (tumors, stroke)
+- Performance equal or superior to expert radiologists
+
+OPHTHALMOLOGY:
+- Diabetic retinopathy (Google Health)
+- Glaucoma, macular degeneration
+- FDA approved for autonomous diagnosis
+
+ADVANTAGES:
+- Available 24/7
+- Rapid diagnosis
+- Access in underserved areas
+- Systematic second opinion
+
+LIMITS:
+- Not a replacement for doctor
+- Needs clinical validation
+- Unclear legal responsibility
+
+Q4: What is the impact of CNNs on social media?
+A: CNNs are omnipresent on platforms:
+
+FILTERS AND EFFECTS:
+- Snapchat/Instagram: face detection + real-time manipulation
+- TikTok: AR effects
+
+CONTENT MODERATION:
+- Inappropriate content detection (nudity, violence)
+- Automatic removal
+- Child protection
+
+ORGANIZATION:
+- Object/scene recognition for photo search
+- Automatic tag suggestions
+- Smart albums (Google Photos)
+
+ADVERTISING:
+- Visual content analysis
+- Targeting based on posted images
+
+PROBLEMS:
+- Undetectable deepfakes
+- Moderation bias
+- Excessive surveillance

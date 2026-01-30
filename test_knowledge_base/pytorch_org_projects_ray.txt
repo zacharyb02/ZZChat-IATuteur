@@ -1,9 +1,0 @@
-
-
-# RAY
-
-
-### Ray is a unified framework for scaling AI and Python applications. Ray consists of a core distributed runtime and a set of AI Libraries for accelerating ML workloads.
-Ray provides a small set of distributed computing primitives that allow developers to scale Python applications across heterogeneous clusters of compute. Ray also includes an ecosystem of higher-level libraries for scaling multimodal data processing, model training, model serving, reinforcement learning, and more.
-
-# Source: https://pytorch.org/projects/ray/

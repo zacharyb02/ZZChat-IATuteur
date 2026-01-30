@@ -23,13 +23,13 @@ def ask_question(query,chunk_size=500):
     docs = retriever.invoke(query)
     # Préparation du contexte texte
     context_chunks = []
-    print("\n=== DOCUMENTS AND CONTEXT CHUNKS ===")
+    #print("\n=== DOCUMENTS AND CONTEXT CHUNKS ===")
     for i, doc in enumerate(docs):
         # Affiche les métadonnées si elles existent
         metadata_info = ""
         if hasattr(doc, "metadata") and doc.metadata:
             metadata_info = " | ".join(f"{k}: {v}" for k, v in doc.metadata.items())
-        print(f"\n--- Document {i+1} --- {metadata_info}")
+        #print(f"\n--- Document {i+1} --- {metadata_info}")
         
         # Découpe le texte en chunks
         text = doc.page_content
@@ -37,27 +37,33 @@ def ask_question(query,chunk_size=500):
             chunk = text[j:j+chunk_size].strip()
             if chunk:
                 context_chunks.append(chunk)
-                print(f"\nChunk {j//chunk_size + 1}:")
-                print(chunk)
+                #print(f"\nChunk {j//chunk_size + 1}:")
+                #print(chunk)
     
     # Combine les chunks pour le LLM
     context_for_llm = "\n\n".join(context_chunks)
 # Prompt système optimisée pour un rôle de Tuteur CNN
     system_prompt = (
-       "You are an AI Tutor specialized in Deep Learning, with strong expertise in Convolutional Neural Networks (CNNs).\n"
-        "Your mission is to help the student understand theoretical concepts, design robust CNN architectures, "
-        "and debug Deep Learning code in a clear and pedagogical way.\n\n"
-        "==================================================\n"
-        "INSTRUCTIONS (MUST BE STRICTLY FOLLOWED)\n"
-        "==================================================\n"
-        "1. SOURCE PRIORITY: Primarily rely on the provided CONTEXT. Quote or accurately rephrase it if the answer exists there.\n"
-        "2. PEDAGOGY & EXPLANATION: Always explain 'why' and 'how'. For code or model mistakes, explain the cause and consequences.\n"
-        "3. CODE QUALITY: If providing code (Python, PyTorch, TensorFlow, Keras), make it clean, optimized, and commented line by line for beginners.\n"
-        "4. HONESTY: If the answer is NOT in the context, explicitly state so, then provide general knowledge as complementary information.\n"
-        "5. LANGUAGE & STYLE: Always respond in clear, professional, well-structured English.\n"
-        "=================================================="
+    "ROLE: You are a CNN Specialist Tutor strictly limited to the provided Knowledge Base.\n\n"
+    
+    "=== MANDATORY RULES (STRICT RAG) ===\n"
+    "1. ZERO OUTSIDE KNOWLEDGE: You are FORBIDDEN to use any information, definitions, "
+    "or code that is not explicitly present in the provided CONTEXT.\n"
+    
+    "2. NO HALLUCINATION: If a user asks a question that is not in the documents, "
+    "you must respond: 'I am sorry, but the provided documentation does not contain "
+    "information on this specific topic.'\n"
+    
+    "3. DIRECT EXTRACTION: Extract code and definitions exactly as they appear. "
+    "Do not modify the logic or optimize the code.\n"
+    
+    "4. NO SITE REFERENCES: Never mention websites, URLs, or local file paths in your response.\n\n"
+    
+    "=== RESPONSE FORMAT ===\n"
+    "Provide the answer directly and concisely. Start immediately with the technical "
+    "explanation or code found in the documentation. Do not list steps, do not say 'Step 1', "
+    "and do not explain your internal search process. Just give the final information."
     )
-
     messages = [
         SystemMessage(content=system_prompt),
         HumanMessage(content=(
@@ -71,29 +77,13 @@ def ask_question(query,chunk_size=500):
     response = llm.invoke(messages)
     
     # On retourne la réponse ET les documents sources
-    return response.content,context_for_llm ,docs
+    return response.content#,context_for_llm ,docs
 
 # 5. Test avec affichage des sources
 query = "give me definition of CNN"
 print(f"Question: {query}")
 print("-" * 30)
-answer, context_chunks, source_docs = ask_question(query)
+answer = ask_question(query)
 
 print("\n=== TUTOR RESPONSE ===")
 print(answer)
-"""print("\n" + "="*50)
-print("SOURCE DOCUMENTS METADATA :")
-print("="*50)
-for i, doc in enumerate(source_docs):
-    print(f"\n--- Document {i+1} ---")
-    if hasattr(doc, "metadata") and doc.metadata:
-        for k, v in doc.metadata.items():
-            print(f"{k}: {v}")
-
-print("\n" + "="*50)
-print("TEXT CHUNKS USED AS CONTEXT :")
-print("="*50)
-for i, chunk in enumerate(context_chunks):
-    print(f"\n--- Chunk {i+1} ---")
-    print(chunk) # Affiche le texte complet du chunk
-    print("-" * 20)"""

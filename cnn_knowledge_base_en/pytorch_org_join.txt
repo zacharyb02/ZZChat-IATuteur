@@ -1,0 +1,24 @@
+# Join PyTorch Foundation
+### Become part of a thriving community in the booming global AI market.
+According to statistics from MIT Sloan, 75% of top executives believe AI will help their organizations grow and gain a competitive edge. Since 2020, there has been a 14X increase in the number of active AI startups, and venture capitalist-funded startups have increased by 6X. The PwC Global Artificial Intelligence Study indicates that AI has the potential to contribute $15.7 trillion to the global economy by 2030, with 45% of the total economic gains coming from product enhancements that stimulate consumer demand.
+By joining the PyTorch Foundation, you can help build and shape the future of end-to-end machine learning frameworks alongside your industry peers. PyTorch offers a user-friendly front-end, distributed training, and an ecosystem of tools and libraries that enable fast, flexible experimentation and efficient production.
+As a member of the PyTorch Foundation, you’ll have access to resources that allow you to be stewards of stable, secure, and long-lasting codebases. You can collaborate on training, local and regional events, open-source developer tooling, academic research, and guides to help new users and contributors have a productive experience.
+## Apply for Membership Today
+If your organization is interested in becoming a Member of the PyTorch Foundation, please complete the Member Enrollment form and designate someone with signature authority for your institution for the membership approval process.
+Please note, membership is not required to participate in PyTorch as an individual contributor. You can join the community at any time and collaborate with others interested in the project.
+Are you a student interested in learning about PyTorch? Get Started!
+## Membership Benefits
+### Insight
+Gain technical traction and insight for your organization’s products by immersing your teams with other industry leaders.
+### Influence
+Influence technical priorities, approaches, and code and gain early access to technical deliverables in motion.
+### Thought Leadership
+Provide thought leadership and expand industry awareness as PyTorch amplifies member progress across the industry.
+### Talent
+Retain, attract, and increase engineering skills and employees and build your innovation partner network, supply chain, and customer pipeline.
+### Community
+Deepen your engagement and leadership in local and industry developer networks and conferences.
+## Join the Membership that fits your goals
+## Questions? Contact Us
+The success of PyTorch is only possible with the contributions and support of our developer community and member companies. To learn more about how you can join your industry peers in supporting PyTorch, or for any questions you may have, please fill out this form to be contacted by a PyTorch Foundation representative.
+Note: for all PyTorch technical questions please go to discuss.pytorch.org
