@@ -7,7 +7,7 @@ from langchain_community.document_loaders import TextLoader
 from pathlib import Path
 
 # 1. Charger le document
-knowledge_base = Path(r"C:\Users\mohaa\Desktop\IA\AI-Tutor\cnn_knowledge_base_en")
+knowledge_base = Path(r"C:\Users\mohaa\Desktop\IA\AI-Tutor\cnn_knowledge_base_eng")
 nom_index_faiss = "faiss_index_pfe"
 modele_ollama = "mxbai-embed-large"
 
