@@ -24,7 +24,7 @@ def ask_question(query):
     # Préparation du contexte texte
     context_chunks = []
     #print("\n=== DOCUMENTS AND CONTEXT CHUNKS ===")
-    for doc in enumerate(docs):
+    for i, doc in enumerate(docs):
         # Découpe le texte en chunks
         text = doc.page_content
         context_chunks.append(text)
@@ -73,7 +73,7 @@ def ask_question(query):
     return response.content
 
 # 5. Test avec affichage des sources
-query = "What is a CNN?"  # Exemple de question
+query = "What is saad"  # Exemple de question
 print(f"Question: {query}")
 print("-" * 30)
 answer = ask_question(query)
