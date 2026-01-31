@@ -82,7 +82,7 @@ def ask_question(query):
     return response.content , inference_time, emissions
 
 # 5. Test avec affichage des sources
-query = "What is saad"  # Exemple de question
+query = "What is maxpooling definition "  # Exemple de question
 print(f"Question: {query}")
 print("-" * 30)
 answer, duration, co2 = ask_question(query)
