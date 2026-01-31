@@ -38,6 +38,8 @@ model = models.Sequential([
     data_augmentation,
     layers.Lambda(tf.keras.applications.mobilenet_v2.preprocess_input),
     base_model,
+    layers.Conv2D(128, (3, 3), activation='relu', padding='same'),
+    layers.BatchNormalization(),
     layers.GlobalAveragePooling2D(),
     layers.Dropout(0.4), # Augmenté pour éviter le surapprentissage sur 72 images
     layers.Dense(4, activation='softmax')
@@ -48,4 +50,24 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
 
 # Entraînement rapide de la tête
 model.fit(train_ds, validation_data=val_ds, epochs=15)
+model.save('model_CNN.h5')
+# 7. Fin du suivi énergétique
+emissions = tracker.stop()
+print("\n" + "="*30)
+print("RÉSULTATS D'ÉVALUATION")
+print("="*30)
 
+y_true = []
+y_pred = []
+
+# Extraction des prédictions sur le jeu de validation
+for images, labels in val_ds:
+    preds = model.predict(images, verbose=0)
+    y_true.extend(np.argmax(labels, axis=1))
+    y_pred.extend(np.argmax(preds, axis=1))
+
+# Affichage du rapport complet (F1-score inclus)
+target_names = train_ds.class_names
+print(classification_report(y_true, y_pred, target_names=target_names))
+
+print(f"\n[BILAN ÉNERGÉTIQUE] Consommation : {emissions:.6f} kg CO2")

@@ -1,8 +1,9 @@
 import os
+import time
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_community.vectorstores import FAISS
 from langchain_core.messages import SystemMessage, HumanMessage
-
+from codecarbon import EmissionsTracker
 # 1. Configuration des Embeddings
 embeddings = OllamaEmbeddings(model="mxbai-embed-large")
 
@@ -18,6 +19,10 @@ llm = ChatOllama(model="mistral", temperature=0,num_gpu=99,num_thread=4)
 
 # 4. Fonction de recherche + réponse modifiée
 def ask_question(query):
+    tracker = EmissionsTracker(save_to_file=True, output_dir=".")
+    tracker.start()
+    
+    start_time = time.time() # Début du chrono
     # Recherche des documents pertinents (on récupère les objets 'Document' entiers)
     retriever = vector_db.as_retriever(search_type="mmr", search_kwargs={'k': 6, 'fetch_k': 20})
     docs = retriever.invoke(query)
@@ -68,15 +73,23 @@ def ask_question(query):
     
     # Génération de la réponse
     response = llm.invoke(messages)
-    
+
+    end_time = time.time() # Fin du chrono
+    emissions = tracker.stop() # Fin du suivi carbone
+
+    inference_time = end_time - start_time
     # On retourne la réponse ET les documents sources
-    return response.content
+    return response.content , inference_time, emissions
 
 # 5. Test avec affichage des sources
 query = "What is saad"  # Exemple de question
 print(f"Question: {query}")
 print("-" * 30)
-answer = ask_question(query)
+answer, duration, co2 = ask_question(query)
+
+print("\n=== METRIQUES DE PERFORMANCE ===")
+print(f"⏱️ Temps d'inférence : {duration:.2f} secondes")
+print(f"🌱 Émissions générées : {co2:.10f} kg CO2")
 print("-" * 30)
 print("\n=== TUTOR RESPONSE ===")
 print(answer)
