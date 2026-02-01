@@ -1,0 +1,125 @@
+CNN BEST PRACTICES
+===================
+
+Q1: Checklist before training?
+A:
+✓ Dataset well prepared and balanced
+✓ Train/Val/Test split (70/15/15 or 80/10/10)
+✓ Appropriate data augmentation
+✓ Image normalization
+✓ Batch size adapted to GPU memory
+✓ Appropriate learning rate (LR finder)
+✓ Optimizer chosen (Adam for start, SGD+momentum for fine-tuning)
+✓ Learning rate scheduler
+✓ Early stopping configured
+✓ Model checkpointing
+✓ Logging and monitoring (TensorBoard)
+
+Q2: Optimal order of operations in CNN block?
+A:
+# RECOMMENDED (modern order):
+Conv -> BatchNorm -> Activation
+
+# Code:
+nn.Conv2d(in_ch, out_ch, 3, padding=1, bias=False)  # bias=False with BN
+nn.BatchNorm2d(out_ch)
+nn.ReLU(inplace=True)
+
+Q3: How to avoid overfitting?
+A:
+# 1. More data
+- Aggressive data augmentation
+- Collect more data
+- Synthetic data
+
+# 2. Regularization
+- Dropout (0.3-0.5 for FC, 0.1-0.2 for Conv)
+- L2 regularization (weight_decay=1e-4 to 1e-5)
+- Batch Normalization
+- Early stopping
+
+# 3. Architecture
+- Simpler model
+- Fewer parameters
+- Transfer learning
+
+Q4: How to diagnose training problems?
+A:
+# SYMPTOM 1: Loss not decreasing
+Possible causes:
+- Learning rate too high → Reduce LR
+- Learning rate too low → Increase LR
+- Bad initialization → Use kaiming/xavier init
+- Exploding gradients → Gradient clipping
+
+# SYMPTOM 2: Overfitting (train acc >> val acc)
+Solutions:
+- More data augmentation
+- Higher dropout
+- Higher weight decay
+- Early stopping
+
+# SYMPTOM 3: Underfitting (train and val acc both low)
+Solutions:
+- More complex model
+- Train longer
+- Higher learning rate
+- Less regularization
+
+Q5: Recommended hyperparameters to start?
+A:
+# IMAGE CLASSIFICATION (ImageNet-like):
+config = {
+    'batch_size': 32,
+    'learning_rate': 1e-3,  # Adam
+    'optimizer': 'Adam',
+    'weight_decay': 1e-4,
+    'dropout': 0.5,
+    'epochs': 100,
+    'scheduler': 'ReduceLROnPlateau',
+    'early_stopping_patience': 10
+}
+
+# TRANSFER LEARNING:
+config_transfer = {
+    'batch_size': 16,
+    'learning_rate': 1e-4,  # Lower!
+    'optimizer': 'Adam',
+    'weight_decay': 1e-5,
+    'dropout': 0.3,
+    'epochs': 50
+}
+
+Q6: How to handle imbalanced datasets?
+A:
+# Solution 1: Class weights in loss
+from sklearn.utils.class_weight import compute_class_weight
+
+class_weights = compute_class_weight('balanced', 
+                                     classes=np.unique(labels), 
+                                     y=labels)
+class_weights = torch.FloatTensor(class_weights)
+criterion = nn.CrossEntropyLoss(weight=class_weights)
+
+# Solution 2: Oversample minority class
+from torch.utils.data import WeightedRandomSampler
+
+class_counts = np.bincount(labels)
+sample_weights = 1. / class_counts[labels]
+sampler = WeightedRandomSampler(sample_weights, len(sample_weights))
+train_loader = DataLoader(dataset, batch_size=32, sampler=sampler)
+
+Q7: Production deployment advice?
+A:
+✓ Convert to ONNX/TensorRT for speed
+✓ INT8 quantization if possible
+✓ Batch inference when possible
+✓ Cache frequent results
+✓ Monitor latency and throughput
+✓ A/B testing of new versions
+✓ Model versioning
+✓ Fallback if model fails
+✓ Robust input validation
+✓ Error logging
+✓ Integration tests
+✓ Clear documentation

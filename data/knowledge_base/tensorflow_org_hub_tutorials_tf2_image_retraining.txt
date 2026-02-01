@@ -1,0 +1,65 @@
+# Retraining an Image ClassifierStay organized with collectionsSave and categorize content based on your preferences.
+## Introduction
+Image classification models have millions of parameters. Training them from
+scratch requires a lot of labeled training data and a lot of computing power. Transfer learning is a technique that shortcuts much of this by taking a piece of a model that has already been trained on a related task and reusing it in a new model.
+This Colab demonstrates how to build a Keras model for classifying five species of flowers by using a pre-trained TF2 SavedModel from TensorFlow Hub for image feature extraction, trained on the much larger and more general ImageNet dataset. Optionally, the feature extractor can be trained ("fine-tuned") alongside the newly added classifier.
+### Looking for a tool instead?
+This is a TensorFlow coding tutorial. If you want a tool that just builds the TensorFlow or TFLite model for, take a look at the make_image_classifier command-line tool that gets installed by the PIP package tensorflow-hub[make_image_classifier] , or at this TFLite colab.
+## Setup
+```python
+import itertools
+import os
+import matplotlib.pylab as plt
+import numpy as np
+import tensorflow as tf
+import tensorflow_hub as hub
+print("TF version:", tf.__version__)
+print("Hub version:", hub.__version__)
+print("GPU is", "available" if tf.config.list_physical_devices('GPU') else "NOT AVAILABLE")
+## Select the TF2 SavedModel module to use
+You can find more TF2 models that generate image feature vectors here .
+There are multiple possible models to try. All you need to do is select a different one on the cell below and follow up with the notebook.
+```python
+model_handle_map = {
+model_image_size_map = {
+"efficientnetv2-s": 384,
+"efficientnetv2-m": 480,
+"efficientnetv2-l": 480,
+"efficientnetv2-b0": 224,
+"efficientnetv2-b1": 240,
+"efficientnetv2-b2": 260,
+"efficientnetv2-b3": 300,
+"efficientnetv2-s-21k": 384,
+"efficientnetv2-m-21k": 480,
+"efficientnetv2-l-21k": 480,
+"efficientnetv2-xl-21k": 512,
+"efficientnetv2-b0-21k": 224,
+"efficientnetv2-b1-21k": 240,
+"efficientnetv2-b2-21k": 260,
+"efficientnetv2-b3-21k": 300,
+"efficientnetv2-s-21k-ft1k": 384,
+"efficientnetv2-m-21k-ft1k": 480,
+"efficientnetv2-l-21k-ft1k": 480,
+"efficientnetv2-xl-21k-ft1k": 512,
+"efficientnetv2-b0-21k-ft1k": 224,
+"efficientnetv2-b1-21k-ft1k": 240,
+"efficientnetv2-b2-21k-ft1k": 260,
+"efficientnetv2-b3-21k-ft1k": 300,
+"efficientnet_b0": 224,
+"efficientnet_b1": 240,
+"efficientnet_b2": 260,
+"efficientnet_b3": 300,
+"efficientnet_b4": 380,
+"efficientnet_b5": 456,
+"efficientnet_b6": 528,
+"efficientnet_b7": 600,
+"inception_v3": 299,
+"inception_resnet_v2": 299,
+"nasnet_large": 331,
+"pnasnet_large": 331,
+model_handle = model_handle_map.get(model_name)
+pixels = model_image_size_map.get(model_name, 224)
+print(f"Selected model: {model_name} : {model_handle}")
+IMAGE_SIZE = (pixels, pixels)
+print(f"Input size {IMAGE_SIZE}")
+BATCH_SIZE = 16

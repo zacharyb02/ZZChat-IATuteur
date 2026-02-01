@@ -1,4 +1,5 @@
 .venv/
 torch.nn — PyTorch 2.9 documentation.pdf
-test_knowledge_base/
 smart_filter_cnn.py
+venv/
+__pycache__/

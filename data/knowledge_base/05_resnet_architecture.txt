@@ -1,0 +1,69 @@
+RESNET ARCHITECTURE (RESIDUAL NETWORKS)
+========================================
+
+Q1: What is ResNet and why is it revolutionary?
+A: ResNet (2015) introduced skip connections (residual connections) enabling training of very deep networks (152+ layers) without performance degradation.
+
+Problem solved: Performance degradation with depth (vanishing gradients)
+Solution: Skip connections allow gradients to flow directly
+
+Q2: How do residual connections work?
+A: Instead of learning F(x), the network learns the residual: F(x) = H(x) - x
+Output = F(x) + x (addition of skip connection)
+
+Q3: How to implement a basic residual block?
+A:
+import torch.nn as nn
+
+class BasicResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, stride=1):
+        super().__init__()
+        
+        self.conv1 = nn.Conv2d(in_channels, out_channels, 3, stride, 1, bias=False)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        
+        self.conv2 = nn.Conv2d(out_channels, out_channels, 3, 1, 1, bias=False)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+        
+        self.relu = nn.ReLU(inplace=True)
+        
+        # Skip connection with projection if necessary
+        self.shortcut = nn.Sequential()
+        if stride != 1 or in_channels != out_channels:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(in_channels, out_channels, 1, stride, bias=False),
+                nn.BatchNorm2d(out_channels)
+            )
+    
+    def forward(self, x):
+        identity = x
+        
+        out = self.relu(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        
+        out += self.shortcut(identity)
+        out = self.relu(out)
+        
+        return out
+
+Q4: How to use pretrained ResNet with transfer learning?
+A:
+import torchvision.models as models
+
+# Load pretrained ResNet-18
+resnet18 = models.resnet18(pretrained=True)
+
+# Option 1: Feature extractor (freeze all weights)
+for param in resnet18.parameters():
+    param.requires_grad = False
+
+# Replace last layer for your number of classes
+num_features = resnet18.fc.in_features
+resnet18.fc = nn.Linear(num_features, 10)
+
+# Option 2: Fine-tuning (unfreeze last layers)
+for name, param in resnet18.named_parameters():
+    if "layer4" not in name and "fc" not in name:
+        param.requires_grad = False
+
+resnet18.fc = nn.Linear(num_features, 10)

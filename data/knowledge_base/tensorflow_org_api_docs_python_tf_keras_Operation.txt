@@ -1,0 +1,49 @@
+# tf.keras.OperationStay organized with collectionsSave and categorize content based on your preferences.
+Compat aliases for migration See Migration guide for
+more details. tf.compat.v1.keras.Operation
+See Migration guide for
+more details.
+```python
+tf.keras.Operation(
+dtype=None, name=None
+## Attributes
+input Retrieves the input tensor(s) of a symbolic operation.
+Only returns the tensor(s) corresponding to the first time the operation was called. output Retrieves the output tensor(s) of a layer.
+Only returns the tensor(s) corresponding to the first time the operation was called.
+## Methods
+### call
+```python
+call(
+*args, **kwargs
+### compute_output_spec
+```python
+compute_output_spec(
+*args, **kwargs
+### from_config
+```python
+@classmethod
+from_config(
+config
+Creates a layer from its config.
+This method is the reverse of get_config ,
+capable of instantiating the same layer from the config
+dictionary. It does not handle layer connectivity
+(handled by Network), nor weights (handled by set_weights ).
+config A Python dictionary, typically the
+output of get_config.
+### get_config
+Returns the config of the object.
+An object config is a Python dictionary (serializable)
+containing the information needed to re-instantiate it.
+### quantized_call
+```python
+quantized_call(
+*args, **kwargs
+### symbolic_call
+```python
+symbolic_call(
+*args, **kwargs
+### __call__
+```python
+*args, **kwargs
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates. Some content is licensed under the numpy license .

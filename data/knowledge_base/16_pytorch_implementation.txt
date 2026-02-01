@@ -1,0 +1,65 @@
+COMPLETE PYTORCH IMPLEMENTATION
+=================================
+
+Q1: How to create a structured PyTorch project?
+A:
+project/
+├── data/
+├── models/
+│   └── resnet.py
+├── utils/
+│   ├── dataset.py
+│   └── transforms.py
+├── train.py
+└── config.py
+
+Q2: How to implement a custom Dataset?
+A:
+from torch.utils.data import Dataset
+
+class CustomDataset(Dataset):
+    def __init__(self, root_dir, transform=None):
+        self.root_dir = root_dir
+        self.transform = transform
+        self.classes = sorted(os.listdir(root_dir))
+        self.images = []
+        self.labels = []
+        
+        for class_name in self.classes:
+            class_dir = os.path.join(root_dir, class_name)
+            class_idx = self.classes.index(class_name)
+            
+            for img_name in os.listdir(class_dir):
+                self.images.append(os.path.join(class_dir, img_name))
+                self.labels.append(class_idx)
+    
+    def __len__(self):
+        return len(self.images)
+    
+    def __getitem__(self, idx):
+        image = Image.open(self.images[idx]).convert('RGB')
+        label = self.labels[idx]
+        
+        if self.transform:
+            image = self.transform(image)
+        
+        return image, label
+
+Q3: How to use TensorBoard?
+A:
+from torch.utils.tensorboard import SummaryWriter
+
+writer = SummaryWriter('runs/experiment_1')
+
+for epoch in range(num_epochs):
+    train_loss, train_acc = train_epoch(...)
+    
+    writer.add_scalar('Loss/train', train_loss, epoch)
+    writer.add_scalar('Accuracy/train', train_acc, epoch)
+    
+    # Log weight histograms
+    for name, param in model.named_parameters():
+        writer.add_histogram(name, param, epoch)
+
+writer.close()
+# View: tensorboard --logdir=runs

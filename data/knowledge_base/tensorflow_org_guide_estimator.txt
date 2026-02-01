@@ -1,0 +1,798 @@
+# EstimatorsStay organized with collectionsSave and categorize content based on your preferences.
+This document introduces tf.estimator —a high-level TensorFlow
+API. Estimators encapsulate the following actions:
+TensorFlow implements several pre-made Estimators. Custom estimators are still suported, but mainly as a backwards compatibility measure. Custom estimators should not be used for new code .  All Estimators—pre-made or custom ones—are classes based on the tf.estimator.Estimator class.
+For a quick example, try Estimator tutorials . For an overview of the API design, check the white paper .
+## Setup
+```python
+import tempfile
+import os
+import tensorflow as tf
+import tensorflow_datasets as tfds
+```python
+## Advantages
+Similar to a tf.keras.Model , an estimator is a model-level abstraction. The tf.estimator provides some capabilities currently still under development for tf.keras . These are:
+- Parameter server based training
+## Estimators Capabilities
+Estimators provide the following benefits:
+- You can run Estimator-based models on a local host or on a distributed multi-server environment without changing your model. Furthermore, you can run Estimator-based models on CPUs, GPUs, or TPUs without recoding your model.
+- Estimators provide a safe distributed training loop that controls how and when to: Load data Handle exceptions Create checkpoint files and recover from failures Save summaries for TensorBoard
+- Create checkpoint files and recover from failures
+When writing an application with Estimators, you must separate the data input pipeline from the model. This separation simplifies experiments with different datasets.
+## Using pre-made Estimators
+Pre-made Estimators enable you to work at a much higher conceptual level than the base TensorFlow APIs. You no longer have to worry about creating the computational graph or sessions since Estimators handle all the "plumbing" for you. Furthermore, pre-made Estimators let you experiment with different model architectures by making only minimal code changes. tf.estimator.DNNClassifier , for example, is a pre-made Estimator class that trains classification models based on dense, feed-forward neural networks.
+A TensorFlow program relying on a pre-made Estimator typically consists of the following four steps:
+### 1. Write an input functions
+For example, you might create one function to import the training set and another function to import the test set. Estimators expect their inputs to be formatted as a pair of objects:
+- A dictionary in which the keys are feature names and the values are Tensors (or SparseTensors) containing the corresponding feature data
+- A Tensor containing one or more labels
+The input_fn should return a tf.data.Dataset that yields pairs in that format.
+For example, the following code builds a tf.data.Dataset from the Titanic dataset's train.csv file:
+```python
+def train_input_fn():
+titanic = tf.data.experimental.make_csv_dataset(
+titanic_file, batch_size=32,
+label_name="survived")
+titanic_batches = (
+titanic.cache().repeat().shuffle(500)
+.prefetch(tf.data.AUTOTUNE))
+return titanic_batches
+The input_fn is executed in a tf.Graph and can also directly return a (features_dics, labels) pair containing graph tensors, but this is error prone outside of simple cases like returning constants.
+### 2. Define the feature columns.
+Each tf.feature_column identifies a feature name, its type, and any input pre-processing.
+For example, the following snippet creates three feature columns.
+- The first uses the age feature directly as a floating-point input.
+- The second uses the class feature as a categorical input.
+- The third uses the embark_town as a categorical input, but uses the hashing trick to avoid the need to enumerate the options, and to set the number of options.
+For further information, check the feature columns tutorial .
+```python
+age = tf.feature_column.numeric_column('age')
+cls = tf.feature_column.categorical_column_with_vocabulary_list('class', ['First', 'Second', 'Third'])
+embark = tf.feature_column.categorical_column_with_hash_bucket('embark_town', 32)
+```python
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/4100412726.py:1: numeric_column (from tensorflow.python.feature_column.feature_column_v2) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use Keras preprocessing layers instead, either directly or via the `tf.keras.utils.FeatureSpace` utility. Each of `tf.feature_column.*` has a functional equivalent in `tf.keras.layers` for feature preprocessing when training a Keras model.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/4100412726.py:2: categorical_column_with_vocabulary_list (from tensorflow.python.feature_column.feature_column_v2) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use Keras preprocessing layers instead, either directly or via the `tf.keras.utils.FeatureSpace` utility. Each of `tf.feature_column.*` has a functional equivalent in `tf.keras.layers` for feature preprocessing when training a Keras model.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/4100412726.py:3: categorical_column_with_hash_bucket (from tensorflow.python.feature_column.feature_column_v2) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use Keras preprocessing layers instead, either directly or via the `tf.keras.utils.FeatureSpace` utility. Each of `tf.feature_column.*` has a functional equivalent in `tf.keras.layers` for feature preprocessing when training a Keras model.
+### 3. Instantiate the relevant pre-made Estimator.
+For example, here's a sample instantiation of a pre-made Estimator named LinearClassifier :
+```python
+model_dir = tempfile.mkdtemp()
+model = tf.estimator.LinearClassifier(
+model_dir=model_dir,
+feature_columns=[embark, cls, age],
+n_classes=2
+```python
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/1904628810.py:2: LinearClassifierV2.__init__ (from tensorflow_estimator.python.estimator.canned.linear) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/head/head_utils.py:54: BinaryClassHead.__init__ (from tensorflow_estimator.python.estimator.head.binary_class_head) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/canned/linear.py:944: Estimator.__init__ (from tensorflow_estimator.python.estimator.estimator) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:1844: RunConfig.__init__ (from tensorflow_estimator.python.estimator.run_config) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Using default config.
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmpbt9n791j', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+For more information, you can go the linear classifier tutorial .
+### 4. Call a training, evaluation, or inference method.
+All Estimators provide train , evaluate , and predict methods.
+```python
+model = model.train(input_fn=train_input_fn, steps=100)
+```python
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:385: StopAtStepHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+30874/30874 [==============================] - 0s 0us/step
+INFO:tensorflow:Calling model_fn.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/keras/src/optimizers/legacy/ftrl.py:173: calling Constant.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/model_fn.py:250: EstimatorSpec.__new__ (from tensorflow_estimator.python.estimator.model_fn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Done calling model_fn.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:1416: NanTensorHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:1419: LoggingTensorHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/basic_session_run_hooks.py:232: SecondOrStepTimer.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:1456: CheckpointSaverHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Create CheckpointSaverHook.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/monitored_session.py:579: StepCounterHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/monitored_session.py:586: SummarySaverHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmpbt9n791j/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/monitored_session.py:1455: SessionRunArgs.__new__ (from tensorflow.python.training.session_run_hook) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/monitored_session.py:1454: SessionRunContext.__init__ (from tensorflow.python.training.session_run_hook) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/monitored_session.py:1474: SessionRunValues.__new__ (from tensorflow.python.training.session_run_hook) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:loss = 0.6931472, step = 0
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 100...
+INFO:tensorflow:Saving checkpoints for 100 into /tmpfs/tmp/tmpbt9n791j/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 100...
+INFO:tensorflow:Loss for final step: 0.59910536.
+```python
+result = model.evaluate(train_input_fn, steps=10)
+for key, value in result.items():
+print(key, ":", value)
+```python
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Starting evaluation at 2024-01-24T02:20:52
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/training/evaluation.py:260: FinalOpsHook.__init__ (from tensorflow.python.training.basic_session_run_hooks) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmpbt9n791j/model.ckpt-100
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Evaluation [1/10]
+INFO:tensorflow:Evaluation [2/10]
+INFO:tensorflow:Evaluation [3/10]
+INFO:tensorflow:Evaluation [4/10]
+INFO:tensorflow:Evaluation [5/10]
+INFO:tensorflow:Evaluation [6/10]
+INFO:tensorflow:Evaluation [7/10]
+INFO:tensorflow:Evaluation [8/10]
+INFO:tensorflow:Evaluation [9/10]
+INFO:tensorflow:Evaluation [10/10]
+INFO:tensorflow:Inference Time : 3.02373s
+INFO:tensorflow:Finished evaluation at 2024-01-24-02:20:55
+INFO:tensorflow:Saving dict for global step 100: accuracy = 0.715625, accuracy_baseline = 0.615625, auc = 0.7548389, auc_precision_recall = 0.66771877, average_loss = 0.56671846, global_step = 100, label/mean = 0.384375, loss = 0.56671846, precision = 0.7, prediction/mean = 0.37144834, recall = 0.45528457
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 100: /tmpfs/tmp/tmpbt9n791j/model.ckpt-100
+accuracy : 0.715625
+accuracy_baseline : 0.615625
+auc : 0.7548389
+auc_precision_recall : 0.66771877
+average_loss : 0.56671846
+label/mean : 0.384375
+loss : 0.56671846
+precision : 0.7
+prediction/mean : 0.37144834
+recall : 0.45528457
+global_step : 100
+```python
+for pred in model.predict(train_input_fn):
+for key, value in pred.items():
+print(key, ":", value)
+break
+```python
+INFO:tensorflow:Calling model_fn.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/head/base_head.py:786: ClassificationOutput.__init__ (from tensorflow.python.saved_model.model_utils.export_output) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/head/binary_class_head.py:561: RegressionOutput.__init__ (from tensorflow.python.saved_model.model_utils.export_output) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/head/binary_class_head.py:563: PredictOutput.__init__ (from tensorflow.python.saved_model.model_utils.export_output) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmpbt9n791j/model.ckpt-100
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+logits : [-0.6829183]
+logistic : [0.33561027]
+probabilities : [0.6643897  0.33561027]
+class_ids : [0]
+classes : [b'0']
+all_class_ids : [0 1]
+all_classes : [b'0' b'1']
+### Benefits of pre-made Estimators
+Pre-made Estimators encode best practices, providing the following benefits:
+- Best practices for determining where different parts of the computational graph should run, implementing strategies on a single machine or on a
+cluster.
+- Best practices for event (summary) writing and universally useful
+summaries.
+If you don't use pre-made Estimators, you must implement the preceding features yourself.
+## Custom Estimators
+The heart of every Estimator—whether pre-made or custom—is its model function , model_fn , which is a method that builds graphs for training, evaluation, and prediction. When you are using a pre-made Estimator, someone else has already implemented the model function. When relying on a custom Estimator, you must write the model function yourself.
+## Create an Estimator from a Keras model
+You can convert existing Keras models to Estimators with tf.keras.estimator.model_to_estimator . This is helpful if you want to modernize your model code, but your training pipeline still requires Estimators.
+Instantiate a Keras MobileNet V2 model and compile the model with the optimizer, loss, and metrics to train with:
+```python
+keras_mobilenet_v2 = tf.keras.applications.MobileNetV2(
+input_shape=(160, 160, 3), include_top=False)
+keras_mobilenet_v2.trainable = False
+estimator_model = tf.keras.Sequential([
+keras_mobilenet_v2,
+tf.keras.layers.GlobalAveragePooling2D(),
+tf.keras.layers.Dense(1)
+# Compile the model
+estimator_model.compile(
+optimizer='adam',
+loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
+metrics=['accuracy'])
+```python
+9406464/9406464 [==============================] - 0s 0us/step
+Create an Estimator from the compiled Keras model. The initial model state of the Keras model is preserved in the created Estimator :
+```python
+est_mobilenet_v2 = tf.keras.estimator.model_to_estimator(keras_model=estimator_model)
+```python
+INFO:tensorflow:Using default config.
+WARNING:tensorflow:Using temporary folder as model directory: /tmpfs/tmp/tmpjcucleiz
+INFO:tensorflow:Using the Keras model provided.
+WARNING:absl:You are using `tf.keras.optimizers.experimental.Optimizer` in TF estimator, which only supports `tf.keras.optimizers.legacy.Optimizer`. Automatically converting your optimizer to `tf.keras.optimizers.legacy.Optimizer`.
+/tmpfs/src/tf_docs_env/lib/python3.9/site-packages/keras/src/backend.py:452: UserWarning: `tf.keras.backend.set_learning_phase` is deprecated and will be removed after 2020-10-11. To update it, simply pass a True/False value to the `training` argument of the `__call__` method of your layer or model.
+warnings.warn(
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmpjcucleiz', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmpjcucleiz', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:2404: WarmStartSettings.__new__ (from tensorflow_estimator.python.estimator.estimator) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:2404: WarmStartSettings.__new__ (from tensorflow_estimator.python.estimator.estimator) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+Treat the derived Estimator as you would with any other Estimator .
+```python
+def preprocess(image, label):
+image = tf.cast(image, tf.float32)
+image = (image/127.5) - 1
+image = tf.image.resize(image, (IMG_SIZE, IMG_SIZE))
+return image, label
+```python
+def train_input_fn(batch_size):
+data = tfds.load('cats_vs_dogs', as_supervised=True)
+train_data = data['train']
+train_data = train_data.map(preprocess).shuffle(500).batch(batch_size)
+return train_data
+To train, call Estimator's train function:
+```python
+est_mobilenet_v2.train(input_fn=lambda: train_input_fn(32), steps=50)
+```python
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Warm-starting with WarmStartSettings: WarmStartSettings(ckpt_to_initialize_from='/tmpfs/tmp/tmpjcucleiz/keras/keras_model.ckpt', vars_to_warm_start='.*', var_name_to_vocab_info={}, var_name_to_prev_var_name={})
+INFO:tensorflow:Warm-starting with WarmStartSettings: WarmStartSettings(ckpt_to_initialize_from='/tmpfs/tmp/tmpjcucleiz/keras/keras_model.ckpt', vars_to_warm_start='.*', var_name_to_vocab_info={}, var_name_to_prev_var_name={})
+INFO:tensorflow:Warm-starting from: /tmpfs/tmp/tmpjcucleiz/keras/keras_model.ckpt
+INFO:tensorflow:Warm-starting from: /tmpfs/tmp/tmpjcucleiz/keras/keras_model.ckpt
+INFO:tensorflow:Warm-starting variables only in TRAINABLE_VARIABLES.
+INFO:tensorflow:Warm-starting variables only in TRAINABLE_VARIABLES.
+INFO:tensorflow:Warm-started 158 variables.
+INFO:tensorflow:Warm-started 158 variables.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmpjcucleiz/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmpjcucleiz/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:loss = 0.6796611, step = 0
+INFO:tensorflow:loss = 0.6796611, step = 0
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 50...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 50...
+INFO:tensorflow:Saving checkpoints for 50 into /tmpfs/tmp/tmpjcucleiz/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 50 into /tmpfs/tmp/tmpjcucleiz/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 50...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 50...
+INFO:tensorflow:Loss for final step: 0.69532585.
+INFO:tensorflow:Loss for final step: 0.69532585.
+Similarly, to evaluate, call the Estimator's evaluate function:
+```python
+est_mobilenet_v2.evaluate(input_fn=lambda: train_input_fn(32), steps=10)
+```python
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+/tmpfs/src/tf_docs_env/lib/python3.9/site-packages/keras/src/engine/training_v1.py:2335: UserWarning: `Model.state_updates` will be removed in a future version. This property should not be used in TensorFlow 2.0, as `updates` are applied automatically.
+updates = self.state_updates
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Starting evaluation at 2024-01-24T02:21:19
+INFO:tensorflow:Starting evaluation at 2024-01-24T02:21:19
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmpjcucleiz/model.ckpt-50
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmpjcucleiz/model.ckpt-50
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Evaluation [1/10]
+INFO:tensorflow:Evaluation [1/10]
+INFO:tensorflow:Evaluation [2/10]
+INFO:tensorflow:Evaluation [2/10]
+INFO:tensorflow:Evaluation [3/10]
+INFO:tensorflow:Evaluation [3/10]
+INFO:tensorflow:Evaluation [4/10]
+INFO:tensorflow:Evaluation [4/10]
+INFO:tensorflow:Evaluation [5/10]
+INFO:tensorflow:Evaluation [5/10]
+INFO:tensorflow:Evaluation [6/10]
+INFO:tensorflow:Evaluation [6/10]
+INFO:tensorflow:Evaluation [7/10]
+INFO:tensorflow:Evaluation [7/10]
+INFO:tensorflow:Evaluation [8/10]
+INFO:tensorflow:Evaluation [8/10]
+INFO:tensorflow:Evaluation [9/10]
+INFO:tensorflow:Evaluation [9/10]
+INFO:tensorflow:Evaluation [10/10]
+INFO:tensorflow:Evaluation [10/10]
+INFO:tensorflow:Inference Time : 2.81526s
+INFO:tensorflow:Inference Time : 2.81526s
+INFO:tensorflow:Finished evaluation at 2024-01-24-02:21:22
+INFO:tensorflow:Finished evaluation at 2024-01-24-02:21:22
+INFO:tensorflow:Saving dict for global step 50: accuracy = 0.54375, global_step = 50, loss = 0.6558426
+INFO:tensorflow:Saving dict for global step 50: accuracy = 0.54375, global_step = 50, loss = 0.6558426
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 50: /tmpfs/tmp/tmpjcucleiz/model.ckpt-50
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 50: /tmpfs/tmp/tmpjcucleiz/model.ckpt-50
+{'accuracy': 0.54375, 'loss': 0.6558426, 'global_step': 50}
+For more details, please refer to the documentation for tf.keras.estimator.model_to_estimator .
+## Saving object-based checkpoints with Estimator
+Estimators by default save checkpoints with variable names rather than the object graph described in the Checkpoint guide . tf.train.Checkpoint will read name-based checkpoints, but variable names may change when moving parts of a model outside of the Estimator's model_fn . For forwards compatibility saving object-based checkpoints makes it easier to train a model inside an Estimator and then use it outside of one.
+```python
+import tensorflow.compat.v1 as tf_compat
+```python
+def toy_dataset():
+inputs = tf.range(10.)[:, None]
+labels = inputs * 5. + tf.range(5.)[None, :]
+return tf.data.Dataset.from_tensor_slices(
+dict(x=inputs, y=labels)).repeat().batch(2)
+```python
+class Net(tf.keras.Model):
+"""A simple linear model."""
+def __init__(self):
+super(Net, self).__init__()
+self.l1 = tf.keras.layers.Dense(5)
+def call(self, x):
+return self.l1(x)
+```python
+def model_fn(features, labels, mode):
+net = Net()
+opt = tf.keras.optimizers.Adam(0.1)
+ckpt = tf.train.Checkpoint(step=tf_compat.train.get_global_step(),
+optimizer=opt, net=net)
+with tf.GradientTape() as tape:
+output = net(features['x'])
+loss = tf.reduce_mean(tf.abs(output - features['y']))
+variables = net.trainable_variables
+gradients = tape.gradient(loss, variables)
+return tf.estimator.EstimatorSpec(
+mode,
+loss=loss,
+train_op=tf.group(opt.apply_gradients(zip(gradients, variables)),
+ckpt.step.assign_add(1)),
+# Tell the Estimator to save "ckpt" in an object-based format.
+scaffold=tf_compat.train.Scaffold(saver=ckpt))
+tf.keras.backend.clear_session()
+est = tf.estimator.Estimator(model_fn, './tf_estimator_example/')
+est.train(toy_dataset, steps=10)
+```python
+INFO:tensorflow:Using default config.
+INFO:tensorflow:Using default config.
+INFO:tensorflow:Using config: {'_model_dir': './tf_estimator_example/', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Using config: {'_model_dir': './tf_estimator_example/', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Saving checkpoints for 0 into ./tf_estimator_example/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 0 into ./tf_estimator_example/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:loss = 4.4765882, step = 1
+INFO:tensorflow:loss = 4.4765882, step = 1
+WARNING:tensorflow:It seems that global step (tf.train.get_global_step) has not been increased. Current value (could be stable): 4 vs previous value: 4. You could increase the global step by passing tf.train.get_global_step() to Optimizer.apply_gradients or Optimizer.minimize.
+WARNING:tensorflow:It seems that global step (tf.train.get_global_step) has not been increased. Current value (could be stable): 4 vs previous value: 4. You could increase the global step by passing tf.train.get_global_step() to Optimizer.apply_gradients or Optimizer.minimize.
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 10...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 10...
+INFO:tensorflow:Saving checkpoints for 10 into ./tf_estimator_example/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 10 into ./tf_estimator_example/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 10...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 10...
+INFO:tensorflow:Loss for final step: 44.10201.
+INFO:tensorflow:Loss for final step: 44.10201.
+tf.train.Checkpoint can then load the Estimator's checkpoints from its model_dir .
+```python
+opt = tf.keras.optimizers.Adam(0.1)
+net = Net()
+ckpt = tf.train.Checkpoint(
+step=tf.Variable(1, dtype=tf.int64), optimizer=opt, net=net)
+ckpt.restore(tf.train.latest_checkpoint('./tf_estimator_example/'))
+ckpt.step.numpy()  # From est.train(..., steps=10)
+## SavedModels from Estimators
+Estimators export SavedModels through tf.Estimator.export_saved_model .
+```python
+input_column = tf.feature_column.numeric_column("x")
+estimator = tf.estimator.LinearClassifier(feature_columns=[input_column])
+def input_fn():
+return tf.data.Dataset.from_tensor_slices(
+({"x": [1., 2., 3., 4.]}, [1, 1, 0, 0])).repeat(200).shuffle(64).batch(16)
+estimator.train(input_fn)
+```python
+INFO:tensorflow:Using default config.
+INFO:tensorflow:Using default config.
+WARNING:tensorflow:Using temporary folder as model directory: /tmpfs/tmp/tmps_vspwiv
+WARNING:tensorflow:Using temporary folder as model directory: /tmpfs/tmp/tmps_vspwiv
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmps_vspwiv', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmps_vspwiv', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_checkpoint_save_graph_def': True, '_service': None, '_cluster_spec': ClusterSpec({}), '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmps_vspwiv/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmps_vspwiv/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:loss = 0.6931472, step = 0
+INFO:tensorflow:loss = 0.6931472, step = 0
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 50...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 50...
+INFO:tensorflow:Saving checkpoints for 50 into /tmpfs/tmp/tmps_vspwiv/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 50 into /tmpfs/tmp/tmps_vspwiv/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 50...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 50...
+INFO:tensorflow:Loss for final step: 0.42848104.
+INFO:tensorflow:Loss for final step: 0.42848104.
+To save an Estimator you need to create a serving_input_receiver . This function builds a part of a tf.Graph that parses the raw data received by the SavedModel.
+The tf.estimator.export module contains functions to help build these receivers .
+The following code builds a receiver, based on the feature_columns , that accepts serialized tf.Example protocol buffers, which are often used with tf-serving .
+```python
+tmpdir = tempfile.mkdtemp()
+serving_input_fn = tf.estimator.export.build_parsing_serving_input_receiver_fn(
+tf.feature_column.make_parse_example_spec([input_column]))
+estimator_base_path = os.path.join(tmpdir, 'from_estimator')
+estimator_path = estimator.export_saved_model(estimator_base_path, serving_input_fn)
+```python
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/121230551.py:4: make_parse_example_spec_v2 (from tensorflow.python.feature_column.feature_column_v2) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use Keras preprocessing layers instead, either directly or via the `tf.keras.utils.FeatureSpace` utility. Each of `tf.feature_column.*` has a functional equivalent in `tf.keras.layers` for feature preprocessing when training a Keras model.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/121230551.py:4: make_parse_example_spec_v2 (from tensorflow.python.feature_column.feature_column_v2) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use Keras preprocessing layers instead, either directly or via the `tf.keras.utils.FeatureSpace` utility. Each of `tf.feature_column.*` has a functional equivalent in `tf.keras.layers` for feature preprocessing when training a Keras model.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/121230551.py:3: build_parsing_serving_input_receiver_fn (from tensorflow_estimator.python.estimator.export.export) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/121230551.py:3: build_parsing_serving_input_receiver_fn (from tensorflow_estimator.python.estimator.export.export) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/export/export.py:312: ServingInputReceiver.__new__ (from tensorflow_estimator.python.estimator.export.export) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/export/export.py:312: ServingInputReceiver.__new__ (from tensorflow_estimator.python.estimator.export.export) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/saved_model/signature_def_utils_impl.py:168: build_tensor_info (from tensorflow.python.saved_model.utils_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/saved_model/signature_def_utils_impl.py:168: build_tensor_info (from tensorflow.python.saved_model.utils_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/saved_model/model_utils/export_utils.py:83: get_tensor_from_tensor_info (from tensorflow.python.saved_model.utils_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/saved_model/model_utils/export_utils.py:83: get_tensor_from_tensor_info (from tensorflow.python.saved_model.utils_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+INFO:tensorflow:Signatures INCLUDED in export for Classify: ['serving_default', 'classification']
+INFO:tensorflow:Signatures INCLUDED in export for Classify: ['serving_default', 'classification']
+INFO:tensorflow:Signatures INCLUDED in export for Regress: ['regression']
+INFO:tensorflow:Signatures INCLUDED in export for Regress: ['regression']
+INFO:tensorflow:Signatures INCLUDED in export for Predict: ['predict']
+INFO:tensorflow:Signatures INCLUDED in export for Predict: ['predict']
+INFO:tensorflow:Signatures INCLUDED in export for Train: None
+INFO:tensorflow:Signatures INCLUDED in export for Train: None
+INFO:tensorflow:Signatures INCLUDED in export for Eval: None
+INFO:tensorflow:Signatures INCLUDED in export for Eval: None
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmps_vspwiv/model.ckpt-50
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmps_vspwiv/model.ckpt-50
+INFO:tensorflow:Assets added to graph.
+INFO:tensorflow:Assets added to graph.
+INFO:tensorflow:No assets to write.
+INFO:tensorflow:No assets to write.
+INFO:tensorflow:SavedModel written to: /tmpfs/tmp/tmpvsrxtilj/from_estimator/temp-1706062885/saved_model.pb
+INFO:tensorflow:SavedModel written to: /tmpfs/tmp/tmpvsrxtilj/from_estimator/temp-1706062885/saved_model.pb
+You can also load and run that model, from python:
+```python
+imported = tf.saved_model.load(estimator_path)
+def predict(x):
+example = tf.train.Example()
+example.features.feature["x"].float_list.value.extend([x])
+return imported.signatures["predict"](
+examples=tf.constant([example.SerializeToString()]))
+```python
+print(predict(1.5))
+print(predict(3.5))
+```python
+{'logistic': <tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[0.576523]], dtype=float32)>, 'probabilities': <tf.Tensor: shape=(1, 2), dtype=float32, numpy=array([[0.42347696, 0.576523  ]], dtype=float32)>, 'class_ids': <tf.Tensor: shape=(1, 1), dtype=int64, numpy=array([[1]])>, 'logits': <tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[0.30851614]], dtype=float32)>, 'classes': <tf.Tensor: shape=(1, 1), dtype=string, numpy=array([[b'1']], dtype=object)>, 'all_class_ids': <tf.Tensor: shape=(1, 2), dtype=int32, numpy=array([[0, 1]], dtype=int32)>, 'all_classes': <tf.Tensor: shape=(1, 2), dtype=string, numpy=array([[b'0', b'1']], dtype=object)>}
+{'logistic': <tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[0.2338471]], dtype=float32)>, 'probabilities': <tf.Tensor: shape=(1, 2), dtype=float32, numpy=array([[0.7661529 , 0.23384713]], dtype=float32)>, 'class_ids': <tf.Tensor: shape=(1, 1), dtype=int64, numpy=array([[0]])>, 'logits': <tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[-1.1867142]], dtype=float32)>, 'classes': <tf.Tensor: shape=(1, 1), dtype=string, numpy=array([[b'0']], dtype=object)>, 'all_class_ids': <tf.Tensor: shape=(1, 2), dtype=int32, numpy=array([[0, 1]], dtype=int32)>, 'all_classes': <tf.Tensor: shape=(1, 2), dtype=string, numpy=array([[b'0', b'1']], dtype=object)>}
+tf.estimator.export.build_raw_serving_input_receiver_fn allows you to create input functions which take raw tensors rather than tf.train.Example s.
+## Usingtf.distribute.Strategywith Estimator (Limited support)
+tf.estimator is a distributed training TensorFlow API that originally supported the async parameter server approach. tf.estimator now supports tf.distribute.Strategy . If you're using tf.estimator , you can change to distributed training with very few changes to your code. With this, Estimator users can now do synchronous distributed training on multiple GPUs and multiple workers, as well as use TPUs. This support in Estimator is, however, limited. Check out the What's supported now section below for more details.
+Using tf.distribute.Strategy with Estimator is slightly different than in the Keras case. Instead of using strategy.scope , now you pass the strategy object into the RunConfig for the Estimator.
+You can refer to the distributed training guide for more information.
+Here is a snippet of code that shows this with a premade Estimator LinearRegressor and MirroredStrategy :
+```python
+mirrored_strategy = tf.distribute.MirroredStrategy()
+config = tf.estimator.RunConfig(
+train_distribute=mirrored_strategy, eval_distribute=mirrored_strategy)
+regressor = tf.estimator.LinearRegressor(
+feature_columns=[tf.feature_column.numeric_column('feats')],
+optimizer='SGD',
+config=config)
+```python
+INFO:tensorflow:Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:GPU:0', '/job:localhost/replica:0/task:0/device:GPU:1', '/job:localhost/replica:0/task:0/device:GPU:2', '/job:localhost/replica:0/task:0/device:GPU:3')
+INFO:tensorflow:Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:GPU:0', '/job:localhost/replica:0/task:0/device:GPU:1', '/job:localhost/replica:0/task:0/device:GPU:2', '/job:localhost/replica:0/task:0/device:GPU:3')
+INFO:tensorflow:Initializing RunConfig with distribution strategies.
+INFO:tensorflow:Initializing RunConfig with distribution strategies.
+INFO:tensorflow:Not using Distribute Coordinator.
+INFO:tensorflow:Not using Distribute Coordinator.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/4277059788.py:4: LinearRegressorV2.__init__ (from tensorflow_estimator.python.estimator.canned.linear) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/tmp/ipykernel_9073/4277059788.py:4: LinearRegressorV2.__init__ (from tensorflow_estimator.python.estimator.canned.linear) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/canned/linear.py:1344: RegressionHead.__init__ (from tensorflow_estimator.python.estimator.head.regression_head) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/canned/linear.py:1344: RegressionHead.__init__ (from tensorflow_estimator.python.estimator.head.regression_head) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.keras instead.
+WARNING:tensorflow:Using temporary folder as model directory: /tmpfs/tmp/tmpjagdxixr
+WARNING:tensorflow:Using temporary folder as model directory: /tmpfs/tmp/tmpjagdxixr
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmpjagdxixr', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+INFO:tensorflow:Using config: {'_model_dir': '/tmpfs/tmp/tmpjagdxixr', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': allow_soft_placement: true
+graph_options {
+rewrite_options {
+meta_optimizer_iterations: ONE
+Here, you use a premade Estimator, but the same code works with a custom Estimator as well. train_distribute determines how training will be distributed, and eval_distribute determines how evaluation will be distributed. This is another difference from Keras where you use the same strategy for both training and eval.
+Now you can train and evaluate this Estimator with an input function:
+```python
+def input_fn():
+dataset = tf.data.Dataset.from_tensors(({"feats":[1.]}, [1.]))
+return dataset.repeat(1000).batch(10)
+regressor.train(input_fn=input_fn, steps=10)
+regressor.evaluate(input_fn=input_fn, steps=10)
+```python
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:1246: StrategyBase.configure (from tensorflow.python.distribute.distribute_lib) is deprecated and will be removed in a future version.
+Instructions for updating:
+use `update_config_proto` instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/estimator.py:1246: StrategyBase.configure (from tensorflow.python.distribute.distribute_lib) is deprecated and will be removed in a future version.
+Instructions for updating:
+use `update_config_proto` instead.
+/tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow/python/data/ops/dataset_ops.py:462: UserWarning: To make it possible to preserve tf.data options across serialization boundaries, their implementation has moved to be part of the TensorFlow graph. As a consequence, the options value is in general no longer known at graph construction time. Invoking this method in graph mode retains the legacy behavior of the original implementation, but note that the returned value might not reflect the actual value of the options.
+warnings.warn("To make it possible to preserve tf.data options across "
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Collective all_reduce tensors: 2 all_reduces, num_devices = 4, group_size = 4, implementation = CommunicationImplementation.NCCL, num_packs = 1
+INFO:tensorflow:Collective all_reduce tensors: 2 all_reduces, num_devices = 4, group_size = 4, implementation = CommunicationImplementation.NCCL, num_packs = 1
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Create CheckpointSaverHook.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/util.py:95: DistributedIteratorV1.initialize (from tensorflow.python.distribute.v1.input_lib) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the iterator's `initializer` property instead.
+WARNING:tensorflow:From /tmpfs/src/tf_docs_env/lib/python3.9/site-packages/tensorflow_estimator/python/estimator/util.py:95: DistributedIteratorV1.initialize (from tensorflow.python.distribute.v1.input_lib) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the iterator's `initializer` property instead.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 0...
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmpjagdxixr/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 0 into /tmpfs/tmp/tmpjagdxixr/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 0...
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+INFO:tensorflow:loss = 4.0, step = 0
+INFO:tensorflow:loss = 4.0, step = 0
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 10...
+INFO:tensorflow:Calling checkpoint listeners before saving checkpoint 10...
+INFO:tensorflow:Saving checkpoints for 10 into /tmpfs/tmp/tmpjagdxixr/model.ckpt.
+INFO:tensorflow:Saving checkpoints for 10 into /tmpfs/tmp/tmpjagdxixr/model.ckpt.
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 10...
+INFO:tensorflow:Calling checkpoint listeners after saving checkpoint 10...
+INFO:tensorflow:Loss for final step: 1.1510792e-12.
+INFO:tensorflow:Loss for final step: 1.1510792e-12.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Reduce to /replica:0/task:0/device:CPU:0 then broadcast to ('/replica:0/task:0/device:CPU:0',).
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Starting evaluation at 2024-01-24T02:21:35
+INFO:tensorflow:Starting evaluation at 2024-01-24T02:21:35
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmpjagdxixr/model.ckpt-10
+INFO:tensorflow:Restoring parameters from /tmpfs/tmp/tmpjagdxixr/model.ckpt-10
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+.  Registered:  device='CPU'
+INFO:tensorflow:Evaluation [1/10]
+INFO:tensorflow:Evaluation [1/10]
+INFO:tensorflow:Evaluation [2/10]
+INFO:tensorflow:Evaluation [2/10]
+INFO:tensorflow:Evaluation [3/10]
+INFO:tensorflow:Evaluation [3/10]
+INFO:tensorflow:Evaluation [4/10]
+INFO:tensorflow:Evaluation [4/10]
+INFO:tensorflow:Evaluation [5/10]
+INFO:tensorflow:Evaluation [5/10]
+INFO:tensorflow:Evaluation [6/10]
+INFO:tensorflow:Evaluation [6/10]
+INFO:tensorflow:Evaluation [7/10]
+INFO:tensorflow:Evaluation [7/10]
+INFO:tensorflow:Evaluation [8/10]
+INFO:tensorflow:Evaluation [8/10]
+INFO:tensorflow:Evaluation [9/10]
+INFO:tensorflow:Evaluation [9/10]
+INFO:tensorflow:Evaluation [10/10]
+INFO:tensorflow:Evaluation [10/10]
+INFO:tensorflow:Inference Time : 1.83647s
+INFO:tensorflow:Inference Time : 1.83647s
+INFO:tensorflow:Finished evaluation at 2024-01-24-02:21:37
+INFO:tensorflow:Finished evaluation at 2024-01-24-02:21:37
+INFO:tensorflow:Saving dict for global step 10: average_loss = 1.4210855e-14, global_step = 10, label/mean = 1.0, loss = 1.4210855e-14, prediction/mean = 0.99999994
+INFO:tensorflow:Saving dict for global step 10: average_loss = 1.4210855e-14, global_step = 10, label/mean = 1.0, loss = 1.4210855e-14, prediction/mean = 0.99999994
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 10: /tmpfs/tmp/tmpjagdxixr/model.ckpt-10
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 10: /tmpfs/tmp/tmpjagdxixr/model.ckpt-10
+{'average_loss': 1.4210855e-14,
+'label/mean': 1.0,
+'loss': 1.4210855e-14,
+'prediction/mean': 0.99999994,
+'global_step': 10}
+Another difference to highlight here between Estimator and Keras is the input handling. In Keras, each batch of the dataset is split automatically across the multiple replicas. In Estimator, however, you do not perform automatic batch splitting, nor automatically shard the data across different workers. You have full control over how you want your data to be distributed across workers and devices, and you must provide an input_fn to specify how to distribute your data.
+Your input_fn is called once per worker, thus giving one dataset per worker. Then one batch from that dataset is fed to one replica on that worker, thereby consuming N batches for N replicas on 1 worker. In other words, the dataset returned by the input_fn should provide batches of size PER_REPLICA_BATCH_SIZE . And the global batch size for a step can be obtained as PER_REPLICA_BATCH_SIZE * strategy.num_replicas_in_sync .
+When performing multi-worker training, you should either split your data across the workers, or shuffle with a random seed on each. You can check an example of how to do this in the Multi-worker training with Estimator tutorial.
+And similarly, you can use multi worker and parameter server strategies as well. The code remains the same, but you need to use tf.estimator.train_and_evaluate , and set TF_CONFIG environment variables for each binary running in your cluster.
+### What's supported now?
+There is limited support for training with Estimator using all strategies except TPUStrategy . Basic training and evaluation should work, but a number of advanced features such as v1.train.Scaffold do not. There may also be a number of bugs in this integration and there are no plans to actively improve this support (the focus is on Keras and custom training loop support). If at all possible, you should prefer to use tf.distribute with those APIs instead.
+### Examples and tutorials
+Here are some end-to-end examples that show how to use various strategies with Estimator:
+- The Multi-worker Training with Estimator tutorial shows how you can train with multiple workers using MultiWorkerMirroredStrategy on the MNIST dataset.
+- An end-to-end example of running multi-worker training with distribution strategies in tensorflow/ecosystem using Kubernetes templates. It starts with a Keras model and converts it to an Estimator using the tf.keras.estimator.model_to_estimator API.
+- The official ResNet50 model, which can be trained using either MirroredStrategy or MultiWorkerMirroredStrategy .
+Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License . For details, see the Google Developers Site Policies . Java is a registered trademark of Oracle and/or its affiliates.

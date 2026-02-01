@@ -1,0 +1,52 @@
+BATCH NORMALIZATION
+====================
+
+Q1: What is Batch Normalization?
+A: Normalization technique that standardizes activations of each layer to accelerate training and improve stability. Introduced by Ioffe & Szegedy (2015).
+
+Q2: How does Batch Normalization work?
+A: For each mini-batch:
+1. Calculate mean and variance: μ = mean(x), σ² = var(x)
+2. Normalize: x_norm = (x - μ) / sqrt(σ² + ε)
+3. Scale and shift: y = γ * x_norm + β (γ and β are learned)
+
+Q3: How to implement Batch Normalization in PyTorch?
+A:
+class ConvBNReLU(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super().__init__()
+        self.conv = nn.Conv2d(in_channels, out_channels, 3, padding=1, bias=False)
+        self.bn = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU(inplace=True)
+    
+    def forward(self, x):
+        return self.relu(self.bn(self.conv(x)))
+
+Q4: Difference between train and eval mode?
+A:
+model = ConvBNReLU(3, 64)
+
+# Training mode
+model.train()
+output = model(x)
+# Uses batch mean/var
+# Updates running_mean and running_var
+
+# Evaluation mode
+model.eval()
+with torch.no_grad():
+    output = model(x)
+# Uses running_mean and running_var (global statistics)
+# No updates
+
+Q5: How to handle small batch sizes?
+A:
+# Problem: BatchNorm unstable with small batches
+# Solution 1: Group Normalization
+gn = nn.GroupNorm(num_groups=32, num_channels=64)
+
+# Solution 2: Layer Normalization  
+ln = nn.LayerNorm([channels, height, width])
+
+# Solution 3: Instance Normalization (for style transfer)
+in_norm = nn.InstanceNorm2d(channels)

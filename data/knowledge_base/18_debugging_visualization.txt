@@ -1,0 +1,91 @@
+DEBUGGING AND VISUALIZATION
+============================
+
+Q1: How to visualize CNN activations?
+A:
+class ActivationExtractor:
+    def __init__(self, model):
+        self.model = model
+        self.activations = {}
+        
+    def get_activation(self, name):
+        def hook(module, input, output):
+            self.activations[name] = output.detach()
+        return hook
+    
+    def register_hooks(self):
+        for name, module in self.model.named_modules():
+            if isinstance(module, nn.Conv2d):
+                module.register_forward_hook(self.get_activation(name))
+
+# Usage
+extractor = ActivationExtractor(model)
+extractor.register_hooks()
+output = model(input_image)
+
+# Visualize
+import matplotlib.pyplot as plt
+
+def visualize_activations(activations, layer_name, num_features=16):
+    act = activations[layer_name][0]
+    
+    fig, axes = plt.subplots(4, 4, figsize=(12, 12))
+    for i, ax in enumerate(axes.flat):
+        if i < min(num_features, act.shape[0]):
+            ax.imshow(act[i].cpu(), cmap='viridis')
+            ax.axis('off')
+    plt.show()
+
+Q2: How to use Grad-CAM for interpretability?
+A:
+class GradCAM:
+    def __init__(self, model, target_layer):
+        self.model = model
+        self.target_layer = target_layer
+        self.gradients = None
+        self.activations = None
+        
+        target_layer.register_forward_hook(self.save_activation)
+        target_layer.register_backward_hook(self.save_gradient)
+    
+    def save_activation(self, module, input, output):
+        self.activations = output.detach()
+    
+    def save_gradient(self, module, grad_input, grad_output):
+        self.gradients = grad_output[0].detach()
+    
+    def generate_cam(self, input_image, class_idx=None):
+        output = self.model(input_image)
+        
+        if class_idx is None:
+            class_idx = output.argmax(dim=1).item()
+        
+        self.model.zero_grad()
+        output[0, class_idx].backward()
+        
+        gradients = self.gradients[0]
+        activations = self.activations[0]
+        
+        weights = gradients.mean(dim=(1, 2), keepdim=True)
+        cam = (weights * activations).sum(dim=0)
+        cam = torch.relu(cam)
+        cam = cam / cam.max()
+        
+        return cam.cpu().numpy()
+
+Q3: How to check gradients for debugging?
+A:
+def check_gradients(model):
+    print("\nGradient Statistics:")
+    for name, param in model.named_parameters():
+        if param.grad is not None:
+            grad_mean = param.grad.mean().item()
+            grad_std = param.grad.std().item()
+            grad_max = param.grad.max().item()
+            
+            print(f"{name}: Mean={grad_mean:.6f}, Max={grad_max:.6f}")
+            
+            if abs(grad_mean) < 1e-7:
+                print(f"  WARNING: Possible vanishing gradient!")
+            if abs(grad_mean) > 10:
+                print(f"  WARNING: Possible exploding gradient!")

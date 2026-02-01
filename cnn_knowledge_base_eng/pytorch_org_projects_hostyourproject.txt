@@ -1,4 +1,0 @@
-# Host Your Project
-### Have an open source project that accelerates open source AI? The PyTorch Foundation offers a neutral, community-driven home for open source AI projects that share our commitment to open and accessible tools that solve problems and provide value in the AI lifecycle.
-By hosting your project with us, you’ll gain support from a global network of developers, researchers, and industry leaders—plus access to events, training, and infrastructure that help your project grow and thrive.
-Ready to take the next step? Submit your project for consideration to become a hosted project at the PyTorch Foundation.

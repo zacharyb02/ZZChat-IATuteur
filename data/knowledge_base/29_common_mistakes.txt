@@ -1,0 +1,84 @@
+COMMON MISTAKES
+================
+
+Q1: Classic beginner mistakes?
+A:
+MISTAKE 1: FORGETTING TO NORMALIZE DATA
+Problem: Images 0-255, model expects 0-1 or normalized
+Solution: Always normalize (mean/std) or scale 0-1
+
+MISTAKE 2: WRONG TRAIN/EVAL MODE
+Problem: Dropout/BatchNorm behave differently
+Solution: model.train() for training, model.eval() for inference
+
+MISTAKE 3: FORGETTING OPTIMIZER.ZERO_GRAD()
+Problem: Gradients accumulate, weights explode
+Solution: Always zero_grad() before backward()
+
+MISTAKE 4: BATCH SIZE TOO LARGE
+Problem: Out of Memory (OOM)
+Solution: Reduce batch size, gradient accumulation
+
+MISTAKE 5: INAPPROPRIATE LEARNING RATE
+Problem: Doesn't converge or too slow
+Solution: Use LR finder, start 1e-3 for Adam
+
+Q2: Common preprocessing errors?
+A:
+DATA LEAKAGE:
+Problem: Test info in train (normalization on whole dataset)
+Solution: Fit on train only, transform on val/test
+
+WRONG AUGMENTATION:
+Problem: Vertical flip on text, excessive rotation on faces
+Solution: Domain-appropriate augmentation
+
+INCONSISTENT RESIZE:
+Problem: Variable sizes → error
+Solution: Identical resize train/val/test
+
+BAD SPLIT:
+Problem: Random split on video → same scene train/test
+Solution: Split by video/patient/series, not random
+
+Q3: Common architecture mistakes?
+A:
+TOO LARGE FC LAYER:
+Problem: Linear(512*7*7, 10000) = parameter explosion
+Solution: Global Average Pooling before FC
+
+FORGETTING ACTIVATION:
+Problem: Stacked convs without ReLU = linear
+Solution: Conv → BatchNorm → ReLU
+
+WRONG POOLING PLACEMENT:
+Problem: Pooling too early loses information
+Solution: Several convs before each pooling
+
+NO SKIP CONNECTIONS FOR DEEP:
+Problem: >20 layers without skip = vanishing gradients
+Solution: ResNet-style blocks
+
+Q4: How to avoid these mistakes?
+A:
+CHECKLIST BEFORE TRAINING:
+✓ Data properly normalized
+✓ Clean train/val/test splits
+✓ Appropriate augmentation
+✓ Sensible architecture
+✓ Reasonable LR (1e-3 for Adam)
+✓ Early stopping configured
+✓ Logging activated
+
+DURING TRAINING:
+✓ Monitor train AND val loss
+✓ Visualize predictions
+✓ Check gradients
+✓ Save checkpoints
+
+PHILOSOPHY:
+- Start simple, complexify progressively
+- Reproduce existing results first
+- Log everything
+- Visualize often
+- Read errors carefully

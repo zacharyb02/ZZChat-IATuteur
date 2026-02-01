@@ -1,0 +1,95 @@
+DEPLOYMENT AND OPTIMIZATION (ONNX/TensorRT)
+=============================================
+
+Q1: How to export PyTorch model to ONNX?
+A:
+import torch
+
+# Load model
+model = MyModel()
+model.load_state_dict(torch.load('model.pth'))
+model.eval()
+
+# Create dummy input
+dummy_input = torch.randn(1, 3, 224, 224)
+
+# Export to ONNX
+torch.onnx.export(
+    model,
+    dummy_input,
+    "model.onnx",
+    export_params=True,
+    opset_version=11,
+    do_constant_folding=True,
+    input_names=['input'],
+    output_names=['output'],
+    dynamic_axes={
+        'input': {0: 'batch_size'},
+        'output': {0: 'batch_size'}
+    }
+)
+
+Q2: How to use ONNX Runtime for inference?
+A:
+import onnxruntime as ort
+
+# Create ONNX Runtime session
+session = ort.InferenceSession("model.onnx")
+
+# Prepare input
+input_name = session.get_inputs()[0].name
+output_name = session.get_outputs()[0].name
+
+# Inference
+outputs = session.run([output_name], {input_name: image})
+predictions = outputs[0]
+
+Q3: How to quantize a model (INT8)?
+A:
+# Dynamic quantization PyTorch
+import torch.quantization
+
+model = MyModel()
+model.eval()
+
+# Dynamic quantization (easy)
+quantized_model = torch.quantization.quantize_dynamic(
+    model,
+    {nn.Linear, nn.Conv2d},
+    dtype=torch.qint8
+)
+
+# Save
+torch.save(quantized_model.state_dict(), 'quantized_model.pth')
+
+Q4: How to benchmark performance?
+A:
+import time
+
+def benchmark_model(model, input_shape=(1, 3, 224, 224), num_iterations=100):
+    model.eval()
+    device = next(model.parameters()).device
+    
+    # Warmup
+    dummy_input = torch.randn(input_shape).to(device)
+    for _ in range(10):
+        _ = model(dummy_input)
+    
+    # Benchmark
+    torch.cuda.synchronize()
+    start = time.time()
+    
+    with torch.no_grad():
+        for _ in range(num_iterations):
+            _ = model(dummy_input)
+    
+    torch.cuda.synchronize()
+    end = time.time()
+    
+    avg_time = (end - start) / num_iterations * 1000
+    throughput = num_iterations / (end - start)
+    
+    print(f"Average time: {avg_time:.2f} ms")
+    print(f"Throughput: {throughput:.2f} FPS")
+    
+    return avg_time, throughput

@@ -1,0 +1,148 @@
+GENERAL FAQ
+===========
+
+Q1: What's the difference between classic machine learning and deep learning?
+A:
+CLASSIC ML (SVM, Random Forest):
+- Manual features (SIFT, HOG, color)
+- Algorithm learns to combine features
+- Pipeline: manual features → ML algorithm
+
+DEEP LEARNING / CNN:
+- Features learned automatically
+- Feature hierarchy: simple → complex
+- Pipeline: pixels → learned features → prediction
+
+DL ADVANTAGES:
+- No domain expertise needed
+- Superior performance with lots of data
+- End-to-end learning
+
+Q2: How long does it take to train a CNN?
+A: Depends on many factors:
+
+ORDER OF MAGNITUDE:
+- Small model + small dataset (1K images): minutes-hours
+- ResNet-50 on CIFAR-10: few hours (1 GPU)
+- ResNet-50 on ImageNet: 2-4 days (8 GPUs)
+- Large models (ViT-Huge): weeks (TPU pods)
+
+FACTORS:
+- Dataset size (more = longer)
+- Model size (larger = longer)
+- Hardware (GPU >> CPU, TPU > GPU)
+- Batch size (larger = faster per epoch)
+- Number of epochs (typically 50-200)
+
+Q3: What's the best framework: PyTorch or TensorFlow?
+A: Both are excellent, choice depends on context:
+
+PYTORCH:
+- More Pythonic and intuitive
+- Preferred in academic research
+- Easy debugging (eager execution)
+- Growing industry adoption
+
+TENSORFLOW:
+- Better for production deployment (TF Serving)
+- TensorFlow Lite excellent for mobile
+- TensorBoard very complete
+- Historically dominant in industry
+
+2024 VERDICT:
+- Research/academic: PyTorch 70%, TensorFlow 30%
+- Production: More balanced
+- Learning: PyTorch easier
+- ADVICE: Learn concepts, not framework
+
+Q4: How much data needed to train a good CNN?
+A: "It depends" but here are benchmarks:
+
+WITH TRANSFER LEARNING (recommended):
+- Minimum viable: 100-500 images per class
+- Good: 1K-10K images per class
+- Excellent: 10K+ images per class
+
+FROM SCRATCH (not recommended unless necessary):
+- Absolute minimum: 10K images total
+- Viable: 100K images
+- Good: 1M+ images (like ImageNet)
+
+STRATEGIES IF LIMITED DATA:
+- Transfer learning (ESSENTIAL)
+- Aggressive data augmentation
+- Synthetic data
+- Semi-supervised learning
+
+Q5: Can CNN work on CPU or is GPU absolutely necessary?
+A: Depends on usage:
+
+TRAINING:
+- CPU: possible but 10-100x slower
+- Small model + small dataset: CPU acceptable
+- Production: GPU quasi-mandatory
+- Cloud GPU recommended (Google Colab free)
+
+INFERENCE:
+- CPU: often sufficient!
+- Mobile models (MobileNet): CPU-optimized
+- Acceptable latency for many applications
+
+WHEN GPU REALLY NECESSARY:
+- Large datasets (> 100K images)
+- Rapid experimentation
+- Real-time critical (video)
+- Very deep models
+
+Q6: Is it difficult to learn CNNs?
+A: Progressive learning curve:
+
+LEVEL 1 - USER (1-2 weeks):
+- Use pretrained models
+- Basic transfer learning
+- Simple fine-tuning
+- Prerequisites: Basic Python
+
+LEVEL 2 - PRACTITIONER (2-3 months):
+- Understand architectures
+- Data augmentation
+- Hyperparameter tuning
+- Debugging
+- Prerequisites: Python, ML basics
+
+LEVEL 3 - EXPERT (6-12 months):
+- Design new architectures
+- Advanced optimization
+- Research
+- Prerequisites: Deep ML, math
+
+RESOURCES:
+- fast.ai (practice first)
+- Stanford CS231n (rigorous theory)
+- PyTorch tutorials
+
+Q7: Will CNNs be replaced by Transformers?
+A: Current debate, nuanced answer:
+
+VISION TRANSFORMERS (ViT):
+- Better on very large datasets
+- More flexible
+- Better global context
+- BUT: need enormous data
+
+MODERN CNNs (ConvNeXt, EfficientNet):
+- Still competitive
+- Better with limited data
+- More computationally efficient
+- Better for edge/mobile
+
+CURRENT TREND:
+- Research: shift to Transformers
+- Production: CNNs still dominant
+- Likely future: hybrid models
+
+VERDICT:
+- CNNs not obsolete at all!
+- Evolution, not replacement
+- Each approach has strengths
+- 5-10 years: coexistence

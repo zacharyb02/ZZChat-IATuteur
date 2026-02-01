@@ -1,0 +1,913 @@
+## Installing previous versions of PyTorch
+We’d prefer you install the latest version ,
+but old binaries and installation instructions are provided below for
+your convenience.
+## Commands for Versions >= 1.0.0
+### v2.9.1
+```python
+pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1
+```python
+# ROCM 6.4 (Linux only)
+# CUDA 12.6
+# CUDA 12.8
+# CUDA 13.0
+# CPU only
+### v2.9.0
+```python
+pip install torch==2.9.0 torchvision==0.24.0 torchaudio==2.9.0
+```python
+# ROCM 6.4 (Linux only)
+# CUDA 12.6
+# CUDA 12.8
+# CUDA 13.0
+# CPU only
+### v2.8.0
+```python
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0
+```python
+# ROCM 6.4 (Linux only)
+# CUDA 12.6
+# CUDA 12.8
+# CUDA 12.9
+# CPU only
+### v2.7.1
+```python
+pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1
+```python
+# ROCM 6.3 (Linux only)
+# CUDA 11.8
+# CUDA 12.6
+# CUDA 12.8
+# CPU only
+### v2.7.0
+```python
+pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0
+```python
+# ROCM 6.3 (Linux only)
+# CUDA 11.8
+# CUDA 12.6
+# CUDA 12.8
+# CPU only
+### v2.6.0
+```python
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0
+```python
+# ROCM 6.1 (Linux only)
+# ROCM 6.2.4 (Linux only)
+# CUDA 11.8
+# CUDA 12.4
+# CUDA 12.6
+# CPU only
+### v2.5.1
+```python
+# conda
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1  pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CUDA 12.4
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=12.4 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 cpuonly -c pytorch
+```python
+pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1
+```python
+# ROCM 6.1 (Linux only)
+# ROCM 6.2 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CUDA 12.4
+# CPU only
+### v2.5.0
+```python
+# conda
+conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0  pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CUDA 12.4
+conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 pytorch-cuda=12.4 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 cpuonly -c pytorch
+```python
+pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0
+```python
+# ROCM 6.1 (Linux only)
+# ROCM 6.2 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CUDA 12.4
+# CPU only
+### v2.4.1
+```python
+# conda
+conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1  pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CUDA 12.4
+conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 pytorch-cuda=12.4 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 cpuonly -c pytorch
+```python
+pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1
+```python
+# ROCM 6.1 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CUDA 12.4
+# CPU only
+### v2.4.0
+```python
+# conda
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0  pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CUDA 12.4
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 pytorch-cuda=12.4 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 cpuonly -c pytorch
+```python
+pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0
+```python
+# ROCM 6.1 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CUDA 12.4
+# CPU only
+### v2.3.1
+```python
+# conda
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 cpuonly -c pytorch
+```python
+pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1
+```python
+# ROCM 6.0 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.3.0
+```python
+# conda
+conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 cpuonly -c pytorch
+```python
+pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0
+```python
+# ROCM 6.0 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.2.2
+```python
+# conda
+conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2 cpuonly -c pytorch
+```python
+pip install torch==2.2.2 torchvision==0.17.2 torchaudio==2.2.2
+```python
+# ROCM 5.7 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.2.1
+```python
+# conda
+conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 cpuonly -c pytorch
+```python
+pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1
+```python
+# ROCM 5.7 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.2.0
+```python
+# conda
+conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 cpuonly -c pytorch
+```python
+pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0
+```python
+# ROCM 5.6 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.1.2
+```python
+# conda
+conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 cpuonly -c pytorch
+```python
+pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2
+```python
+# ROCM 5.6 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.1.1
+```python
+# conda
+conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 cpuonly -c pytorch
+```python
+pip install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1
+```python
+# ROCM 5.6 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.1.0
+```python
+# conda
+conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 -c pytorch
+```python
+# CUDA 11.8
+conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CUDA 12.1
+conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 cpuonly -c pytorch
+```python
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0
+```python
+# ROCM 5.6 (Linux only)
+# CUDA 11.8
+# CUDA 12.1
+# CPU only
+### v2.0.1
+```python
+# conda
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 -c pytorch
+```python
+# CUDA 11.7
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
+# CUDA 11.8
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 cpuonly -c pytorch
+```python
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
+```python
+# ROCM 5.4.2 (Linux only)
+# CUDA 11.7
+pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2
+# CUDA 11.8
+# CPU only
+### v2.0.0
+```python
+# conda
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 -c pytorch
+```python
+# CUDA 11.7
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.7 -c pytorch -c nvidia
+# CUDA 11.8
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 cpuonly -c pytorch
+```python
+pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
+```python
+# ROCM 5.4.2 (Linux only)
+# CUDA 11.7
+pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
+# CUDA 11.8
+# CPU only
+### v1.13.1
+```python
+# conda
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 -c pytorch
+```python
+# CUDA 11.6
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
+# CUDA 11.7
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 cpuonly -c pytorch
+```python
+pip install torch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1
+```python
+# ROCM 5.2 (Linux only)
+# CUDA 11.6
+# CUDA 11.7
+# CPU only
+### v1.13.0
+```python
+# conda
+conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 -c pytorch
+```python
+# CUDA 11.6
+conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.6 -c pytorch -c nvidia
+# CUDA 11.7
+conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 pytorch-cuda=11.7 -c pytorch -c nvidia
+# CPU Only
+conda install pytorch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0 cpuonly -c pytorch
+```python
+pip install torch==1.13.0 torchvision==0.14.0 torchaudio==0.13.0
+```python
+# ROCM 5.2 (Linux only)
+# CUDA 11.6
+# CUDA 11.7
+# CPU only
+### v1.12.1
+```python
+# conda
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
+# CUDA 11.6
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.6 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cpuonly -c pytorch
+```python
+pip install torch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1
+```python
+# ROCM 5.1.1 (Linux only)
+# CUDA 11.6
+# CUDA 11.3
+# CUDA 10.2
+# CPU only
+### v1.12.0
+```python
+# conda
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.3 -c pytorch
+# CUDA 11.6
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.6 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cpuonly -c pytorch
+```python
+pip install torch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0
+```python
+# ROCM 5.1.1 (Linux only)
+# CUDA 11.6
+# CUDA 11.3
+# CUDA 10.2
+# CPU only
+### v1.11.0
+```python
+# conda
+conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
+# CPU Only
+conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cpuonly -c pytorch
+```python
+pip install torch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0
+```python
+# ROCM 4.5.2 (Linux only)
+# CUDA 11.3
+# CUDA 10.2
+# CPU only
+### v1.10.1
+```python
+# conda
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cpuonly -c pytorch
+```python
+pip install torch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1
+```python
+# ROCM 4.2 (Linux only)
+# ROCM 4.1 (Linux only)
+# ROCM 4.0.1 (Linux only)
+# CUDA 11.1
+# CUDA 10.2
+# CPU only
+### v1.10.0
+```python
+# conda
+conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cudatoolkit=11.3 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cpuonly -c pytorch
+```python
+pip install torch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0
+```python
+# ROCM 4.2 (Linux only)
+# ROCM 4.1 (Linux only)
+# ROCM 4.0.1 (Linux only)
+# CUDA 11.1
+# CUDA 10.2
+# CPU only
+### v1.9.1
+```python
+# conda
+conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1 cpuonly -c pytorch
+```python
+pip install torch==1.9.1 torchvision==0.10.1 torchaudio==0.9.1
+```python
+# ROCM 4.2 (Linux only)
+# ROCM 4.1 (Linux only)
+# ROCM 4.0.1 (Linux only)
+# CUDA 11.1
+# CUDA 10.2
+# CPU only
+### v1.9.0
+```python
+# conda
+conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.3 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
+```python
+pip install torch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0
+```python
+# ROCM 4.2 (Linux only)
+# ROCM 4.1 (Linux only)
+# ROCM 4.0.1 (Linux only)
+# CUDA 11.1
+# CUDA 10.2
+# CPU only
+### v1.8.2 with LTS support
+macOS is currently not supported for LTS.
+```python
+# CUDA 10.2
+# NOTE: PyTorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch-lts
+# CUDA 11.1 (Linux)
+# NOTE: 'nvidia' channel is required for cudatoolkit 11.1 <br> <b>NOTE:</b> Pytorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c nvidia
+# CUDA 11.1 (Windows)
+# 'conda-forge' channel is required for cudatoolkit 11.1 <br> <b>NOTE:</b> Pytorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch-lts -c conda-forge
+# CPU Only
+# Pytorch LTS version 1.8.2 is only supported for Python <= 3.8.
+conda install pytorch torchvision torchaudio cpuonly -c pytorch-lts
+# ROCM5.x
+Not supported in LTS.
+macOS is currently not supported in LTS.
+```python
+# CUDA 10.2
+# CUDA 11.1
+# CPU Only
+# ROCM5.x
+Not supported in LTS.
+### v1.8.1
+```python
+# conda
+conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=10.2 -c pytorch
+# CUDA 11.3
+conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cpuonly -c pytorch
+```python
+pip install torch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1
+```python
+# ROCM 4.0.1 (Linux only)
+# ROCM 3.10 (Linux only)
+# CUDA 11.1
+# CUDA 10.2
+# CUDA 10.1
+# CPU only
+### v1.8.0
+```python
+# conda
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 -c pytorch
+```python
+# CUDA 10.2
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=10.2 -c pytorch
+# CUDA 11.1
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cudatoolkit=11.1 -c pytorch -c conda-forge
+# CPU Only
+conda install pytorch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0 cpuonly -c pytorch
+```python
+pip install torch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0
+```python
+# RocM 4.0.1 (Linux only)
+pip install ninja
+# CUDA 11.1
+# CUDA 10.2
+pip install torch==1.8.0 torchvision==0.9.0 torchaudio==0.8.0
+# CPU only
+### v1.7.1
+```python
+# conda
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=9.2 -c pytorch
+# CUDA 10.1
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch
+# CUDA 10.2
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.2 -c pytorch
+# CUDA 11.0
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.0 -c pytorch
+# CPU Only
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cpuonly -c pytorch
+```python
+pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
+```python
+# CUDA 11.0
+# CUDA 10.2
+pip install torch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2
+# CUDA 10.1
+# CUDA 9.2
+# CPU only
+### v1.7.0
+```python
+# conda
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=9.2 -c pytorch
+# CUDA 10.1
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=10.1 -c pytorch
+# CUDA 10.2
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=10.2 -c pytorch
+# CUDA 11.0
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cudatoolkit=11.0 -c pytorch
+# CPU Only
+conda install pytorch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0 cpuonly -c pytorch
+```python
+pip install torch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0
+```python
+# CUDA 11.0
+# CUDA 10.2
+pip install torch==1.7.0 torchvision==0.8.0 torchaudio==0.7.0
+# CUDA 10.1
+# CUDA 9.2
+# CPU only
+### v1.6.0
+```python
+# conda
+conda install pytorch==1.6.0 torchvision==0.7.0 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=9.2 -c pytorch
+# CUDA 10.1
+conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.1 -c pytorch
+# CUDA 10.2
+conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.2 -c pytorch
+# CPU Only
+conda install pytorch==1.6.0 torchvision==0.7.0 cpuonly -c pytorch
+```python
+# CUDA 10.2
+pip install torch==1.6.0 torchvision==0.7.0
+# CUDA 10.1
+# CUDA 9.2
+# CPU only
+### v1.5.1
+```python
+# conda
+conda install pytorch==1.5.1 torchvision==0.6.1 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=9.2 -c pytorch
+# CUDA 10.1
+conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.1 -c pytorch
+# CUDA 10.2
+conda install pytorch==1.5.1 torchvision==0.6.1 cudatoolkit=10.2 -c pytorch
+# CPU Only
+conda install pytorch==1.5.1 torchvision==0.6.1 cpuonly -c pytorch
+```python
+# CUDA 10.2
+pip install torch==1.5.1 torchvision==0.6.1
+# CUDA 10.1
+# CUDA 9.2
+# CPU only
+### v1.5.0
+```python
+# conda
+conda install pytorch==1.5.0 torchvision==0.6.0 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=9.2 -c pytorch
+# CUDA 10.1
+conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.1 -c pytorch
+# CUDA 10.2
+conda install pytorch==1.5.0 torchvision==0.6.0 cudatoolkit=10.2 -c pytorch
+# CPU Only
+conda install pytorch==1.5.0 torchvision==0.6.0 cpuonly -c pytorch
+```python
+# CUDA 10.2
+pip install torch==1.5.0 torchvision==0.6.0
+# CUDA 10.1
+# CUDA 9.2
+# CPU only
+### v1.4.0
+```python
+# conda
+conda install pytorch==1.4.0 torchvision==0.5.0 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=9.2 -c pytorch
+# CUDA 10.1
+conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=10.1 -c pytorch
+# CPU Only
+conda install pytorch==1.4.0 torchvision==0.5.0 cpuonly -c pytorch
+```python
+# CUDA 10.1
+pip install torch==1.4.0 torchvision==0.5.0
+# CUDA 9.2
+# CPU only
+### v1.2.0
+```python
+# conda
+conda install pytorch==1.2.0 torchvision==0.4.0 -c pytorch
+```python
+# CUDA 9.2
+conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=9.2 -c pytorch
+# CUDA 10.0
+conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0 -c pytorch
+# CPU Only
+conda install pytorch==1.2.0 torchvision==0.4.0 cpuonly -c pytorch
+```python
+# CUDA 10.0
+pip install torch==1.2.0 torchvision==0.4.0
+# CUDA 9.2
+# CPU only
+### v1.1.0
+```python
+# conda
+conda install pytorch==1.1.0 torchvision==0.3.0 -c pytorch
+```python
+# CUDA 9.0
+conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=9.0 -c pytorch
+# CUDA 10.0
+conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=10.0 -c pytorch
+# CPU Only
+conda install pytorch-cpu==1.1.0 torchvision-cpu==0.3.0 cpuonly -c pytorch
+```python
+# CUDA 10.0
+# CUDA 9.0
+# CPU only
+### v1.0.1
+```python
+# conda
+conda install pytorch==1.0.1 torchvision==0.2.2 -c pytorch
+```python
+# CUDA 9.0
+conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=9.0 -c pytorch
+# CUDA 10.0
+conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=10.0 -c pytorch
+# CPU Only
+conda install pytorch-cpu==1.0.1 torchvision-cpu==0.2.2 cpuonly -c pytorch
+### v1.0.0
+```python
+# conda
+conda install pytorch==1.0.0 torchvision==0.2.1 -c pytorch
+```python
+# CUDA 10.0
+conda install pytorch==1.0.0 torchvision==0.2.1 cuda100 -c pytorch
+# CUDA 9.0
+conda install pytorch==1.0.0 torchvision==0.2.1 cuda90 -c pytorch
+# CUDA 8.0
+conda install pytorch==1.0.0 torchvision==0.2.1 cuda80 -c pytorch
+# CPU Only
+conda install pytorch-cpu==1.0.0 torchvision-cpu==0.2.1 cpuonly -c pytorch
+```python
+# CUDA 10.0
+# CUDA 9.0
+# CUDA 8.0
+# CPU only
+## Commands for Versions < 1.0.0
+### Via conda
+This should be used for most previous macOS version installs.
+To install a previous version of PyTorch via Anaconda or Miniconda,
+replace “0.4.1” in the following commands with the desired version
+(i.e., “0.2.0”).
+conda install pytorch=0.4.1 cuda90 -c pytorch
+conda install pytorch=0.4.1 cuda92 -c pytorch
+conda install pytorch=0.4.1 cuda80 -c pytorch
+conda install pytorch=0.4.1 cuda75 -c pytorch
+conda install pytorch=0.4.1 -c pytorch
+### From source
+It is possible to checkout an older version of PyTorch and build it.
+You can list tags in PyTorch git repository with git tag and checkout a
+particular one (replace ‘0.1.9’ with the desired version) with
+Follow the install from source instructions in the README.md of the PyTorch
+checkout.
+### Via pip
+Download the whl file with the desired version from the following html pages:
+Then, install the file with pip install [downloaded file]
+Note: most pytorch versions are available only for specific CUDA versions. For example pytorch=1.0.1 is not available for CUDA 9.2
+### (Old) PyTorch Linux binaries compiled with CUDA 7.5
+These predate the html page above and have to be manually installed by downloading the wheel file and pip install downloaded_file
+- cu75/torch-0.3.0.post4-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl
+- cu75/torch-0.3.0.post4-cp27-cp27m-linux_x86_64.whl
+- cu75/torch-0.2.0.post3-cp36-cp36m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post3-cp27-cp27mu-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post3-cp27-cp27m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post2-cp36-cp36m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post2-cp27-cp27mu-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post2-cp27-cp27m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post1-cp36-cp36m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post1-cp27-cp27mu-manylinux1_x86_64.whl
+- cu75/torch-0.2.0.post1-cp27-cp27m-manylinux1_x86_64.whl
+- cu75/torch-0.1.12.post2-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.12.post2-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.12.post2-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.12.post1-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.12.post1-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.12.post1-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.11.post5-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.11.post5-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.11.post5-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.11.post4-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.11.post4-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.11.post4-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.10.post2-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.10.post2-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.10.post2-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.10.post1-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.10.post1-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.10.post1-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.9.post2-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.9.post2-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.9.post2-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.9.post1-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.9.post1-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.9.post1-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.8.post1-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.8.post1-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.8.post1-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.7.post2-cp36-cp36m-linux_x86_64.whl
+- cu75/torch-0.1.7.post2-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.7.post2-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.6.post22-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.6.post22-cp27-none-linux_x86_64.whl
+- cu75/torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl
+- cu75/torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl
+### Windows binaries
+- cpu/torch-1.0.0-cp35-cp35m-win_amd64.whl
+- cu80/torch-1.0.0-cp35-cp35m-win_amd64.whl
+- cu90/torch-1.0.0-cp35-cp35m-win_amd64.whl
+- cu100/torch-1.0.0-cp35-cp35m-win_amd64.whl
+- cpu/torch-1.0.0-cp36-cp36m-win_amd64.whl
+- cu80/torch-1.0.0-cp36-cp36m-win_amd64.whl
+- cu90/torch-1.0.0-cp36-cp36m-win_amd64.whl
+- cu100/torch-1.0.0-cp36-cp36m-win_amd64.whl
+- cpu/torch-1.0.0-cp37-cp37m-win_amd64.whl
+- cu80/torch-1.0.0-cp37-cp37m-win_amd64.whl
+- cu90/torch-1.0.0-cp37-cp37m-win_amd64.whl
+- cu100/torch-1.0.0-cp37-cp37m-win_amd64.whl
+- cpu/torch-0.4.1-cp35-cp35m-win_amd64.whl
+- cu80/torch-0.4.1-cp35-cp35m-win_amd64.whl
+- cu90/torch-0.4.1-cp35-cp35m-win_amd64.whl
+- cu92/torch-0.4.1-cp35-cp35m-win_amd64.whl
+- cpu/torch-0.4.1-cp36-cp36m-win_amd64.whl
+- cu80/torch-0.4.1-cp36-cp36m-win_amd64.whl
+- cu90/torch-0.4.1-cp36-cp36m-win_amd64.whl
+- cu92/torch-0.4.1-cp36-cp36m-win_amd64.whl
+- cpu/torch-0.4.1-cp37-cp37m-win_amd64.whl
+- cu80/torch-0.4.1-cp37-cp37m-win_amd64.whl
+- cu90/torch-0.4.1-cp37-cp37m-win_amd64.whl
+- cu92/torch-0.4.1-cp37-cp37m-win_amd64.whl
+### Mac and misc. binaries
+For recent macOS binaries, use conda :
+conda install pytorch=0.4.1 cuda90 -c pytorch conda install pytorch=0.4.1 cuda92 -c pytorch conda install pytorch=0.4.1 cuda80 -c pytorch conda install pytorch=0.4.1 -c pytorch # No CUDA
+- torchvision-0.1.6-py3-none-any.whl
+- torchvision-0.1.6-py2-none-any.whl
+- torch-1.0.0-cp37-none-macosx_10_7_x86_64.whl
+- torch-1.0.0-cp36-none-macosx_10_7_x86_64.whl
+- torch-1.0.0-cp35-none-macosx_10_6_x86_64.whl
+- torch-1.0.0-cp27-none-macosx_10_6_x86_64.whl
+- torch-0.4.0-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.4.0-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.4.0-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.3.1-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.3.1-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.3.1-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.3.0.post4-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.3.0.post4-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.3.0.post4-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.2.0.post3-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.2.0.post3-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.2.0.post3-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.2.0.post2-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.2.0.post2-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.2.0.post2-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.2.0.post1-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.2.0.post1-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.2.0.post1-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.12.post2-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.12.post2-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.1.12.post2-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.12.post1-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.12.post1-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.1.12.post1-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.11.post5-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.11.post5-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.1.11.post5-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.11.post4-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.11.post4-cp35-cp35m-macosx_10_7_x86_64.whl
+- torch-0.1.11.post4-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.10.post1-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.10.post1-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1.10.post1-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.9.post2-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.9.post2-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1.9.post2-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.9.post1-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.9.post1-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1.9.post1-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.8.post1-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.8.post1-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1.8.post1-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.7.post2-cp36-cp36m-macosx_10_7_x86_64.whl
+- torch-0.1.7.post2-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1.7.post2-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.6.post22-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1.6.post22-cp27-none-macosx_10_7_x86_64.whl
+- torch-0.1.6.post20-cp35-cp35m-linux_x86_64.whl
+- torch-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl
+- torch-0.1.6.post17-cp35-cp35m-linux_x86_64.whl
+- torch-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl
+- torch-0.1-cp35-cp35m-macosx_10_6_x86_64.whl
+- torch-0.1-cp27-cp27m-macosx_10_6_x86_64.whl
+- torch_cuda80-0.1.6.post20-cp35-cp35m-linux_x86_64.whl
+- torch_cuda80-0.1.6.post20-cp27-cp27mu-linux_x86_64.whl
+- torch_cuda80-0.1.6.post17-cp35-cp35m-linux_x86_64.whl
+- torch_cuda80-0.1.6.post17-cp27-cp27mu-linux_x86_64.whl
