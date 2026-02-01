@@ -48,3 +48,20 @@ export const sendMessage = async (content, chatId) => {
   });
   return res.json();
 };
+
+// Classification api
+export const classifyImage = async (imageFile) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  const res = await fetch(
+    `http://localhost:5000/api/classification/`, // no ID needed
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  if (!res.ok) throw new Error("Classification failed");
+  return res.json();
+};

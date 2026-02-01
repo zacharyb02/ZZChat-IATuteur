@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Add project root to PYTHONPATH
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -7,7 +13,7 @@ from extensions import db, bcrypt, login_manager
 from routes.auth_routes import auth_bp
 from routes.chat_routes import chat_bp
 from routes.message_routes import message_bp
-
+from routes.classification_routes import classification_bp
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +28,8 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SECRET_KEY"] = "thisisasecretkey"
 
+    
+
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
@@ -30,6 +38,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(chat_bp)
     app.register_blueprint(message_bp)
+    app.register_blueprint(classification_bp)
 
     @login_manager.user_loader
     def load_user(user_id):

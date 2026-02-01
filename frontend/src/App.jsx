@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Loading from './pages/Loading'
 import './assets/prism.css'
 import { useAppContext } from './context/AppContext'
+import Classification from './components/Classification'
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
 
           <Routes>
             <Route path="/" element={<ChatBox />} />          
+            <Route path="/classification" element={<Classification />} />          
             <Route path="/login" element={<ChatBox />} />          
           </Routes>
         </div>
