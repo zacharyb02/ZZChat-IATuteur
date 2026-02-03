@@ -196,13 +196,12 @@ Frontend accessible at `http://localhost:5173`
 - **FAISS** - Vector similarity search
 - **TensorFlow/Keras** - Deep Learning models
 - **CodeCarbon** - Energy tracking
-- **SQLite** - User authentication
+- **SQLite** - Storing user data and chat history
 
 ### Frontend
 - **React 18** - UI framework
 - **Vite** - Build tool
 - **React Router** - Navigation
-- **Axios** - HTTP client
 
 ### Models & Embeddings
 - **Mistral 7B** - Large Language Model
